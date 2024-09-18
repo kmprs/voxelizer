@@ -1,10 +1,18 @@
 #include "openGLHandler.hpp"
 #include "shader.hpp"
 
+unsigned int programID;
+
 OpenGLHandler::OpenGLHandler()
         :
         m_shaderHandler( std::make_unique<ShaderHandler>())
 {
+    if ( GLEW_OK != glewInit())
+    {
+        std::cout << "Failed to Init GLEW" << std::endl;
+    }
+    programID = glCreateProgram();
+
     // set up OpenGL
     glEnable( GL_DEPTH_TEST );
 

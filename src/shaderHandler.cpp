@@ -2,6 +2,10 @@
 
 unsigned int shaderHandlerID;
 
+ShaderHandler::ShaderHandler()
+{
+}
+
 void ShaderHandler::link()
 {
     glLinkProgram( shaderHandlerID );

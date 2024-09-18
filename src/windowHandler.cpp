@@ -31,7 +31,7 @@ WindowHandler::WindowHandler( const std::string &title, int width, int height )
     }
 
     m_context = SDL_GL_CreateContext( m_window );
-    if ( !m_context )
+    if ( m_context == nullptr )
     {
         std::cerr << "Failed to create OpenGL context: " << SDL_GetError() << std::endl;
         exit( EXIT_FAILURE );

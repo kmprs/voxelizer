@@ -8,7 +8,7 @@
 class ShaderHandler
 {
 public: 
-    ShaderHandler() = default;
+    ShaderHandler();
     ~ShaderHandler() = default;
     void link();
     void use() const;
