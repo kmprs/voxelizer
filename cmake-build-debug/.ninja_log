@@ -8,3 +8,17 @@
 535	824	1726637618071045030	CMakeFiles/TestVoxelizer.dir/src/renderer.cpp.o	2ee86cfc1b5ff037
 509	965	1726637618211601580	CMakeFiles/TestVoxelizer.dir/src/shaderHandler.cpp.o	e0cb997136304414
 965	995	1726637618242781452	TestVoxelizer	efb03c30a788dc2b
+3	431	1726638993535276143	CMakeFiles/TestVoxelizer.dir/src/renderer.cpp.o	2ee86cfc1b5ff037
+3	489	1726638993594498586	CMakeFiles/TestVoxelizer.dir/src/openGLHandler.cpp.o	29fd6bff89a4947
+2	549	1726638993653274910	CMakeFiles/TestVoxelizer.dir/src/program.cpp.o	73733f414b31a026
+549	635	1726638993741158651	TestVoxelizer	efb03c30a788dc2b
+4	469	1726639433699802385	CMakeFiles/TestVoxelizer.dir/src/openGLHandler.cpp.o	29fd6bff89a4947
+4	525	1726639433755865453	CMakeFiles/TestVoxelizer.dir/src/program.cpp.o	73733f414b31a026
+525	612	1726639433844778221	TestVoxelizer	efb03c30a788dc2b
+9	439	1726640159772762105	CMakeFiles/TestVoxelizer.dir/src/renderer.cpp.o	2ee86cfc1b5ff037
+8	516	1726640159850116856	CMakeFiles/TestVoxelizer.dir/src/openGLHandler.cpp.o	29fd6bff89a4947
+9	536	1726640159870577216	CMakeFiles/TestVoxelizer.dir/src/shaderHandler.cpp.o	e0cb997136304414
+8	574	1726640159908584392	CMakeFiles/TestVoxelizer.dir/src/program.cpp.o	73733f414b31a026
+575	660	1726640159995372688	TestVoxelizer	efb03c30a788dc2b
+3	267	1726640352202179199	CMakeFiles/TestVoxelizer.dir/src/renderer.cpp.o	2ee86cfc1b5ff037
+267	296	1726640352232500938	TestVoxelizer	efb03c30a788dc2b

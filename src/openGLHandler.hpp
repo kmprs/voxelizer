@@ -8,13 +8,8 @@ class OpenGLHandler
 public:
     OpenGLHandler();
     ~OpenGLHandler() = default;
+    void use() const;
 
 private:
     std::unique_ptr<ShaderHandler> m_shaderHandler = nullptr;
-
-    float m_vertices[9] = {
-            -0.5f, -0.5f, 0.0f,
-            0.5f, -0.5f, 0.0f,
-            0.0f,  0.5f, 0.0f
-    };
 };

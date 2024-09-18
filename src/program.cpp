@@ -24,5 +24,6 @@ void Program::run()
         eventHandler.processInput(event, windowHandler);
         windowHandler.swapWindow();
         renderer.render();
+        openGlHandler.use();
     }
 }

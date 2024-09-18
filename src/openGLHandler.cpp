@@ -23,3 +23,8 @@ OpenGLHandler::OpenGLHandler()
     m_shaderHandler->add(fragmentShader);
     m_shaderHandler->link();
 }
+
+void OpenGLHandler::use() const
+{
+    glUseProgram(programID);
+}

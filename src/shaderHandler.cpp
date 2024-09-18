@@ -16,11 +16,6 @@ void ShaderHandler::link()
     }
 }
 
-void ShaderHandler::use() const
-{
-    glUseProgram( programID );
-}
-
 void ShaderHandler::add( const Shader &shader )
 {
     m_shaders.emplace_back(shader);

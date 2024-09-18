@@ -11,7 +11,6 @@ public:
     ShaderHandler();
     ~ShaderHandler() = default;
     void link();
-    void use() const;
     void add(const Shader &shader);
     std::vector<Shader> getShaders();
     void setMat4( const std::string &name, const glm::mat4 &mat ) const;
