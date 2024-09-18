@@ -1,4 +1,17 @@
 /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_MAKE_PROGRAM=/Applications/CLion.app/Contents/bin/ninja/mac/ninja -G Ninja -S /Users/jakobkampers/Desktop/Privat/private_workspace/TestVoxelizer -B /Users/jakobkampers/Desktop/Privat/private_workspace/TestVoxelizer/cmake-build-release
--- Configuring done (0.0s)
+-- The C compiler identification is AppleClang 15.0.0.15000309
+-- The CXX compiler identification is AppleClang 15.0.0.15000309
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /Library/Developer/CommandLineTools/usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /Library/Developer/CommandLineTools/usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found GLEW: /opt/homebrew/lib/cmake/glew/glew-config.cmake  
+-- Configuring done (0.3s)
 -- Generating done (0.0s)
 -- Build files have been written to: /Users/jakobkampers/Desktop/Privat/private_workspace/TestVoxelizer/cmake-build-release

@@ -222,15 +222,6 @@ GLEW_LIBRARY_RELEASE:FILEPATH=GLEW_LIBRARY_RELEASE-NOTFOUND
 //The directory containing a CMake configuration file for GLM.
 GLM_DIR:PATH=/opt/homebrew/share/glm
 
-//Value Computed by CMake
-NAME_BINARY_DIR:STATIC=/Users/jakobkampers/Desktop/Privat/private_workspace/TestVoxelizer/cmake-build-release
-
-//Value Computed by CMake
-NAME_IS_TOP_LEVEL:STATIC=ON
-
-//Value Computed by CMake
-NAME_SOURCE_DIR:STATIC=/Users/jakobkampers/Desktop/Privat/private_workspace/TestVoxelizer
-
 //The directory containing a CMake configuration file for SDL2.
 SDL2_DIR:PATH=/opt/homebrew/lib/cmake/SDL2
 
