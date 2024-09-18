@@ -10,7 +10,6 @@ const std::string TITLE = "TestVoxelizer";
 void Program::run()
 {
     SDL_Event event;
-    EventHandler eventHandler = {};
     WindowHandler windowHandler = { TITLE, WINDOW_WIDTH, WINDOW_HEIGHT };
     OpenGLHandler openGlHandler = {};
     Renderer renderer = {};
@@ -21,7 +20,7 @@ void Program::run()
         {
             windowHandler.close();
         }
-        eventHandler.processInput(event, windowHandler);
+        EventHandler::processInput(event, windowHandler);
         windowHandler.swapWindow();
         renderer.render();
         openGlHandler.use();

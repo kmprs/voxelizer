@@ -8,5 +8,5 @@ class EventHandler
 public:
     EventHandler() = default;
     ~EventHandler() = default;
-    void processInput(SDL_Event &event, WindowHandler &windowHandler);
+    static void processInput(SDL_Event &event, WindowHandler &windowHandler);
 };

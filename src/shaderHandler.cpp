@@ -21,11 +21,6 @@ void ShaderHandler::add( const Shader &shader )
     m_shaders.emplace_back(shader);
 }
 
-std::vector<Shader> ShaderHandler::getShaders()
-{
-    return m_shaders;
-}
-
 void ShaderHandler::setMat4( const std::string &name, const glm::mat4 &mat ) const
 {
     glUniformMatrix4fv( glGetUniformLocation( programID, name.c_str()), 1, GL_FALSE, &mat[0][0] );
