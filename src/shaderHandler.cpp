@@ -1,6 +1,6 @@
 #include "shaderHandler.hpp"
 
-unsigned int shaderHandlerID;
+extern unsigned int programID;
 
 ShaderHandler::ShaderHandler()
 {
@@ -8,8 +8,8 @@ ShaderHandler::ShaderHandler()
 
 void ShaderHandler::link()
 {
-    glLinkProgram( shaderHandlerID );
-    checkCompileErrors( shaderHandlerID, "PROGRAM" );
+    glLinkProgram( programID );
+    checkCompileErrors( programID, "PROGRAM" );
     for ( Shader s: m_shaders )
     {
         glDeleteShader( s.getID() );
@@ -18,7 +18,7 @@ void ShaderHandler::link()
 
 void ShaderHandler::use() const
 {
-    glUseProgram( shaderHandlerID );
+    glUseProgram( programID );
 }
 
 void ShaderHandler::add( const Shader &shader )
@@ -33,12 +33,12 @@ std::vector<Shader> ShaderHandler::getShaders()
 
 void ShaderHandler::setMat4( const std::string &name, const glm::mat4 &mat ) const
 {
-    glUniformMatrix4fv( glGetUniformLocation( shaderHandlerID, name.c_str()), 1, GL_FALSE, &mat[0][0] );
+    glUniformMatrix4fv( glGetUniformLocation( programID, name.c_str()), 1, GL_FALSE, &mat[0][0] );
 }
 
 unsigned int ShaderHandler::getID() const
 {
-    return shaderHandlerID;
+    return programID;
 }
 
 void ShaderHandler::uploadInt( const std::string &name, const int value ) const
@@ -62,7 +62,7 @@ void ShaderHandler::checkCompileErrors( unsigned int shader, const std::string &
 
 GLint ShaderHandler::getVariableLocation( const char* name )
 {
-    GLint loc = glGetUniformLocation( shaderHandlerID, name );
+    GLint loc = glGetUniformLocation( programID, name );
     if ( loc == -1 )
     {
         std::cerr << "Uniform: " << name << " not found" << std::endl;

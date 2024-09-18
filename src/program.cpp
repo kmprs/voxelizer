@@ -1,5 +1,6 @@
 #include "program.hpp"
 #include "openGLHandler.hpp"
+#include "renderer.hpp"
 
 
 const int WINDOW_WIDTH = 1200;
@@ -12,6 +13,7 @@ void Program::run()
     EventHandler eventHandler = {};
     WindowHandler windowHandler = { TITLE, WINDOW_WIDTH, WINDOW_HEIGHT };
     OpenGLHandler openGlHandler = {};
+    Renderer renderer = {};
 
     while ( !windowHandler.isClosed())
     {
@@ -21,5 +23,6 @@ void Program::run()
         }
         eventHandler.processInput(event, windowHandler);
         windowHandler.swapWindow();
+        renderer.render();
     }
 }

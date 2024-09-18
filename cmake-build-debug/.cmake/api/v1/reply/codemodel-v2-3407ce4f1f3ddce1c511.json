@@ -6,7 +6,7 @@
 			[
 				{
 					"build" : ".",
-					"jsonFile" : "directory-.-Release-f5ebdc15457944623624.json",
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.26"
@@ -19,7 +19,7 @@
 					]
 				}
 			],
-			"name" : "Release",
+			"name" : "Debug",
 			"projects" : 
 			[
 				{
@@ -39,7 +39,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "TestVoxelizer::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-TestVoxelizer-Release-175b36eaf2e615d11709.json",
+					"jsonFile" : "target-TestVoxelizer-Debug-35a89604d743b22606e2.json",
 					"name" : "TestVoxelizer",
 					"projectIndex" : 0
 				}
@@ -49,7 +49,7 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "/Users/jakobkampers/Desktop/Privat/private_workspace/TestVoxelizer/cmake-build-release",
+		"build" : "/Users/jakobkampers/Desktop/Privat/private_workspace/TestVoxelizer/cmake-build-debug",
 		"source" : "/Users/jakobkampers/Desktop/Privat/private_workspace/TestVoxelizer"
 	},
 	"version" : 
