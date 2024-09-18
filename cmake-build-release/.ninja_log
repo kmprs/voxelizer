@@ -1,0 +1,12 @@
+# ninja log v5
+352	384	1725543752496964893	TestVoxelizer	ce51c6ac176327e3
+2	234	1725450226495249522	CMakeFiles/TestVoxelizer.dir/src/window.cpp.o	9817f7ae30c658d3
+2	304	1725543633475705360	CMakeFiles/TestVoxelizer.dir/main.cpp.o	e1bd542efca533a7
+2	279	1725449984484873045	CMakeFiles/TestVoxelizer.dir/src/Program.cpp.o	39a2fb6dce0de86e
+2	249	1725449984455045908	CMakeFiles/TestVoxelizer.dir/src/Window.cpp.o	8d6e3b02b9229e46
+2	352	1725543752460692793	CMakeFiles/TestVoxelizer.dir/src/program.cpp.o	a9cff7264501734b
+2	307	1725543633487646948	CMakeFiles/TestVoxelizer.dir/src/windowHandler.cpp.o	b46990776f9e7fe7
+2	368	1725543199891196847	CMakeFiles/NAME.dir/src/windowHandler.cpp.o	9fd920774eb647bd
+2	358	1725543199881443134	CMakeFiles/NAME.dir/src/program.cpp.o	9f137e9e7aaeed94
+2	348	1725543199870609421	CMakeFiles/NAME.dir/main.cpp.o	41370e0b8dbdc6e7
+368	407	1725543199931263406	NAME	1ce408fb8577cb12

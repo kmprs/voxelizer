@@ -1,0 +1,3 @@
+/Users/jakobkampers/Desktop/Privat/private_workspace/TestVoxelizer/cmake-build-release/CMakeFiles/TestVoxelizer.dir
+/Users/jakobkampers/Desktop/Privat/private_workspace/TestVoxelizer/cmake-build-release/CMakeFiles/edit_cache.dir
+/Users/jakobkampers/Desktop/Privat/private_workspace/TestVoxelizer/cmake-build-release/CMakeFiles/rebuild_cache.dir
