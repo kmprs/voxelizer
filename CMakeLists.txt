@@ -19,7 +19,9 @@ add_executable(${NAME} main.cpp
         src/shaderHandler.cpp
         src/shaderHandler.hpp
         src/renderer.cpp
-        src/renderer.hpp)
+        src/renderer.hpp
+        src/camera.cpp
+        src/camera.hpp)
 
 find_package(SDL2 REQUIRED)
 target_include_directories(${NAME} PRIVATE ${SDL2_INCLUDE_DIRS})
