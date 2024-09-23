@@ -9,7 +9,8 @@ public:
     OpenGLHandler();
     ~OpenGLHandler() = default;
     void use() const;
+    std::shared_ptr<ShaderHandler> getShaderHandler();
 
 private:
-    std::unique_ptr<ShaderHandler> m_shaderHandler = nullptr;
+    std::shared_ptr<ShaderHandler> m_shaderHandler = nullptr;
 };

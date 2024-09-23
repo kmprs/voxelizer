@@ -112,6 +112,13 @@ build CMakeFiles/TestVoxelizer.dir/src/camera.cpp.o: CXX_COMPILER__TestVoxelizer
   OBJECT_DIR = CMakeFiles/TestVoxelizer.dir
   OBJECT_FILE_DIR = CMakeFiles/TestVoxelizer.dir/src
 
+build CMakeFiles/TestVoxelizer.dir/src/transformator.cpp.o: CXX_COMPILER__TestVoxelizer_unscanned_Release /Users/jakobkampers/Desktop/Privat/private_workspace/TestVoxelizer/src/transformator.cpp || cmake_object_order_depends_target_TestVoxelizer
+  DEP_FILE = CMakeFiles/TestVoxelizer.dir/src/transformator.cpp.o.d
+  FLAGS = -O3 -DNDEBUG -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -fcolor-diagnostics -F/Library/Developer/CommandLineTools/SDKs/MacOSX14.sdk/System/Library/Frameworks
+  INCLUDES = -I/opt/homebrew/Cellar/sdl2/2.30.3/include -isystem /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2 -isystem /opt/homebrew/include
+  OBJECT_DIR = CMakeFiles/TestVoxelizer.dir
+  OBJECT_FILE_DIR = CMakeFiles/TestVoxelizer.dir/src
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target TestVoxelizer
@@ -120,7 +127,7 @@ build CMakeFiles/TestVoxelizer.dir/src/camera.cpp.o: CXX_COMPILER__TestVoxelizer
 #############################################
 # Link the executable TestVoxelizer
 
-build TestVoxelizer: CXX_EXECUTABLE_LINKER__TestVoxelizer_Release CMakeFiles/TestVoxelizer.dir/main.cpp.o CMakeFiles/TestVoxelizer.dir/src/program.cpp.o CMakeFiles/TestVoxelizer.dir/src/windowHandler.cpp.o CMakeFiles/TestVoxelizer.dir/src/eventHandler.cpp.o CMakeFiles/TestVoxelizer.dir/src/openGLHandler.cpp.o CMakeFiles/TestVoxelizer.dir/src/shader.cpp.o CMakeFiles/TestVoxelizer.dir/src/shaderHandler.cpp.o CMakeFiles/TestVoxelizer.dir/src/renderer.cpp.o CMakeFiles/TestVoxelizer.dir/src/camera.cpp.o | /opt/homebrew/Cellar/sdl2/2.30.3/lib/libSDL2.dylib /opt/homebrew/lib/libGLEW.2.2.0.dylib /opt/homebrew/lib/libglm.dylib
+build TestVoxelizer: CXX_EXECUTABLE_LINKER__TestVoxelizer_Release CMakeFiles/TestVoxelizer.dir/main.cpp.o CMakeFiles/TestVoxelizer.dir/src/program.cpp.o CMakeFiles/TestVoxelizer.dir/src/windowHandler.cpp.o CMakeFiles/TestVoxelizer.dir/src/eventHandler.cpp.o CMakeFiles/TestVoxelizer.dir/src/openGLHandler.cpp.o CMakeFiles/TestVoxelizer.dir/src/shader.cpp.o CMakeFiles/TestVoxelizer.dir/src/shaderHandler.cpp.o CMakeFiles/TestVoxelizer.dir/src/renderer.cpp.o CMakeFiles/TestVoxelizer.dir/src/camera.cpp.o CMakeFiles/TestVoxelizer.dir/src/transformator.cpp.o | /opt/homebrew/Cellar/sdl2/2.30.3/lib/libSDL2.dylib /opt/homebrew/lib/libGLEW.2.2.0.dylib /opt/homebrew/lib/libglm.dylib
   FLAGS = -O3 -DNDEBUG -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk
   LINK_LIBRARIES = -Wl,-rpath,/opt/homebrew/Cellar/sdl2/2.30.3/lib -Wl,-rpath,/opt/homebrew/lib  /opt/homebrew/Cellar/sdl2/2.30.3/lib/libSDL2.dylib  /opt/homebrew/lib/libGLEW.2.2.0.dylib  /opt/homebrew/lib/libglm.dylib  -Xlinker -framework -Xlinker OpenGL
   LINK_PATH = -F/Library/Developer/CommandLineTools/SDKs/MacOSX14.sdk/System/Library/Frameworks  -L/opt/homebrew/Cellar/sdl2/2.30.3/lib

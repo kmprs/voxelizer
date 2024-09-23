@@ -1,17 +1,19 @@
 #include "program.hpp"
 #include "openGLHandler.hpp"
 #include "renderer.hpp"
+#include "constants.hpp"
+#include "transformator.hpp"
+#include "camera.hpp"
 
-
-const int WINDOW_WIDTH = 1200;
-const int WINDOW_HEIGHT = 800;
-const std::string TITLE = "TestVoxelizer";
 
 void Program::run()
 {
     SDL_Event event;
-    WindowHandler windowHandler = { TITLE, WINDOW_WIDTH, WINDOW_HEIGHT };
+    WindowHandler windowHandler = {TITLE, WINDOW_WIDTH, WINDOW_HEIGHT};
     OpenGLHandler openGlHandler = {};
+    std::shared_ptr<ShaderHandler> shaderHandler = openGlHandler.getShaderHandler();
+    Camera camera = {};
+    Transformator transformator = {shaderHandler};
     Renderer renderer = {};
 
     while ( !windowHandler.isClosed())
@@ -20,8 +22,11 @@ void Program::run()
         {
             windowHandler.close();
         }
-        EventHandler::processInput(event, windowHandler);
+        EventHandler::processInput( event, windowHandler );
+        // TODO: fill in the correct direction
+        camera.update( Direction::LEFT );
         windowHandler.swapWindow();
+        transformator.transform( camera.getPosition(), camera.getDirection());
         renderer.render();
         openGlHandler.use();
     }
