@@ -22,9 +22,11 @@ void Program::run()
         {
             windowHandler.close();
         }
-        EventHandler::processInput( event, windowHandler );
+        Direction cameraDirection;
+        EventHandler::processInput( event, windowHandler, cameraDirection );
         // TODO: fill in the correct direction
-        camera.update( Direction::LEFT );
+        camera.update( cameraDirection );
+
         windowHandler.swapWindow();
         transformator.transform( camera.getPosition(), camera.getDirection());
         renderer.render();

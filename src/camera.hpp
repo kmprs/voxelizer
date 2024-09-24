@@ -1,6 +1,8 @@
 #pragma once
 
 #include <iostream>
+#define GLM_ENABLE_EXPERIMENTAL
+#include <glm/gtx/rotate_vector.hpp>
 #include "glm/glm.hpp"
 
 enum Direction {
@@ -28,7 +30,10 @@ public:
 private:
     glm::vec3 m_position = {};
     glm::vec3 m_direction = {};
-    glm::vec3 m_up = {0, 1, 0};
+
+    float m_yaw = -1;
+    float m_pitch = -1;
+    float m_roll = -1;
 
     bool m_moving = false;
     bool m_forwardMovement = false;
@@ -37,8 +42,6 @@ private:
 
     int m_xPosMouse = -1;
     int m_yPosMouse = -1;
-    float m_yaw = -1;
-    float m_pitch = -1;
     float m_lastX = -1;
     float m_lastY = -1;
     bool m_dragging = false;

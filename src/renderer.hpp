@@ -19,11 +19,19 @@ private:
     GLuint m_VBO = 0;
     GLuint m_EBO = 0;
     std::vector<float> m_vertices = {
-              0, .5f, 0,
-             .5f, -.5f,  0,
-            -.5f, -.5f,  0
+              -.25f, -.25f, -.25f,
+              -.25f,  .25f, -.25f,
+               .25f, -.25f, -.25f,
+               .25f,  .25f, -.25f,
+              -.25f, -.25f,  .25f,
+              -.25f,  .25f,  .25f,
+               .25f, -.25f,  .25f,
+               .25f,  .25f,  .25f,
     };
-    std::vector<unsigned int> m_indices = {0, 1, 2};
+    std::vector<unsigned int> m_indices = {0, 1, 2,
+                                           1, 3, 2,
+                                           4, 5, 6,
+                                           5, 7, 6};
     void createMesh();
     void drawMesh();
 

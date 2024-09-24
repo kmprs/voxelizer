@@ -27,7 +27,7 @@ void Renderer::createMesh()
     glBindBuffer( GL_ARRAY_BUFFER, m_VBO );
     glBufferData( GL_ARRAY_BUFFER, sizeof( float ) * m_vertices.size(), vertices, GL_STATIC_DRAW );
     // Vertex attribute pointer for integer data
-    glVertexAttribPointer( 0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0 );
+    glVertexAttribPointer( 0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)nullptr );
     glEnableVertexAttribArray( 0 );
 
     glGenBuffers( 1, &m_EBO );
