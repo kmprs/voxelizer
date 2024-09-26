@@ -21,20 +21,9 @@ void ShaderHandler::add( const Shader &shader )
     m_shaders.emplace_back(shader);
 }
 
-void ShaderHandler::setMat4( const std::string &name, const glm::mat4 &mat ) const
-{
-    glUniformMatrix4fv( glGetUniformLocation( programID, name.c_str()), 1, GL_FALSE, &mat[0][0] );
-}
-
 unsigned int ShaderHandler::getID() const
 {
     return programID;
-}
-
-void ShaderHandler::uploadInt( const std::string &name, const int value ) const
-{
-    int location = getVariableLocation( name.c_str() );
-    glUniform1i( location, value );
 }
 
 void ShaderHandler::checkCompileErrors( unsigned int shader, const std::string &type )
@@ -62,4 +51,23 @@ GLint ShaderHandler::getVariableLocation( const char* name )
 
 }
 
+void ShaderHandler::setMat4( const std::string &name, const glm::mat4 &mat ) const
+{
+    glUseProgram(programID);
+    GLint location = glGetUniformLocation(programID, name.c_str());
+    glUniformMatrix4fv( location, 1, GL_FALSE, &mat[0][0] );
+}
 
+void ShaderHandler::setVec3( const std::string &name, const glm::vec3 &vec ) const
+{
+    glUseProgram(programID);
+    GLint location = glGetUniformLocation( programID, name.c_str());
+    glUniform3fv(location, 1, &vec[0]);
+}
+
+void ShaderHandler::setFloat( const std::string &name, float value ) const
+{
+    glUseProgram(programID);
+    GLint location = glGetUniformLocation( programID, name.c_str());
+    glUniform1f(location, value);
+}

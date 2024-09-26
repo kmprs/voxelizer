@@ -1,8 +1,7 @@
 #include "camera.hpp"
 #include "constants.hpp"
 
-const glm::vec3 YAW_AXIS = {0, 1, 0};
-const glm::vec3 PITCH_AXIS = {1, 0, 0};
+
 
 Camera::Camera() :
         m_position( glm::vec3( 2.f, 0, 2.f )),
@@ -33,7 +32,8 @@ void Camera::update( Direction direction )
         // camera is always focused on the center
         if ( direction == FORWARD && (abs( m_position.x ) + abs( m_position.z )) > 0.01 )
             m_position += CAMERA_SPEED * m_direction;
-        else if ( direction == BACKWARD ) m_position -= CAMERA_SPEED * m_direction;
+        else if ( direction == BACKWARD )
+            m_position -= CAMERA_SPEED * m_direction;
         else if ( direction == UP )
             m_position = glm::rotate( m_position, glm::radians( CAMERA_ROTATION_SPEED ), PITCH_AXIS );
         else if ( direction == DOWN )

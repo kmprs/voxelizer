@@ -4,6 +4,7 @@
 #include "constants.hpp"
 #include "transformator.hpp"
 #include "camera.hpp"
+#include "sceneHandler.hpp"
 
 
 void Program::run()
@@ -14,6 +15,7 @@ void Program::run()
     std::shared_ptr<ShaderHandler> shaderHandler = openGlHandler.getShaderHandler();
     Camera camera = {};
     Transformator transformator = {shaderHandler};
+    SceneHandler sceneHandler = {shaderHandler};
     Renderer renderer = {};
 
     while ( !windowHandler.isClosed())
@@ -24,11 +26,10 @@ void Program::run()
         }
         Direction cameraDirection;
         EventHandler::processInput( event, windowHandler, cameraDirection );
-        // TODO: fill in the correct direction
         camera.update( cameraDirection );
-
         windowHandler.swapWindow();
         transformator.transform( camera.getPosition(), camera.getDirection());
+        sceneHandler.setScene();
         renderer.render();
         openGlHandler.use();
     }

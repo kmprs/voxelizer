@@ -3,6 +3,7 @@
 #include "shader.hpp"
 #include <iostream>
 #include <vector>
+#include <glm/gtc/type_ptr.hpp>
 
 
 class ShaderHandler
@@ -12,9 +13,10 @@ public:
     ~ShaderHandler() = default;
     void link();
     void add(const Shader &shader);
-    void setMat4( const std::string &name, const glm::mat4 &mat ) const;
     [[nodiscard]] unsigned int getID() const;
-    void uploadInt( const std::string &name, int value ) const;
+    void setMat4( const std::string &name, const glm::mat4 &mat ) const;
+    void setVec3( const std::string &name, const glm::vec3 &vec ) const;
+    void setFloat(const std::string &name, float value) const;
 
 private:
     std::vector<Shader> m_shaders;

@@ -24,7 +24,9 @@ add_executable(${NAME} main.cpp
         src/camera.hpp
         src/constants.hpp
         src/transformator.cpp
-        src/transformator.hpp)
+        src/transformator.hpp
+        src/sceneHandler.cpp
+        src/sceneHandler.hpp)
 
 find_package(SDL2 REQUIRED)
 target_include_directories(${NAME} PRIVATE ${SDL2_INCLUDE_DIRS})

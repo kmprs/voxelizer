@@ -13,7 +13,7 @@ OpenGLHandler::OpenGLHandler()
     }
     programID = glCreateProgram();
 
-    // set up OpenGL
+    // setScene up OpenGL
     glEnable( GL_DEPTH_TEST );
 
     // shaders setup

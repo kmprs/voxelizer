@@ -20,9 +20,9 @@ public:
 
 private:
     std::shared_ptr<ShaderHandler> m_shaderHandler = nullptr;
-    glm::mat4 m_model = {};
-    glm::mat4 m_view = {};
-    glm::mat4 m_projection = {};
+    glm::mat4 m_model = glm::mat4( 1.0f );
+    glm::mat4 m_view = glm::mat4( 1.0f );
+    glm::mat4 m_projection = glm::mat4( 1.0f );
     int m_modelLocation = 0;
     int m_viewLocation = 0;
 };
