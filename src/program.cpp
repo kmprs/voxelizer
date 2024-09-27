@@ -20,25 +20,27 @@ void Program::run()
 
     Direction cameraDirection;
 
-    unsigned int frameStart, frameTime, currentTime;
+    // fps settings and display variables
     int frameCount = 0;
-    unsigned int fpsTimer = SDL_GetTicks();
-    float deltaTime = 0.0f;
-    unsigned lastTime = SDL_GetTicks();
+    float deltaTime, frameDuration;
+    Uint64 currentCounter;
+    Uint64 fpsTimer = SDL_GetPerformanceCounter();
+    Uint64 lastCounter = SDL_GetPerformanceCounter();
+    Uint64 performanceFrequency = SDL_GetPerformanceFrequency();
 
     while ( !windowHandler.isClosed())
     {
-        // constant fps
-         frameStart = SDL_GetTicks();
+        currentCounter = SDL_GetPerformanceCounter();
 
         if ( SDL_PollEvent( &event ) && event.type == SDL_QUIT )
         {
             windowHandler.close();
         }
-        currentTime = SDL_GetTicks();
-        deltaTime = (static_cast<float>(currentTime - lastTime)) / 1000.f;
-        lastTime = currentTime;
 
+        deltaTime = (static_cast<float>(currentCounter - lastCounter)) / static_cast<float>(performanceFrequency);
+        lastCounter = currentCounter;
+
+        // main methods
         EventHandler::processInput( event, windowHandler, cameraDirection );
         camera.update( cameraDirection, deltaTime );
         windowHandler.swapWindow();
@@ -48,15 +50,16 @@ void Program::run()
         openGlHandler.use();
 
         // constant fps
-        frameTime = SDL_GetTicks() - frameStart;
         frameCount++;
-        if (SDL_GetTicks() - fpsTimer >= 1000) {
+        if (currentCounter - fpsTimer >= performanceFrequency) {
             std::clog << "\rcurrent FPS: " << frameCount << ' ' << std::flush;
             frameCount = 0;
-            fpsTimer = SDL_GetTicks();
+            fpsTimer = SDL_GetPerformanceCounter();
         }
-        if (FRAME_DELAY > frameTime) {
-            SDL_Delay(FRAME_DELAY - frameTime);
+
+        frameDuration = (1000.f * (static_cast<float>(SDL_GetPerformanceCounter() - currentCounter))) / static_cast<float>(performanceFrequency);
+        if (FRAME_DELAY > frameDuration) {
+            SDL_Delay(static_cast<Uint32>(FRAME_DELAY - frameDuration));
         }
     }
 }
