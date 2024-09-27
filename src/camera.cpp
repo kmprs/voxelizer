@@ -25,23 +25,25 @@ glm::vec3 Camera::getDirection()
     return m_direction;
 }
 
-void Camera::update( Direction direction )
+void Camera::update( Direction direction, float deltaTime )
 {
+    float cameraSpeed = CAMERA_SPEED * deltaTime;
+    float cameraRotationSpeed = CAMERA_ROTATION_SPEED *  deltaTime;
     if ( direction != NO_MOVEMENT )
     {
         // camera is always focused on the center
         if ( direction == FORWARD && (abs( m_position.x ) + abs( m_position.z )) > 0.01 )
-            m_position += CAMERA_SPEED * m_direction;
+            m_position += cameraSpeed * m_direction;
         else if ( direction == BACKWARD )
-            m_position -= CAMERA_SPEED * m_direction;
+            m_position -= cameraSpeed * m_direction;
         else if ( direction == UP )
-            m_position = glm::rotate( m_position, glm::radians( CAMERA_ROTATION_SPEED ), PITCH_AXIS );
+            m_position = glm::rotate( m_position, glm::radians( cameraRotationSpeed ), PITCH_AXIS );
         else if ( direction == DOWN )
-            m_position = glm::rotate( m_position, glm::radians( -CAMERA_ROTATION_SPEED ), PITCH_AXIS );
+            m_position = glm::rotate( m_position, glm::radians( -cameraRotationSpeed ), PITCH_AXIS );
         else if ( direction == RIGHT )
-            m_position = glm::rotate( m_position, glm::radians( CAMERA_ROTATION_SPEED ), YAW_AXIS );
+            m_position = glm::rotate( m_position, glm::radians( cameraRotationSpeed ), YAW_AXIS );
         else if ( direction == LEFT )
-            m_position = glm::rotate( m_position, glm::radians( -CAMERA_ROTATION_SPEED ), YAW_AXIS );
+            m_position = glm::rotate( m_position, glm::radians( -cameraRotationSpeed ), YAW_AXIS );
         m_direction = glm::normalize( WORLD_CENTER - m_position );
     }
 }

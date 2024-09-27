@@ -21,7 +21,7 @@ public:
     Camera();
     ~Camera() = default;
 
-    void update( Direction direction );
+    void update( Direction direction, float deltaTime );
     void setPosition( const glm::vec3 &pos );
     glm::vec3 getPosition();
     glm::vec3 getDirection();
