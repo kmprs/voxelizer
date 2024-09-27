@@ -28,7 +28,8 @@ add_executable(${NAME} main.cpp
         src/sceneHandler.cpp
         src/sceneHandler.hpp
         src/mesh.cpp
-        src/mesh.hpp)
+        src/mesh.hpp
+        src/types.hpp)
 
 find_package(SDL2 REQUIRED)
 target_include_directories(${NAME} PRIVATE ${SDL2_INCLUDE_DIRS})

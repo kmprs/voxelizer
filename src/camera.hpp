@@ -4,16 +4,9 @@
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/rotate_vector.hpp>
 #include "glm/glm.hpp"
+#include "types.hpp"
 
-enum Direction {
-    NO_MOVEMENT,
-    FORWARD,
-    BACKWARD,
-    UP,
-    DOWN,
-    LEFT,
-    RIGHT
-};
+
 
 class Camera
 {

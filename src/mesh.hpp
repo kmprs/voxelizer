@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include "GL/glew.h"
+#include "types.hpp"
 
 
 class Mesh

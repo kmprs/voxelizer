@@ -21,6 +21,6 @@ constexpr glm::vec3 PITCH_AXIS = {1, 0, 0};
 // WORLD
 constexpr glm::vec3 WORLD_CENTER = {.0f, .0f, .0f};
 constexpr float AMBIENT_STRENGTH = .6f;
-constexpr glm::vec3 LIGHT_POSITION = {10.f, 10.f, 10.f};
+constexpr glm::vec3 LIGHT_POSITION = {1.f, 3.f, 2.f};
 constexpr glm::vec3 LIGHT_COLOR = {1.f, 1.f, 1.f};
 constexpr glm::vec3 VOXEL_COLOR = {1.f, .5f, .1f};
