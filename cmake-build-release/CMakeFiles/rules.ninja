@@ -6,7 +6,7 @@
 # It is included in the main 'build.ninja'.
 
 # =============================================================================
-# Project: TestVoxelizer
+# Project: Voxelizer
 # Configurations: Release
 # =============================================================================
 # =============================================================================
@@ -14,7 +14,7 @@
 #############################################
 # Rule for compiling CXX files.
 
-rule CXX_COMPILER__TestVoxelizer_unscanned_Release
+rule CXX_COMPILER__Voxelizer_unscanned_Release
   depfile = $DEP_FILE
   deps = gcc
   command = /Library/Developer/CommandLineTools/usr/bin/c++ $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out -c $in
@@ -24,7 +24,7 @@ rule CXX_COMPILER__TestVoxelizer_unscanned_Release
 #############################################
 # Rule for linking CXX executable.
 
-rule CXX_EXECUTABLE_LINKER__TestVoxelizer_Release
+rule CXX_EXECUTABLE_LINKER__Voxelizer_Release
   command = $PRE_LINK && /Library/Developer/CommandLineTools/usr/bin/c++ $FLAGS -Wl,-search_paths_first -Wl,-headerpad_max_install_names $LINK_FLAGS $in -o $TARGET_FILE $LINK_PATH $LINK_LIBRARIES && $POST_BUILD
   description = Linking CXX executable $TARGET_FILE
   restat = $RESTAT
@@ -42,7 +42,7 @@ rule CUSTOM_COMMAND
 # Rule for re-running cmake.
 
 rule RERUN_CMAKE
-  command = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake --regenerate-during-build -S/Users/jakobkampers/Desktop/Privat/private_workspace/TestVoxelizer -B/Users/jakobkampers/Desktop/Privat/private_workspace/TestVoxelizer/cmake-build-release
+  command = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake --regenerate-during-build -S/Users/jakobkampers/Desktop/Privat/private_workspace/Voxelizer -B/Users/jakobkampers/Desktop/Privat/private_workspace/Voxelizer/cmake-build-release
   description = Re-running CMake...
   generator = 1
 

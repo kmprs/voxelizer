@@ -1,5 +1,7 @@
 #pragma once
 
+#include <iostream>
+#include <vector>
 
 struct Vertex
 {
@@ -15,23 +17,11 @@ struct Vertex
     float nx = 0;
     float ny = 0;
     float nz = 0;
-};
 
-
-struct TriangleFace
-{
-    TriangleFace( const Vertex vertices[3], unsigned int offset ) :
-            vertices{ vertices[0], vertices[1], vertices[2] }, offset( offset )
+    std::vector<float> toVector()
     {
-        indices[0] = offset + 0;
-        indices[1] = offset + 1;
-        indices[2] = offset + 2;
-    };
-    TriangleFace() = default;
-
-    Vertex vertices[3] = {};
-    unsigned int indices[3] = {};
-    unsigned int offset = 0;
+        return std::vector<float>{ x, y, z, nx, ny, nz };
+    }
 };
 
 
@@ -39,8 +29,7 @@ struct VoxelFace
 {
     VoxelFace( const Vertex vertices[4], unsigned int offset )
             :
-            vertices{ vertices[0], vertices[1], vertices[2], vertices[3] },
-            offset( offset )
+            vertices{ vertices[0], vertices[1], vertices[2], vertices[3] }
     {
         indices[0] = offset + 0;
         indices[1] = offset + 1;
@@ -52,26 +41,24 @@ struct VoxelFace
 
     VoxelFace() = default;
 
-    unsigned int offset = 0;
     Vertex vertices[4] = {};
     unsigned int indices[6] = {};
-};
 
+    std::vector<float> verticesToVector()
+    {
+        std::vector<float> result = {};
+        for ( Vertex vertex: vertices )
+        {
+            std::vector<float> vertexData = vertex.toVector();
+            result.insert( result.end(), vertexData.begin(), vertexData.end());
+        }
+        return result;
+    }
 
-struct Voxel
-{
-    Voxel( const VoxelFace &front, const VoxelFace &back, const VoxelFace &top, const VoxelFace &bottom,
-           const VoxelFace &left, const VoxelFace &right )
-            :
-            front( front ), back( back ), top( top ), bottom( bottom ), left( left ), right( right )
-    {};
-    Voxel() = default;
-    VoxelFace front = {};
-    VoxelFace back = {};
-    VoxelFace top = {};
-    VoxelFace bottom = {};
-    VoxelFace left = {};
-    VoxelFace right = {};
+    std::vector<unsigned int> indicesToVector()
+    {
+        return { std::begin( indices ), std::end( indices ) };
+    }
 };
 
 

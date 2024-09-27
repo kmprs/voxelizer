@@ -11,7 +11,7 @@
 # =============================================================================
 
 # =============================================================================
-# Project: TestVoxelizer
+# Project: Voxelizer
 # Configurations: Release
 # =============================================================================
 
@@ -39,124 +39,138 @@ include CMakeFiles/rules.ninja
 #############################################
 # Logical path to working directory; prefix for absolute paths.
 
-cmake_ninja_workdir = /Users/jakobkampers/Desktop/Privat/private_workspace/TestVoxelizer/cmake-build-release/
+cmake_ninja_workdir = /Users/jakobkampers/Desktop/Privat/private_workspace/Voxelizer/cmake-build-release/
 # =============================================================================
-# Object build statements for EXECUTABLE target TestVoxelizer
+# Object build statements for EXECUTABLE target Voxelizer
 
 
 #############################################
-# Order-only phony target for TestVoxelizer
+# Order-only phony target for Voxelizer
 
-build cmake_object_order_depends_target_TestVoxelizer: phony || CMakeFiles/TestVoxelizer.dir
+build cmake_object_order_depends_target_Voxelizer: phony || CMakeFiles/Voxelizer.dir
 
-build CMakeFiles/TestVoxelizer.dir/main.cpp.o: CXX_COMPILER__TestVoxelizer_unscanned_Release /Users/jakobkampers/Desktop/Privat/private_workspace/TestVoxelizer/main.cpp || cmake_object_order_depends_target_TestVoxelizer
-  DEP_FILE = CMakeFiles/TestVoxelizer.dir/main.cpp.o.d
+build CMakeFiles/Voxelizer.dir/main.cpp.o: CXX_COMPILER__Voxelizer_unscanned_Release /Users/jakobkampers/Desktop/Privat/private_workspace/Voxelizer/main.cpp || cmake_object_order_depends_target_Voxelizer
+  DEP_FILE = CMakeFiles/Voxelizer.dir/main.cpp.o.d
   FLAGS = -O3 -DNDEBUG -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -fcolor-diagnostics -F/Library/Developer/CommandLineTools/SDKs/MacOSX14.sdk/System/Library/Frameworks
   INCLUDES = -I/opt/homebrew/Cellar/sdl2/2.30.3/include -isystem /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2 -isystem /opt/homebrew/include
-  OBJECT_DIR = CMakeFiles/TestVoxelizer.dir
-  OBJECT_FILE_DIR = CMakeFiles/TestVoxelizer.dir
+  OBJECT_DIR = CMakeFiles/Voxelizer.dir
+  OBJECT_FILE_DIR = CMakeFiles/Voxelizer.dir
 
-build CMakeFiles/TestVoxelizer.dir/src/program.cpp.o: CXX_COMPILER__TestVoxelizer_unscanned_Release /Users/jakobkampers/Desktop/Privat/private_workspace/TestVoxelizer/src/program.cpp || cmake_object_order_depends_target_TestVoxelizer
-  DEP_FILE = CMakeFiles/TestVoxelizer.dir/src/program.cpp.o.d
+build CMakeFiles/Voxelizer.dir/src/program.cpp.o: CXX_COMPILER__Voxelizer_unscanned_Release /Users/jakobkampers/Desktop/Privat/private_workspace/Voxelizer/src/program.cpp || cmake_object_order_depends_target_Voxelizer
+  DEP_FILE = CMakeFiles/Voxelizer.dir/src/program.cpp.o.d
   FLAGS = -O3 -DNDEBUG -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -fcolor-diagnostics -F/Library/Developer/CommandLineTools/SDKs/MacOSX14.sdk/System/Library/Frameworks
   INCLUDES = -I/opt/homebrew/Cellar/sdl2/2.30.3/include -isystem /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2 -isystem /opt/homebrew/include
-  OBJECT_DIR = CMakeFiles/TestVoxelizer.dir
-  OBJECT_FILE_DIR = CMakeFiles/TestVoxelizer.dir/src
+  OBJECT_DIR = CMakeFiles/Voxelizer.dir
+  OBJECT_FILE_DIR = CMakeFiles/Voxelizer.dir/src
 
-build CMakeFiles/TestVoxelizer.dir/src/windowHandler.cpp.o: CXX_COMPILER__TestVoxelizer_unscanned_Release /Users/jakobkampers/Desktop/Privat/private_workspace/TestVoxelizer/src/windowHandler.cpp || cmake_object_order_depends_target_TestVoxelizer
-  DEP_FILE = CMakeFiles/TestVoxelizer.dir/src/windowHandler.cpp.o.d
+build CMakeFiles/Voxelizer.dir/src/windowHandler.cpp.o: CXX_COMPILER__Voxelizer_unscanned_Release /Users/jakobkampers/Desktop/Privat/private_workspace/Voxelizer/src/windowHandler.cpp || cmake_object_order_depends_target_Voxelizer
+  DEP_FILE = CMakeFiles/Voxelizer.dir/src/windowHandler.cpp.o.d
   FLAGS = -O3 -DNDEBUG -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -fcolor-diagnostics -F/Library/Developer/CommandLineTools/SDKs/MacOSX14.sdk/System/Library/Frameworks
   INCLUDES = -I/opt/homebrew/Cellar/sdl2/2.30.3/include -isystem /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2 -isystem /opt/homebrew/include
-  OBJECT_DIR = CMakeFiles/TestVoxelizer.dir
-  OBJECT_FILE_DIR = CMakeFiles/TestVoxelizer.dir/src
+  OBJECT_DIR = CMakeFiles/Voxelizer.dir
+  OBJECT_FILE_DIR = CMakeFiles/Voxelizer.dir/src
 
-build CMakeFiles/TestVoxelizer.dir/src/eventHandler.cpp.o: CXX_COMPILER__TestVoxelizer_unscanned_Release /Users/jakobkampers/Desktop/Privat/private_workspace/TestVoxelizer/src/eventHandler.cpp || cmake_object_order_depends_target_TestVoxelizer
-  DEP_FILE = CMakeFiles/TestVoxelizer.dir/src/eventHandler.cpp.o.d
+build CMakeFiles/Voxelizer.dir/src/eventHandler.cpp.o: CXX_COMPILER__Voxelizer_unscanned_Release /Users/jakobkampers/Desktop/Privat/private_workspace/Voxelizer/src/eventHandler.cpp || cmake_object_order_depends_target_Voxelizer
+  DEP_FILE = CMakeFiles/Voxelizer.dir/src/eventHandler.cpp.o.d
   FLAGS = -O3 -DNDEBUG -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -fcolor-diagnostics -F/Library/Developer/CommandLineTools/SDKs/MacOSX14.sdk/System/Library/Frameworks
   INCLUDES = -I/opt/homebrew/Cellar/sdl2/2.30.3/include -isystem /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2 -isystem /opt/homebrew/include
-  OBJECT_DIR = CMakeFiles/TestVoxelizer.dir
-  OBJECT_FILE_DIR = CMakeFiles/TestVoxelizer.dir/src
+  OBJECT_DIR = CMakeFiles/Voxelizer.dir
+  OBJECT_FILE_DIR = CMakeFiles/Voxelizer.dir/src
 
-build CMakeFiles/TestVoxelizer.dir/src/openGLHandler.cpp.o: CXX_COMPILER__TestVoxelizer_unscanned_Release /Users/jakobkampers/Desktop/Privat/private_workspace/TestVoxelizer/src/openGLHandler.cpp || cmake_object_order_depends_target_TestVoxelizer
-  DEP_FILE = CMakeFiles/TestVoxelizer.dir/src/openGLHandler.cpp.o.d
+build CMakeFiles/Voxelizer.dir/src/openGLHandler.cpp.o: CXX_COMPILER__Voxelizer_unscanned_Release /Users/jakobkampers/Desktop/Privat/private_workspace/Voxelizer/src/openGLHandler.cpp || cmake_object_order_depends_target_Voxelizer
+  DEP_FILE = CMakeFiles/Voxelizer.dir/src/openGLHandler.cpp.o.d
   FLAGS = -O3 -DNDEBUG -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -fcolor-diagnostics -F/Library/Developer/CommandLineTools/SDKs/MacOSX14.sdk/System/Library/Frameworks
   INCLUDES = -I/opt/homebrew/Cellar/sdl2/2.30.3/include -isystem /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2 -isystem /opt/homebrew/include
-  OBJECT_DIR = CMakeFiles/TestVoxelizer.dir
-  OBJECT_FILE_DIR = CMakeFiles/TestVoxelizer.dir/src
+  OBJECT_DIR = CMakeFiles/Voxelizer.dir
+  OBJECT_FILE_DIR = CMakeFiles/Voxelizer.dir/src
 
-build CMakeFiles/TestVoxelizer.dir/src/shader.cpp.o: CXX_COMPILER__TestVoxelizer_unscanned_Release /Users/jakobkampers/Desktop/Privat/private_workspace/TestVoxelizer/src/shader.cpp || cmake_object_order_depends_target_TestVoxelizer
-  DEP_FILE = CMakeFiles/TestVoxelizer.dir/src/shader.cpp.o.d
+build CMakeFiles/Voxelizer.dir/src/shader.cpp.o: CXX_COMPILER__Voxelizer_unscanned_Release /Users/jakobkampers/Desktop/Privat/private_workspace/Voxelizer/src/shader.cpp || cmake_object_order_depends_target_Voxelizer
+  DEP_FILE = CMakeFiles/Voxelizer.dir/src/shader.cpp.o.d
   FLAGS = -O3 -DNDEBUG -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -fcolor-diagnostics -F/Library/Developer/CommandLineTools/SDKs/MacOSX14.sdk/System/Library/Frameworks
   INCLUDES = -I/opt/homebrew/Cellar/sdl2/2.30.3/include -isystem /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2 -isystem /opt/homebrew/include
-  OBJECT_DIR = CMakeFiles/TestVoxelizer.dir
-  OBJECT_FILE_DIR = CMakeFiles/TestVoxelizer.dir/src
+  OBJECT_DIR = CMakeFiles/Voxelizer.dir
+  OBJECT_FILE_DIR = CMakeFiles/Voxelizer.dir/src
 
-build CMakeFiles/TestVoxelizer.dir/src/shaderHandler.cpp.o: CXX_COMPILER__TestVoxelizer_unscanned_Release /Users/jakobkampers/Desktop/Privat/private_workspace/TestVoxelizer/src/shaderHandler.cpp || cmake_object_order_depends_target_TestVoxelizer
-  DEP_FILE = CMakeFiles/TestVoxelizer.dir/src/shaderHandler.cpp.o.d
+build CMakeFiles/Voxelizer.dir/src/shaderHandler.cpp.o: CXX_COMPILER__Voxelizer_unscanned_Release /Users/jakobkampers/Desktop/Privat/private_workspace/Voxelizer/src/shaderHandler.cpp || cmake_object_order_depends_target_Voxelizer
+  DEP_FILE = CMakeFiles/Voxelizer.dir/src/shaderHandler.cpp.o.d
   FLAGS = -O3 -DNDEBUG -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -fcolor-diagnostics -F/Library/Developer/CommandLineTools/SDKs/MacOSX14.sdk/System/Library/Frameworks
   INCLUDES = -I/opt/homebrew/Cellar/sdl2/2.30.3/include -isystem /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2 -isystem /opt/homebrew/include
-  OBJECT_DIR = CMakeFiles/TestVoxelizer.dir
-  OBJECT_FILE_DIR = CMakeFiles/TestVoxelizer.dir/src
+  OBJECT_DIR = CMakeFiles/Voxelizer.dir
+  OBJECT_FILE_DIR = CMakeFiles/Voxelizer.dir/src
 
-build CMakeFiles/TestVoxelizer.dir/src/renderer.cpp.o: CXX_COMPILER__TestVoxelizer_unscanned_Release /Users/jakobkampers/Desktop/Privat/private_workspace/TestVoxelizer/src/renderer.cpp || cmake_object_order_depends_target_TestVoxelizer
-  DEP_FILE = CMakeFiles/TestVoxelizer.dir/src/renderer.cpp.o.d
+build CMakeFiles/Voxelizer.dir/src/renderer.cpp.o: CXX_COMPILER__Voxelizer_unscanned_Release /Users/jakobkampers/Desktop/Privat/private_workspace/Voxelizer/src/renderer.cpp || cmake_object_order_depends_target_Voxelizer
+  DEP_FILE = CMakeFiles/Voxelizer.dir/src/renderer.cpp.o.d
   FLAGS = -O3 -DNDEBUG -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -fcolor-diagnostics -F/Library/Developer/CommandLineTools/SDKs/MacOSX14.sdk/System/Library/Frameworks
   INCLUDES = -I/opt/homebrew/Cellar/sdl2/2.30.3/include -isystem /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2 -isystem /opt/homebrew/include
-  OBJECT_DIR = CMakeFiles/TestVoxelizer.dir
-  OBJECT_FILE_DIR = CMakeFiles/TestVoxelizer.dir/src
+  OBJECT_DIR = CMakeFiles/Voxelizer.dir
+  OBJECT_FILE_DIR = CMakeFiles/Voxelizer.dir/src
 
-build CMakeFiles/TestVoxelizer.dir/src/camera.cpp.o: CXX_COMPILER__TestVoxelizer_unscanned_Release /Users/jakobkampers/Desktop/Privat/private_workspace/TestVoxelizer/src/camera.cpp || cmake_object_order_depends_target_TestVoxelizer
-  DEP_FILE = CMakeFiles/TestVoxelizer.dir/src/camera.cpp.o.d
+build CMakeFiles/Voxelizer.dir/src/camera.cpp.o: CXX_COMPILER__Voxelizer_unscanned_Release /Users/jakobkampers/Desktop/Privat/private_workspace/Voxelizer/src/camera.cpp || cmake_object_order_depends_target_Voxelizer
+  DEP_FILE = CMakeFiles/Voxelizer.dir/src/camera.cpp.o.d
   FLAGS = -O3 -DNDEBUG -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -fcolor-diagnostics -F/Library/Developer/CommandLineTools/SDKs/MacOSX14.sdk/System/Library/Frameworks
   INCLUDES = -I/opt/homebrew/Cellar/sdl2/2.30.3/include -isystem /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2 -isystem /opt/homebrew/include
-  OBJECT_DIR = CMakeFiles/TestVoxelizer.dir
-  OBJECT_FILE_DIR = CMakeFiles/TestVoxelizer.dir/src
+  OBJECT_DIR = CMakeFiles/Voxelizer.dir
+  OBJECT_FILE_DIR = CMakeFiles/Voxelizer.dir/src
 
-build CMakeFiles/TestVoxelizer.dir/src/transformator.cpp.o: CXX_COMPILER__TestVoxelizer_unscanned_Release /Users/jakobkampers/Desktop/Privat/private_workspace/TestVoxelizer/src/transformator.cpp || cmake_object_order_depends_target_TestVoxelizer
-  DEP_FILE = CMakeFiles/TestVoxelizer.dir/src/transformator.cpp.o.d
+build CMakeFiles/Voxelizer.dir/src/transformator.cpp.o: CXX_COMPILER__Voxelizer_unscanned_Release /Users/jakobkampers/Desktop/Privat/private_workspace/Voxelizer/src/transformator.cpp || cmake_object_order_depends_target_Voxelizer
+  DEP_FILE = CMakeFiles/Voxelizer.dir/src/transformator.cpp.o.d
   FLAGS = -O3 -DNDEBUG -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -fcolor-diagnostics -F/Library/Developer/CommandLineTools/SDKs/MacOSX14.sdk/System/Library/Frameworks
   INCLUDES = -I/opt/homebrew/Cellar/sdl2/2.30.3/include -isystem /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2 -isystem /opt/homebrew/include
-  OBJECT_DIR = CMakeFiles/TestVoxelizer.dir
-  OBJECT_FILE_DIR = CMakeFiles/TestVoxelizer.dir/src
+  OBJECT_DIR = CMakeFiles/Voxelizer.dir
+  OBJECT_FILE_DIR = CMakeFiles/Voxelizer.dir/src
 
-build CMakeFiles/TestVoxelizer.dir/src/sceneHandler.cpp.o: CXX_COMPILER__TestVoxelizer_unscanned_Release /Users/jakobkampers/Desktop/Privat/private_workspace/TestVoxelizer/src/sceneHandler.cpp || cmake_object_order_depends_target_TestVoxelizer
-  DEP_FILE = CMakeFiles/TestVoxelizer.dir/src/sceneHandler.cpp.o.d
+build CMakeFiles/Voxelizer.dir/src/sceneHandler.cpp.o: CXX_COMPILER__Voxelizer_unscanned_Release /Users/jakobkampers/Desktop/Privat/private_workspace/Voxelizer/src/sceneHandler.cpp || cmake_object_order_depends_target_Voxelizer
+  DEP_FILE = CMakeFiles/Voxelizer.dir/src/sceneHandler.cpp.o.d
   FLAGS = -O3 -DNDEBUG -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -fcolor-diagnostics -F/Library/Developer/CommandLineTools/SDKs/MacOSX14.sdk/System/Library/Frameworks
   INCLUDES = -I/opt/homebrew/Cellar/sdl2/2.30.3/include -isystem /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2 -isystem /opt/homebrew/include
-  OBJECT_DIR = CMakeFiles/TestVoxelizer.dir
-  OBJECT_FILE_DIR = CMakeFiles/TestVoxelizer.dir/src
+  OBJECT_DIR = CMakeFiles/Voxelizer.dir
+  OBJECT_FILE_DIR = CMakeFiles/Voxelizer.dir/src
 
-build CMakeFiles/TestVoxelizer.dir/src/mesh.cpp.o: CXX_COMPILER__TestVoxelizer_unscanned_Release /Users/jakobkampers/Desktop/Privat/private_workspace/TestVoxelizer/src/mesh.cpp || cmake_object_order_depends_target_TestVoxelizer
-  DEP_FILE = CMakeFiles/TestVoxelizer.dir/src/mesh.cpp.o.d
+build CMakeFiles/Voxelizer.dir/src/mesh.cpp.o: CXX_COMPILER__Voxelizer_unscanned_Release /Users/jakobkampers/Desktop/Privat/private_workspace/Voxelizer/src/mesh.cpp || cmake_object_order_depends_target_Voxelizer
+  DEP_FILE = CMakeFiles/Voxelizer.dir/src/mesh.cpp.o.d
   FLAGS = -O3 -DNDEBUG -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -fcolor-diagnostics -F/Library/Developer/CommandLineTools/SDKs/MacOSX14.sdk/System/Library/Frameworks
   INCLUDES = -I/opt/homebrew/Cellar/sdl2/2.30.3/include -isystem /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2 -isystem /opt/homebrew/include
-  OBJECT_DIR = CMakeFiles/TestVoxelizer.dir
-  OBJECT_FILE_DIR = CMakeFiles/TestVoxelizer.dir/src
+  OBJECT_DIR = CMakeFiles/Voxelizer.dir
+  OBJECT_FILE_DIR = CMakeFiles/Voxelizer.dir/src
+
+build CMakeFiles/Voxelizer.dir/src/voxel.cpp.o: CXX_COMPILER__Voxelizer_unscanned_Release /Users/jakobkampers/Desktop/Privat/private_workspace/Voxelizer/src/voxel.cpp || cmake_object_order_depends_target_Voxelizer
+  DEP_FILE = CMakeFiles/Voxelizer.dir/src/voxel.cpp.o.d
+  FLAGS = -O3 -DNDEBUG -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -fcolor-diagnostics -F/Library/Developer/CommandLineTools/SDKs/MacOSX14.sdk/System/Library/Frameworks
+  INCLUDES = -I/opt/homebrew/Cellar/sdl2/2.30.3/include -isystem /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2 -isystem /opt/homebrew/include
+  OBJECT_DIR = CMakeFiles/Voxelizer.dir
+  OBJECT_FILE_DIR = CMakeFiles/Voxelizer.dir/src
+
+build CMakeFiles/Voxelizer.dir/src/triangleFace.cpp.o: CXX_COMPILER__Voxelizer_unscanned_Release /Users/jakobkampers/Desktop/Privat/private_workspace/Voxelizer/src/triangleFace.cpp || cmake_object_order_depends_target_Voxelizer
+  DEP_FILE = CMakeFiles/Voxelizer.dir/src/triangleFace.cpp.o.d
+  FLAGS = -O3 -DNDEBUG -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -fcolor-diagnostics -F/Library/Developer/CommandLineTools/SDKs/MacOSX14.sdk/System/Library/Frameworks
+  INCLUDES = -I/opt/homebrew/Cellar/sdl2/2.30.3/include -isystem /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2 -isystem /opt/homebrew/include
+  OBJECT_DIR = CMakeFiles/Voxelizer.dir
+  OBJECT_FILE_DIR = CMakeFiles/Voxelizer.dir/src
 
 
 # =============================================================================
-# Link build statements for EXECUTABLE target TestVoxelizer
+# Link build statements for EXECUTABLE target Voxelizer
 
 
 #############################################
-# Link the executable TestVoxelizer
+# Link the executable Voxelizer
 
-build TestVoxelizer: CXX_EXECUTABLE_LINKER__TestVoxelizer_Release CMakeFiles/TestVoxelizer.dir/main.cpp.o CMakeFiles/TestVoxelizer.dir/src/program.cpp.o CMakeFiles/TestVoxelizer.dir/src/windowHandler.cpp.o CMakeFiles/TestVoxelizer.dir/src/eventHandler.cpp.o CMakeFiles/TestVoxelizer.dir/src/openGLHandler.cpp.o CMakeFiles/TestVoxelizer.dir/src/shader.cpp.o CMakeFiles/TestVoxelizer.dir/src/shaderHandler.cpp.o CMakeFiles/TestVoxelizer.dir/src/renderer.cpp.o CMakeFiles/TestVoxelizer.dir/src/camera.cpp.o CMakeFiles/TestVoxelizer.dir/src/transformator.cpp.o CMakeFiles/TestVoxelizer.dir/src/sceneHandler.cpp.o CMakeFiles/TestVoxelizer.dir/src/mesh.cpp.o | /opt/homebrew/Cellar/sdl2/2.30.3/lib/libSDL2.dylib /opt/homebrew/lib/libGLEW.2.2.0.dylib /opt/homebrew/lib/libglm.dylib
+build Voxelizer: CXX_EXECUTABLE_LINKER__Voxelizer_Release CMakeFiles/Voxelizer.dir/main.cpp.o CMakeFiles/Voxelizer.dir/src/program.cpp.o CMakeFiles/Voxelizer.dir/src/windowHandler.cpp.o CMakeFiles/Voxelizer.dir/src/eventHandler.cpp.o CMakeFiles/Voxelizer.dir/src/openGLHandler.cpp.o CMakeFiles/Voxelizer.dir/src/shader.cpp.o CMakeFiles/Voxelizer.dir/src/shaderHandler.cpp.o CMakeFiles/Voxelizer.dir/src/renderer.cpp.o CMakeFiles/Voxelizer.dir/src/camera.cpp.o CMakeFiles/Voxelizer.dir/src/transformator.cpp.o CMakeFiles/Voxelizer.dir/src/sceneHandler.cpp.o CMakeFiles/Voxelizer.dir/src/mesh.cpp.o CMakeFiles/Voxelizer.dir/src/voxel.cpp.o CMakeFiles/Voxelizer.dir/src/triangleFace.cpp.o | /opt/homebrew/Cellar/sdl2/2.30.3/lib/libSDL2.dylib /opt/homebrew/lib/libGLEW.2.2.0.dylib /opt/homebrew/lib/libglm.dylib
   FLAGS = -O3 -DNDEBUG -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk
   LINK_LIBRARIES = -Wl,-rpath,/opt/homebrew/Cellar/sdl2/2.30.3/lib -Wl,-rpath,/opt/homebrew/lib  /opt/homebrew/Cellar/sdl2/2.30.3/lib/libSDL2.dylib  /opt/homebrew/lib/libGLEW.2.2.0.dylib  /opt/homebrew/lib/libglm.dylib  -Xlinker -framework -Xlinker OpenGL
   LINK_PATH = -F/Library/Developer/CommandLineTools/SDKs/MacOSX14.sdk/System/Library/Frameworks  -L/opt/homebrew/Cellar/sdl2/2.30.3/lib
-  OBJECT_DIR = CMakeFiles/TestVoxelizer.dir
+  OBJECT_DIR = CMakeFiles/Voxelizer.dir
   POST_BUILD = :
   PRE_LINK = :
-  TARGET_FILE = TestVoxelizer
-  TARGET_PDB = TestVoxelizer.dbg
+  TARGET_FILE = Voxelizer
+  TARGET_PDB = Voxelizer.dbg
 
 
 #############################################
 # Utility command for edit_cache
 
 build CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /Users/jakobkampers/Desktop/Privat/private_workspace/TestVoxelizer/cmake-build-release && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+  COMMAND = cd /Users/jakobkampers/Desktop/Privat/private_workspace/Voxelizer/cmake-build-release && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -167,7 +181,7 @@ build edit_cache: phony CMakeFiles/edit_cache.util
 # Utility command for rebuild_cache
 
 build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /Users/jakobkampers/Desktop/Privat/private_workspace/TestVoxelizer/cmake-build-release && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake --regenerate-during-build -S/Users/jakobkampers/Desktop/Privat/private_workspace/TestVoxelizer -B/Users/jakobkampers/Desktop/Privat/private_workspace/TestVoxelizer/cmake-build-release
+  COMMAND = cd /Users/jakobkampers/Desktop/Privat/private_workspace/Voxelizer/cmake-build-release && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake --regenerate-during-build -S/Users/jakobkampers/Desktop/Privat/private_workspace/Voxelizer -B/Users/jakobkampers/Desktop/Privat/private_workspace/Voxelizer/cmake-build-release
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -183,9 +197,9 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 # =============================================================================
 
 #############################################
-# Folder: /Users/jakobkampers/Desktop/Privat/private_workspace/TestVoxelizer/cmake-build-release
+# Folder: /Users/jakobkampers/Desktop/Privat/private_workspace/Voxelizer/cmake-build-release
 
-build all: phony TestVoxelizer
+build all: phony Voxelizer
 
 # =============================================================================
 # Built-in targets
@@ -194,14 +208,14 @@ build all: phony TestVoxelizer
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja: RERUN_CMAKE | /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeCInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeCXXInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeCommonLanguageInclude.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeGenericSystem.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeInitializeConfigs.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeLanguageInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeSystemSpecificInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeSystemSpecificInitialize.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Compiler/AppleClang-C.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Compiler/AppleClang-CXX.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Compiler/CMakeCommonCompilerMacros.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Compiler/Clang.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Compiler/GNU.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/FeatureSummary.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/FindGLEW.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/FindPackageHandleStandardArgs.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/FindPackageMessage.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Platform/Apple-AppleClang-C.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Platform/Apple-AppleClang-CXX.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Platform/Apple-Clang-C.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Platform/Apple-Clang-CXX.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Platform/Apple-Clang.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Platform/Darwin-Initialize.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Platform/Darwin.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Platform/UnixPaths.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/SelectLibraryConfigurations.cmake /Users/jakobkampers/Desktop/Privat/private_workspace/TestVoxelizer/CMakeLists.txt /opt/homebrew/lib/cmake/SDL2/sdl2-config-version.cmake /opt/homebrew/lib/cmake/SDL2/sdl2-config.cmake /opt/homebrew/lib/cmake/glew/CopyImportedTargetProperties.cmake /opt/homebrew/lib/cmake/glew/glew-config.cmake /opt/homebrew/lib/cmake/glew/glew-targets-release.cmake /opt/homebrew/lib/cmake/glew/glew-targets.cmake /opt/homebrew/share/glm/GLMConfig.cmake /opt/homebrew/share/glm/GLMConfigVersion.cmake /opt/homebrew/share/glm/glmConfig-release.cmake CMakeCache.txt CMakeFiles/3.26.4/CMakeCCompiler.cmake CMakeFiles/3.26.4/CMakeCXXCompiler.cmake CMakeFiles/3.26.4/CMakeSystem.cmake
+build build.ninja: RERUN_CMAKE | /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeCInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeCXXInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeCommonLanguageInclude.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeGenericSystem.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeInitializeConfigs.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeLanguageInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeSystemSpecificInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeSystemSpecificInitialize.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Compiler/AppleClang-C.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Compiler/AppleClang-CXX.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Compiler/CMakeCommonCompilerMacros.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Compiler/Clang.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Compiler/GNU.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/FeatureSummary.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/FindGLEW.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/FindPackageHandleStandardArgs.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/FindPackageMessage.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Platform/Apple-AppleClang-C.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Platform/Apple-AppleClang-CXX.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Platform/Apple-Clang-C.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Platform/Apple-Clang-CXX.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Platform/Apple-Clang.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Platform/Darwin-Initialize.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Platform/Darwin.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Platform/UnixPaths.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/SelectLibraryConfigurations.cmake /Users/jakobkampers/Desktop/Privat/private_workspace/Voxelizer/CMakeLists.txt /opt/homebrew/lib/cmake/SDL2/sdl2-config-version.cmake /opt/homebrew/lib/cmake/SDL2/sdl2-config.cmake /opt/homebrew/lib/cmake/glew/CopyImportedTargetProperties.cmake /opt/homebrew/lib/cmake/glew/glew-config.cmake /opt/homebrew/lib/cmake/glew/glew-targets-release.cmake /opt/homebrew/lib/cmake/glew/glew-targets.cmake /opt/homebrew/share/glm/GLMConfig.cmake /opt/homebrew/share/glm/GLMConfigVersion.cmake /opt/homebrew/share/glm/glmConfig-release.cmake CMakeCache.txt CMakeFiles/3.26.4/CMakeCCompiler.cmake CMakeFiles/3.26.4/CMakeCXXCompiler.cmake CMakeFiles/3.26.4/CMakeSystem.cmake
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeCInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeCXXInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeCommonLanguageInclude.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeGenericSystem.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeInitializeConfigs.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeLanguageInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeSystemSpecificInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeSystemSpecificInitialize.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Compiler/AppleClang-C.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Compiler/AppleClang-CXX.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Compiler/CMakeCommonCompilerMacros.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Compiler/Clang.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Compiler/GNU.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/FeatureSummary.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/FindGLEW.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/FindPackageHandleStandardArgs.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/FindPackageMessage.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Platform/Apple-AppleClang-C.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Platform/Apple-AppleClang-CXX.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Platform/Apple-Clang-C.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Platform/Apple-Clang-CXX.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Platform/Apple-Clang.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Platform/Darwin-Initialize.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Platform/Darwin.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Platform/UnixPaths.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/SelectLibraryConfigurations.cmake /Users/jakobkampers/Desktop/Privat/private_workspace/TestVoxelizer/CMakeLists.txt /opt/homebrew/lib/cmake/SDL2/sdl2-config-version.cmake /opt/homebrew/lib/cmake/SDL2/sdl2-config.cmake /opt/homebrew/lib/cmake/glew/CopyImportedTargetProperties.cmake /opt/homebrew/lib/cmake/glew/glew-config.cmake /opt/homebrew/lib/cmake/glew/glew-targets-release.cmake /opt/homebrew/lib/cmake/glew/glew-targets.cmake /opt/homebrew/share/glm/GLMConfig.cmake /opt/homebrew/share/glm/GLMConfigVersion.cmake /opt/homebrew/share/glm/glmConfig-release.cmake CMakeCache.txt CMakeFiles/3.26.4/CMakeCCompiler.cmake CMakeFiles/3.26.4/CMakeCXXCompiler.cmake CMakeFiles/3.26.4/CMakeSystem.cmake: phony
+build /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeCInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeCXXInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeCommonLanguageInclude.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeGenericSystem.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeInitializeConfigs.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeLanguageInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeSystemSpecificInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeSystemSpecificInitialize.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Compiler/AppleClang-C.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Compiler/AppleClang-CXX.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Compiler/CMakeCommonCompilerMacros.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Compiler/Clang.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Compiler/GNU.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/FeatureSummary.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/FindGLEW.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/FindPackageHandleStandardArgs.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/FindPackageMessage.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Platform/Apple-AppleClang-C.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Platform/Apple-AppleClang-CXX.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Platform/Apple-Clang-C.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Platform/Apple-Clang-CXX.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Platform/Apple-Clang.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Platform/Darwin-Initialize.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Platform/Darwin.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Platform/UnixPaths.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/SelectLibraryConfigurations.cmake /Users/jakobkampers/Desktop/Privat/private_workspace/Voxelizer/CMakeLists.txt /opt/homebrew/lib/cmake/SDL2/sdl2-config-version.cmake /opt/homebrew/lib/cmake/SDL2/sdl2-config.cmake /opt/homebrew/lib/cmake/glew/CopyImportedTargetProperties.cmake /opt/homebrew/lib/cmake/glew/glew-config.cmake /opt/homebrew/lib/cmake/glew/glew-targets-release.cmake /opt/homebrew/lib/cmake/glew/glew-targets.cmake /opt/homebrew/share/glm/GLMConfig.cmake /opt/homebrew/share/glm/GLMConfigVersion.cmake /opt/homebrew/share/glm/glmConfig-release.cmake CMakeCache.txt CMakeFiles/3.26.4/CMakeCCompiler.cmake CMakeFiles/3.26.4/CMakeCXXCompiler.cmake CMakeFiles/3.26.4/CMakeSystem.cmake: phony
 
 
 #############################################

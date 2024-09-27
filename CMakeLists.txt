@@ -1,4 +1,4 @@
-set(NAME "TestVoxelizer")
+set(NAME "Voxelizer")
 
 cmake_minimum_required(VERSION 3.26)
 project(${NAME})
@@ -29,7 +29,12 @@ add_executable(${NAME} main.cpp
         src/sceneHandler.hpp
         src/mesh.cpp
         src/mesh.hpp
-        src/types.hpp)
+        src/types.hpp
+        src/renderableObject.hpp
+        src/voxel.cpp
+        src/voxel.hpp
+        src/triangleFace.cpp
+        src/triangleFace.hpp)
 
 find_package(SDL2 REQUIRED)
 target_include_directories(${NAME} PRIVATE ${SDL2_INCLUDE_DIRS})

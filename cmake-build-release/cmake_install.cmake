@@ -1,4 +1,4 @@
-# Install script for directory: /Users/jakobkampers/Desktop/Privat/private_workspace/TestVoxelizer
+# Install script for directory: /Users/jakobkampers/Desktop/Privat/private_workspace/Voxelizer
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Users/jakobkampers/Desktop/Privat/private_workspace/TestVoxelizer/cmake-build-release/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/jakobkampers/Desktop/Privat/private_workspace/Voxelizer/cmake-build-release/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

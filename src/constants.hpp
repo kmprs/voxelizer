@@ -1,6 +1,6 @@
 #pragma once
 
-#include <iostream>
+#include <string>
 
 // WINDOW
 constexpr int WINDOW_WIDTH = 1280;

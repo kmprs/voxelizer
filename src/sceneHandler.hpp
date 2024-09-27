@@ -1,7 +1,5 @@
 #pragma once
 
-#include <iostream>
-#include <memory>
 #include "shaderHandler.hpp"
 #include "constants.hpp"
 

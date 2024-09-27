@@ -1,4 +1,4 @@
-/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_MAKE_PROGRAM=/Applications/CLion.app/Contents/bin/ninja/mac/ninja -G Ninja -S /Users/jakobkampers/Desktop/Privat/private_workspace/TestVoxelizer -B /Users/jakobkampers/Desktop/Privat/private_workspace/TestVoxelizer/cmake-build-release
+/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_MAKE_PROGRAM=/Applications/CLion.app/Contents/bin/ninja/mac/ninja -G Ninja -S /Users/jakobkampers/Desktop/Privat/private_workspace/Voxelizer -B /Users/jakobkampers/Desktop/Privat/private_workspace/Voxelizer/cmake-build-release
 -- Configuring done (0.0s)
 -- Generating done (0.0s)
--- Build files have been written to: /Users/jakobkampers/Desktop/Privat/private_workspace/TestVoxelizer/cmake-build-release
+-- Build files have been written to: /Users/jakobkampers/Desktop/Privat/private_workspace/Voxelizer/cmake-build-release

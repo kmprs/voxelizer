@@ -1,9 +1,9 @@
 #pragma once
 
-#include <iostream>
-#include <vector>
+#include <glm/vec3.hpp>
 #include "GL/glew.h"
-#include "types.hpp"
+#include "voxel.hpp"
+#include "triangleFace.hpp"
 
 
 class Mesh
@@ -19,56 +19,9 @@ private:
     GLuint m_VBO = 0;
     GLuint m_EBO = 0;
 
-    std::vector<float> m_vertices = {
-            -.25f, -.25f, -.25f,  1.f, 0.f, 0.f,
-            -.25f,  .25f, -.25f,  1.f, 0.f, 0.f,
-            .25f, -.25f, -.25f,  1.f, 0.f, 0.f,
-            .25f,  .25f, -.25f,  1.f, 0.f, 0.f,
+    std::vector<float> m_vertices = {};
+    std::vector<unsigned int> m_indices = {};
 
-            -.25f, -.25f,  .25f, -1.f, 0.f, 0.f,
-            -.25f,  .25f,  .25f, -1.f, 0.f, 0.f,
-            .25f, -.25f,  .25f, -1.f, 0.f, 0.f,
-            .25f,  .25f,  .25f, -1.f, 0.f, 0.f,
-
-            -.25f, -.25f,  .25f,  0.f, 1.f, 0.f,
-            -.25f, -.25f, -.25f,  0.f, 1.f, 0.f,
-            .25f, -.25f,  .25f,  0.f, 1.f, 0.f,
-            .25f, -.25f, -.25f,  0.f, 1.f, 0.f,
-
-            -.25f, .25f, -.25f,  0.f, -1.f, 0.f,
-            -.25f, .25f,  .25f,  0.f, -1.f, 0.f,
-            .25f, .25f, -.25f,  0.f, -1.f, 0.f,
-            .25f, .25f,  .25f,  0.f, -1.f, 0.f,
-
-            -.25f, -.25f,  .25f,  0.f, 0.f, 1.f,
-            -.25f, -.25f, -.25f,  0.f, 0.f, 1.f,
-            -.25f,  .25f,  .25f,  0.f, 0.f, 1.f,
-            -.25f,  .25f, -.25f,  0.f, 0.f, 1.f,
-
-            .25f, -.25f, -.25f,  0.f, 0.f, -1.f,
-            .25f, -.25f,  .25f,  0.f, 0.f, -1.f,
-            .25f,  .25f, -.25f,  0.f, 0.f, -1.f,
-            .25f,  .25f,  .25f,  0.f, 0.f, -1.f,
-    };
-    std::vector<unsigned int> m_indices =
-            {
-                    0, 1, 2,
-                    1, 3, 2,
-
-                    4, 5, 6,
-                    5, 7, 6,
-
-                    8, 9,  10,
-                    9, 11, 10,
-
-                    12, 13, 14,
-                    13, 15, 14,
-
-                    16, 17, 18,
-                    17, 19, 18,
-
-                    20, 21, 22,
-                    21, 23, 22,
-
-            };
+    void createData( const std::vector<std::unique_ptr<RenderableObject>> &objects );
+    Voxel createVoxel(const glm::vec3 &position, unsigned int offset, float size);
 };

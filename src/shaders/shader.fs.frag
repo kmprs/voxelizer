@@ -13,7 +13,7 @@ void main()
 {
     vec3 norm = normalize(normal);
     vec3 ambient = AMBIENT_STRENGTH * LIGHT_COLOR;
-    vec3 lightDirection = normalize(fragPosition - LIGHT_POSITION);
+    vec3 lightDirection = normalize(LIGHT_POSITION - fragPosition);
     float diffuseValue = max(dot(norm, lightDirection), 0.f);
     vec3 diffuseVector = diffuseValue * LIGHT_COLOR;
     vec3 result = color * (diffuseVector + ambient);
