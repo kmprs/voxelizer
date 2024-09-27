@@ -21,4 +21,4 @@ constexpr glm::vec3 WORLD_CENTER = {.0f, .0f, .0f};
 constexpr float AMBIENT_STRENGTH = .6f;
 constexpr glm::vec3 LIGHT_POSITION = {10.f, 10.f, 10.f};
 constexpr glm::vec3 LIGHT_COLOR = {1.f, 1.f, 1.f};
-constexpr glm::vec3 VOXEL_COLOR = {1.f, .8f, .1f};
+constexpr glm::vec3 VOXEL_COLOR = {1.f, .5f, .1f};
