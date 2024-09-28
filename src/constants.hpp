@@ -5,7 +5,7 @@
 // WINDOW
 constexpr int WINDOW_WIDTH = 1280;
 constexpr int WINDOW_HEIGHT = 780;
-const std::string TITLE = "TestVoxelizer";
+const std::string TITLE = "Voxelizer";
 constexpr int TARGET_FPS = 300;
 constexpr int FRAME_DELAY = 1000/TARGET_FPS;
 

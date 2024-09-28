@@ -1,6 +1,9 @@
 #pragma once
 
+#include <memory>
 #include "mesh.hpp"
+#include "voxel.hpp"
+#include "triangleFace.hpp"
 
 
 class Renderer
@@ -12,6 +15,8 @@ public:
     void render();
 
 private:
-    Mesh m_mesh = {};
+    Mesh m_mesh = { std::vector<std::shared_ptr<Renderable>>() };
+    std::vector<std::shared_ptr<Renderable>> m_renderables = {};
 
+    Voxel createVoxel(const glm::vec3 &position, unsigned int offset, float size);
 };

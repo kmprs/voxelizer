@@ -30,7 +30,7 @@ add_executable(${NAME} main.cpp
         src/mesh.cpp
         src/mesh.hpp
         src/types.hpp
-        src/renderableObject.hpp
+        src/renderable.hpp
         src/voxel.cpp
         src/voxel.hpp
         src/triangleFace.cpp

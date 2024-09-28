@@ -1,9 +1,9 @@
 #pragma once
 
-#include "renderableObject.hpp"
+#include "renderable.hpp"
 #include "types.hpp"
 
-class TriangleFace : public RenderableObject
+class TriangleFace : public Renderable
 {
 public:
     TriangleFace( const Vertex vertices[3], unsigned int offset ) :
@@ -13,7 +13,6 @@ public:
         indices[1] = offset + 1;
         indices[2] = offset + 2;
     };
-    TriangleFace() = default;
 
     [[nodiscard]] std::vector<float> getVertexData() const override;
     [[nodiscard]] std::vector<unsigned int> getIndices() const override;

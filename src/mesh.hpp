@@ -1,15 +1,15 @@
 #pragma once
 
+#include <vector>
 #include <glm/vec3.hpp>
 #include "GL/glew.h"
-#include "voxel.hpp"
-#include "triangleFace.hpp"
+#include "renderable.hpp"
 
 
 class Mesh
 {
 public:
-    Mesh();
+    Mesh( const std::vector<std::shared_ptr<Renderable>>& renderables);
     ~Mesh() = default;
 
     void draw();
@@ -22,6 +22,6 @@ private:
     std::vector<float> m_vertices = {};
     std::vector<unsigned int> m_indices = {};
 
-    void createData( const std::vector<std::unique_ptr<RenderableObject>> &objects );
-    Voxel createVoxel(const glm::vec3 &position, unsigned int offset, float size);
+    void createData( const std::vector<std::shared_ptr<Renderable>> &objects );
+
 };

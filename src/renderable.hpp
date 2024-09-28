@@ -2,11 +2,11 @@
 
 #include <iostream>
 
-class RenderableObject
+class Renderable
 {
 public:
     [[nodiscard]] virtual std::vector<float> getVertexData() const = 0;
     [[nodiscard]] virtual std::vector<unsigned int> getIndices() const = 0;
 
-    virtual ~RenderableObject() = default;
+    virtual ~Renderable() = default;
 };
