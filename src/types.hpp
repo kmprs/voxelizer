@@ -72,3 +72,9 @@ enum Direction
     LEFT,
     RIGHT
 };
+
+
+enum FileFormat
+{
+    OBJ,
+};

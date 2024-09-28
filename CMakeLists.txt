@@ -34,7 +34,12 @@ add_executable(${NAME} main.cpp
         src/voxel.cpp
         src/voxel.hpp
         src/triangleFace.cpp
-        src/triangleFace.hpp)
+        src/triangleFace.hpp
+        src/dataHandler.cpp
+        src/dataHandler.hpp
+        src/reader.hpp
+        src/objReader.cpp
+        src/objReader.hpp)
 
 find_package(SDL2 REQUIRED)
 target_include_directories(${NAME} PRIVATE ${SDL2_INCLUDE_DIRS})

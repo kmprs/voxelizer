@@ -24,12 +24,12 @@ Voxel Renderer::createVoxel( const glm::vec3 &position, unsigned int offset, flo
     float halfSize = size / 2.0f;
 
     glm::vec3 normals[6] = {
-            { 0,  0,  1 },  // Front
-            { 0,  0,  -1 }, // Back
-            { 0,  1,  0 },  // Top
-            { 0,  -1, 0 }, // Bottom
-            { -1, 0,  0 }, // Left
-            { 1,  0,  0 }   // Right
+            {  0,  0,  1 },  // Front
+            {  0,  0, -1 },  // Back
+            {  0,  1,  0 },  // Top
+            {  0, -1,  0 },  // Bottom
+            { -1,  0,  0 },  // Left
+            {  1,  0,  0 }   // Right
     };
 
     Vertex frontVertices[4] = {
