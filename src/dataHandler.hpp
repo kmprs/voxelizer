@@ -4,7 +4,7 @@
 #include <memory>
 #include "voxel.hpp"
 #include "triangleFace.hpp"
-#include "objReader.hpp"
+#include "objParser.hpp"
 
 
 class DataHandler
@@ -20,7 +20,7 @@ private:
     std::string m_path;
     std::vector<std::shared_ptr<Voxel>> m_voxels = {};
     std::vector<std::shared_ptr<TriangleFace>> m_triangleFaces = {};
-    std::unique_ptr<Reader> m_reader = nullptr;
+    std::unique_ptr<Parser> m_reader = nullptr;
 
     void voxelize();
 };

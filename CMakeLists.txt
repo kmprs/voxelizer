@@ -37,9 +37,9 @@ add_executable(${NAME} main.cpp
         src/triangleFace.hpp
         src/dataHandler.cpp
         src/dataHandler.hpp
-        src/reader.hpp
-        src/objReader.cpp
-        src/objReader.hpp)
+        src/parser.hpp
+        src/objParser.cpp
+        src/objParser.hpp)
 
 find_package(SDL2 REQUIRED)
 target_include_directories(${NAME} PRIVATE ${SDL2_INCLUDE_DIRS})

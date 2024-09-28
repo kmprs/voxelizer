@@ -5,9 +5,9 @@
 DataHandler::DataHandler( std::string path, FileFormat format ) :
         m_path(std::move( path ))
 {
-    if (format == OBJ) m_reader = std::make_unique<OBJReader>();
-    m_triangleFaces = m_reader->read(m_path);
-
+    if (format == OBJ) m_reader = std::make_unique<OBJParser>();
+    m_triangleFaces = m_reader->parse( m_path );
+    voxelize();
 }
 
 std::vector<std::shared_ptr<Voxel>> DataHandler::getVoxels() const
@@ -19,3 +19,9 @@ std::vector<std::shared_ptr<TriangleFace>> DataHandler::getTriangleFaces() const
 {
     return {};
 }
+
+void DataHandler::voxelize()
+{
+
+}
+
