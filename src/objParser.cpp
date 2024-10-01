@@ -27,7 +27,6 @@ std::vector<std::shared_ptr<TriangleFace>> OBJParser::parse( const std::string &
         {
             glm::vec3 normal = {};
             iss >> normal.x >> normal.y >> normal.z;
-            std::cout << normal.x << " " << normal.y << " " << normal.z << "\n";
             m_normals.emplace_back( normal );
         } else if ( prefix == "f" )
         {
@@ -39,6 +38,15 @@ std::vector<std::shared_ptr<TriangleFace>> OBJParser::parse( const std::string &
         }
     }
     file.close();
+
+    // normalize vertex coordinates
+    float maximum = findMax( m_positions );
+    for (glm::vec3 &vec : m_positions)
+    {
+        vec.x = vec.x / maximum;
+        vec.y = vec.y / maximum;
+        vec.z = vec.z / maximum;
+    }
 
     // creation of triangle faces based on the obj file
     for ( OBJFaceIndices faceIndices: m_faceIndices )
@@ -68,7 +76,7 @@ std::vector<std::shared_ptr<TriangleFace>> OBJParser::parse( const std::string &
  * @param fInput extracted .../.../... of the f-line
  * @return vector of OBJFaceIndices
  */
-std::vector<OBJFaceIndices> OBJParser::toFaceIndices( const std::vector<std::string> fInput ) const
+std::vector<OBJFaceIndices> OBJParser::toFaceIndices( const std::vector<std::string> &fInput )
 {
     std::vector<OBJFaceIndices> faceIndices = {};
     std::vector<std::string> baseElement = split( fInput[0], '/' );
@@ -77,9 +85,9 @@ std::vector<OBJFaceIndices> OBJParser::toFaceIndices( const std::vector<std::str
         std::vector<std::string> element1 = split( fInput[i], '/' );
         std::vector<std::string> element2 = split( fInput[i + 1], '/' );
         // the index in the f line in obj starts at 1, not 0
-        OBJFaceIndices face = { std::stoi( baseElement[0]) - 1, std::stoi( baseElement[1] ) - 1,
-                                std::stoi( element1[0] ) - 1, std::stoi( element1[1] ) - 1,
-                                std::stoi( element2[0] ) - 1, std::stoi( element2[1] ) - 1};
+        OBJFaceIndices face = { std::stoi( baseElement[0]) - 1, std::stoi( baseElement[2] ) - 1,
+                                std::stoi( element1[0] ) - 1, std::stoi( element1[2] ) - 1,
+                                std::stoi( element2[0] ) - 1, std::stoi( element2[2] ) - 1};
         faceIndices.push_back(face);
     }
 
@@ -96,6 +104,16 @@ std::vector<std::string> OBJParser::split( const std::string &s, char delimiter 
         tokens.push_back( token );
     }
     return tokens;
+}
+
+float OBJParser::findMax( const std::vector<glm::vec3> &input )
+{
+    float maximum = 0.f;
+    for ( const glm::vec3 &vec : input)
+    {
+        maximum = std::max( { maximum, vec.x, vec.y, vec.z });
+    }
+    return maximum;
 }
 
 

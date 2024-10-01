@@ -68,6 +68,8 @@ struct OBJFaceIndices
             f1Coords{ f1Coords }, f1Normal( f1Normal ), f2Coords( f2Coords ), f2Normal( f2Normal ),
             f3Coords( f3Coords ), f3Normal( f3Normal )
     {};
+
+    OBJFaceIndices() = default;
     int f1Coords, f1Normal, f2Coords, f2Normal, f3Coords, f3Normal;
 };
 

@@ -21,7 +21,7 @@ private:
     std::vector<glm::vec3> m_normals = {};
     std::vector<OBJFaceIndices> m_faceIndices = {};
 
-    std::vector<OBJFaceIndices> toFaceIndices( const std::vector<std::string> fInput ) const;
+    static std::vector<OBJFaceIndices> toFaceIndices( const std::vector<std::string> &fInput ) ;
     [[nodiscard]] static std::vector<std::string> split( const std::string &s, char delimiter );
-
+    [[nodiscard]] static float findMax( const std::vector<glm::vec3> &input );
 };
