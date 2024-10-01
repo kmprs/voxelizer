@@ -1,14 +1,16 @@
 #include "renderer.hpp"
+#include "dataHandler.hpp"
 
 extern unsigned int programID;
 
 Renderer::Renderer()
 {
-    std::shared_ptr<Voxel> v1 = std::make_shared<Voxel>( createVoxel( { .5f, .5f, 0.f }, 0, 0.5f ));
-    std::shared_ptr<Voxel> v2 = std::make_shared<Voxel>( createVoxel( { 0.f, 0.f, 0.f }, 24, 0.5f ));
-    m_renderables.push_back( v1 );
-    m_renderables.push_back( v2 );
+    std::unique_ptr<DataHandler> dataHandler = std::make_unique<DataHandler>(MODEL_PATH, OBJ);
+    std::vector<std::shared_ptr<TriangleFace>> triangleFaces = dataHandler->getTriangleFaces();
+    m_renderables.insert(m_renderables.end(), triangleFaces.begin(), triangleFaces.end());
     m_mesh = Mesh( m_renderables );
+
+
 }
 
 void Renderer::render()

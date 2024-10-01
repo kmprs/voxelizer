@@ -7,7 +7,7 @@
 class Parser
 {
 public:
-    [[nodiscard]] virtual std::vector<std::shared_ptr<TriangleFace>> parse( const std::string &path) const = 0;
+    [[nodiscard]] virtual std::vector<std::shared_ptr<TriangleFace>> parse( const std::string &path) = 0;
 
     virtual ~Parser() = default;
 };

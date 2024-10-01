@@ -4,6 +4,7 @@
 #include "mesh.hpp"
 #include "voxel.hpp"
 #include "triangleFace.hpp"
+#include "constants.hpp"
 
 
 class Renderer

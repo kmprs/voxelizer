@@ -2,6 +2,9 @@
 
 #include <string>
 
+// MODEL
+const std::string MODEL_PATH = "../data/indoor plant_02.obj";
+
 // WINDOW
 constexpr int WINDOW_WIDTH = 1280;
 constexpr int WINDOW_HEIGHT = 780;

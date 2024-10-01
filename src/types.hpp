@@ -62,6 +62,16 @@ struct VoxelFace
 };
 
 
+struct OBJFaceIndices
+{
+    OBJFaceIndices( int f1Coords, int f1Normal, int f2Coords, int f2Normal, int f3Coords, int f3Normal ) :
+            f1Coords{ f1Coords }, f1Normal( f1Normal ), f2Coords( f2Coords ), f2Normal( f2Normal ),
+            f3Coords( f3Coords ), f3Normal( f3Normal )
+    {};
+    int f1Coords, f1Normal, f2Coords, f2Normal, f3Coords, f3Normal;
+};
+
+
 enum Direction
 {
     NO_MOVEMENT,
@@ -78,3 +88,5 @@ enum FileFormat
 {
     OBJ,
 };
+
+

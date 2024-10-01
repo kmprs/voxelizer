@@ -17,7 +17,7 @@ std::vector<std::shared_ptr<Voxel>> DataHandler::getVoxels() const
 
 std::vector<std::shared_ptr<TriangleFace>> DataHandler::getTriangleFaces() const
 {
-    return {};
+    return m_triangleFaces;
 }
 
 void DataHandler::voxelize()
