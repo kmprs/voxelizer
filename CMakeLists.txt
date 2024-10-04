@@ -39,7 +39,9 @@ add_executable(${NAME} main.cpp
         src/dataHandler.hpp
         src/parser.hpp
         src/objParser.cpp
-        src/objParser.hpp)
+        src/objParser.hpp
+        src/util.cpp
+        src/util.hpp)
 
 find_package(SDL2 REQUIRED)
 target_include_directories(${NAME} PRIVATE ${SDL2_INCLUDE_DIRS})

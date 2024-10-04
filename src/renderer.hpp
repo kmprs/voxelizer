@@ -19,5 +19,5 @@ private:
     Mesh m_mesh = { std::vector<std::shared_ptr<Renderable>>() };
     std::vector<std::shared_ptr<Renderable>> m_renderables = {};
 
-    Voxel createVoxel(const glm::vec3 &position, unsigned int offset, float size);
+    [[nodiscard]] Voxel createVoxel(const glm::vec3 &position, unsigned int offset, float edgeLength);
 };

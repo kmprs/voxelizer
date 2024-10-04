@@ -5,9 +5,12 @@ extern unsigned int programID;
 
 Renderer::Renderer()
 {
-    std::unique_ptr<DataHandler> dataHandler = std::make_unique<DataHandler>(MODEL_PATH, OBJ);
+    std::unique_ptr<DataHandler> dataHandler = std::make_unique<DataHandler>( MODEL_PATH, OBJ );
     std::vector<std::shared_ptr<TriangleFace>> triangleFaces = dataHandler->getTriangleFaces();
-    m_renderables.insert(m_renderables.end(), triangleFaces.begin(), triangleFaces.end());
+    m_renderables.insert( m_renderables.end(), triangleFaces.begin(), triangleFaces.end());
+
+    Voxel v = createVoxel({0, 0, 0}, m_renderables.size() * 3, 2);
+    m_renderables.push_back(std::make_shared<Voxel>(v));
     m_mesh = Mesh( m_renderables );
 
 
@@ -15,23 +18,23 @@ Renderer::Renderer()
 
 void Renderer::render()
 {
-    glClearColor( 0.35f, 0.4f, 0.37f, 1.0f );
+    glClearColor( BACKGROUND_COLOR.x, BACKGROUND_COLOR.y, BACKGROUND_COLOR.z, 1.f );
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
     m_mesh.draw();
 }
 
 
-Voxel Renderer::createVoxel( const glm::vec3 &position, unsigned int offset, float size )
+Voxel Renderer::createVoxel( const glm::vec3 &position, unsigned int offset, float edgeLength )
 {
-    float halfSize = size / 2.0f;
+    float halfSize = edgeLength / 2.0f;
 
     glm::vec3 normals[6] = {
-            {  0,  0,  1 },  // Front
-            {  0,  0, -1 },  // Back
-            {  0,  1,  0 },  // Top
-            {  0, -1,  0 },  // Bottom
-            { -1,  0,  0 },  // Left
-            {  1,  0,  0 }   // Right
+            { 0,  0,  1 },  // Front
+            { 0,  0,  -1 },  // Back
+            { 0,  1,  0 },  // Top
+            { 0,  -1, 0 },  // Bottom
+            { -1, 0,  0 },  // Left
+            { 1,  0,  0 }   // Right
     };
 
     Vertex frontVertices[4] = {

@@ -40,7 +40,7 @@ std::vector<std::shared_ptr<TriangleFace>> OBJParser::parse( const std::string &
     file.close();
 
     // normalize vertex coordinates
-    float maximum = findMax( m_positions );
+    float maximum = util::findMax( m_positions );
     for (glm::vec3 &vec : m_positions)
     {
         vec.x = vec.x / maximum;
@@ -79,11 +79,11 @@ std::vector<std::shared_ptr<TriangleFace>> OBJParser::parse( const std::string &
 std::vector<OBJFaceIndices> OBJParser::toFaceIndices( const std::vector<std::string> &fInput )
 {
     std::vector<OBJFaceIndices> faceIndices = {};
-    std::vector<std::string> baseElement = split( fInput[0], '/' );
+    std::vector<std::string> baseElement = util::split( fInput[0], '/' );
     for ( int i = 1; i < fInput.size() - 1; i++ )
     {
-        std::vector<std::string> element1 = split( fInput[i], '/' );
-        std::vector<std::string> element2 = split( fInput[i + 1], '/' );
+        std::vector<std::string> element1 = util::split( fInput[i], '/' );
+        std::vector<std::string> element2 = util::split( fInput[i + 1], '/' );
         // the index in the f line in obj starts at 1, not 0
         OBJFaceIndices face = { std::stoi( baseElement[0]) - 1, std::stoi( baseElement[2] ) - 1,
                                 std::stoi( element1[0] ) - 1, std::stoi( element1[2] ) - 1,
@@ -92,28 +92,6 @@ std::vector<OBJFaceIndices> OBJParser::toFaceIndices( const std::vector<std::str
     }
 
     return faceIndices;
-}
-
-std::vector<std::string> OBJParser::split( const std::string &s, char delimiter )
-{
-    std::vector<std::string> tokens;
-    std::string token;
-    std::istringstream tokenStream( s );
-    while ( std::getline( tokenStream, token, delimiter ))
-    {
-        tokens.push_back( token );
-    }
-    return tokens;
-}
-
-float OBJParser::findMax( const std::vector<glm::vec3> &input )
-{
-    float maximum = 0.f;
-    for ( const glm::vec3 &vec : input)
-    {
-        maximum = std::max( { maximum, vec.x, vec.y, vec.z });
-    }
-    return maximum;
 }
 
 

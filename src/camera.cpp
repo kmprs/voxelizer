@@ -4,7 +4,7 @@
 
 
 Camera::Camera() :
-        m_position( glm::vec3( 2.f, 0, 2.f )),
+        m_position( glm::vec3( -2.f, 0, -2.f )),
         m_direction( glm::vec3( 0, 0, -1 ))
 {
 
