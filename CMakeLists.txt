@@ -41,7 +41,9 @@ add_executable(${NAME} main.cpp
         src/objParser.cpp
         src/objParser.hpp
         src/util.cpp
-        src/util.hpp)
+        src/util.hpp
+        src/octreeNode.cpp
+        src/octreeNode.hpp)
 
 find_package(SDL2 REQUIRED)
 target_include_directories(${NAME} PRIVATE ${SDL2_INCLUDE_DIRS})

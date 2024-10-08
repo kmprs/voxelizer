@@ -51,119 +51,126 @@ build cmake_object_order_depends_target_Voxelizer: phony || CMakeFiles/Voxelizer
 
 build CMakeFiles/Voxelizer.dir/main.cpp.o: CXX_COMPILER__Voxelizer_unscanned_Debug /Users/jakobkampers/Desktop/Privat/private_workspace/Voxelizer/main.cpp || cmake_object_order_depends_target_Voxelizer
   DEP_FILE = CMakeFiles/Voxelizer.dir/main.cpp.o.d
-  FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -fcolor-diagnostics -F/Library/Developer/CommandLineTools/SDKs/MacOSX14.sdk/System/Library/Frameworks
+  FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk -fcolor-diagnostics -F/Library/Developer/CommandLineTools/SDKs/MacOSX14.sdk/System/Library/Frameworks
   INCLUDES = -I/opt/homebrew/Cellar/sdl2/2.30.3/include -isystem /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2 -isystem /opt/homebrew/include
   OBJECT_DIR = CMakeFiles/Voxelizer.dir
   OBJECT_FILE_DIR = CMakeFiles/Voxelizer.dir
 
 build CMakeFiles/Voxelizer.dir/src/program.cpp.o: CXX_COMPILER__Voxelizer_unscanned_Debug /Users/jakobkampers/Desktop/Privat/private_workspace/Voxelizer/src/program.cpp || cmake_object_order_depends_target_Voxelizer
   DEP_FILE = CMakeFiles/Voxelizer.dir/src/program.cpp.o.d
-  FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -fcolor-diagnostics -F/Library/Developer/CommandLineTools/SDKs/MacOSX14.sdk/System/Library/Frameworks
+  FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk -fcolor-diagnostics -F/Library/Developer/CommandLineTools/SDKs/MacOSX14.sdk/System/Library/Frameworks
   INCLUDES = -I/opt/homebrew/Cellar/sdl2/2.30.3/include -isystem /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2 -isystem /opt/homebrew/include
   OBJECT_DIR = CMakeFiles/Voxelizer.dir
   OBJECT_FILE_DIR = CMakeFiles/Voxelizer.dir/src
 
 build CMakeFiles/Voxelizer.dir/src/windowHandler.cpp.o: CXX_COMPILER__Voxelizer_unscanned_Debug /Users/jakobkampers/Desktop/Privat/private_workspace/Voxelizer/src/windowHandler.cpp || cmake_object_order_depends_target_Voxelizer
   DEP_FILE = CMakeFiles/Voxelizer.dir/src/windowHandler.cpp.o.d
-  FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -fcolor-diagnostics -F/Library/Developer/CommandLineTools/SDKs/MacOSX14.sdk/System/Library/Frameworks
+  FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk -fcolor-diagnostics -F/Library/Developer/CommandLineTools/SDKs/MacOSX14.sdk/System/Library/Frameworks
   INCLUDES = -I/opt/homebrew/Cellar/sdl2/2.30.3/include -isystem /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2 -isystem /opt/homebrew/include
   OBJECT_DIR = CMakeFiles/Voxelizer.dir
   OBJECT_FILE_DIR = CMakeFiles/Voxelizer.dir/src
 
 build CMakeFiles/Voxelizer.dir/src/eventHandler.cpp.o: CXX_COMPILER__Voxelizer_unscanned_Debug /Users/jakobkampers/Desktop/Privat/private_workspace/Voxelizer/src/eventHandler.cpp || cmake_object_order_depends_target_Voxelizer
   DEP_FILE = CMakeFiles/Voxelizer.dir/src/eventHandler.cpp.o.d
-  FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -fcolor-diagnostics -F/Library/Developer/CommandLineTools/SDKs/MacOSX14.sdk/System/Library/Frameworks
+  FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk -fcolor-diagnostics -F/Library/Developer/CommandLineTools/SDKs/MacOSX14.sdk/System/Library/Frameworks
   INCLUDES = -I/opt/homebrew/Cellar/sdl2/2.30.3/include -isystem /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2 -isystem /opt/homebrew/include
   OBJECT_DIR = CMakeFiles/Voxelizer.dir
   OBJECT_FILE_DIR = CMakeFiles/Voxelizer.dir/src
 
 build CMakeFiles/Voxelizer.dir/src/openGLHandler.cpp.o: CXX_COMPILER__Voxelizer_unscanned_Debug /Users/jakobkampers/Desktop/Privat/private_workspace/Voxelizer/src/openGLHandler.cpp || cmake_object_order_depends_target_Voxelizer
   DEP_FILE = CMakeFiles/Voxelizer.dir/src/openGLHandler.cpp.o.d
-  FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -fcolor-diagnostics -F/Library/Developer/CommandLineTools/SDKs/MacOSX14.sdk/System/Library/Frameworks
+  FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk -fcolor-diagnostics -F/Library/Developer/CommandLineTools/SDKs/MacOSX14.sdk/System/Library/Frameworks
   INCLUDES = -I/opt/homebrew/Cellar/sdl2/2.30.3/include -isystem /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2 -isystem /opt/homebrew/include
   OBJECT_DIR = CMakeFiles/Voxelizer.dir
   OBJECT_FILE_DIR = CMakeFiles/Voxelizer.dir/src
 
 build CMakeFiles/Voxelizer.dir/src/shader.cpp.o: CXX_COMPILER__Voxelizer_unscanned_Debug /Users/jakobkampers/Desktop/Privat/private_workspace/Voxelizer/src/shader.cpp || cmake_object_order_depends_target_Voxelizer
   DEP_FILE = CMakeFiles/Voxelizer.dir/src/shader.cpp.o.d
-  FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -fcolor-diagnostics -F/Library/Developer/CommandLineTools/SDKs/MacOSX14.sdk/System/Library/Frameworks
+  FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk -fcolor-diagnostics -F/Library/Developer/CommandLineTools/SDKs/MacOSX14.sdk/System/Library/Frameworks
   INCLUDES = -I/opt/homebrew/Cellar/sdl2/2.30.3/include -isystem /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2 -isystem /opt/homebrew/include
   OBJECT_DIR = CMakeFiles/Voxelizer.dir
   OBJECT_FILE_DIR = CMakeFiles/Voxelizer.dir/src
 
 build CMakeFiles/Voxelizer.dir/src/shaderHandler.cpp.o: CXX_COMPILER__Voxelizer_unscanned_Debug /Users/jakobkampers/Desktop/Privat/private_workspace/Voxelizer/src/shaderHandler.cpp || cmake_object_order_depends_target_Voxelizer
   DEP_FILE = CMakeFiles/Voxelizer.dir/src/shaderHandler.cpp.o.d
-  FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -fcolor-diagnostics -F/Library/Developer/CommandLineTools/SDKs/MacOSX14.sdk/System/Library/Frameworks
+  FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk -fcolor-diagnostics -F/Library/Developer/CommandLineTools/SDKs/MacOSX14.sdk/System/Library/Frameworks
   INCLUDES = -I/opt/homebrew/Cellar/sdl2/2.30.3/include -isystem /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2 -isystem /opt/homebrew/include
   OBJECT_DIR = CMakeFiles/Voxelizer.dir
   OBJECT_FILE_DIR = CMakeFiles/Voxelizer.dir/src
 
 build CMakeFiles/Voxelizer.dir/src/renderer.cpp.o: CXX_COMPILER__Voxelizer_unscanned_Debug /Users/jakobkampers/Desktop/Privat/private_workspace/Voxelizer/src/renderer.cpp || cmake_object_order_depends_target_Voxelizer
   DEP_FILE = CMakeFiles/Voxelizer.dir/src/renderer.cpp.o.d
-  FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -fcolor-diagnostics -F/Library/Developer/CommandLineTools/SDKs/MacOSX14.sdk/System/Library/Frameworks
+  FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk -fcolor-diagnostics -F/Library/Developer/CommandLineTools/SDKs/MacOSX14.sdk/System/Library/Frameworks
   INCLUDES = -I/opt/homebrew/Cellar/sdl2/2.30.3/include -isystem /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2 -isystem /opt/homebrew/include
   OBJECT_DIR = CMakeFiles/Voxelizer.dir
   OBJECT_FILE_DIR = CMakeFiles/Voxelizer.dir/src
 
 build CMakeFiles/Voxelizer.dir/src/camera.cpp.o: CXX_COMPILER__Voxelizer_unscanned_Debug /Users/jakobkampers/Desktop/Privat/private_workspace/Voxelizer/src/camera.cpp || cmake_object_order_depends_target_Voxelizer
   DEP_FILE = CMakeFiles/Voxelizer.dir/src/camera.cpp.o.d
-  FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -fcolor-diagnostics -F/Library/Developer/CommandLineTools/SDKs/MacOSX14.sdk/System/Library/Frameworks
+  FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk -fcolor-diagnostics -F/Library/Developer/CommandLineTools/SDKs/MacOSX14.sdk/System/Library/Frameworks
   INCLUDES = -I/opt/homebrew/Cellar/sdl2/2.30.3/include -isystem /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2 -isystem /opt/homebrew/include
   OBJECT_DIR = CMakeFiles/Voxelizer.dir
   OBJECT_FILE_DIR = CMakeFiles/Voxelizer.dir/src
 
 build CMakeFiles/Voxelizer.dir/src/transformator.cpp.o: CXX_COMPILER__Voxelizer_unscanned_Debug /Users/jakobkampers/Desktop/Privat/private_workspace/Voxelizer/src/transformator.cpp || cmake_object_order_depends_target_Voxelizer
   DEP_FILE = CMakeFiles/Voxelizer.dir/src/transformator.cpp.o.d
-  FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -fcolor-diagnostics -F/Library/Developer/CommandLineTools/SDKs/MacOSX14.sdk/System/Library/Frameworks
+  FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk -fcolor-diagnostics -F/Library/Developer/CommandLineTools/SDKs/MacOSX14.sdk/System/Library/Frameworks
   INCLUDES = -I/opt/homebrew/Cellar/sdl2/2.30.3/include -isystem /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2 -isystem /opt/homebrew/include
   OBJECT_DIR = CMakeFiles/Voxelizer.dir
   OBJECT_FILE_DIR = CMakeFiles/Voxelizer.dir/src
 
 build CMakeFiles/Voxelizer.dir/src/sceneHandler.cpp.o: CXX_COMPILER__Voxelizer_unscanned_Debug /Users/jakobkampers/Desktop/Privat/private_workspace/Voxelizer/src/sceneHandler.cpp || cmake_object_order_depends_target_Voxelizer
   DEP_FILE = CMakeFiles/Voxelizer.dir/src/sceneHandler.cpp.o.d
-  FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -fcolor-diagnostics -F/Library/Developer/CommandLineTools/SDKs/MacOSX14.sdk/System/Library/Frameworks
+  FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk -fcolor-diagnostics -F/Library/Developer/CommandLineTools/SDKs/MacOSX14.sdk/System/Library/Frameworks
   INCLUDES = -I/opt/homebrew/Cellar/sdl2/2.30.3/include -isystem /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2 -isystem /opt/homebrew/include
   OBJECT_DIR = CMakeFiles/Voxelizer.dir
   OBJECT_FILE_DIR = CMakeFiles/Voxelizer.dir/src
 
 build CMakeFiles/Voxelizer.dir/src/mesh.cpp.o: CXX_COMPILER__Voxelizer_unscanned_Debug /Users/jakobkampers/Desktop/Privat/private_workspace/Voxelizer/src/mesh.cpp || cmake_object_order_depends_target_Voxelizer
   DEP_FILE = CMakeFiles/Voxelizer.dir/src/mesh.cpp.o.d
-  FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -fcolor-diagnostics -F/Library/Developer/CommandLineTools/SDKs/MacOSX14.sdk/System/Library/Frameworks
+  FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk -fcolor-diagnostics -F/Library/Developer/CommandLineTools/SDKs/MacOSX14.sdk/System/Library/Frameworks
   INCLUDES = -I/opt/homebrew/Cellar/sdl2/2.30.3/include -isystem /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2 -isystem /opt/homebrew/include
   OBJECT_DIR = CMakeFiles/Voxelizer.dir
   OBJECT_FILE_DIR = CMakeFiles/Voxelizer.dir/src
 
 build CMakeFiles/Voxelizer.dir/src/voxel.cpp.o: CXX_COMPILER__Voxelizer_unscanned_Debug /Users/jakobkampers/Desktop/Privat/private_workspace/Voxelizer/src/voxel.cpp || cmake_object_order_depends_target_Voxelizer
   DEP_FILE = CMakeFiles/Voxelizer.dir/src/voxel.cpp.o.d
-  FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -fcolor-diagnostics -F/Library/Developer/CommandLineTools/SDKs/MacOSX14.sdk/System/Library/Frameworks
+  FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk -fcolor-diagnostics -F/Library/Developer/CommandLineTools/SDKs/MacOSX14.sdk/System/Library/Frameworks
   INCLUDES = -I/opt/homebrew/Cellar/sdl2/2.30.3/include -isystem /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2 -isystem /opt/homebrew/include
   OBJECT_DIR = CMakeFiles/Voxelizer.dir
   OBJECT_FILE_DIR = CMakeFiles/Voxelizer.dir/src
 
 build CMakeFiles/Voxelizer.dir/src/triangleFace.cpp.o: CXX_COMPILER__Voxelizer_unscanned_Debug /Users/jakobkampers/Desktop/Privat/private_workspace/Voxelizer/src/triangleFace.cpp || cmake_object_order_depends_target_Voxelizer
   DEP_FILE = CMakeFiles/Voxelizer.dir/src/triangleFace.cpp.o.d
-  FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -fcolor-diagnostics -F/Library/Developer/CommandLineTools/SDKs/MacOSX14.sdk/System/Library/Frameworks
+  FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk -fcolor-diagnostics -F/Library/Developer/CommandLineTools/SDKs/MacOSX14.sdk/System/Library/Frameworks
   INCLUDES = -I/opt/homebrew/Cellar/sdl2/2.30.3/include -isystem /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2 -isystem /opt/homebrew/include
   OBJECT_DIR = CMakeFiles/Voxelizer.dir
   OBJECT_FILE_DIR = CMakeFiles/Voxelizer.dir/src
 
 build CMakeFiles/Voxelizer.dir/src/dataHandler.cpp.o: CXX_COMPILER__Voxelizer_unscanned_Debug /Users/jakobkampers/Desktop/Privat/private_workspace/Voxelizer/src/dataHandler.cpp || cmake_object_order_depends_target_Voxelizer
   DEP_FILE = CMakeFiles/Voxelizer.dir/src/dataHandler.cpp.o.d
-  FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -fcolor-diagnostics -F/Library/Developer/CommandLineTools/SDKs/MacOSX14.sdk/System/Library/Frameworks
+  FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk -fcolor-diagnostics -F/Library/Developer/CommandLineTools/SDKs/MacOSX14.sdk/System/Library/Frameworks
   INCLUDES = -I/opt/homebrew/Cellar/sdl2/2.30.3/include -isystem /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2 -isystem /opt/homebrew/include
   OBJECT_DIR = CMakeFiles/Voxelizer.dir
   OBJECT_FILE_DIR = CMakeFiles/Voxelizer.dir/src
 
 build CMakeFiles/Voxelizer.dir/src/objParser.cpp.o: CXX_COMPILER__Voxelizer_unscanned_Debug /Users/jakobkampers/Desktop/Privat/private_workspace/Voxelizer/src/objParser.cpp || cmake_object_order_depends_target_Voxelizer
   DEP_FILE = CMakeFiles/Voxelizer.dir/src/objParser.cpp.o.d
-  FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -fcolor-diagnostics -F/Library/Developer/CommandLineTools/SDKs/MacOSX14.sdk/System/Library/Frameworks
+  FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk -fcolor-diagnostics -F/Library/Developer/CommandLineTools/SDKs/MacOSX14.sdk/System/Library/Frameworks
   INCLUDES = -I/opt/homebrew/Cellar/sdl2/2.30.3/include -isystem /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2 -isystem /opt/homebrew/include
   OBJECT_DIR = CMakeFiles/Voxelizer.dir
   OBJECT_FILE_DIR = CMakeFiles/Voxelizer.dir/src
 
 build CMakeFiles/Voxelizer.dir/src/util.cpp.o: CXX_COMPILER__Voxelizer_unscanned_Debug /Users/jakobkampers/Desktop/Privat/private_workspace/Voxelizer/src/util.cpp || cmake_object_order_depends_target_Voxelizer
   DEP_FILE = CMakeFiles/Voxelizer.dir/src/util.cpp.o.d
-  FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -fcolor-diagnostics -F/Library/Developer/CommandLineTools/SDKs/MacOSX14.sdk/System/Library/Frameworks
+  FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk -fcolor-diagnostics -F/Library/Developer/CommandLineTools/SDKs/MacOSX14.sdk/System/Library/Frameworks
+  INCLUDES = -I/opt/homebrew/Cellar/sdl2/2.30.3/include -isystem /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2 -isystem /opt/homebrew/include
+  OBJECT_DIR = CMakeFiles/Voxelizer.dir
+  OBJECT_FILE_DIR = CMakeFiles/Voxelizer.dir/src
+
+build CMakeFiles/Voxelizer.dir/src/octreeNode.cpp.o: CXX_COMPILER__Voxelizer_unscanned_Debug /Users/jakobkampers/Desktop/Privat/private_workspace/Voxelizer/src/octreeNode.cpp || cmake_object_order_depends_target_Voxelizer
+  DEP_FILE = CMakeFiles/Voxelizer.dir/src/octreeNode.cpp.o.d
+  FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk -fcolor-diagnostics -F/Library/Developer/CommandLineTools/SDKs/MacOSX14.sdk/System/Library/Frameworks
   INCLUDES = -I/opt/homebrew/Cellar/sdl2/2.30.3/include -isystem /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2 -isystem /opt/homebrew/include
   OBJECT_DIR = CMakeFiles/Voxelizer.dir
   OBJECT_FILE_DIR = CMakeFiles/Voxelizer.dir/src
@@ -176,8 +183,8 @@ build CMakeFiles/Voxelizer.dir/src/util.cpp.o: CXX_COMPILER__Voxelizer_unscanned
 #############################################
 # Link the executable Voxelizer
 
-build Voxelizer: CXX_EXECUTABLE_LINKER__Voxelizer_Debug CMakeFiles/Voxelizer.dir/main.cpp.o CMakeFiles/Voxelizer.dir/src/program.cpp.o CMakeFiles/Voxelizer.dir/src/windowHandler.cpp.o CMakeFiles/Voxelizer.dir/src/eventHandler.cpp.o CMakeFiles/Voxelizer.dir/src/openGLHandler.cpp.o CMakeFiles/Voxelizer.dir/src/shader.cpp.o CMakeFiles/Voxelizer.dir/src/shaderHandler.cpp.o CMakeFiles/Voxelizer.dir/src/renderer.cpp.o CMakeFiles/Voxelizer.dir/src/camera.cpp.o CMakeFiles/Voxelizer.dir/src/transformator.cpp.o CMakeFiles/Voxelizer.dir/src/sceneHandler.cpp.o CMakeFiles/Voxelizer.dir/src/mesh.cpp.o CMakeFiles/Voxelizer.dir/src/voxel.cpp.o CMakeFiles/Voxelizer.dir/src/triangleFace.cpp.o CMakeFiles/Voxelizer.dir/src/dataHandler.cpp.o CMakeFiles/Voxelizer.dir/src/objParser.cpp.o CMakeFiles/Voxelizer.dir/src/util.cpp.o | /opt/homebrew/Cellar/sdl2/2.30.3/lib/libSDL2.dylib /opt/homebrew/lib/libGLEW.2.2.0.dylib /opt/homebrew/lib/libglm.dylib
-  FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk
+build Voxelizer: CXX_EXECUTABLE_LINKER__Voxelizer_Debug CMakeFiles/Voxelizer.dir/main.cpp.o CMakeFiles/Voxelizer.dir/src/program.cpp.o CMakeFiles/Voxelizer.dir/src/windowHandler.cpp.o CMakeFiles/Voxelizer.dir/src/eventHandler.cpp.o CMakeFiles/Voxelizer.dir/src/openGLHandler.cpp.o CMakeFiles/Voxelizer.dir/src/shader.cpp.o CMakeFiles/Voxelizer.dir/src/shaderHandler.cpp.o CMakeFiles/Voxelizer.dir/src/renderer.cpp.o CMakeFiles/Voxelizer.dir/src/camera.cpp.o CMakeFiles/Voxelizer.dir/src/transformator.cpp.o CMakeFiles/Voxelizer.dir/src/sceneHandler.cpp.o CMakeFiles/Voxelizer.dir/src/mesh.cpp.o CMakeFiles/Voxelizer.dir/src/voxel.cpp.o CMakeFiles/Voxelizer.dir/src/triangleFace.cpp.o CMakeFiles/Voxelizer.dir/src/dataHandler.cpp.o CMakeFiles/Voxelizer.dir/src/objParser.cpp.o CMakeFiles/Voxelizer.dir/src/util.cpp.o CMakeFiles/Voxelizer.dir/src/octreeNode.cpp.o | /opt/homebrew/Cellar/sdl2/2.30.3/lib/libSDL2.dylib /opt/homebrew/lib/libGLEW.2.2.0.dylib /opt/homebrew/lib/libglm.dylib
+  FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk
   LINK_LIBRARIES = -Wl,-rpath,/opt/homebrew/Cellar/sdl2/2.30.3/lib -Wl,-rpath,/opt/homebrew/lib  /opt/homebrew/Cellar/sdl2/2.30.3/lib/libSDL2.dylib  /opt/homebrew/lib/libGLEW.2.2.0.dylib  /opt/homebrew/lib/libglm.dylib  -Xlinker -framework -Xlinker OpenGL
   LINK_PATH = -F/Library/Developer/CommandLineTools/SDKs/MacOSX14.sdk/System/Library/Frameworks  -L/opt/homebrew/Cellar/sdl2/2.30.3/lib
   OBJECT_DIR = CMakeFiles/Voxelizer.dir

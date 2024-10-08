@@ -24,4 +24,26 @@ namespace util
         }
         return maximum;
     }
+
+    void findleavesAtMaxDepth( OctreeNode* node, int depth, int& maxDepth, std::vector<OctreeNode*>& leaves )
+    {
+        if ( node->isLeaf )
+        {
+            if ( depth > maxDepth )
+            {
+                maxDepth = depth;
+                leaves.clear();
+            }
+            if ( depth == maxDepth )
+            {
+                leaves.push_back( node );
+            }
+        } else
+        {
+            for ( OctreeNode* child: node->children )
+            {
+                findleavesAtMaxDepth( child, depth + 1, maxDepth, leaves );
+            }
+        }
+    }
 }

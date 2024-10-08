@@ -3,7 +3,7 @@
 #include <string>
 
 // MODEL
-const std::string MODEL_PATH = "../binaries/dragon.obj";
+const std::string MODEL_PATH = "../binaries/dog.obj";
 
 // WINDOW
 constexpr int WINDOW_WIDTH = 1280;

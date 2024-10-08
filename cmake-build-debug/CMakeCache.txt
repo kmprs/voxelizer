@@ -137,7 +137,7 @@ CMAKE_OSX_DEPLOYMENT_TARGET:STRING=
 
 //The product will be built against the headers and libraries located
 // inside the indicated SDK.
-CMAKE_OSX_SYSROOT:PATH=/Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk
+CMAKE_OSX_SYSROOT:PATH=/Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk
 
 //Value Computed by CMake
 CMAKE_PROJECT_DESCRIPTION:STATIC=
@@ -224,15 +224,6 @@ GLM_DIR:PATH=/opt/homebrew/share/glm
 
 //The directory containing a CMake configuration file for SDL2.
 SDL2_DIR:PATH=/opt/homebrew/lib/cmake/SDL2
-
-//Value Computed by CMake
-TestVoxelizer_BINARY_DIR:STATIC=/Users/jakobkampers/Desktop/Privat/private_workspace/Voxelizer/cmake-build-debug
-
-//Value Computed by CMake
-TestVoxelizer_IS_TOP_LEVEL:STATIC=ON
-
-//Value Computed by CMake
-TestVoxelizer_SOURCE_DIR:STATIC=/Users/jakobkampers/Desktop/Privat/private_workspace/Voxelizer
 
 //Value Computed by CMake
 Voxelizer_BINARY_DIR:STATIC=/Users/jakobkampers/Desktop/Privat/private_workspace/Voxelizer/cmake-build-debug
