@@ -1,10 +1,11 @@
 # ninja log v5
-0	40	1728365976130291951	build.ninja	f48d5148fe32da3
-3	649	1728293646873064394	CMakeFiles/Voxelizer.dir/src/windowHandler.cpp.o	23b6eaf04294ab3d
 2	752	1728293646972413294	CMakeFiles/Voxelizer.dir/main.cpp.o	3b1fecb80d797224
 7	790	1728365822781095068	CMakeFiles/Voxelizer.dir/src/camera.cpp.o	fd10936e9660e829
-7	1007	1728365822996567891	CMakeFiles/Voxelizer.dir/src/program.cpp.o	eb050d4b541c54c9
-7	951	1728365822941306011	CMakeFiles/Voxelizer.dir/src/renderer.cpp.o	4b4ddbed1004fa44
+3	332	1728367232979430608	CMakeFiles/Voxelizer.dir/src/voxelizer.cpp.o	c5f6ccd4041e76f7
+3	649	1728293646873064394	CMakeFiles/Voxelizer.dir/src/windowHandler.cpp.o	23b6eaf04294ab3d
+0	40	1728367707716671966	build.ninja	f48d5148fe32da3
+5	822	1728366977913866459	CMakeFiles/Voxelizer.dir/src/program.cpp.o	eb050d4b541c54c9
+5	456	1728367180324771830	CMakeFiles/Voxelizer.dir/src/renderer.cpp.o	4b4ddbed1004fa44
 8	905	1728365822894330551	CMakeFiles/Voxelizer.dir/src/sceneHandler.cpp.o	93783d8dcedd145d
 7	899	1728365822880222392	CMakeFiles/Voxelizer.dir/src/transformator.cpp.o	29edf0889e4c798c
 1276	1732	1728293647957467037	CMakeFiles/Voxelizer.dir/src/voxel.cpp.o	a25d47b540a46f49
@@ -14,8 +15,17 @@
 652	1276	1728293647496991284	CMakeFiles/Voxelizer.dir/src/shaderHandler.cpp.o	2d358d535b7b2bd3
 3	731	1728293646954238024	CMakeFiles/Voxelizer.dir/src/eventHandler.cpp.o	95e80bcd26b8b4c4
 1324	1745	1728293647971268635	CMakeFiles/Voxelizer.dir/src/triangleFace.cpp.o	46815190eeda26e2
-5	676	1728365760668643623	CMakeFiles/Voxelizer.dir/src/dataHandler.cpp.o	20fec3664f4f276f
+6	403	1728367180271657002	CMakeFiles/Voxelizer.dir/src/dataHandler.cpp.o	20fec3664f4f276f
 6	661	1728365760651037112	CMakeFiles/Voxelizer.dir/src/util.cpp.o	e994921b2d8023ed
-495	528	1728365929874726999	Voxelizer	5136060bc666e5b7
+332	365	1728367233013884502	Voxelizer	6dd7b345d385bc3a
 3	744	1728293646965710245	CMakeFiles/Voxelizer.dir/src/shader.cpp.o	308cc8401bc0669a
-4	495	1728365929839595184	CMakeFiles/Voxelizer.dir/src/openGLHandler.cpp.o	7ced78165c08bb4a
+4	452	1728366996492694853	CMakeFiles/Voxelizer.dir/src/openGLHandler.cpp.o	7ced78165c08bb4a
+4	573	1728368069379794429	CMakeFiles/Voxelizer.dir/src/renderer.cpp.o	4b4ddbed1004fa44
+573	610	1728368069419279559	Voxelizer	6dd7b345d385bc3a
+5	717	1728368196974723889	CMakeFiles/Voxelizer.dir/src/dataHandler.cpp.o	20fec3664f4f276f
+4	813	1728368197071403451	CMakeFiles/Voxelizer.dir/src/renderer.cpp.o	4b4ddbed1004fa44
+813	861	1728368197120407674	Voxelizer	6dd7b345d385bc3a
+3	375	1728368287801025618	CMakeFiles/Voxelizer.dir/src/dataHandler.cpp.o	20fec3664f4f276f
+375	409	1728368287837755400	Voxelizer	6dd7b345d385bc3a
+3	359	1728368527243917683	CMakeFiles/Voxelizer.dir/src/voxelizer.cpp.o	c5f6ccd4041e76f7
+359	392	1728368527278571496	Voxelizer	6dd7b345d385bc3a
