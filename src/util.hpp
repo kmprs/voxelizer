@@ -6,6 +6,8 @@
 #include <sstream>
 #include <glm/vec3.hpp>
 #include "octreeNode.hpp"
+#include "triangleFace.hpp"
+#include "voxel.hpp"
 
 
 namespace util
@@ -14,4 +16,6 @@ namespace util
     [[nodiscard]] float findMax( const std::vector<glm::vec3> &input );
     void findleavesAtMaxDepth( OctreeNode* node, int depth, int &maxDepth,
                                std::vector<OctreeNode*> &leaves );
+    [[nodiscard]] std::array<Triangle, 12>
+    getCubeTriangles( const glm::vec3 &positions, float edgeLength );
 }

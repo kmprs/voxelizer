@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 
+
 struct Vertex
 {
     Vertex( float x, float y, float z, float nx, float ny, float nz ) :
@@ -22,6 +23,18 @@ struct Vertex
     {
         return std::vector<float>{ x, y, z, nx, ny, nz };
     }
+};
+
+
+struct Triangle
+{
+    Triangle( const glm::vec3 &position1, const glm::vec3 &position2,
+              const glm::vec3 &position3 ) :
+            position1( position1 ), position2( position2 ), position3( position3 ){};
+
+    glm::vec3 position1 = {};
+    glm::vec3 position2 = {};
+    glm::vec3 position3 = {};
 };
 
 
@@ -64,8 +77,10 @@ struct VoxelFace
 
 struct OBJFaceIndices
 {
-    OBJFaceIndices( int f1Coords, int f1Normal, int f2Coords, int f2Normal, int f3Coords, int f3Normal ) :
-            f1Coords{ f1Coords }, f1Normal( f1Normal ), f2Coords( f2Coords ), f2Normal( f2Normal ),
+    OBJFaceIndices( int f1Coords, int f1Normal, int f2Coords, int f2Normal, int f3Coords,
+                    int f3Normal ) :
+            f1Coords{ f1Coords }, f1Normal( f1Normal ), f2Coords( f2Coords ),
+            f2Normal( f2Normal ),
             f3Coords( f3Coords ), f3Normal( f3Normal )
     {};
 

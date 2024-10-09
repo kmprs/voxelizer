@@ -22,7 +22,9 @@ std::vector<std::shared_ptr<TriangleFace>> DataHandler::getTriangleFaces() const
 
 void DataHandler::voxelize()
 {
-    std::vector<std::shared_ptr<Voxel>> voxels = m_voxelizer.convert( m_triangleFaces );
+    std::vector<std::shared_ptr<Voxel>> voxels = m_voxelizer.convert( m_triangleFaces,
+                                                                      nullptr, 0, 0,
+                                                                      <#initializer#> );
     m_voxels.insert( m_voxels.end(), voxels.begin(), voxels.end() );
 }
 

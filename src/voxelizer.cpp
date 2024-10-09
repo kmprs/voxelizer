@@ -1,21 +1,24 @@
 #include "voxelizer.hpp"
+#include "util.hpp"
 
-std::vector<std::shared_ptr<Voxel>>
-Voxelizer::convert( const std::vector<std::shared_ptr<TriangleFace>> &triangleFaces)
+void Voxelizer::convert( const std::vector<std::shared_ptr<TriangleFace>> &triangleFaces,
+                         std::unique_ptr<OctreeNode> node, int depth, int maxDepth,
+                         std::vector<std::shared_ptr<Voxel>> &voxels )
 {
-    std::vector<std::shared_ptr<Voxel>> result;
+    if ( depth >= maxDepth ) return;
 
-    for ( int i = 0; i < triangleFaces.size()-1; i++)
+    // fetch vertex positions from octree node
+    std::array<Triangle, 12> voxelTriangles = util::getCubeTriangles( node->position,
+                                                                       node->edgeLength );
+
+    for ( int i = 0; i < triangleFaces.size() - 1; i++ )
     {
-        Voxel v = createVoxel({i, 0, 0}, i * 24, i / 2);
-        result.push_back(std::make_shared<Voxel>(v));
+        Voxel v = createVoxel( { i % 2, 0, 0 }, i * 24, i % 2 );
     }
-
-    return result;
 }
 
 Voxel Voxelizer::createVoxel( const glm::vec3 &position, unsigned int offset,
-                              float edgeLength ) const
+                              float edgeLength )
 {
     float halfLength = edgeLength / 2.0f;
 

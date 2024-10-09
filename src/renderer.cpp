@@ -12,8 +12,6 @@ Renderer::Renderer()
     m_renderables.insert( m_renderables.end(), voxels.begin(), voxels.end());
 
     m_mesh = Mesh( m_renderables );
-
-
 }
 
 void Renderer::render()

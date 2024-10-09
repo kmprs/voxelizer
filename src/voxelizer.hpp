@@ -4,17 +4,20 @@
 #include <glm/vec3.hpp>
 #include "voxel.hpp"
 #include "triangleFace.hpp"
+#include "octreeNode.hpp"
 
 
 class Voxelizer
 {
 public:
-    std::vector<std::shared_ptr<Voxel>>
-    convert( const std::vector<std::shared_ptr<TriangleFace>> &triangleFaces );
+    static void
+    convert( const std::vector<std::shared_ptr<TriangleFace>> &triangleFaces,
+             std::unique_ptr<OctreeNode> node, int depth, int maxDepth,
+             std::vector<std::shared_ptr<Voxel>> &voxels );
 
 private:
-    [[nodiscard]] Voxel
-    createVoxel( const glm::vec3 &position, unsigned int offset, float edgeLength ) const;
+    [[nodiscard]] static Voxel
+    createVoxel( const glm::vec3 &position, unsigned int offset, float edgeLength ) ;
 };
 
 
