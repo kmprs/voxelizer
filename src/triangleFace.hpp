@@ -16,6 +16,7 @@ public:
 
     [[nodiscard]] std::vector<float> getVertexData() const override;
     [[nodiscard]] std::vector<unsigned int> getIndices() const override;
+    [[nodiscard]] Triangle toTriangle();
 
 private:
     Vertex vertices[3] = {};

@@ -6,6 +6,7 @@
 #include "triangleFace.hpp"
 #include "objParser.hpp"
 #include "voxelizer.hpp"
+#include "constants.hpp"
 
 
 class DataHandler

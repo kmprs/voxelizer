@@ -1,19 +1,49 @@
 #include "voxelizer.hpp"
 #include "util.hpp"
 
-void Voxelizer::convert( const std::vector<std::shared_ptr<TriangleFace>> &triangleFaces,
-                         std::unique_ptr<OctreeNode> node, int depth, int maxDepth,
-                         std::vector<std::shared_ptr<Voxel>> &voxels )
-{
-    if ( depth >= maxDepth ) return;
 
+Voxelizer::Voxelizer( const std::vector<std::shared_ptr<TriangleFace>> &triangleFaces )
+{
+    for ( const std::shared_ptr<TriangleFace> &triangleFace: triangleFaces )
+    {
+        m_meshTriangles.push_back( triangleFace->toTriangle());
+    }
+}
+
+
+void Voxelizer::buildOctree( OctreeNode* node, int depth, int maxDepth )
+{
+
+    if ( depth >= maxDepth ) return;
+    std::cout << "I'm here" << std::endl;
     // fetch vertex positions from octree node
     std::array<Triangle, 12> voxelTriangles = util::getCubeTriangles( node->position,
-                                                                       node->edgeLength );
+                                                                      node->edgeLength );
 
-    for ( int i = 0; i < triangleFaces.size() - 1; i++ )
+
+    bool found = false;
+    for ( const Triangle &voxelTriangle: voxelTriangles )
     {
-        Voxel v = createVoxel( { i % 2, 0, 0 }, i * 24, i % 2 );
+        for ( const Triangle &meshTriangle: m_meshTriangles )
+        {
+            // check for triangle-triangle intersection
+            if ( doTrianglesIntersect( meshTriangle, voxelTriangle ))
+            {
+                node->isAir = false;
+                // new function call of buildOctree with children of node
+                if ( depth - 1 < maxDepth )
+                {
+                    node->createChildren();
+                    for ( OctreeNode* child: node->children )
+                    {
+                        buildOctree( child, depth + 1, maxDepth );
+                    }
+                }
+                found = true;
+                break;
+            }
+        }
+        if ( found ) break;
     }
 }
 
@@ -109,4 +139,11 @@ Voxel Voxelizer::createVoxel( const glm::vec3 &position, unsigned int offset,
 
     // Create and return the voxel
     return { frontFace, backFace, topFace, bottomFace, leftFace, rightFace };
+}
+
+
+bool Voxelizer::doTrianglesIntersect( const Triangle &t1, const Triangle &t2 )
+{
+    // TODO implement algorithm
+    return true;
 }

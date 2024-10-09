@@ -10,14 +10,16 @@
 class Voxelizer
 {
 public:
-    static void
-    convert( const std::vector<std::shared_ptr<TriangleFace>> &triangleFaces,
-             std::unique_ptr<OctreeNode> node, int depth, int maxDepth,
-             std::vector<std::shared_ptr<Voxel>> &voxels );
+    Voxelizer(const std::vector<std::shared_ptr<TriangleFace>> &triangleFaces);
+    Voxelizer() = default;
+    void
+    buildOctree( OctreeNode* node, int depth, int maxDepth);
 
 private:
+    std::vector<Triangle> m_meshTriangles = {};
     [[nodiscard]] static Voxel
-    createVoxel( const glm::vec3 &position, unsigned int offset, float edgeLength ) ;
+    createVoxel( const glm::vec3 &position, unsigned int offset, float edgeLength );
+    bool doTrianglesIntersect(const Triangle& t1, const Triangle& t2);
 };
 
 

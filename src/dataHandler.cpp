@@ -7,6 +7,7 @@ DataHandler::DataHandler( std::string path, FileFormat format ) :
 {
     if ( format == OBJ ) m_reader = std::make_unique<OBJParser>();
     m_triangleFaces = m_reader->parse( m_path );
+    m_voxelizer = { m_triangleFaces };
     voxelize();
 }
 
@@ -22,9 +23,12 @@ std::vector<std::shared_ptr<TriangleFace>> DataHandler::getTriangleFaces() const
 
 void DataHandler::voxelize()
 {
-    std::vector<std::shared_ptr<Voxel>> voxels = m_voxelizer.convert( m_triangleFaces,
-                                                                      nullptr, 0, 0,
-                                                                      <#initializer#> );
-    m_voxels.insert( m_voxels.end(), voxels.begin(), voxels.end() );
+    auto octree = new OctreeNode { nullptr, 2, WORLD_CENTER };
+    m_voxelizer.buildOctree( octree, 0, 2);
+
+    // TODO: convert the octree to voxels
+//    m_voxels.insert( m_voxels.end(), voxels.begin(), voxels.end());
+
+    delete octree;
 }
 
