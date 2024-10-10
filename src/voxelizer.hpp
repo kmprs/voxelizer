@@ -19,7 +19,7 @@ private:
     std::vector<Triangle> m_meshTriangles = {};
     [[nodiscard]] static Voxel
     createVoxel( const glm::vec3 &position, unsigned int offset, float edgeLength );
-    bool doTrianglesIntersect(const Triangle& t1, const Triangle& t2);
+    static bool doTrianglesIntersect(const Triangle& t0, const Triangle& t1);
 };
 
 

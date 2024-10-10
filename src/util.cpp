@@ -25,6 +25,25 @@ namespace util
         return maximum;
     }
 
+
+    bool differentSign( float test, float a, float b )
+    {
+        if (( test < 0 && a > 0 && b > 0 ) || ( test > 0 && a < 0 && b < 0 )) return true;
+        return false;
+    }
+
+
+    bool doIntervalsIntersect(const float* interval0, const float* interval1) {
+        float min0 = std::min(interval0[0], interval0[1]);
+        float max0 = std::max(interval0[0], interval0[1]);
+
+        float min1 = std::min(interval1[0], interval1[1]);
+        float max1 = std::max(interval1[0], interval1[1]);
+
+        return !(max0 < min1 || max1 < min0);
+    }
+
+
     void findleavesAtMaxDepth( OctreeNode* node, int depth, int &maxDepth,
                                std::vector<OctreeNode*> &leaves )
     {

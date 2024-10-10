@@ -14,6 +14,8 @@ namespace util
 {
     [[nodiscard]] std::vector<std::string> split( const std::string &s, char delimiter );
     [[nodiscard]] float findMax( const std::vector<glm::vec3> &input );
+    bool differentSign (float test, float a, float b);
+    bool doIntervalsIntersect(const float* interval0, const float* interval1);
     void findleavesAtMaxDepth( OctreeNode* node, int depth, int &maxDepth,
                                std::vector<OctreeNode*> &leaves );
     [[nodiscard]] std::array<Triangle, 12>
