@@ -26,9 +26,14 @@ void DataHandler::voxelize()
     auto octree = new OctreeNode { nullptr, 2, WORLD_CENTER };
     m_voxelizer.buildOctree( octree, 0, 2);
 
+    std::vector<Voxel> voxels = util::octree::toVoxel(octree, 0);
+    for ( Voxel v : voxels )
+    {
+        m_voxels.push_back(std::make_shared<Voxel>(v));
+    }
+
     // TODO: convert the octree to voxels
 //    m_voxels.insert( m_voxels.end(), voxels.begin(), voxels.end());
-
     delete octree;
 }
 

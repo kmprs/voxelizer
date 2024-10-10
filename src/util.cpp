@@ -33,39 +33,17 @@ namespace util
     }
 
 
-    bool doIntervalsIntersect(const float* interval0, const float* interval1) {
-        float min0 = std::min(interval0[0], interval0[1]);
-        float max0 = std::max(interval0[0], interval0[1]);
-
-        float min1 = std::min(interval1[0], interval1[1]);
-        float max1 = std::max(interval1[0], interval1[1]);
-
-        return !(max0 < min1 || max1 < min0);
-    }
-
-
-    void findleavesAtMaxDepth( OctreeNode* node, int depth, int &maxDepth,
-                               std::vector<OctreeNode*> &leaves )
+    bool doIntervalsIntersect( const float* interval0, const float* interval1 )
     {
-        if ( node->isLeaf )
-        {
-            if ( depth > maxDepth )
-            {
-                maxDepth = depth;
-                leaves.clear();
-            }
-            if ( depth == maxDepth )
-            {
-                leaves.push_back( node );
-            }
-        } else
-        {
-            for ( OctreeNode* child: node->children )
-            {
-                findleavesAtMaxDepth( child, depth + 1, maxDepth, leaves );
-            }
-        }
+        float min0 = std::min( interval0[0], interval0[1] );
+        float max0 = std::max( interval0[0], interval0[1] );
+
+        float min1 = std::min( interval1[0], interval1[1] );
+        float max1 = std::max( interval1[0], interval1[1] );
+
+        return !( max0 < min1 || max1 < min0 );
     }
+
 
     std::array<Triangle, 12>
     getCubeTriangles( const glm::vec3 &position, float edgeLength )
@@ -104,5 +82,177 @@ namespace util
         };
 
         return triangles;
+    }
+
+    namespace octree
+    {
+        void findleavesAtMaxDepth( OctreeNode* node, int depth, int &maxDepth,
+                                   std::vector<OctreeNode*> &leaves )
+        {
+            if ( node->isLeaf )
+            {
+                if ( depth > maxDepth )
+                {
+                    maxDepth = depth;
+                    leaves.clear();
+                }
+                if ( depth == maxDepth )
+                {
+                    leaves.push_back( node );
+                }
+            } else
+            {
+                for ( OctreeNode* child: node->children )
+                {
+                    findleavesAtMaxDepth( child, depth + 1, maxDepth, leaves );
+                }
+            }
+        }
+
+        std::vector<Voxel> toVoxel( OctreeNode* node, int depth )
+        {
+            std::vector<Voxel> result;
+            std::vector<OctreeNode*> leaves;
+            int maxDepth = -1;
+
+            util::octree::findleavesAtMaxDepth( node, depth, maxDepth, leaves );
+
+            for ( OctreeNode* leaf: leaves )
+            {
+                if ( !leaf->isAir )
+                {
+                    Voxel v = util::voxel::createVoxel( leaf->position,
+                                                        result.size() * 24,
+                                                        leaf->edgeLength );
+                    result.push_back(v);
+                }
+            }
+        }
+    }//namespace octree
+    namespace voxel
+    {
+        Voxel
+        createVoxel( const glm::vec3 &position, unsigned int offset, float edgeLength )
+        {
+            float halfLength = edgeLength / 2.0f;
+
+            glm::vec3 normals[6] = {
+                    { 0,  0,  1 },  // Front
+                    { 0,  0,  -1 },  // Back
+                    { 0,  1,  0 },  // Top
+                    { 0,  -1, 0 },  // Bottom
+                    { -1, 0,  0 },  // Left
+                    { 1,  0,  0 }   // Right
+            };
+
+            Vertex frontVertices[4] = {
+                    { position.x - halfLength, position.y - halfLength,
+                                                                        position.z +
+                                                                        halfLength,
+                            normals[0].x, normals[0].y, normals[0].z },
+                    { position.x + halfLength, position.y - halfLength, position.z +
+                                                                        halfLength,
+                            normals[0].x, normals[0].y, normals[0].z },
+                    { position.x - halfLength, position.y + halfLength, position.z +
+                                                                        halfLength,
+                            normals[0].x, normals[0].y, normals[0].z },
+                    { position.x + halfLength, position.y + halfLength, position.z +
+                                                                        halfLength,
+                            normals[0].x, normals[0].y, normals[0].z }
+            };
+
+            Vertex backVertices[4] = {
+                    { position.x + halfLength, position.y - halfLength,
+                                                                        position.z -
+                                                                        halfLength,
+                            normals[1].x, normals[1].y, normals[1].z },
+                    { position.x - halfLength, position.y - halfLength, position.z -
+                                                                        halfLength,
+                            normals[1].x, normals[1].y, normals[1].z },
+                    { position.x + halfLength, position.y + halfLength, position.z -
+                                                                        halfLength,
+                            normals[1].x, normals[1].y, normals[1].z },
+                    { position.x - halfLength, position.y + halfLength, position.z -
+                                                                        halfLength,
+                            normals[1].x, normals[1].y, normals[1].z }
+            };
+
+
+            Vertex topVertices[4] = {
+                    { position.x - halfLength, position.y + halfLength,
+                                                                        position.z +
+                                                                        halfLength,
+                            normals[2].x, normals[2].y, normals[2].z },
+                    { position.x + halfLength, position.y + halfLength, position.z +
+                                                                        halfLength,
+                            normals[2].x, normals[2].y, normals[2].z },
+                    { position.x - halfLength, position.y + halfLength, position.z -
+                                                                        halfLength,
+                            normals[2].x, normals[2].y, normals[2].z },
+                    { position.x + halfLength, position.y + halfLength, position.z -
+                                                                        halfLength,
+                            normals[2].x, normals[2].y, normals[2].z }
+            };
+
+            Vertex bottomVertices[4] = {
+                    { position.x - halfLength, position.y - halfLength,
+                                                                        position.z -
+                                                                        halfLength,
+                            normals[3].x, normals[3].y, normals[3].z },
+                    { position.x + halfLength, position.y - halfLength, position.z -
+                                                                        halfLength,
+                            normals[3].x, normals[3].y, normals[3].z },
+                    { position.x - halfLength, position.y - halfLength, position.z +
+                                                                        halfLength,
+                            normals[3].x, normals[3].y, normals[3].z },
+                    { position.x + halfLength, position.y - halfLength, position.z +
+                                                                        halfLength,
+                            normals[3].x, normals[3].y, normals[3].z }
+            };
+
+            Vertex leftVertices[4] = {
+                    { position.x - halfLength, position.y - halfLength,
+                                                                        position.z -
+                                                                        halfLength,
+                            normals[4].x, normals[4].y, normals[4].z },
+                    { position.x - halfLength, position.y - halfLength, position.z +
+                                                                        halfLength,
+                            normals[4].x, normals[4].y, normals[4].z },
+                    { position.x - halfLength, position.y + halfLength, position.z -
+                                                                        halfLength,
+                            normals[4].x, normals[4].y, normals[4].z },
+                    { position.x - halfLength, position.y + halfLength, position.z +
+                                                                        halfLength,
+                            normals[4].x, normals[4].y, normals[4].z }
+            };
+
+
+            Vertex rightVertices[4] = {
+                    { position.x + halfLength, position.y - halfLength,
+                                                                        position.z +
+                                                                        halfLength,
+                            normals[5].x, normals[5].y, normals[5].z },
+                    { position.x + halfLength, position.y - halfLength, position.z -
+                                                                        halfLength,
+                            normals[5].x, normals[5].y, normals[5].z },
+                    { position.x + halfLength, position.y + halfLength, position.z +
+                                                                        halfLength,
+                            normals[5].x, normals[5].y, normals[5].z },
+                    { position.x + halfLength, position.y + halfLength, position.z -
+                                                                        halfLength,
+                            normals[5].x, normals[5].y, normals[5].z }
+            };
+
+            // Create voxel faces with calculated vertices and the provided offset
+            VoxelFace frontFace( frontVertices, offset + 0 );
+            VoxelFace backFace( backVertices, offset + 4 );
+            VoxelFace topFace( topVertices, offset + 8 );
+            VoxelFace bottomFace( bottomVertices, offset + 12 );
+            VoxelFace leftFace( leftVertices, offset + 16 );
+            VoxelFace rightFace( rightVertices, offset + 20 );
+
+            // Create and return the voxel
+            return { frontFace, backFace, topFace, bottomFace, leftFace, rightFace };
+        }
     }
 }
