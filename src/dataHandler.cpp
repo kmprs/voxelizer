@@ -24,7 +24,7 @@ std::vector<std::shared_ptr<TriangleFace>> DataHandler::getTriangleFaces() const
 void DataHandler::voxelize()
 {
     auto octree = new OctreeNode { nullptr, 2, WORLD_CENTER };
-    m_voxelizer.buildOctree( octree, 0, 2);
+    m_voxelizer.buildOctree( octree, 0, RESOLUTION_LEVEL );
 
     std::vector<Voxel> voxels = util::octree::toVoxel(octree, 0);
     for ( Voxel v : voxels )

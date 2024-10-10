@@ -127,6 +127,7 @@ namespace util
                     result.push_back(v);
                 }
             }
+            return result;
         }
     }//namespace octree
     namespace voxel
