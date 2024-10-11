@@ -31,9 +31,6 @@ void DataHandler::voxelize()
     {
         m_voxels.push_back(std::make_shared<Voxel>(v));
     }
-
-    // TODO: convert the octree to voxels
-//    m_voxels.insert( m_voxels.end(), voxels.begin(), voxels.end());
     delete octree;
 }
 

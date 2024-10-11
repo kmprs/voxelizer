@@ -33,7 +33,8 @@ namespace util
     }
 
 
-    bool doIntervalsIntersect( const float* interval0, const float* interval1 )
+    bool doIntervalsIntersect( const std::array<float, 2> &interval0,
+                               const std::array<float, 2> & interval1 )
     {
         float min0 = std::min( interval0[0], interval0[1] );
         float max0 = std::max( interval0[0], interval0[1] );

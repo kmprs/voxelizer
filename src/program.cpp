@@ -28,6 +28,7 @@ void Program::run()
     Uint64 lastCounter = SDL_GetPerformanceCounter();
     Uint64 performanceFrequency = SDL_GetPerformanceFrequency();
 
+    return;
     while ( !windowHandler.isClosed())
     {
         currentCounter = SDL_GetPerformanceCounter();

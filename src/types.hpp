@@ -29,13 +29,13 @@ struct Vertex
 
 struct Triangle
 {
-    Triangle( const glm::vec3 &position1, const glm::vec3 &position2,
-              const glm::vec3 &position3 ) :
-            position1( position1 ), position2( position2 ), position3( position3 ){};
+    Triangle( const glm::vec3 &position0, const glm::vec3 &position1,
+              const glm::vec3 &position2 ) :
+            position0( position0 ), position1( position1 ), position2( position2 ){};
 
+    glm::vec3 position0 = {};
     glm::vec3 position1 = {};
     glm::vec3 position2 = {};
-    glm::vec3 position3 = {};
 };
 
 
