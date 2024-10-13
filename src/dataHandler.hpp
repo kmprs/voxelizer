@@ -3,7 +3,6 @@
 #include <string>
 #include <memory>
 #include "voxel.hpp"
-#include "triangleFace.hpp"
 #include "objParser.hpp"
 #include "voxelizer.hpp"
 #include "constants.hpp"

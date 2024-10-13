@@ -7,7 +7,8 @@
 #include <glm/vec3.hpp>
 #include "octreeNode.hpp"
 #include "voxel.hpp"
-#include "bvhNode.hpp"
+#include "triangleFace.hpp"
+//#include "bvhNode.hpp"
 
 
 namespace util
@@ -29,8 +30,6 @@ namespace util
         glm::vec3 maxVec( const std::vector<glm::vec3> &vectors );
         bool doBoundingVolumesIntersect( const glm::vec3 &min1, const glm::vec3 &max1,
                                          const glm::vec3 &min2, const glm::vec3 &max2 );
-        glm::vec3 calculateCenter( const glm::vec3 &pos0, const glm::vec3 &pos1,
-                              const glm::vec3 &pos2 );
     }
 
     namespace octree
@@ -49,6 +48,6 @@ namespace util
 
     namespace bvh
     {
-        void createChildren( BVHNode* node, int depth, int maxDepth );
+//        void createChildren( BVHNode* node, int depth, int maxDepth );
     }
 }

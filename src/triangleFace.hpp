@@ -2,7 +2,6 @@
 
 #include "renderable.hpp"
 #include "types.hpp"
-#include "util.hpp"
 
 
 class TriangleFace : public Renderable

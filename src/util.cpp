@@ -140,16 +140,6 @@ namespace util
 
             return xOverlap && yOverlap && zOverlap;
         }
-
-        glm::vec3 calculateCenter( const glm::vec3 &pos0, const glm::vec3 &pos1,
-                                   const glm::vec3 &pos2 )
-        {
-            return {
-                    ( pos0.x + pos1.x + pos2.x ) / 3,
-                    ( pos0.y + pos1.y + pos2.y ) / 3,
-                    ( pos0.z + pos1.z + pos2.z ) / 3,
-            };
-        }
     }
 
     namespace octree
@@ -326,36 +316,36 @@ namespace util
     }
 
 
-    namespace bvh
-    {
-        void createChildren( BVHNode* node, int depth, int maxDepth )
-        {
-            if ( depth >= maxDepth ) return;
-
-            // initialization of child nodes
-            node->left = new BVHNode( node );
-            node->right = new BVHNode( node );
-
-            float centerX = ( node->highest.x + node->lowest.x ) / 2;
-            for ( const TriangleFace &t: node->triangleFaces )
-            {
-                if ( t.getCenter().x < centerX ) node->left->triangleFaces.push_back( t );
-                else
-                    node->right->triangleFaces.push_back( t );
-            }
-
-            // define min/max vectors for child nodes
-            node->left->highest = util::geometry::maxVec(
-                    util::geometry::extractPositions( node->left->triangleFaces ));
-            node->left->lowest = util::geometry::minVec(
-                    util::geometry::extractPositions( node->left->triangleFaces ));
-            node->right->highest = util::geometry::maxVec(
-                    util::geometry::extractPositions( node->right->triangleFaces ));
-            node->right->lowest = util::geometry::minVec(
-                    util::geometry::extractPositions( node->right->triangleFaces ));
-
-            createChildren( node->left, depth + 1, maxDepth );
-            createChildren( node->right, depth + 1, maxDepth );
-        }
-    }
+//    namespace bvh
+//    {
+//        void createChildren( BVHNode* node, int depth, int maxDepth )
+//        {
+//            if ( depth >= maxDepth ) return;
+//
+//            // initialization of child nodes
+//            node->left = new BVHNode( node );
+//            node->right = new BVHNode( node );
+//
+//            float centerX = ( node->highest.x + node->lowest.x ) / 2;
+//            for ( const TriangleFace &t: node->triangleFaces )
+//            {
+//                if ( t.getCenter().x < centerX ) node->left->triangleFaces.push_back( t );
+//                else
+//                    node->right->triangleFaces.push_back( t );
+//            }
+//
+//            // define min/max vectors for child nodes
+//            node->left->highest = util::geometry::maxVec(
+//                    util::geometry::extractPositions( node->left->triangleFaces ));
+//            node->left->lowest = util::geometry::minVec(
+//                    util::geometry::extractPositions( node->left->triangleFaces ));
+//            node->right->highest = util::geometry::maxVec(
+//                    util::geometry::extractPositions( node->right->triangleFaces ));
+//            node->right->lowest = util::geometry::minVec(
+//                    util::geometry::extractPositions( node->right->triangleFaces ));
+//
+//            createChildren( node->left, depth + 1, maxDepth );
+//            createChildren( node->right, depth + 1, maxDepth );
+//        }
+//    }
 }
