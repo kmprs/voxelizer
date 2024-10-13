@@ -6,7 +6,6 @@
 #include <sstream>
 #include <glm/vec3.hpp>
 #include "octreeNode.hpp"
-#include "triangleFace.hpp"
 #include "voxel.hpp"
 #include "bvhNode.hpp"
 

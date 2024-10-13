@@ -20,3 +20,15 @@
 4	422	1728549989111046773	CMakeFiles/Voxelizer.dir/src/voxelizer.cpp.o	c5f6ccd4041e76f7
 3	590	1728551923494132851	CMakeFiles/Voxelizer.dir/src/camera.cpp.o	fd10936e9660e829
 4	1100	1728494153829935529	CMakeFiles/Voxelizer.dir/main.cpp.o	3b1fecb80d797224
+4	728	1728846490276855984	CMakeFiles/Voxelizer.dir/src/camera.cpp.o	fd10936e9660e829
+3	768	1728846490317209564	CMakeFiles/Voxelizer.dir/main.cpp.o	3b1fecb80d797224
+4	867	1728846490412923313	CMakeFiles/Voxelizer.dir/src/eventHandler.cpp.o	95e80bcd26b8b4c4
+4	881	1728846490429036028	CMakeFiles/Voxelizer.dir/src/transformator.cpp.o	29edf0889e4c798c
+728	1236	1728846490785821276	CMakeFiles/Voxelizer.dir/src/sceneHandler.cpp.o	93783d8dcedd145d
+769	1251	1728846490801219823	CMakeFiles/Voxelizer.dir/src/mesh.cpp.o	45a50848345815fb
+4	613	1728846517596352765	CMakeFiles/Voxelizer.dir/src/voxel.cpp.o	a25d47b540a46f49
+5	909	1728846690421212841	CMakeFiles/Voxelizer.dir/src/util.cpp.o	e994921b2d8023ed
+5	691	1728846747842394005	CMakeFiles/Voxelizer.dir/src/util.cpp.o	e994921b2d8023ed
+6	779	1728846778722716196	CMakeFiles/Voxelizer.dir/src/util.cpp.o	e994921b2d8023ed
+5	733	1728846850582890227	CMakeFiles/Voxelizer.dir/src/util.cpp.o	e994921b2d8023ed
+7	979	1728846892209793692	CMakeFiles/Voxelizer.dir/src/util.cpp.o	e994921b2d8023ed

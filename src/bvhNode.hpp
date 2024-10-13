@@ -7,6 +7,7 @@
 
 struct BVHNode
 {
+    // TODO: integrate this code 
     BVHNode( BVHNode* parent ) :
     parent( parent ) {}
     BVHNode() = default;
@@ -16,8 +17,8 @@ struct BVHNode
         delete right;
     }
 
-    glm::vec3 highest;
-    glm::vec3 lowest;
+    glm::vec3 highest = {};
+    glm::vec3 lowest = {};
 
     BVHNode* parent = nullptr;
     BVHNode* left = nullptr;
