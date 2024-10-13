@@ -15,8 +15,9 @@ void Voxelizer::buildOctree( OctreeNode* node, int depth, int maxDepth )
 {
     if ( depth >= maxDepth ) return;
     // fetch vertex positions from octree node
-    std::array<Triangle, 12> voxelTriangles = util::getCubeTriangles( node->position,
-                                                                      node->edgeLength );
+    std::array<Triangle, 12> voxelTriangles = util::geometry::getCubeTriangles(
+            node->position,
+            node->edgeLength );
 
     bool found = false;
     for ( const Triangle &voxelTriangle: voxelTriangles )
@@ -131,9 +132,10 @@ Voxelizer::computeTriangleLineInterval( const Triangle &triangle,
 float
 Voxelizer::projectOntoAxis( const glm::vec3 &distance, const glm::vec3 &trianglePoint )
 {
-    float maxDistance = std::max({abs(distance.x), abs(distance.y), abs(distance.z)});
-    if ( abs(distance.x) == maxDistance ) return trianglePoint.x;
-    else if ( abs(distance.y) == maxDistance )return  trianglePoint.y;
+    float maxDistance = std::max(
+            { abs( distance.x ), abs( distance.y ), abs( distance.z ) } );
+    if ( abs( distance.x ) == maxDistance ) return trianglePoint.x;
+    else if ( abs( distance.y ) == maxDistance )return trianglePoint.y;
     return trianglePoint.z;
 }
 

@@ -2,23 +2,21 @@
 
 #include "renderable.hpp"
 #include "types.hpp"
+#include "util.hpp"
+
 
 class TriangleFace : public Renderable
 {
 public:
-    TriangleFace( const Vertex vertices[3], unsigned int offset ) :
-            vertices{ vertices[0], vertices[1], vertices[2] }
-    {
-        indices[0] = offset + 0;
-        indices[1] = offset + 1;
-        indices[2] = offset + 2;
-    };
+    TriangleFace( const Vertex vertices[3], unsigned int offset );
 
     [[nodiscard]] std::vector<float> getVertexData() const override;
     [[nodiscard]] std::vector<unsigned int> getIndices() const override;
-    [[nodiscard]] Triangle toTriangle();
+    [[nodiscard]] Triangle toTriangle() const;
+    [[nodiscard]] glm::vec3 getCenter() const;
 
 private:
-    Vertex vertices[3] = {};
-    unsigned int indices[3] = {};
+    Vertex m_vertices[3] = {};
+    unsigned int m_indices[3] = {};
+    glm::vec3 m_center = {};
 };
