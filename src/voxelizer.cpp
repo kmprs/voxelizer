@@ -47,7 +47,6 @@ void Voxelizer::buildOctree( OctreeNode* node, int depth, int maxDepth )
 
 bool Voxelizer::doTrianglesIntersect( const Triangle &t0, const Triangle &t1 )
 {
-    // TODO: refactor this method!
     // TODO: test this method!
     // this method is based on the algorithm presented by Thomas Moeller
     // test if triangles are on the same side of the plane build by the other triangle
