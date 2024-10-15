@@ -34,7 +34,7 @@ void DataHandler::voxelize()
     std::cout << leaves.size() << std::endl;
 
     auto start = std::chrono::high_resolution_clock::now();
-    int counter = 0;
+    long counter = 0;
     m_voxelizer.buildOctree( octree, 0, RESOLUTION_LEVEL, leaves, counter );
 
     auto stop = std::chrono::high_resolution_clock::now();

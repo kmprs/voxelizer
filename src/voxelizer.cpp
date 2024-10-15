@@ -11,7 +11,7 @@ Voxelizer::Voxelizer( const std::vector<std::shared_ptr<TriangleFace>> &triangle
 
 
 void Voxelizer::buildOctree( OctreeNode* node, int depth, int maxDepth,
-                             std::vector<BVHNode*> &leaves, int &counter )
+                             std::vector<BVHNode*> &leaves, long &counter )
 {
     if ( depth >= maxDepth ) return;
     // fetch vertex positions from octree node

@@ -14,7 +14,7 @@ public:
     Voxelizer() = default;
     void
     buildOctree( OctreeNode* node, int depth, int maxDepth,
-                 std::vector<BVHNode*> &leaves, int &counter );
+                 std::vector<BVHNode*> &leaves, long &counter );
 
 private:
     std::vector<Triangle> m_meshTriangles = {};
