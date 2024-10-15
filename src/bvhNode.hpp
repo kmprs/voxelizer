@@ -7,10 +7,12 @@
 
 struct BVHNode
 {
-    // TODO: integrate this code 
     BVHNode( BVHNode* parent ) :
-    parent( parent ) {}
+            parent( parent )
+    {}
+
     BVHNode() = default;
+
     ~BVHNode()
     {
         delete left;
@@ -24,5 +26,7 @@ struct BVHNode
     BVHNode* left = nullptr;
     BVHNode* right = nullptr;
 
-    std::vector<TriangleFace> triangleFaces;
+    std::vector<std::shared_ptr<TriangleFace>> triangleFaces = {};
+
+    void getLeaves( std::vector<BVHNode*> &leaves);
 };

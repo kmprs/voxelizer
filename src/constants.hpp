@@ -3,7 +3,7 @@
 #include <string>
 
 // MODEL
-const std::string MODEL_PATH = "../binaries/astronaut.obj";
+const std::string MODEL_PATH = "../binaries/dragon.obj";
 
 // WINDOW
 constexpr int WINDOW_WIDTH = 1280;
@@ -31,3 +31,4 @@ constexpr glm::vec3 VOXEL_COLOR = {.75f, .6f, .47f};
 
 // VOXELIZER
 constexpr int RESOLUTION_LEVEL = 6;
+constexpr int BVH_DEPTH = 10;

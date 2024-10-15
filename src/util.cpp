@@ -88,12 +88,13 @@ namespace util
         }
 
         std::vector<glm::vec3>
-        extractPositions( const std::vector<TriangleFace> &triangleFaces )
+        extractPositions(
+                const std::vector<std::shared_ptr<TriangleFace>> &triangleFaces )
         {
             std::vector<glm::vec3> positions;
-            for ( const TriangleFace &face: triangleFaces )
+            for ( const std::shared_ptr<TriangleFace> &face: triangleFaces )
             {
-                Triangle t = face.toTriangle();
+                Triangle t = face->toTriangle();
                 positions.push_back( t.position0 );
                 positions.push_back( t.position1 );
                 positions.push_back( t.position2 );
@@ -316,36 +317,62 @@ namespace util
     }
 
 
-//    namespace bvh
-//    {
-//        void createChildren( BVHNode* node, int depth, int maxDepth )
-//        {
-//            if ( depth >= maxDepth ) return;
-//
-//            // initialization of child nodes
-//            node->left = new BVHNode( node );
-//            node->right = new BVHNode( node );
-//
-//            float centerX = ( node->highest.x + node->lowest.x ) / 2;
-//            for ( const TriangleFace &t: node->triangleFaces )
-//            {
-//                if ( t.getCenter().x < centerX ) node->left->triangleFaces.push_back( t );
-//                else
-//                    node->right->triangleFaces.push_back( t );
-//            }
-//
-//            // define min/max vectors for child nodes
-//            node->left->highest = util::geometry::maxVec(
-//                    util::geometry::extractPositions( node->left->triangleFaces ));
-//            node->left->lowest = util::geometry::minVec(
-//                    util::geometry::extractPositions( node->left->triangleFaces ));
-//            node->right->highest = util::geometry::maxVec(
-//                    util::geometry::extractPositions( node->right->triangleFaces ));
-//            node->right->lowest = util::geometry::minVec(
-//                    util::geometry::extractPositions( node->right->triangleFaces ));
-//
-//            createChildren( node->left, depth + 1, maxDepth );
-//            createChildren( node->right, depth + 1, maxDepth );
-//        }
-//    }
+    namespace bvh
+    {
+        void createChildren( BVHNode* node, int depth, int maxDepth )
+        {
+            if ( depth >= maxDepth ) return;
+
+            // initialization of child nodes
+            node->left = new BVHNode( node );
+            node->right = new BVHNode( node );
+
+
+            // Find the longest axis (x, y, or z)
+            glm::vec3 bboxSize = node->highest - node->lowest;
+            int longestAxis = 0;
+            if (bboxSize.y > bboxSize.x) longestAxis = 1;
+            if (bboxSize.z > bboxSize.y && bboxSize.z > bboxSize.x) longestAxis = 2;
+
+            // Compute the center of the bounding volume along the longest axis
+            float center = (node->highest[longestAxis] + node->lowest[longestAxis]) / 2;
+
+            // Map triangles to one of two bounding volumes based on the center
+            for ( const std::shared_ptr<TriangleFace> &t : node->triangleFaces )
+            {
+                if ( t->getCenter()[longestAxis] < center )
+                    node->left->triangleFaces.push_back( t );
+                else
+                    node->right->triangleFaces.push_back( t );
+            }
+
+            // define min/max vectors for child nodes
+            node->left->highest = util::geometry::maxVec(
+                    util::geometry::extractPositions( node->left->triangleFaces ));
+            node->left->lowest = util::geometry::minVec(
+                    util::geometry::extractPositions( node->left->triangleFaces ));
+            node->right->highest = util::geometry::maxVec(
+                    util::geometry::extractPositions( node->right->triangleFaces ));
+            node->right->lowest = util::geometry::minVec(
+                    util::geometry::extractPositions( node->right->triangleFaces ));
+
+            if (!node->triangleFaces.empty())
+            {
+                createChildren( node->left, depth + 1, maxDepth );
+                createChildren( node->right, depth + 1, maxDepth );
+            }
+        }
+    }
+
+    void getLeaves( BVHNode* node, std::vector<BVHNode*> &leaves )
+    {
+        if ( node->left == nullptr && node->right == nullptr )
+        {
+            leaves.push_back( node );
+        } else
+        {
+            getLeaves( node->left, leaves );
+            getLeaves( node->right, leaves );
+        }
+    }
 }

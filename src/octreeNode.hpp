@@ -2,6 +2,7 @@
 
 #include <glm/vec3.hpp>
 #include <array>
+#include "bvhNode.hpp"
 
 
 struct OctreeNode
@@ -22,5 +23,5 @@ struct OctreeNode
     bool isAir = false;
     bool isLeaf = true;
 
-    void createChildren();
+    void  createChildren();
 };

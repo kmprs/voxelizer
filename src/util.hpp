@@ -8,7 +8,6 @@
 #include "octreeNode.hpp"
 #include "voxel.hpp"
 #include "triangleFace.hpp"
-//#include "bvhNode.hpp"
 
 
 namespace util
@@ -25,7 +24,7 @@ namespace util
         [[nodiscard]] std::array<Triangle, 12>
         getCubeTriangles( const glm::vec3 &positions, float edgeLength );
         std::vector<glm::vec3>
-        extractPositions( const std::vector<TriangleFace> &triangleFaces );
+        extractPositions( const std::vector<std::shared_ptr<TriangleFace>> &triangleFaces );
         glm::vec3 minVec( const std::vector<glm::vec3> &vectors );
         glm::vec3 maxVec( const std::vector<glm::vec3> &vectors );
         bool doBoundingVolumesIntersect( const glm::vec3 &min1, const glm::vec3 &max1,
@@ -48,6 +47,7 @@ namespace util
 
     namespace bvh
     {
-//        void createChildren( BVHNode* node, int depth, int maxDepth );
+        void createChildren( BVHNode* node, int depth, int maxDepth );
+        void getLeaves( BVHNode* node, std::vector<BVHNode*> &leaves);
     }
 }
