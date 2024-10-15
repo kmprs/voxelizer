@@ -5,7 +5,7 @@
 #include "voxel.hpp"
 #include "triangleFace.hpp"
 #include "octreeNode.hpp"
-
+#include "util.hpp"
 
 class Voxelizer
 {
@@ -13,7 +13,8 @@ public:
     Voxelizer( const std::vector<std::shared_ptr<TriangleFace>> &triangleFaces );
     Voxelizer() = default;
     void
-    buildOctree( OctreeNode* node, int depth, int maxDepth );
+    buildOctree( OctreeNode* node, int depth, int maxDepth,
+                 std::vector<BVHNode*> &leaves, long &counter );
 
 private:
     std::vector<Triangle> m_meshTriangles = {};

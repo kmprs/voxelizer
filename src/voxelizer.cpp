@@ -1,5 +1,4 @@
 #include "voxelizer.hpp"
-#include "util.hpp"
 
 
 Voxelizer::Voxelizer( const std::vector<std::shared_ptr<TriangleFace>> &triangleFaces )
@@ -11,43 +10,67 @@ Voxelizer::Voxelizer( const std::vector<std::shared_ptr<TriangleFace>> &triangle
 }
 
 
-void Voxelizer::buildOctree( OctreeNode* node, int depth, int maxDepth )
+void Voxelizer::buildOctree( OctreeNode* node, int depth, int maxDepth,
+                             std::vector<BVHNode*> &leaves, long &counter )
 {
     if ( depth >= maxDepth ) return;
     // fetch vertex positions from octree node
-    std::array<Triangle, 12> voxelTriangles = util::getCubeTriangles( node->position,
-                                                                      node->edgeLength );
+    std::array<Triangle, 12> voxelTriangles = util::geometry::getCubeTriangles(
+            node->position,
+            node->edgeLength );
 
-    bool found = false;
-    for ( const Triangle &voxelTriangle: voxelTriangles )
+    std::vector<glm::vec3> vertexPositions;
+    vertexPositions.reserve(36);
+
+    for ( const Triangle &t: voxelTriangles )
     {
-        for ( const Triangle &meshTriangle: m_meshTriangles )
+        vertexPositions.push_back( t.position0 );
+        vertexPositions.push_back( t.position1 );
+        vertexPositions.push_back( t.position2 );
+    }
+
+    // calculate extremes of voxels
+    glm::vec3 maxVec = util::geometry::maxVec( vertexPositions );
+    glm::vec3 minVec = util::geometry::minVec( vertexPositions );
+
+
+    for ( auto bvhNode: leaves )
+    {
+        if ( !util::geometry::doBoundingVolumesIntersect( minVec, maxVec,
+                                                          bvhNode->lowest,
+                                                          bvhNode->highest ))
         {
-            // check for triangle-triangle intersection
-            if ( doTrianglesIntersect( meshTriangle, voxelTriangle ))
+            continue;
+        }
+
+
+        for ( const Triangle &voxelTriangle: voxelTriangles )
+        {
+            for ( const std::shared_ptr<TriangleFace> &meshTriangleFace: bvhNode->triangleFaces )
             {
-                node->isAir = false;
-                // new function call of buildOctree with children of node
-                if ( depth - 1 < maxDepth )
+                Triangle meshTriangle = meshTriangleFace->toTriangle();
+                counter++;
+                if ( doTrianglesIntersect( meshTriangle, voxelTriangle ))
                 {
-                    node->createChildren();
-                    for ( OctreeNode* child: node->children )
+                    node->isAir = false;
+                    if ( depth < maxDepth - 1 )
                     {
-                        buildOctree( child, depth + 1, maxDepth );
+                        node->createChildren();
+                        for ( OctreeNode* child: node->children )
+                        {
+                            buildOctree( child, depth + 1, maxDepth, leaves, counter );
+                        }
                     }
+                    return;
                 }
-                found = true;
-                break;
             }
         }
-        if ( found ) break;
     }
 }
 
 
 bool Voxelizer::doTrianglesIntersect( const Triangle &t0, const Triangle &t1 )
 {
-    // TODO: test this method!
     // this method is based on the algorithm presented by Thomas Moeller
     // test if triangles are on the same side of the plane build by the other triangle
     // if yes, both triangles do not intersect
@@ -131,9 +154,10 @@ Voxelizer::computeTriangleLineInterval( const Triangle &triangle,
 float
 Voxelizer::projectOntoAxis( const glm::vec3 &distance, const glm::vec3 &trianglePoint )
 {
-    float maxDistance = std::max({abs(distance.x), abs(distance.y), abs(distance.z)});
-    if ( abs(distance.x) == maxDistance ) return trianglePoint.x;
-    else if ( abs(distance.y) == maxDistance )return  trianglePoint.y;
+    float maxDistance = std::max(
+            { abs( distance.x ), abs( distance.y ), abs( distance.z ) } );
+    if ( abs( distance.x ) == maxDistance ) return trianglePoint.x;
+    else if ( abs( distance.y ) == maxDistance )return trianglePoint.y;
     return trianglePoint.z;
 }
 

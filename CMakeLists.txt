@@ -45,7 +45,9 @@ add_executable(${NAME} main.cpp
         src/octreeNode.cpp
         src/octreeNode.hpp
         src/voxelizer.cpp
-        src/voxelizer.hpp)
+        src/voxelizer.hpp
+        src/bvhNode.cpp
+        src/bvhNode.hpp)
 
 find_package(SDL2 REQUIRED)
 target_include_directories(${NAME} PRIVATE ${SDL2_INCLUDE_DIRS})

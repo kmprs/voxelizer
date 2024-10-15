@@ -182,6 +182,13 @@ build CMakeFiles/Voxelizer.dir/src/voxelizer.cpp.o: CXX_COMPILER__Voxelizer_unsc
   OBJECT_DIR = CMakeFiles/Voxelizer.dir
   OBJECT_FILE_DIR = CMakeFiles/Voxelizer.dir/src
 
+build CMakeFiles/Voxelizer.dir/src/bvhNode.cpp.o: CXX_COMPILER__Voxelizer_unscanned_Release /Users/jakobkampers/Desktop/Privat/private_workspace/Voxelizer/src/bvhNode.cpp || cmake_object_order_depends_target_Voxelizer
+  DEP_FILE = CMakeFiles/Voxelizer.dir/src/bvhNode.cpp.o.d
+  FLAGS = -O3 -DNDEBUG -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk -fcolor-diagnostics -F/Library/Developer/CommandLineTools/SDKs/MacOSX14.sdk/System/Library/Frameworks
+  INCLUDES = -I/opt/homebrew/Cellar/sdl2/2.30.3/include -isystem /opt/homebrew/Cellar/sdl2/2.30.3/include/SDL2 -isystem /opt/homebrew/include
+  OBJECT_DIR = CMakeFiles/Voxelizer.dir
+  OBJECT_FILE_DIR = CMakeFiles/Voxelizer.dir/src
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target Voxelizer
@@ -190,7 +197,7 @@ build CMakeFiles/Voxelizer.dir/src/voxelizer.cpp.o: CXX_COMPILER__Voxelizer_unsc
 #############################################
 # Link the executable Voxelizer
 
-build Voxelizer: CXX_EXECUTABLE_LINKER__Voxelizer_Release CMakeFiles/Voxelizer.dir/main.cpp.o CMakeFiles/Voxelizer.dir/src/program.cpp.o CMakeFiles/Voxelizer.dir/src/windowHandler.cpp.o CMakeFiles/Voxelizer.dir/src/eventHandler.cpp.o CMakeFiles/Voxelizer.dir/src/openGLHandler.cpp.o CMakeFiles/Voxelizer.dir/src/shader.cpp.o CMakeFiles/Voxelizer.dir/src/shaderHandler.cpp.o CMakeFiles/Voxelizer.dir/src/renderer.cpp.o CMakeFiles/Voxelizer.dir/src/camera.cpp.o CMakeFiles/Voxelizer.dir/src/transformator.cpp.o CMakeFiles/Voxelizer.dir/src/sceneHandler.cpp.o CMakeFiles/Voxelizer.dir/src/mesh.cpp.o CMakeFiles/Voxelizer.dir/src/voxel.cpp.o CMakeFiles/Voxelizer.dir/src/triangleFace.cpp.o CMakeFiles/Voxelizer.dir/src/dataHandler.cpp.o CMakeFiles/Voxelizer.dir/src/objParser.cpp.o CMakeFiles/Voxelizer.dir/src/util.cpp.o CMakeFiles/Voxelizer.dir/src/octreeNode.cpp.o CMakeFiles/Voxelizer.dir/src/voxelizer.cpp.o | /opt/homebrew/Cellar/sdl2/2.30.3/lib/libSDL2.dylib /opt/homebrew/lib/libGLEW.2.2.0.dylib /opt/homebrew/lib/libglm.dylib
+build Voxelizer: CXX_EXECUTABLE_LINKER__Voxelizer_Release CMakeFiles/Voxelizer.dir/main.cpp.o CMakeFiles/Voxelizer.dir/src/program.cpp.o CMakeFiles/Voxelizer.dir/src/windowHandler.cpp.o CMakeFiles/Voxelizer.dir/src/eventHandler.cpp.o CMakeFiles/Voxelizer.dir/src/openGLHandler.cpp.o CMakeFiles/Voxelizer.dir/src/shader.cpp.o CMakeFiles/Voxelizer.dir/src/shaderHandler.cpp.o CMakeFiles/Voxelizer.dir/src/renderer.cpp.o CMakeFiles/Voxelizer.dir/src/camera.cpp.o CMakeFiles/Voxelizer.dir/src/transformator.cpp.o CMakeFiles/Voxelizer.dir/src/sceneHandler.cpp.o CMakeFiles/Voxelizer.dir/src/mesh.cpp.o CMakeFiles/Voxelizer.dir/src/voxel.cpp.o CMakeFiles/Voxelizer.dir/src/triangleFace.cpp.o CMakeFiles/Voxelizer.dir/src/dataHandler.cpp.o CMakeFiles/Voxelizer.dir/src/objParser.cpp.o CMakeFiles/Voxelizer.dir/src/util.cpp.o CMakeFiles/Voxelizer.dir/src/octreeNode.cpp.o CMakeFiles/Voxelizer.dir/src/voxelizer.cpp.o CMakeFiles/Voxelizer.dir/src/bvhNode.cpp.o | /opt/homebrew/Cellar/sdl2/2.30.3/lib/libSDL2.dylib /opt/homebrew/lib/libGLEW.2.2.0.dylib /opt/homebrew/lib/libglm.dylib
   FLAGS = -O3 -DNDEBUG -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk
   LINK_LIBRARIES = -Wl,-rpath,/opt/homebrew/Cellar/sdl2/2.30.3/lib -Wl,-rpath,/opt/homebrew/lib  /opt/homebrew/Cellar/sdl2/2.30.3/lib/libSDL2.dylib  /opt/homebrew/lib/libGLEW.2.2.0.dylib  /opt/homebrew/lib/libglm.dylib  -Xlinker -framework -Xlinker OpenGL
   LINK_PATH = -F/Library/Developer/CommandLineTools/SDKs/MacOSX14.sdk/System/Library/Frameworks  -L/opt/homebrew/Cellar/sdl2/2.30.3/lib

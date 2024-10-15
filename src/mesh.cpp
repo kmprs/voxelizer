@@ -10,7 +10,7 @@ Mesh::Mesh( const std::vector<std::shared_ptr<Renderable>>& renderables )
     glGenVertexArrays( 1, &m_VAO );
     glBindVertexArray( m_VAO );
 
-    // Buffer for vertices
+    // Buffer for m_vertices
     glGenBuffers( 1, &m_VBO );
     glBindBuffer( GL_ARRAY_BUFFER, m_VBO );
     glBufferData( GL_ARRAY_BUFFER, sizeof( float ) * m_vertices.size(), vertices, GL_STATIC_DRAW );
@@ -23,7 +23,7 @@ Mesh::Mesh( const std::vector<std::shared_ptr<Renderable>>& renderables )
     glVertexAttribPointer( 1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof( float ), ( void* ) ( 3 * sizeof( float )));
     glEnableVertexAttribArray( 1 );
 
-    // Buffer for indices
+    // Buffer for m_indices
     glGenBuffers( 1, &m_EBO );
     glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, m_EBO );
     glBufferData( GL_ELEMENT_ARRAY_BUFFER, sizeof( unsigned int ) * m_indices.size(), indices, GL_STATIC_DRAW );
