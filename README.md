@@ -1,9 +1,8 @@
 # Voxelizer 🎲
 
 ## Table of Contents
-- [Introduction](#introduction)
-- [Installation](#installation)
-- [License](#license)
+- [Introduction](#Introduction)
+- [Installation](#Installation)
 
 ---
 
@@ -13,7 +12,7 @@ It includes features for voxel face creation, file parsing, bounding volume hier
 construction, and efficient spatial partitioning. This project aims to provide a lightweight
 platform for rendering 3D-models as voxels and to explore different optimization methods. 
 
-## Installation ⚙️
+## Installation
 
 - Clone the repository
 - Navigate to the project directory
