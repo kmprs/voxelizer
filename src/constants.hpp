@@ -27,7 +27,7 @@ constexpr glm::vec3 WORLD_CENTER = {.0f, .0f, .0f};
 constexpr float AMBIENT_STRENGTH = .6f;
 constexpr glm::vec3 LIGHT_POSITION = {-1.f, 3.f, -2.f};
 constexpr glm::vec3 LIGHT_COLOR = {1.f, 1.f, 1.f};
-constexpr glm::vec3 VOXEL_COLOR = {.75f, .6f, .47f};
+constexpr glm::vec3 VOXEL_COLOR = {.47f, .75f, .6f };
 
 // VOXELIZER
 constexpr int RESOLUTION_LEVEL = 8;

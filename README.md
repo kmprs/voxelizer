@@ -20,4 +20,6 @@ platform for rendering 3D-models as voxels and to explore different optimization
 - Install the necessary dependencies 
   - OpenGL 
   - SDL2 
+- Create a ./binaries directory and put your 3D models 
+- Adjust the 3D model path in src/constants.hpp 
 
