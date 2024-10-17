@@ -6,18 +6,20 @@
 #include "triangleFace.hpp"
 #include "octreeNode.hpp"
 #include "util.hpp"
+#include "constants.hpp"
 
-class Voxelizer
+class OctreeVoxelizer
 {
 public:
-    Voxelizer( const std::vector<std::shared_ptr<TriangleFace>> &triangleFaces );
-    Voxelizer() = default;
+    OctreeVoxelizer() = default;
+
+    std::vector<Voxel> run(const std::vector<std::shared_ptr<TriangleFace>> triangleFaces);
     void
     buildOctree( OctreeNode* node, int depth, int maxDepth,
                  std::vector<BVHNode*> &leaves, long &counter );
 
 private:
-    std::vector<Triangle> m_meshTriangles = {};
+    std::vector<std::shared_ptr<TriangleFace>> m_meshTriangles = {};
     static bool doTrianglesIntersect( const Triangle &t0, const Triangle &t1 );
     static float
     computePlaneDistance( const glm::vec3 &normal, const glm::vec3 &point,

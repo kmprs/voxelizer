@@ -4,8 +4,7 @@
 #include <memory>
 #include "voxel.hpp"
 #include "objParser.hpp"
-#include "voxelizer.hpp"
-#include "constants.hpp"
+#include "octreeVoxelizer.hpp"
 
 
 class DataHandler
@@ -22,7 +21,7 @@ private:
     std::vector<std::shared_ptr<Voxel>> m_voxels = {};
     std::vector<std::shared_ptr<TriangleFace>> m_triangleFaces = {};
     std::unique_ptr<Parser> m_reader = nullptr;
-    Voxelizer m_voxelizer;
+    OctreeVoxelizer m_voxelizer;
 
     void voxelize();
 };

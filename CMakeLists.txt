@@ -44,8 +44,8 @@ add_executable(${NAME} main.cpp
         src/util.hpp
         src/octreeNode.cpp
         src/octreeNode.hpp
-        src/voxelizer.cpp
-        src/voxelizer.hpp
+        src/octreeVoxelizer.cpp
+        src/octreeVoxelizer.hpp
         src/bvhNode.cpp
         src/bvhNode.hpp)
 

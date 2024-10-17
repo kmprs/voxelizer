@@ -1,17 +1,41 @@
-#include "voxelizer.hpp"
+#include "octreeVoxelizer.hpp"
 
 
-Voxelizer::Voxelizer( const std::vector<std::shared_ptr<TriangleFace>> &triangleFaces )
+std::vector<Voxel> OctreeVoxelizer::run(
+        const std::vector<std::shared_ptr<TriangleFace>> triangleFaces )
 {
-    for ( const std::shared_ptr<TriangleFace> &triangleFace: triangleFaces )
+    for ( const std::shared_ptr<TriangleFace> &t: triangleFaces )
     {
-        m_meshTriangles.push_back( triangleFace->toTriangle());
+        m_meshTriangles.push_back( t );
     }
+
+    auto octree = new OctreeNode { nullptr, 2, WORLD_CENTER };
+    auto bvh = new BVHNode{ nullptr };
+
+    bvh->triangleFaces = m_meshTriangles;
+    util::bvh::createChildren( bvh, 0, BVH_DEPTH);
+    std::vector<BVHNode*> leaves;
+    bvh->getLeaves( leaves );
+    // DEBUG
+    long counter = 0;
+    buildOctree( octree, 0, RESOLUTION_LEVEL, leaves, counter );
+    std::cout << "Triangle Intersection Test Counter: " << counter << std::endl;
+
+    std::vector<Voxel> voxels = util::octree::toVoxel(octree, 0);
+    for ( const Voxel& v : voxels )
+    {
+        voxels.push_back(v);
+    }
+
+    delete bvh;
+    delete octree;
+
+    return voxels;
 }
 
 
-void Voxelizer::buildOctree( OctreeNode* node, int depth, int maxDepth,
-                             std::vector<BVHNode*> &leaves, long &counter )
+void OctreeVoxelizer::buildOctree( OctreeNode* node, int depth, int maxDepth,
+                                   std::vector<BVHNode*> &leaves, long &counter )
 {
     if ( depth >= maxDepth ) return;
     // fetch vertex positions from octree node
@@ -69,7 +93,7 @@ void Voxelizer::buildOctree( OctreeNode* node, int depth, int maxDepth,
 }
 
 
-bool Voxelizer::doTrianglesIntersect( const Triangle &t0, const Triangle &t1 )
+bool OctreeVoxelizer::doTrianglesIntersect( const Triangle &t0, const Triangle &t1 )
 {
     // this method is based on the algorithm presented by Thomas Moeller
     // test if triangles are on the same side of the plane build by the other triangle
@@ -112,16 +136,16 @@ bool Voxelizer::doTrianglesIntersect( const Triangle &t0, const Triangle &t1 )
     return util::doIntervalsIntersect( interval0, interval1 );
 }
 
-float Voxelizer::computePlaneDistance( const glm::vec3 &normal, const glm::vec3 &point,
-                                       float distance )
+float OctreeVoxelizer::computePlaneDistance( const glm::vec3 &normal, const glm::vec3 &point,
+                                             float distance )
 {
     return glm::dot( normal, point ) + distance;
 }
 
 std::array<float, 2>
-Voxelizer::computeTriangleLineInterval( const Triangle &triangle,
-                                        const glm::vec3 &intersectionDirection,
-                                        const std::array<float, 3> &distances )
+OctreeVoxelizer::computeTriangleLineInterval( const Triangle &triangle,
+                                              const glm::vec3 &intersectionDirection,
+                                              const std::array<float, 3> &distances )
 {
     float p0 = projectOntoAxis( intersectionDirection, triangle.position0 );
     float p1 = projectOntoAxis( intersectionDirection, triangle.position1 );
@@ -152,7 +176,7 @@ Voxelizer::computeTriangleLineInterval( const Triangle &triangle,
 }
 
 float
-Voxelizer::projectOntoAxis( const glm::vec3 &distance, const glm::vec3 &trianglePoint )
+OctreeVoxelizer::projectOntoAxis( const glm::vec3 &distance, const glm::vec3 &trianglePoint )
 {
     float maxDistance = std::max(
             { abs( distance.x ), abs( distance.y ), abs( distance.z ) } );

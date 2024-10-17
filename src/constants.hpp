@@ -9,7 +9,7 @@ const std::string MODEL_PATH = "../binaries/plant.obj";
 constexpr int WINDOW_WIDTH = 1280;
 constexpr int WINDOW_HEIGHT = 780;
 constexpr glm::vec3 BACKGROUND_COLOR = { .2f, .2f, .2f };
-const std::string TITLE = "Voxelizer";
+const std::string TITLE = "OctreeVoxelizer";
 constexpr int TARGET_FPS = 200;
 constexpr int FRAME_DELAY = 1000/TARGET_FPS;
 
@@ -18,7 +18,7 @@ constexpr int FRAME_DELAY = 1000/TARGET_FPS;
 constexpr float CAMERA_SPEED = 5.f;
 constexpr float CAMERA_ROTATION_SPEED = 120.f;
 constexpr float CLIP_MIN = 0.1;
-constexpr float CLIP_MAX = 100;
+constexpr float CLIP_MAX = 10;
 constexpr glm::vec3 YAW_AXIS = {0, 1, 0};
 constexpr glm::vec3 PITCH_AXIS = {1, 0, 0};
 
