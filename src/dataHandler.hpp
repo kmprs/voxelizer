@@ -21,7 +21,7 @@ private:
     std::vector<std::shared_ptr<Voxel>> m_voxels = {};
     std::vector<std::shared_ptr<TriangleFace>> m_triangleFaces = {};
     std::unique_ptr<Parser> m_reader = nullptr;
-    OctreeVoxelizer m_voxelizer;
+    std::unique_ptr<Voxelizer> m_voxelizer;
 
     void voxelize();
 };
