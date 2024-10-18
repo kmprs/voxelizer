@@ -1,10 +1,8 @@
 #pragma once
 
-#include <string>
-#include <memory>
-#include "voxel.hpp"
 #include "objParser.hpp"
 #include "octreeVoxelizer.hpp"
+#include "bresenhamVoxelizer.hpp"
 
 
 class DataHandler

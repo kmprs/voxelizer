@@ -26,6 +26,14 @@ struct Vertex
     }
 };
 
+struct Line
+{
+    Line ( const glm::vec3& position0, const glm::vec3& position1 ) :
+    position0( position0 ), position1( position1 ){};
+
+    glm::vec3 position0 = {};
+    glm::vec3 position1 = {};
+};
 
 struct Triangle
 {

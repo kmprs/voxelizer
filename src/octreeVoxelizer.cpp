@@ -2,7 +2,7 @@
 
 
 std::vector<Voxel> OctreeVoxelizer::run(
-        const std::vector<std::shared_ptr<TriangleFace>> triangleFaces )
+        const std::vector<std::shared_ptr<TriangleFace>> &triangleFaces )
 {
     for ( const std::shared_ptr<TriangleFace> &t: triangleFaces )
     {

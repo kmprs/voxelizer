@@ -13,7 +13,7 @@ public:
     OctreeVoxelizer() = default;
 
     std::vector<Voxel>
-    run( const std::vector<std::shared_ptr<TriangleFace>> triangleFaces ) override;
+    run( const std::vector<std::shared_ptr<TriangleFace>> &triangleFaces ) override;
     void
     buildOctree( OctreeNode* node, int depth, int maxDepth,
                  std::vector<BVHNode*> &leaves, long &counter );

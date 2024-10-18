@@ -1,6 +1,5 @@
 #include "dataHandler.hpp"
 
-#include <utility>
 
 DataHandler::DataHandler( std::string path, FileFormat format ) :
         m_path( std::move( path )), m_voxelizer( std::make_unique<OctreeVoxelizer>())
@@ -30,13 +29,15 @@ void DataHandler::voxelize()
     auto durationS = std::chrono::duration_cast<std::chrono::seconds>( stop - start );
     auto durationMS = std::chrono::duration_cast<std::chrono::milliseconds>(
             stop - start );
-    std::cout << "Build Octree: " << durationS.count() << "s:"
+    std::cout << "Voxelization took: " << durationS.count() << "s:"
               << durationMS.count() % 1000 << "ms" << std::endl;
 
     for ( const Voxel &v: voxels )
     {
         m_voxels.push_back( std::make_shared<Voxel>( v ));
     }
+
+    std::cout << "Number of voxels: " << m_voxels.size() << std::endl;
 
 }
 
