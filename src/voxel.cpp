@@ -26,6 +26,13 @@ std::vector<unsigned int> Voxel::getIndices() const
     return result;
 }
 
+glm::vec3 Voxel::getPos() const
+{
+    Vertex v = m_front.vertices[0];
+    return {v.x, v.y, v.z};
+}
+
+
 bool Voxel::operator<(const Voxel &other) const
 {
     std::vector<float> vertexData = getVertexData();

@@ -11,5 +11,5 @@ class Voxelizer
 public:
     virtual std::vector<Voxel>
     run( const std::vector<std::shared_ptr<TriangleFace>> &triangleFaces ) = 0;
-    ~Voxelizer() = default;
+    virtual ~Voxelizer() = default;
 };

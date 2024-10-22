@@ -18,7 +18,8 @@ private:
 
     void createLineVoxels( const glm::vec3 &start, const glm::vec3 &end,
                            std::set<Voxel> &voxels );
-    std::array<Line, 3> toLines( const std::shared_ptr<TriangleFace> &triangleFace );
-    glm::vec3 quantizeToVoxelCenter( const glm::vec3 &point, float edgeLength );
+    static std::array<Line, 3>
+    toLines( const std::shared_ptr<TriangleFace> &triangleFace );
+    static glm::vec3 quantizeToVoxelCenter( const glm::vec3 &point, float edgeLength );
 };
 

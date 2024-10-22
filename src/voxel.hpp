@@ -17,6 +17,7 @@ public:
 
     [[nodiscard]] std::vector<float> getVertexData() const override;
     [[nodiscard]] std::vector<unsigned int> getIndices() const override;
+    [[nodiscard]] glm::vec3 getPos() const;
 
     bool operator<( const Voxel &other ) const;
     bool operator==( const Voxel &other ) const;

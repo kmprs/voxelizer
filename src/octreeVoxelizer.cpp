@@ -22,10 +22,6 @@ std::vector<Voxel> OctreeVoxelizer::run(
     std::cout << "Triangle Intersection Test Counter: " << counter << std::endl;
 
     std::vector<Voxel> voxels = util::octree::toVoxel(octree, 0);
-    for ( const Voxel& v : voxels )
-    {
-        voxels.push_back(v);
-    }
 
     delete bvh;
     delete octree;

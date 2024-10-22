@@ -6,7 +6,7 @@ std::vector<Voxel> BresenhamVoxelizer::run(
 {
     std::set<Voxel> voxelSet;
 
-    for ( const auto& triangleFace: triangleFaces )
+    for ( const auto &triangleFace: triangleFaces )
     {
         std::array<Line, 3> lines = toLines( triangleFace );
         for ( const Line &line: lines )
@@ -145,8 +145,8 @@ BresenhamVoxelizer::toLines( const std::shared_ptr<TriangleFace> &triangleFace )
     Triangle triangle = triangleFace->toTriangle();
     return std::array<Line, 3>{
             Line( triangle.position0, triangle.position1 ),
-            Line( triangle.position0, triangle.position2 ),
-            Line( triangle.position1, triangle.position2 )
+            Line( triangle.position1, triangle.position2 ),
+            Line( triangle.position2, triangle.position0 )
     };
 }
 
@@ -154,9 +154,9 @@ BresenhamVoxelizer::toLines( const std::shared_ptr<TriangleFace> &triangleFace )
 glm::vec3
 BresenhamVoxelizer::quantizeToVoxelCenter( const glm::vec3 &point, float edgeLength )
 {
-    return glm::vec3(
+    return {
             std::round( point.x / edgeLength ) * edgeLength,
             std::round( point.y / edgeLength ) * edgeLength,
             std::round( point.z / edgeLength ) * edgeLength
-    );
+    };
 }
