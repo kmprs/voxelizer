@@ -18,6 +18,7 @@ void OctreeNode::createChildren()
         float offsetY = ( i & 2 ) ? offset : -offset;
         float offsetZ = ( i & 4 ) ? offset : -offset;
 
+        // creates 8 child nodes with offsets calculated above
         children[i] = new OctreeNode( this, edgeLength / 2,
                                       { position.x + offsetX, position.y + offsetY,
                                         position.z + offsetZ } );

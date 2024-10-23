@@ -14,11 +14,11 @@ std::vector<Voxel> OctreeVoxelizer::run(
 
     bvh->triangleFaces = m_meshTriangles;
     util::bvh::createChildren( bvh, 0, BVH_DEPTH);
-    std::vector<BVHNode*> leaves;
-    bvh->getLeaves( leaves );
+    std::vector<BVHNode*> bvhLeaves;
+    bvh->getLeaves( bvhLeaves );
     // DEBUG
     long counter = 0;
-    buildOctree( octree, 0, RESOLUTION_LEVEL, leaves, counter );
+    buildOctree( octree, 0, RESOLUTION_LEVEL, bvhLeaves, counter );
     std::cout << "Triangle Intersection Test Counter: " << counter << std::endl;
 
     std::vector<Voxel> voxels = util::octree::toVoxel(octree, 0);
