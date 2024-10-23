@@ -38,16 +38,17 @@ WindowHandler::WindowHandler( const std::string &title, int width, int height )
         std::cerr << "Failed to create OpenGL context: " << SDL_GetError() << std::endl;
         exit( EXIT_FAILURE );
     }
-    SDL_GL_SetSwapInterval(1);
 
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
-    ImGuiIO& io = ImGui::GetIO(); (void)io;
-    io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
-    ImGui_ImplSDL2_InitForOpenGL(m_window, m_context);
-    ImGui_ImplOpenGL3_Init("#version 330");
+    ImGuiIO &io = ImGui::GetIO();
+    ( void ) io;
+    ImGui_ImplSDL2_InitForOpenGL( m_window, m_context );
+    ImGui_ImplOpenGL3_Init( "#version 330" );
 
     ImGui::StyleColorsDark();
+
+    m_gui = { m_window, m_context };
 }
 
 WindowHandler::~WindowHandler()
@@ -77,13 +78,21 @@ void WindowHandler::swapWindow()
 
 void WindowHandler::makeCurrent()
 {
-    SDL_GL_MakeCurrent(m_window, m_context);
+    SDL_GL_MakeCurrent( m_window, m_context );
 }
 
 int WindowHandler::getHeight() const
 {
     int width, height;
-    SDL_GetWindowSize(m_window, &width, &height);
+    SDL_GetWindowSize( m_window, &width, &height );
     return height;
 }
+
+void WindowHandler::loadGUIFrame()
+{
+    SDL_GetWindowSize( m_window, &m_width, &m_height );
+    m_gui.createFrame( static_cast<float>(m_width) * .25f, static_cast<float>(m_height), 0, 0 );
+}
+
+
 

@@ -64,6 +64,8 @@ add_executable(${NAME} main.cpp
         dependencies/imgui/imgui_impl_opengl3_loader.h
         dependencies/imgui/imgui_impl_sdl2.cpp
         dependencies/imgui/imgui_impl_sdl2.h
+        src/gui.cpp
+        src/gui.hpp
 )
 
 

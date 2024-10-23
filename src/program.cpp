@@ -29,7 +29,8 @@ void Program::run()
     Uint64 performanceFrequency = SDL_GetPerformanceFrequency();
 
 
-    float my_float = 0.f;
+    float my_float = 120.f;
+    float color[4] = {1.0f, 0.0f, 0.0f, 1.0f};
 
     while ( !windowHandler.isClosed())
     {
@@ -39,7 +40,6 @@ void Program::run()
         {
             windowHandler.close();
         } else {
-            // Pass the event to ImGui for processing
             ImGui_ImplSDL2_ProcessEvent(&event);
         }
 
@@ -48,16 +48,9 @@ void Program::run()
         lastCounter = currentCounter;
 
         // imgui
-        ImGui_ImplSDL2_NewFrame();
-        ImGui_ImplOpenGL3_NewFrame();
-        ImGui::NewFrame();
-        ImGui::SetNextWindowPos(ImVec2(0, 0));
-        ImGui::SetNextWindowSize(ImVec2(300, static_cast<float>(windowHandler.getHeight())));
+        windowHandler.loadGUIFrame();
 
-        ImGui::Begin("Extra Window");
-        ImGui::Text("This is the extra window.");
-        ImGui::SliderFloat("My slider", &my_float, 0.f, 100.f);
-        ImGui::End();
+
 
         // main methods
         EventHandler::processInput( event, windowHandler, cameraDirection );
@@ -66,8 +59,8 @@ void Program::run()
         sceneHandler.setScene();
         renderer.render();
         openGlHandler.use();
-        // ImGui Rendering
 
+        // ImGui Rendering
         ImGui::Render();
         windowHandler.makeCurrent();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());

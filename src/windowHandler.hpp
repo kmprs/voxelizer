@@ -5,6 +5,8 @@
 #include "../dependencies/imgui/imgui.h"
 #include "../dependencies/imgui/imgui_impl_opengl3.h"
 #include "../dependencies/imgui/imgui_impl_sdl2.h"
+#include "gui.hpp"
+
 
 class WindowHandler
 {
@@ -16,13 +18,15 @@ public:
     void close();
     void swapWindow();
     void makeCurrent();
+    void loadGUIFrame();
     int getHeight() const;
 
 
 private:
-    const int m_width;
-    const int m_height;
+    int m_width;
+    int m_height;
     bool m_closed = false;
     SDL_Window *m_window = nullptr;
     SDL_GLContext m_context = nullptr;
+    GUI m_gui;
 };
