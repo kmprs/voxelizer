@@ -20,7 +20,7 @@ WindowHandler::WindowHandler( const std::string &title, int width, int height )
             SDL_WINDOWPOS_CENTERED,
             m_width,
             m_height,
-            SDL_WINDOW_OPENGL
+            SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE
     );
 
 
@@ -30,16 +30,31 @@ WindowHandler::WindowHandler( const std::string &title, int width, int height )
         exit( EXIT_FAILURE );
     }
 
+//    SDL_SetWindowFullscreen(m_window, SDL_WINDOW_FULLSCREEN_DESKTOP);
+
     m_context = SDL_GL_CreateContext( m_window );
     if ( m_context == nullptr )
     {
         std::cerr << "Failed to create OpenGL context: " << SDL_GetError() << std::endl;
         exit( EXIT_FAILURE );
     }
+    SDL_GL_SetSwapInterval(1);
+
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    ImGuiIO& io = ImGui::GetIO(); (void)io;
+    io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
+    ImGui_ImplSDL2_InitForOpenGL(m_window, m_context);
+    ImGui_ImplOpenGL3_Init("#version 330");
+
+    ImGui::StyleColorsDark();
 }
 
 WindowHandler::~WindowHandler()
 {
+    ImGui_ImplOpenGL3_Shutdown();
+    ImGui_ImplSDL2_Shutdown();
+    ImGui::DestroyContext();
     SDL_GL_DeleteContext( m_context );
     SDL_DestroyWindow( m_window );
     SDL_Quit();
@@ -59,3 +74,16 @@ void WindowHandler::swapWindow()
 {
     SDL_GL_SwapWindow( m_window );
 }
+
+void WindowHandler::makeCurrent()
+{
+    SDL_GL_MakeCurrent(m_window, m_context);
+}
+
+int WindowHandler::getHeight() const
+{
+    int width, height;
+    SDL_GetWindowSize(m_window, &width, &height);
+    return height;
+}
+

@@ -50,7 +50,22 @@ add_executable(${NAME} main.cpp
         src/bvhNode.hpp
         src/voxelizer.hpp
         src/bresenhamVoxelizer.cpp
-        src/bresenhamVoxelizer.hpp)
+        src/bresenhamVoxelizer.hpp
+
+        dependencies/imgui/imconfig.h
+        dependencies/imgui/imgui.cpp
+        dependencies/imgui/imgui.h
+        dependencies/imgui/imgui_demo.cpp
+        dependencies/imgui/imgui_draw.cpp
+        dependencies/imgui/imgui_tables.cpp
+        dependencies/imgui/imgui_widgets.cpp
+        dependencies/imgui/imgui_impl_opengl3.cpp
+        dependencies/imgui/imgui_impl_opengl3.h
+        dependencies/imgui/imgui_impl_opengl3_loader.h
+        dependencies/imgui/imgui_impl_sdl2.cpp
+        dependencies/imgui/imgui_impl_sdl2.h
+)
+
 
 find_package(SDL2 REQUIRED)
 target_include_directories(${NAME} PRIVATE ${SDL2_INCLUDE_DIRS})

@@ -2,6 +2,9 @@
 
 #include <iostream>
 #include <SDL.h>
+#include "../dependencies/imgui/imgui.h"
+#include "../dependencies/imgui/imgui_impl_opengl3.h"
+#include "../dependencies/imgui/imgui_impl_sdl2.h"
 
 class WindowHandler
 {
@@ -12,6 +15,8 @@ public:
     bool isClosed();
     void close();
     void swapWindow();
+    void makeCurrent();
+    int getHeight() const;
 
 
 private:

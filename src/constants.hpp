@@ -10,7 +10,7 @@ constexpr int WINDOW_WIDTH = 1280;
 constexpr int WINDOW_HEIGHT = 780;
 constexpr glm::vec3 BACKGROUND_COLOR = { .2f, .2f, .2f };
 const std::string TITLE = "Voxelizer";
-constexpr int TARGET_FPS = 1000;
+constexpr int TARGET_FPS = 200;
 constexpr int FRAME_DELAY = 1000/TARGET_FPS;
 
 
