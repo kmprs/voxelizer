@@ -7,8 +7,6 @@
 const std::string MODEL_PATH = "../binaries/plant.obj";
 
 // WINDOW
-constexpr int WINDOW_WIDTH = 1280;
-constexpr int WINDOW_HEIGHT = 780;
 constexpr glm::vec3 BACKGROUND_COLOR = { .2f, .2f, .2f };
 const std::string TITLE = "Voxelizer";
 constexpr int TARGET_FPS = 1000;
@@ -16,7 +14,7 @@ constexpr int FRAME_DELAY = 1000/TARGET_FPS;
 
 
 // CAMERA
-constexpr float CAMERA_SPEED = 5.f;
+constexpr float CAMERA_SPEED_LIMIT = 1000.f;
 constexpr float CAMERA_ROTATION_SPEED = 120.f;
 constexpr float CLIP_MIN = 0.1;
 constexpr float CLIP_MAX = 200;

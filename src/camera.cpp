@@ -1,6 +1,7 @@
 #include "camera.hpp"
 #include "constants.hpp"
 
+extern std::shared_ptr<DataHandler> dataHandler;
 
 
 Camera::Camera() :
@@ -27,7 +28,7 @@ glm::vec3 Camera::getDirection()
 
 void Camera::update( Direction direction, float deltaTime )
 {
-    float cameraSpeed = CAMERA_SPEED * deltaTime;
+    float cameraSpeed = dataHandler->getCameraSpeed() * deltaTime;
     float cameraRotationSpeed = CAMERA_ROTATION_SPEED *  deltaTime;
     if ( direction != NO_MOVEMENT )
     {

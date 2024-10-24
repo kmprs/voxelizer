@@ -2,6 +2,7 @@
 
 
 #include <glm/vec3.hpp>
+#include "constants.hpp"
 
 
 class DataHandler
@@ -16,9 +17,12 @@ public:
     void setWindowWidth(int width);
     [[nodiscard]] int getWindowHeight() const;
     void setWindowHeight(int height);
+    [[nodiscard]] float getCameraSpeed() const;
+    void setCameraSpeed(float speed);
 
 private:
     glm::vec3 m_voxelColor = {};
     int m_windowWidth = -1;
     int m_windowHeight = -1;
+    float m_cameraSpeed = -1.f;
 };

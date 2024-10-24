@@ -2,7 +2,8 @@
 
 
 DataHandler::DataHandler() :
-m_voxelColor({.5f, .7f, .4f}), m_windowWidth(1280), m_windowHeight(780)
+        m_voxelColor( { .5f, .7f, .4f } ), m_windowWidth( 1280 ), m_windowHeight( 780 ),
+        m_cameraSpeed( 5.f )
 {}
 
 
@@ -21,7 +22,7 @@ int DataHandler::getWindowWidth() const
     return m_windowWidth;
 }
 
-void DataHandler::setWindowWidth(int width)
+void DataHandler::setWindowWidth( int width )
 {
     m_windowWidth = width;
 }
@@ -34,5 +35,15 @@ int DataHandler::getWindowHeight() const
 void DataHandler::setWindowHeight( int height )
 {
     m_windowHeight = height;
+}
+
+float DataHandler::getCameraSpeed() const
+{
+    return m_cameraSpeed;
+}
+
+void DataHandler::setCameraSpeed( float speed )
+{
+    if (speed > 0 && speed <= CAMERA_SPEED_LIMIT) m_cameraSpeed = speed;
 }
 
