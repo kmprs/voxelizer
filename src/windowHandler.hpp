@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <SDL.h>
+#include <GL/glew.h>
 #include "../dependencies/imgui/imgui.h"
 #include "../dependencies/imgui/imgui_impl_opengl3.h"
 #include "../dependencies/imgui/imgui_impl_sdl2.h"
@@ -18,8 +19,8 @@ public:
     void close();
     void swapWindow();
     void makeCurrent();
+    void updateWindowSize();
     void loadGUIFrame();
-    int getHeight() const;
 
 
 private:

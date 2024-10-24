@@ -11,7 +11,8 @@ std::shared_ptr<DataHandler> dataHandler = std::make_shared<DataHandler>();
 void Program::run()
 {
     SDL_Event event;
-    WindowHandler windowHandler = { TITLE, WINDOW_WIDTH, WINDOW_HEIGHT };
+    WindowHandler windowHandler = { TITLE, dataHandler->getWindowWidth(),
+                                    dataHandler->getWindowHeight() };
     OpenGLHandler openGlHandler = {};
     std::shared_ptr<ShaderHandler> shaderHandler = openGlHandler.getShaderHandler();
     Camera camera = {};
@@ -31,7 +32,7 @@ void Program::run()
 
 
     float my_float = 120.f;
-    float color[4] = {1.0f, 0.0f, 0.0f, 1.0f};
+    float color[4] = { 1.0f, 0.0f, 0.0f, 1.0f };
 
     while ( !windowHandler.isClosed())
     {
@@ -40,8 +41,13 @@ void Program::run()
         if ( SDL_PollEvent( &event ) && event.type == SDL_QUIT )
         {
             windowHandler.close();
-        } else {
-            ImGui_ImplSDL2_ProcessEvent(&event);
+        } else if ( event.type == SDL_WINDOWEVENT &&
+                    event.window.event == SDL_WINDOWEVENT_RESIZED )
+        {
+            windowHandler.updateWindowSize();
+        } else
+        {
+            ImGui_ImplSDL2_ProcessEvent( &event );
         }
 
         deltaTime = ( static_cast<float>(currentCounter - lastCounter)) /
@@ -64,7 +70,7 @@ void Program::run()
         // ImGui Rendering
         ImGui::Render();
         windowHandler.makeCurrent();
-        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+        ImGui_ImplOpenGL3_RenderDrawData( ImGui::GetDrawData());
         windowHandler.swapWindow();
 
         // constant fps

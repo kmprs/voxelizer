@@ -8,6 +8,7 @@
 #include <GL/glew.h>
 #include "constants.hpp"
 #include "shaderHandler.hpp"
+#include "dataHandler.hpp"
 
 
 class Transformator

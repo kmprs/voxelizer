@@ -1,5 +1,9 @@
 #include "windowHandler.hpp"
 
+
+extern std::shared_ptr<DataHandler> dataHandler;
+
+
 WindowHandler::WindowHandler( const std::string &title, int width, int height )
         :
         m_width( width ), m_height( height )
@@ -81,17 +85,18 @@ void WindowHandler::makeCurrent()
     SDL_GL_MakeCurrent( m_window, m_context );
 }
 
-int WindowHandler::getHeight() const
+void WindowHandler::updateWindowSize()
 {
-    int width, height;
-    SDL_GetWindowSize( m_window, &width, &height );
-    return height;
+    SDL_GetWindowSize( m_window, &m_width, &m_height );
+    glViewport(0, 0, m_width, m_height);
+    dataHandler->setWindowWidth( m_width );
+    dataHandler->setWindowHeight( m_height );
 }
 
 void WindowHandler::loadGUIFrame()
 {
-    SDL_GetWindowSize( m_window, &m_width, &m_height );
-    m_gui.createFrame( static_cast<float>(m_width) * .25f, static_cast<float>(m_height), 0, 0 );
+    m_gui.createFrame( static_cast<float>(m_width) * .2f, static_cast<float>(m_height),
+                       0, 0 );
 }
 
 

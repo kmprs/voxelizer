@@ -4,7 +4,7 @@
 #include <glm/glm.hpp>
 
 // MODEL
-const std::string MODEL_PATH = "../binaries/astronaut.obj";
+const std::string MODEL_PATH = "../binaries/plant.obj";
 
 // WINDOW
 constexpr int WINDOW_WIDTH = 1280;
@@ -28,10 +28,9 @@ constexpr glm::vec3 WORLD_CENTER = {.0f, .0f, .0f};
 constexpr float AMBIENT_STRENGTH = .6f;
 constexpr glm::vec3 LIGHT_POSITION = {-1.f, 3.f, -2.f};
 constexpr glm::vec3 LIGHT_COLOR = {1.f, 1.f, 1.f};
-constexpr glm::vec3 VOXEL_COLOR = {.47f, .75f, .6f };
 
 constexpr int VOXEL_MEMORY_SIZE = 24;
 
 // VOXELIZER
-constexpr int RESOLUTION_LEVEL = 6;
+constexpr int RESOLUTION_LEVEL = 8;
 constexpr int BVH_DEPTH = 10;
