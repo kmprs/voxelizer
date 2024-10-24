@@ -3,8 +3,7 @@
 
 DataHandler::DataHandler() :
         m_voxelColor( { .5f, .7f, .4f } ), m_windowWidth( 1280 ), m_windowHeight( 780 ),
-        m_cameraSpeed( 5.f )
-{}
+        m_cameraSpeed( 5.f ), m_rotationSpeed( 120.f ){}
 
 
 glm::vec3 DataHandler::getVoxelColor() const
@@ -44,6 +43,15 @@ float DataHandler::getCameraSpeed() const
 
 void DataHandler::setCameraSpeed( float speed )
 {
-    if (speed > 0 && speed <= CAMERA_SPEED_LIMIT) m_cameraSpeed = speed;
+    if ( speed > 0 && speed <= CAMERA_SPEED_LIMIT ) m_cameraSpeed = speed;
 }
 
+float DataHandler::getRotationSpeed() const
+{
+    return m_rotationSpeed;
+}
+
+void DataHandler::setRotationSpeed( float speed )
+{
+    if ( speed > 0 && speed <= ROTATION_SPEED_LIMIT ) m_rotationSpeed = speed;
+}

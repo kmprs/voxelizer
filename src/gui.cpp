@@ -13,30 +13,43 @@ GUI::GUI( SDL_Window* window, SDL_GLContext glContext ) :
 
 void GUI::createFrame( float width, float height, int x, int y )
 {
+
     ImGui_ImplSDL2_NewFrame();
     ImGui_ImplOpenGL3_NewFrame();
     ImGui::NewFrame();
-    ImGui::SetNextWindowPos(ImVec2(0, 0));
-    ImGui::SetNextWindowSize(ImVec2(width, height));
+    ImGui::SetNextWindowPos( ImVec2( static_cast<float>(x), static_cast<float>(y)));
+    ImGui::SetNextWindowSize( ImVec2( width, height ));
 
-    ImGui::Begin("Extra Window");
+    ImGuiWindowFlags window_flags =
+            ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize;
+    ImGui::Begin( "Left GUI", nullptr, window_flags );
 
     glm::vec3 voxelColor = dataHandler->getVoxelColor();
-    float rgb[3] = {voxelColor.x, voxelColor.y, voxelColor.z};
-    ImGui::Text("Voxel Color");
-    ImGui::ColorPicker3("##hiddenLabel", rgb);
+    float rgb[3] = { voxelColor.x, voxelColor.y, voxelColor.z };
+    ImGui::Text( "Voxel Color" );
+    ImGui::ColorPicker3( "##hiddenLabel", rgb );
     ImGui::Spacing();
-    dataHandler->setVoxelColor({rgb[0], rgb[1], rgb[2]});
+    dataHandler->setVoxelColor( { rgb[0], rgb[1], rgb[2] } );
 
 
     // camera and rotation speeds
     float speed = dataHandler->getCameraSpeed();
-    ImGui::Text("Camera Speed");
-    ImGui::InputFloat("##hiddenLabel", &speed, 1.f, 1.f, "%.1f");
+    ImGui::Text( "Camera Speed" );
+    ImGui::InputFloat( "##camera speed", &speed, 1.f, 1.f, "%.1f" );
     ImGui::Spacing();
-    dataHandler->setCameraSpeed(speed);
+    dataHandler->setCameraSpeed( speed );
+
+    speed = dataHandler->getRotationSpeed();
+    ImGui::Text( "Rotation Speed" );
+    ImGui::InputFloat( "##rotation speed", &speed, 10.f, 10.f, "%.1f" );
+    ImGui::Spacing();
+    dataHandler->setRotationSpeed( speed );
 
     ImGui::End();
+
+
+    // left frame
+
 }
 
 

@@ -22,7 +22,8 @@ void Transformator::transform( const glm::vec3 &cameraPosition,
     m_shaderHandler->setMat4( "view", m_view );
     m_shaderHandler->setMat4( "model", m_model );
     m_projection = glm::perspective( glm::radians( 45.0f ),
-                                     static_cast<float>(dataHandler->getWindowWidth()) /
+                                     static_cast<float>(dataHandler->getWindowWidth() -
+                                                        GUI_WIDTH) /
                                      static_cast<float>(dataHandler->getWindowHeight()),
                                      static_cast<float>(CLIP_MIN),
                                      static_cast<float>(CLIP_MAX));

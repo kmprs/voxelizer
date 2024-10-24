@@ -19,10 +19,13 @@ public:
     void setWindowHeight(int height);
     [[nodiscard]] float getCameraSpeed() const;
     void setCameraSpeed(float speed);
+    [[nodiscard]] float getRotationSpeed() const;
+    void setRotationSpeed(float speed);
 
 private:
     glm::vec3 m_voxelColor = {};
     int m_windowWidth = -1;
     int m_windowHeight = -1;
     float m_cameraSpeed = -1.f;
+    float m_rotationSpeed = -1.f;
 };

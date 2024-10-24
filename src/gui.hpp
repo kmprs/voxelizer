@@ -14,7 +14,7 @@ class GUI
 public:
     GUI( SDL_Window* window, SDL_GLContext glContext );
     GUI() = default;
-    void createFrame( float width, float height, int x, int y );
+    static void createFrame( float width, float height, int x, int y );
 
 private:
     SDL_Window* m_window;

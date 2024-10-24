@@ -88,15 +88,14 @@ void WindowHandler::makeCurrent()
 void WindowHandler::updateWindowSize()
 {
     SDL_GetWindowSize( m_window, &m_width, &m_height );
-    glViewport(0, 0, m_width, m_height);
     dataHandler->setWindowWidth( m_width );
     dataHandler->setWindowHeight( m_height );
 }
 
-void WindowHandler::loadGUIFrame()
+void WindowHandler::loadGUIFrame() const
 {
-    m_gui.createFrame( static_cast<float>(m_width) * .2f, static_cast<float>(m_height),
-                       0, 0 );
+    GUI::createFrame( static_cast<float>(GUI_WIDTH), static_cast<float>(m_height),
+                          0, 0 );
 }
 
 

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "shaderHandler.hpp"
-
+#include "dataHandler.hpp"
 
 class OpenGLHandler
 {

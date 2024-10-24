@@ -31,9 +31,6 @@ void Program::run()
     Uint64 performanceFrequency = SDL_GetPerformanceFrequency();
 
 
-    float my_float = 120.f;
-    float color[4] = { 1.0f, 0.0f, 0.0f, 1.0f };
-
     while ( !windowHandler.isClosed())
     {
         currentCounter = SDL_GetPerformanceCounter();
@@ -56,8 +53,6 @@ void Program::run()
 
         // imgui
         windowHandler.loadGUIFrame();
-
-
 
         // main methods
         EventHandler::processInput( event, windowHandler, cameraDirection );

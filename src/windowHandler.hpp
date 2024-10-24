@@ -20,7 +20,7 @@ public:
     void swapWindow();
     void makeCurrent();
     void updateWindowSize();
-    void loadGUIFrame();
+    void loadGUIFrame() const;
 
 
 private:
