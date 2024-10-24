@@ -6,6 +6,7 @@
 #include "camera.hpp"
 #include "sceneHandler.hpp"
 
+std::shared_ptr<DataHandler> dataHandler = std::make_shared<DataHandler>();
 
 void Program::run()
 {

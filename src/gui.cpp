@@ -1,7 +1,7 @@
 #include "gui.hpp"
 
-float my_float;
-float rgb[3] = {0.4, 0.3, 0.7};
+
+extern std::shared_ptr<DataHandler> dataHandler;
 
 GUI::GUI( SDL_Window* window, SDL_GLContext glContext ) :
         m_window( window ), m_context( glContext )
@@ -19,8 +19,11 @@ void GUI::createFrame( float width, float height, int x, int y )
 
     ImGui::Begin("Extra Window");
     ImGui::Text("my label");
-    ImGui::SliderFloat("My slider", &my_float, 10.f, 1000.f);
+
+    glm::vec3 voxelColor = dataHandler->getVoxelColor();
+    float rgb[3] = {voxelColor.x, voxelColor.y, voxelColor.z};
     ImGui::ColorPicker3("Voxel color", rgb);
+    dataHandler->setVoxelColor({rgb[0], rgb[1], rgb[2]});
     ImGui::End();
 }
 

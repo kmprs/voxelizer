@@ -35,8 +35,8 @@ add_executable(${NAME} main.cpp
         src/voxel.hpp
         src/triangleFace.cpp
         src/triangleFace.hpp
-        src/dataHandler.cpp
-        src/dataHandler.hpp
+        src/meshDataHandler.cpp
+        src/meshDataHandler.hpp
         src/parser.hpp
         src/objParser.cpp
         src/objParser.hpp
@@ -66,6 +66,8 @@ add_executable(${NAME} main.cpp
         dependencies/imgui/imgui_impl_sdl2.h
         src/gui.cpp
         src/gui.hpp
+        src/dataHandler.cpp
+        src/dataHandler.hpp
 )
 
 

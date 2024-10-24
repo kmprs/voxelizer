@@ -1,25 +1,18 @@
 #pragma once
 
-#include "objParser.hpp"
-#include "octreeVoxelizer.hpp"
-#include "bresenhamVoxelizer.hpp"
+
+#include <glm/vec3.hpp>
 
 
 class DataHandler
 {
 public:
-    DataHandler( std::string path, FileFormat format );
-    ~DataHandler() = default;
+    DataHandler();
 
-    [[nodiscard]] std::vector<std::shared_ptr<Voxel>> getVoxels() const;
-    [[nodiscard]] std::vector<std::shared_ptr<TriangleFace>> getTriangleFaces() const;
+    // getters and setters
+    glm::vec3 getVoxelColor();
+    void setVoxelColor(const glm::vec3 &color);
 
 private:
-    std::string m_path;
-    std::vector<std::shared_ptr<Voxel>> m_voxels = {};
-    std::vector<std::shared_ptr<TriangleFace>> m_triangleFaces = {};
-    std::unique_ptr<Parser> m_reader = nullptr;
-    std::unique_ptr<Voxelizer> m_voxelizer;
-
-    void voxelize();
+    glm::vec3 m_voxelColor = {};
 };

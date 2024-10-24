@@ -2,6 +2,7 @@
 
 #include "shaderHandler.hpp"
 #include "constants.hpp"
+#include "dataHandler.hpp"
 
 
 class SceneHandler

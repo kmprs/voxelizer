@@ -1,11 +1,11 @@
 #include "renderer.hpp"
-#include "dataHandler.hpp"
+#include "meshDataHandler.hpp"
 
 extern unsigned int programID;
 
 Renderer::Renderer()
 {
-    std::unique_ptr<DataHandler> dataHandler = std::make_unique<DataHandler>( MODEL_PATH, OBJ );
+    std::unique_ptr<MeshDataHandler> dataHandler = std::make_unique<MeshDataHandler>( MODEL_PATH, OBJ );
 //    std::vector<std::shared_ptr<TriangleFace>> triangleFaces = dataHandler->getTriangleFaces();
 //    m_renderables.insert( m_renderables.end(), triangleFaces.begin(), triangleFaces.end());
     std::vector<std::shared_ptr<Voxel>> voxels = dataHandler->getVoxels();
