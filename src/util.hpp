@@ -4,6 +4,7 @@
 #include <string>
 #include <fstream>
 #include <sstream>
+#include <set>
 #include <glm/vec3.hpp>
 #include "octreeNode.hpp"
 #include "voxel.hpp"

@@ -9,19 +9,20 @@ std::vector<Voxel> OctreeVoxelizer::run(
         m_meshTriangles.push_back( t );
     }
 
-    auto octree = new OctreeNode { nullptr, 2, WORLD_CENTER };
+    auto octree = new OctreeNode{ nullptr, 2, WORLD_CENTER };
     auto bvh = new BVHNode{ nullptr };
 
     bvh->triangleFaces = m_meshTriangles;
-    util::bvh::createChildren( bvh, 0, BVH_DEPTH);
+    util::bvh::createChildren( bvh, 0, BVH_DEPTH );
     std::vector<BVHNode*> bvhLeaves;
     bvh->getLeaves( bvhLeaves );
     // DEBUG
     long counter = 0;
     buildOctree( octree, 0, RESOLUTION_LEVEL, bvhLeaves, counter );
+    std::cout << "Number of leaves in bvh node: " << bvhLeaves.size() << std::endl;
     std::cout << "Triangle Intersection Test Counter: " << counter << std::endl;
 
-    std::vector<Voxel> voxels = util::octree::toVoxel(octree, 0);
+    std::vector<Voxel> voxels = util::octree::toVoxel( octree, 0 );
 
     delete bvh;
     delete octree;
@@ -30,55 +31,42 @@ std::vector<Voxel> OctreeVoxelizer::run(
 }
 
 
-void OctreeVoxelizer::buildOctree( OctreeNode* node, int depth, int maxDepth,
+void OctreeVoxelizer::buildOctree( OctreeNode* octreeNode, int depth, int maxDepth,
                                    std::vector<BVHNode*> &leaves, long &counter )
 {
-    if ( depth >= maxDepth ) return;
-    // fetch vertex positions from octree node
+    // fetch vertex positions from octree octreeNode
     std::array<Triangle, 12> voxelTriangles = util::geometry::getCubeTriangles(
-            node->position,
-            node->edgeLength );
+            octreeNode->position,
+            octreeNode->edgeLength );
 
-    std::vector<glm::vec3> vertexPositions;
-    vertexPositions.reserve(36);
-
-    for ( const Triangle &t: voxelTriangles )
+    for ( const Triangle &voxelTriangle: voxelTriangles )
     {
-        vertexPositions.push_back( t.position0 );
-        vertexPositions.push_back( t.position1 );
-        vertexPositions.push_back( t.position2 );
-    }
-
-    // calculate extremes of voxels
-    glm::vec3 maxVec = util::geometry::maxVec( vertexPositions );
-    glm::vec3 minVec = util::geometry::minVec( vertexPositions );
-
-
-    for ( auto bvhNode: leaves )
-    {
-        if ( !util::geometry::doBoundingVolumesIntersect( minVec, maxVec,
-                                                          bvhNode->lowest,
-                                                          bvhNode->highest ))
+        std::vector<glm::vec3> trianglePositionsVoxel = { voxelTriangle.position0,
+                                                          voxelTriangle.position1,
+                                                          voxelTriangle.position2 };
+        glm::vec3 maxVec = util::geometry::maxVec( trianglePositionsVoxel );
+        glm::vec3 minVec = util::geometry::minVec( trianglePositionsVoxel );
+        for ( auto bvhNode: leaves )
         {
-            continue;
-        }
-
-
-        for ( const Triangle &voxelTriangle: voxelTriangles )
-        {
+            if ( bvhNode->triangleFaces.empty()) continue;
+            if ( !util::geometry::doBoundingVolumesIntersect( minVec, maxVec,
+                                                              bvhNode->lowest,
+                                                              bvhNode->highest ))
+                continue;
             for ( const std::shared_ptr<TriangleFace> &meshTriangleFace: bvhNode->triangleFaces )
             {
                 Triangle meshTriangle = meshTriangleFace->toTriangle();
                 counter++;
                 if ( doTrianglesIntersect( meshTriangle, voxelTriangle ))
                 {
-                    node->isAir = false;
+                    octreeNode->isAir = false;
                     if ( depth < maxDepth - 1 )
                     {
-                        node->createChildren();
-                        for ( OctreeNode* child: node->children )
+                        octreeNode->createChildren();
+                        for ( OctreeNode* child: octreeNode->children )
                         {
-                            buildOctree( child, depth + 1, maxDepth, leaves, counter );
+                            buildOctree( child, depth + 1, maxDepth, leaves,
+                                         counter );
                         }
                     }
                     return;
@@ -132,8 +120,10 @@ bool OctreeVoxelizer::doTrianglesIntersect( const Triangle &t0, const Triangle &
     return util::doIntervalsIntersect( interval0, interval1 );
 }
 
-float OctreeVoxelizer::computePlaneDistance( const glm::vec3 &normal, const glm::vec3 &point,
-                                             float distance )
+float
+OctreeVoxelizer::computePlaneDistance( const glm::vec3 &normal,
+                                       const glm::vec3 &point,
+                                       float distance )
 {
     return glm::dot( normal, point ) + distance;
 }
@@ -151,28 +141,34 @@ OctreeVoxelizer::computeTriangleLineInterval( const Triangle &triangle,
     if ( util::differentSign( distances[0], distances[1], distances[2] ))
     {
         interval[0] =
-                p1 + ( p0 - p1 ) * ( distances[1] / ( distances[1] - distances[0] ));
+                p1 +
+                ( p0 - p1 ) * ( distances[1] / ( distances[1] - distances[0] ));
         interval[1] =
-                p2 + ( p0 - p2 ) * ( distances[2] / ( distances[2] - distances[0] ));
+                p2 +
+                ( p0 - p2 ) * ( distances[2] / ( distances[2] - distances[0] ));
     } else if ( util::differentSign( distances[1], distances[0], distances[2] ))
     {
         interval[0] =
-                p0 + ( p1 - p0 ) * ( distances[0] / ( distances[0] - distances[1] ));
+                p0 +
+                ( p1 - p0 ) * ( distances[0] / ( distances[0] - distances[1] ));
         interval[1] =
-                p2 + ( p1 - p2 ) * ( distances[2] / ( distances[2] - distances[1] ));
+                p2 +
+                ( p1 - p2 ) * ( distances[2] / ( distances[2] - distances[1] ));
     } else
     {
         interval[0] =
-                p0 + ( p2 - p0 ) * ( distances[0] / ( distances[0] - distances[2] ));
+                p0 +
+                ( p2 - p0 ) * ( distances[0] / ( distances[0] - distances[2] ));
         interval[1] =
-                p1 + ( p2 - p1 ) * ( distances[1] / ( distances[1] - distances[2] ));
+                p1 +
+                ( p2 - p1 ) * ( distances[1] / ( distances[1] - distances[2] ));
     }
 
     return interval;
 }
 
-float
-OctreeVoxelizer::projectOntoAxis( const glm::vec3 &distance, const glm::vec3 &trianglePoint )
+float OctreeVoxelizer::projectOntoAxis( const glm::vec3 &distance,
+                                        const glm::vec3 &trianglePoint )
 {
     float maxDistance = std::max(
             { abs( distance.x ), abs( distance.y ), abs( distance.z ) } );

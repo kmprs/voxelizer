@@ -20,7 +20,7 @@ struct OctreeNode
 
     glm::vec3 position = {};
     float edgeLength = -1;
-    bool isAir = false;
+    bool isAir = true;
     bool isLeaf = true;
 
     void  createChildren();

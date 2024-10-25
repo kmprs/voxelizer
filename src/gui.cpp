@@ -21,7 +21,8 @@ void GUI::createFrame( float width, float height, int x, int y )
     ImGui::SetNextWindowSize( ImVec2( width, height ));
 
     ImGuiWindowFlags window_flags =
-            ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize;
+            ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse |
+            ImGuiWindowFlags_NoResize;
     ImGui::Begin( "Left GUI", nullptr, window_flags );
 
     glm::vec3 voxelColor = dataHandler->getVoxelColor();
@@ -49,7 +50,15 @@ void GUI::createFrame( float width, float height, int x, int y )
 
 
     // left frame
+    ImGui::SetNextWindowPos(
+            ImVec2( static_cast<float>(dataHandler->getWindowWidth()) - width,
+                    static_cast<float>(y)));
+    ImGui::SetNextWindowSize( ImVec2( width, height ));
+    ImGui::Begin( "Right GUI", nullptr, window_flags );
 
+    // Right window content (you can add your own content here)
+
+    ImGui::End();
 }
 
 

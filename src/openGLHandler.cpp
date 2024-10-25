@@ -17,7 +17,7 @@ OpenGLHandler::OpenGLHandler()
     }
     programID = glCreateProgram();
     glViewport( GUI_WIDTH, 0,
-                dataHandler->getWindowWidth() - GUI_WIDTH,
+                dataHandler->getWindowWidth() - GUI_WIDTH * 2,
                 dataHandler->getWindowHeight());
 
     // set scene OpenGL

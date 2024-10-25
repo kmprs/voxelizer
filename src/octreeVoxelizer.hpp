@@ -15,7 +15,7 @@ public:
     std::vector<Voxel>
     run( const std::vector<std::shared_ptr<TriangleFace>> &triangleFaces ) override;
     void
-    buildOctree( OctreeNode* node, int depth, int maxDepth,
+    buildOctree( OctreeNode* octreeNode, int depth, int maxDepth,
                  std::vector<BVHNode*> &leaves, long &counter );
 
 private:

@@ -132,14 +132,25 @@ namespace util
             return maxVec;
         }
 
-        bool doBoundingVolumesIntersect( const glm::vec3 &min1, const glm::vec3 &max1,
-                                         const glm::vec3 &min2, const glm::vec3 &max2 )
+        bool doBoundingVolumesIntersect(const glm::vec3& min1, const glm::vec3& max1,
+                                        const glm::vec3& min2, const glm::vec3& max2)
         {
-            bool xOverlap = ( min1.x < max2.x ) && ( max1.x > min2.x );
-            bool yOverlap = ( min1.y < max2.y ) && ( max1.y > min2.y );
-            bool zOverlap = ( min1.z < max2.z ) && ( max1.z > min2.z );
+            // Check for general overlap in all dimensions
+            bool overlap = (min1.x <= max2.x && max1.x >= min2.x) &&
+                           (min1.y <= max2.y && max1.y >= min2.y) &&
+                           (min1.z <= max2.z && max1.z >= min2.z);
 
-            return xOverlap && yOverlap && zOverlap;
+            // Check for full containment (box1 inside box2 or vice versa)
+            bool box1InsideBox2 = (min1.x >= min2.x && max1.x <= max2.x) &&
+                                  (min1.y >= min2.y && max1.y <= max2.y) &&
+                                  (min1.z >= min2.z && max1.z <= max2.z);
+
+            bool box2InsideBox1 = (min2.x >= min1.x && max2.x <= max1.x) &&
+                                  (min2.y >= min1.y && max2.y <= max1.y) &&
+                                  (min2.z >= min1.z && max2.z <= max1.z);
+
+            // Return true if there is either overlap or containment
+            return overlap || box1InsideBox2 || box2InsideBox1;
         }
     }
 
@@ -175,8 +186,8 @@ namespace util
             int maxDepth = -1;
 
             util::octree::findleavesAtMaxDepth( node, depth, maxDepth, leaves );
-
-            for ( OctreeNode* leaf: leaves )
+            int counter = 0;
+            for ( const OctreeNode* leaf: leaves )
             {
                 if ( !leaf->isAir )
                 {
@@ -184,6 +195,7 @@ namespace util
                                                         result.size() * 24,
                                                         leaf->edgeLength );
                     result.push_back( v );
+                    counter++;
                 }
             }
             return result;
@@ -331,14 +343,14 @@ namespace util
             // Find the longest axis (x, y, or z)
             glm::vec3 bboxSize = node->highest - node->lowest;
             int longestAxis = 0;
-            if (bboxSize.y > bboxSize.x) longestAxis = 1;
-            if (bboxSize.z > bboxSize.y && bboxSize.z > bboxSize.x) longestAxis = 2;
+            if ( bboxSize.y > bboxSize.x ) longestAxis = 1;
+            if ( bboxSize.z > bboxSize.y && bboxSize.z > bboxSize.x ) longestAxis = 2;
 
             // Compute the center of the bounding volume along the longest axis
-            float center = (node->highest[longestAxis] + node->lowest[longestAxis]) / 2;
+            float center = ( node->highest[longestAxis] + node->lowest[longestAxis] ) / 2;
 
             // Map triangles to one of two bounding volumes based on the center
-            for ( const std::shared_ptr<TriangleFace> &t : node->triangleFaces )
+            for ( const std::shared_ptr<TriangleFace> &t: node->triangleFaces )
             {
                 if ( t->getCenter()[longestAxis] < center )
                     node->left->triangleFaces.push_back( t );
@@ -356,7 +368,7 @@ namespace util
             node->right->lowest = util::geometry::minVec(
                     util::geometry::extractPositions( node->right->triangleFaces ));
 
-            if (!node->triangleFaces.empty())
+            if ( !(node->triangleFaces.empty()))
             {
                 createChildren( node->left, depth + 1, maxDepth );
                 createChildren( node->right, depth + 1, maxDepth );
