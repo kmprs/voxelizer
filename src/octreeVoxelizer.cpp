@@ -42,25 +42,32 @@ void OctreeVoxelizer::buildOctree( OctreeNode* octreeNode, int depth, int maxDep
             octreeNode->position,
             octreeNode->edgeLength );
 
-    for ( const Triangle &voxelTriangle: voxelTriangles )
+    std::vector<glm::vec3> voxelPositions;
+    for ( const Triangle &triangle: voxelTriangles )
     {
-        std::vector<glm::vec3> trianglePositionsVoxel = { voxelTriangle.position0,
-                                                          voxelTriangle.position1,
-                                                          voxelTriangle.position2 };
-        glm::vec3 maxVec = util::geometry::maxVec( trianglePositionsVoxel );
-        glm::vec3 minVec = util::geometry::minVec( trianglePositionsVoxel );
-        for ( auto bvhNode: leaves )
+        voxelPositions.push_back( triangle.position0 );
+        voxelPositions.push_back( triangle.position1 );
+        voxelPositions.push_back( triangle.position2 );
+    }
+    glm::vec3 minVoxel = util::geometry::minVec( voxelPositions );
+    glm::vec3 maxVoxel = util::geometry::maxVec( voxelPositions );
+
+
+    for ( auto bvhNode: leaves )
+    {
+        if ( bvhNode->triangleFaces.empty()) continue;
+        if ( !util::geometry::doBoundingVolumesIntersect( minVoxel, maxVoxel,
+                                                          bvhNode->lowest,
+                                                          bvhNode->highest ))
+            continue;
+        for ( const Triangle &voxelTriangle: voxelTriangles )
         {
-            if ( bvhNode->triangleFaces.empty()) continue;
-            if ( !util::geometry::doBoundingVolumesIntersect( minVec, maxVec,
-                                                              bvhNode->lowest,
-                                                              bvhNode->highest ))
-                continue;
             for ( const std::shared_ptr<TriangleFace> &meshTriangleFace: bvhNode->triangleFaces )
             {
                 Triangle meshTriangle = meshTriangleFace->toTriangle();
                 counter++;
-                if ( doTrianglesIntersect( meshTriangle, voxelTriangle ))
+                if ( doTrianglesIntersect( meshTriangle, voxelTriangle )
+                     || isInsideBox( meshTriangle, minVoxel, maxVoxel ))
                 {
                     octreeNode->isAir = false;
                     if ( depth < maxDepth - 1 )
@@ -68,8 +75,7 @@ void OctreeVoxelizer::buildOctree( OctreeNode* octreeNode, int depth, int maxDep
                         octreeNode->createChildren();
                         for ( OctreeNode* child: octreeNode->children )
                         {
-                            buildOctree( child, depth + 1, maxDepth, leaves,
-                                         counter );
+                            buildOctree( child, depth + 1, maxDepth, leaves, counter );
                         }
                     }
                     return;
@@ -122,6 +128,24 @@ bool OctreeVoxelizer::doTrianglesIntersect( const Triangle &t0, const Triangle &
 
     return util::doIntervalsIntersect( interval0, interval1 );
 }
+
+
+bool OctreeVoxelizer::isInsideBox( const Triangle &triangle, const glm::vec3 &minAABB,
+                                   const glm::vec3 &maxAABB )
+{
+    // Lambda to check if a point is inside the AABB
+    auto isPointInside = [&]( const glm::vec3 &point ) -> bool {
+        return ( point.x >= minAABB.x && point.x <= maxAABB.x ) &&
+               ( point.y >= minAABB.y && point.y <= maxAABB.y ) &&
+               ( point.z >= minAABB.z && point.z <= maxAABB.z );
+    };
+
+    // Check if all vertices of the triangle are inside the AABB
+    return isPointInside( triangle.position0 ) &&
+           isPointInside( triangle.position1 ) &&
+           isPointInside( triangle.position2 );
+}
+
 
 float
 OctreeVoxelizer::computePlaneDistance( const glm::vec3 &normal,

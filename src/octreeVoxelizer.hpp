@@ -22,6 +22,7 @@ public:
 private:
     std::vector<std::shared_ptr<TriangleFace>> m_meshTriangles = {};
     static bool doTrianglesIntersect( const Triangle &t0, const Triangle &t1 );
+    static bool isInsideBox( const Triangle &triangle, const glm::vec3 &minAABB, const glm::vec3 &maxAABB);
     static float
     computePlaneDistance( const glm::vec3 &normal, const glm::vec3 &point,
                           float distance );

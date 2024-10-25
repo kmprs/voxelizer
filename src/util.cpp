@@ -102,31 +102,33 @@ namespace util
             return positions;
         }
 
-        glm::vec3 minVec( const std::vector<glm::vec3> &vectors )
-        {
-            float lowest = std::numeric_limits<float>::max();
-            glm::vec3 minVec( lowest, lowest, lowest );
+        glm::vec3 minVec(const std::vector<glm::vec3> &vectors) {
+            if (vectors.empty()) {
+                // Handle empty vector case, could return a default value or throw an error
+                return {0.0f, 0.0f, 0.0f}; // Example default value
+            }
 
-            for ( const glm::vec3 &vec: vectors )
-            {
-                if ( vec.x < minVec.x ) minVec.x = vec.x;
-                if ( vec.y < minVec.y ) minVec.y = vec.y;
-                if ( vec.z < minVec.z ) minVec.z = vec.z;
+            glm::vec3 minVec(std::numeric_limits<float>::max());
+            for (const glm::vec3 &vec : vectors) {
+                if (vec.x < minVec.x) minVec.x = vec.x;
+                if (vec.y < minVec.y) minVec.y = vec.y;
+                if (vec.z < minVec.z) minVec.z = vec.z;
             }
 
             return minVec;
         }
 
-        glm::vec3 maxVec( const std::vector<glm::vec3> &vectors )
-        {
-            float highest = std::numeric_limits<float>::min();
-            glm::vec3 maxVec( highest, highest, highest );
+        glm::vec3 maxVec(const std::vector<glm::vec3> &vectors) {
+            if (vectors.empty()) {
+                // Handle empty vector case, could return a default value or throw an error
+                return {0.0f, 0.0f, 0.0f}; // Example default value
+            }
 
-            for ( const glm::vec3 &vec: vectors )
-            {
-                if ( vec.x > maxVec.x ) maxVec.x = vec.x;
-                if ( vec.y > maxVec.y ) maxVec.y = vec.y;
-                if ( vec.z > maxVec.z ) maxVec.z = vec.z;
+            glm::vec3 maxVec(std::numeric_limits<float>::lowest()); // Changed to lowest()
+            for (const glm::vec3 &vec : vectors) {
+                if (vec.x > maxVec.x) maxVec.x = vec.x;
+                if (vec.y > maxVec.y) maxVec.y = vec.y;
+                if (vec.z > maxVec.z) maxVec.z = vec.z;
             }
 
             return maxVec;
