@@ -2,7 +2,7 @@
 
 
 DataHandler::DataHandler() :
-        m_voxelColor( { .5f, .7f, .4f } ), m_windowWidth( 1280 ), m_windowHeight( 780 ),
+        m_voxelColor( { .5f, .7f, .4f } ), m_worldCenter({0, 0, 0}), m_windowWidth( 1280 ), m_windowHeight( 780 ),
         m_cameraSpeed( 5.f ), m_rotationSpeed( 120.f ){}
 
 
@@ -54,4 +54,15 @@ float DataHandler::getRotationSpeed() const
 void DataHandler::setRotationSpeed( float speed )
 {
     if ( speed > 0 && speed <= ROTATION_SPEED_LIMIT ) m_rotationSpeed = speed;
+}
+
+glm::vec3 DataHandler::getWorldCenter() const
+{
+    return m_worldCenter;
+}
+
+void DataHandler::setWorldCenter( const glm::vec3 &center )
+{
+    // TODO: calculate centroid of triangle mesh
+    m_worldCenter = center;
 }

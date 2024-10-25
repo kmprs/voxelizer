@@ -1,6 +1,9 @@
 #include "octreeVoxelizer.hpp"
 
 
+extern std::shared_ptr<DataHandler> dataHandler;
+
+
 std::vector<Voxel> OctreeVoxelizer::run(
         const std::vector<std::shared_ptr<TriangleFace>> &triangleFaces )
 {
@@ -9,7 +12,7 @@ std::vector<Voxel> OctreeVoxelizer::run(
         m_meshTriangles.push_back( t );
     }
 
-    auto octree = new OctreeNode{ nullptr, 2, WORLD_CENTER };
+    auto octree = new OctreeNode{ nullptr, 2, dataHandler->getWorldCenter() };
     auto bvh = new BVHNode{ nullptr };
 
     bvh->triangleFaces = m_meshTriangles;

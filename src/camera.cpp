@@ -49,6 +49,6 @@ void Camera::update( Direction direction, float deltaTime )
         else if ( direction == LEFT )
             m_position = glm::rotate( m_position, glm::radians( -cameraRotationSpeed ),
                                       YAW_AXIS );
-        m_direction = glm::normalize( WORLD_CENTER - m_position );
+        m_direction = glm::normalize( dataHandler->getWorldCenter() - m_position );
     }
 }

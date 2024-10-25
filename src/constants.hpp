@@ -4,7 +4,7 @@
 #include <glm/glm.hpp>
 
 // MODEL
-const std::string MODEL_PATH = "../binaries/plant.obj";
+const std::string MODEL_PATH = "../binaries/dragon.obj";
 
 // WINDOW
 constexpr glm::vec3 BACKGROUND_COLOR = { .2f, .2f, .2f };
@@ -22,7 +22,6 @@ constexpr glm::vec3 YAW_AXIS = {0, 1, 0};
 constexpr glm::vec3 PITCH_AXIS = {1, 0, 0};
 
 // WORLD
-constexpr glm::vec3 WORLD_CENTER = {.0f, .0f, .0f};
 constexpr float AMBIENT_STRENGTH = .6f;
 constexpr glm::vec3 LIGHT_POSITION = {-1.f, 3.f, -2.f};
 constexpr glm::vec3 LIGHT_COLOR = {1.f, 1.f, 1.f};
@@ -30,5 +29,5 @@ constexpr glm::vec3 LIGHT_COLOR = {1.f, 1.f, 1.f};
 constexpr int VOXEL_MEMORY_SIZE = 24;
 
 // VOXELIZER
-constexpr int RESOLUTION_LEVEL = 7;
+constexpr int RESOLUTION_LEVEL = 6;
 constexpr int BVH_DEPTH = 10;

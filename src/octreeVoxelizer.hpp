@@ -5,6 +5,7 @@
 #include "util.hpp"
 #include "constants.hpp"
 #include "voxelizer.hpp"
+#include "dataHandler.hpp"
 
 
 class OctreeVoxelizer : public Voxelizer

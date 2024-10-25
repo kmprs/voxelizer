@@ -132,25 +132,13 @@ namespace util
             return maxVec;
         }
 
-        bool doBoundingVolumesIntersect(const glm::vec3& min1, const glm::vec3& max1,
-                                        const glm::vec3& min2, const glm::vec3& max2)
+        bool doBoundingVolumesIntersect( const glm::vec3 &min1, const glm::vec3 &max1,
+                                         const glm::vec3 &min2, const glm::vec3 &max2 )
         {
             // Check for general overlap in all dimensions
-            bool overlap = (min1.x <= max2.x && max1.x >= min2.x) &&
-                           (min1.y <= max2.y && max1.y >= min2.y) &&
-                           (min1.z <= max2.z && max1.z >= min2.z);
-
-            // Check for full containment (box1 inside box2 or vice versa)
-            bool box1InsideBox2 = (min1.x >= min2.x && max1.x <= max2.x) &&
-                                  (min1.y >= min2.y && max1.y <= max2.y) &&
-                                  (min1.z >= min2.z && max1.z <= max2.z);
-
-            bool box2InsideBox1 = (min2.x >= min1.x && max2.x <= max1.x) &&
-                                  (min2.y >= min1.y && max2.y <= max1.y) &&
-                                  (min2.z >= min1.z && max2.z <= max1.z);
-
-            // Return true if there is either overlap or containment
-            return overlap || box1InsideBox2 || box2InsideBox1;
+            return ( min1.x <= max2.x && max1.x >= min2.x ) &&
+                   ( min1.y <= max2.y && max1.y >= min2.y ) &&
+                   ( min1.z <= max2.z && max1.z >= min2.z );
         }
     }
 
@@ -357,6 +345,8 @@ namespace util
                 else
                     node->right->triangleFaces.push_back( t );
             }
+            if ( node->left->triangleFaces.empty() || node->left->triangleFaces.empty())
+                return;
 
             // define min/max vectors for child nodes
             node->left->highest = util::geometry::maxVec(
@@ -368,11 +358,9 @@ namespace util
             node->right->lowest = util::geometry::minVec(
                     util::geometry::extractPositions( node->right->triangleFaces ));
 
-            if ( !(node->triangleFaces.empty()))
-            {
-                createChildren( node->left, depth + 1, maxDepth );
-                createChildren( node->right, depth + 1, maxDepth );
-            }
+            createChildren( node->left, depth + 1, maxDepth );
+            createChildren( node->right, depth + 1, maxDepth );
+
         }
     }
 
