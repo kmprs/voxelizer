@@ -155,6 +155,7 @@ OctreeVoxelizer::computePlaneDistance( const glm::vec3 &normal,
     return glm::dot( normal, point ) + distance;
 }
 
+
 std::array<float, 2>
 OctreeVoxelizer::computeTriangleLineInterval( const Triangle &triangle,
                                               const glm::vec3 &intersectionDirection,
@@ -194,6 +195,7 @@ OctreeVoxelizer::computeTriangleLineInterval( const Triangle &triangle,
     return interval;
 }
 
+
 float OctreeVoxelizer::projectOntoAxis( const glm::vec3 &distance,
                                         const glm::vec3 &trianglePoint )
 {
@@ -203,4 +205,3 @@ float OctreeVoxelizer::projectOntoAxis( const glm::vec3 &distance,
     else if ( abs( distance.y ) == maxDistance )return trianglePoint.y;
     return trianglePoint.z;
 }
-

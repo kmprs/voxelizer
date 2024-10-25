@@ -63,6 +63,5 @@ glm::vec3 DataHandler::getWorldCenter() const
 
 void DataHandler::setWorldCenter( const glm::vec3 &center )
 {
-    // TODO: calculate centroid of triangle mesh
     m_worldCenter = center;
 }

@@ -19,6 +19,8 @@ public:
     glm::vec3 getPosition();
     glm::vec3 getDirection();
 
+    // TODO: rotate around the centroid of the model!
+
 
 private:
     glm::vec3 m_position = {};
