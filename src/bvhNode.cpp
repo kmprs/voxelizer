@@ -7,7 +7,13 @@ void BVHNode::getLeaves( std::vector<BVHNode*> &leaves )
         leaves.push_back( this );
     } else
     {
-        left->getLeaves( leaves );
-        right->getLeaves( leaves );
+        if (left != nullptr)
+        {
+            left->getLeaves(leaves);
+        }
+        if (right != nullptr)
+        {
+            right->getLeaves(leaves);
+        }
     }
 }

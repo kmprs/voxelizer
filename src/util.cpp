@@ -103,9 +103,9 @@ namespace util
         }
 
         glm::vec3 minVec(const std::vector<glm::vec3> &vectors) {
+            // handle empty vector case
             if (vectors.empty()) {
-                // Handle empty vector case, could return a default value or throw an error
-                return {0.0f, 0.0f, 0.0f}; // Example default value
+                return {-1.0f, -1.0f, -1.0f};
             }
 
             glm::vec3 minVec(std::numeric_limits<float>::max());
@@ -120,11 +120,11 @@ namespace util
 
         glm::vec3 maxVec(const std::vector<glm::vec3> &vectors) {
             if (vectors.empty()) {
-                // Handle empty vector case, could return a default value or throw an error
-                return {0.0f, 0.0f, 0.0f}; // Example default value
+                // Handle empty vector case
+                return {1.0f, 1.0f, 1.0f};
             }
 
-            glm::vec3 maxVec(std::numeric_limits<float>::lowest()); // Changed to lowest()
+            glm::vec3 maxVec(std::numeric_limits<float>::lowest());
             for (const glm::vec3 &vec : vectors) {
                 if (vec.x > maxVec.x) maxVec.x = vec.x;
                 if (vec.y > maxVec.y) maxVec.y = vec.y;
@@ -323,7 +323,8 @@ namespace util
     {
         void createChildren( BVHNode* node, int depth, int maxDepth )
         {
-            if ( depth >= maxDepth ) return;
+            if (depth >= maxDepth || node->triangleFaces.size() <= 1)
+                return;
 
             // initialization of child nodes
             node->left = new BVHNode( node );
@@ -347,8 +348,15 @@ namespace util
                 else
                     node->right->triangleFaces.push_back( t );
             }
-            if ( node->left->triangleFaces.empty() || node->left->triangleFaces.empty())
+
+            if ( node->left->triangleFaces.empty() || node->right->triangleFaces.empty())
+            {
+                delete node->left;
+                delete node->right;
+                node->left = nullptr;
+                node->right = nullptr;
                 return;
+            }
 
             // define min/max vectors for child nodes
             node->left->highest = util::geometry::maxVec(

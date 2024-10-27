@@ -66,8 +66,8 @@ void OctreeVoxelizer::buildOctree( OctreeNode* octreeNode, int depth, int maxDep
             {
                 Triangle meshTriangle = meshTriangleFace->toTriangle();
                 counter++;
-                if ( doTrianglesIntersect( meshTriangle, voxelTriangle )
-                     || isInsideBox( meshTriangle, minVoxel, maxVoxel ))
+                if ( doTrianglesIntersect( meshTriangle, voxelTriangle ))
+//                     || isInsideBox( meshTriangle, minVoxel, maxVoxel ))
                 {
                     octreeNode->isAir = false;
                     if ( depth < maxDepth - 1 )
@@ -90,7 +90,6 @@ bool OctreeVoxelizer::doTrianglesIntersect( const Triangle &t0, const Triangle &
 {
     // this method is based on the algorithm presented by Thomas Moeller
     // test if triangles are on the same side of the plane build by the other triangle
-    // if yes, both triangles do not intersect
 
     glm::vec3 normalT1 = glm::cross( t1.position1 - t1.position0,
                                      t1.position2 - t1.position0 );
@@ -118,6 +117,7 @@ bool OctreeVoxelizer::doTrianglesIntersect( const Triangle &t0, const Triangle &
         return false;
 
     glm::vec3 intersectionDirection = glm::cross( normalT0, normalT1 );
+
     // finding the triangle point which is on the other side of the plane
     std::array<float, 2> interval0 = computeTriangleLineInterval( t0,
                                                                   intersectionDirection,
