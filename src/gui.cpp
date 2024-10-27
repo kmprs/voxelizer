@@ -64,7 +64,9 @@ void GUI::createFrame( float width, float height, int x, int y )
     ImGui::SetNextWindowSize(
             ImVec2( static_cast<float>(dataHandler->getWindowWidth()) - 2 * width, performanceHeight ));
     ImGui::Begin( "Performance stats", nullptr, window_flags | ImGuiWindowFlags_NoBackground );
-    ImGui::Text("FPS: %d", dataHandler->getCurrentFPS());
+
+    ImGui::SameLine();
+    ImGui::Text("Number of voxels: %d", dataHandler->getNumberOfVoxels());
     ImGui::End();
 }
 

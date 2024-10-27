@@ -75,3 +75,13 @@ void DataHandler::setCurrentFPS( int fps )
 {
     if ( fps >= 0 ) m_currentFPS = fps;
 }
+
+int DataHandler::getNumberOfVoxels() const
+{
+    return m_numberOfVoxels;
+}
+
+void DataHandler::setNumberOfVoxels( int numberOfVoxels )
+{
+    if ( numberOfVoxels >= 0 ) m_numberOfVoxels = numberOfVoxels;
+}
