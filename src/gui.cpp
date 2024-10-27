@@ -22,7 +22,7 @@ void GUI::createFrame( float width, float height, int x, int y )
 
     ImGuiWindowFlags window_flags =
             ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse |
-            ImGuiWindowFlags_NoResize;
+            ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
     ImGui::Begin( "Left GUI", nullptr, window_flags );
 
     glm::vec3 voxelColor = dataHandler->getVoxelColor();
@@ -55,9 +55,16 @@ void GUI::createFrame( float width, float height, int x, int y )
                     static_cast<float>(y)));
     ImGui::SetNextWindowSize( ImVec2( width, height ));
     ImGui::Begin( "Right GUI", nullptr, window_flags );
+    ImGui::End();
 
-    // Right window content (you can add your own content here)
-
+    // bottom bar for performance data
+    float performanceHeight = 30.f;
+    ImGui::SetNextWindowPos(
+            ImVec2( width, static_cast<float>(dataHandler->getWindowHeight()) - performanceHeight ));
+    ImGui::SetNextWindowSize(
+            ImVec2( static_cast<float>(dataHandler->getWindowWidth()) - 2 * width, performanceHeight ));
+    ImGui::Begin( "Performance stats", nullptr, window_flags | ImGuiWindowFlags_NoBackground );
+    ImGui::Text("FPS: %d", dataHandler->getCurrentFPS());
     ImGui::End();
 }
 

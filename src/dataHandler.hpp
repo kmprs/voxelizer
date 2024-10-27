@@ -19,6 +19,8 @@ public:
     void setWindowWidth(int width);
     [[nodiscard]] int getWindowHeight() const;
     void setWindowHeight(int height);
+    [[nodiscard]] int getCurrentFPS() const;
+    void setCurrentFPS(int fps);
     [[nodiscard]] float getCameraSpeed() const;
     void setCameraSpeed(float speed);
     [[nodiscard]] float getRotationSpeed() const;
@@ -29,6 +31,7 @@ private:
     glm::vec3 m_worldCenter = {};
     int m_windowWidth = -1;
     int m_windowHeight = -1;
+    int m_currentFPS = -1;
     float m_cameraSpeed = -1.f;
     float m_rotationSpeed = -1.f;
 };

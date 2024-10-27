@@ -65,3 +65,13 @@ void DataHandler::setWorldCenter( const glm::vec3 &center )
 {
     m_worldCenter = center;
 }
+
+int DataHandler::getCurrentFPS() const
+{
+    return m_currentFPS;
+}
+
+void DataHandler::setCurrentFPS( int fps )
+{
+    if ( fps >= 0 ) m_currentFPS = fps;
+}

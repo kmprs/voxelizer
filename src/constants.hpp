@@ -4,7 +4,7 @@
 #include <glm/glm.hpp>
 
 // MODEL
-const std::string MODEL_PATH = "../binaries/astronaut.obj";
+const std::string MODEL_PATH = "../binaries/plant.obj";
 
 // WINDOW
 constexpr glm::vec3 BACKGROUND_COLOR = { .2f, .2f, .2f };

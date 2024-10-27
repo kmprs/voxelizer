@@ -72,6 +72,7 @@ void Program::run()
         frameCount++;
         if ( currentCounter - fpsTimer >= performanceFrequency )
         {
+            dataHandler->setCurrentFPS( frameCount );
             std::clog << "\rcurrent FPS: " << frameCount << ' ' << std::flush;
             frameCount = 0;
             fpsTimer = SDL_GetPerformanceCounter();
