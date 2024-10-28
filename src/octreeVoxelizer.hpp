@@ -14,13 +14,12 @@ public:
     OctreeVoxelizer() = default;
 
     std::vector<Voxel>
-    run( const std::vector<std::shared_ptr<TriangleFace>> &triangleFaces ) override;
+    run( const std::vector<std::shared_ptr<TriangleFace>> &triangleFaces, int resolution ) override;
     void
     buildOctree( OctreeNode* octreeNode, int depth, int maxDepth,
                  std::vector<BVHNode*> &leaves, long &counter );
 
 private:
-    std::vector<std::shared_ptr<TriangleFace>> m_meshTriangles = {};
     static bool doTrianglesIntersect( const Triangle &t0, const Triangle &t1 );
     static bool isInsideBox( const Triangle &triangle, const glm::vec3 &minAABB, const glm::vec3 &maxAABB);
     static float

@@ -2,7 +2,7 @@
 
 
 std::vector<Voxel> BresenhamVoxelizer::run(
-        const std::vector<std::shared_ptr<TriangleFace>> &triangleFaces )
+        const std::vector<std::shared_ptr<TriangleFace>> &triangleFaces, int resolution )
 {
     std::set<Voxel> voxelSet;
 
@@ -28,7 +28,7 @@ std::vector<Voxel> BresenhamVoxelizer::run(
 void BresenhamVoxelizer::createLineVoxels( const glm::vec3 &start, const glm::vec3 &end,
                                            std::set<Voxel> &voxels )
 {
-    const float edgeLength = 1.f / RESOLUTION_LEVEL;
+    const float edgeLength = 1.f / INIT_RESOLUTION;
 
     glm::vec3 startQuantized = quantizeToVoxelCenter( start, edgeLength );
     glm::vec3 endQuantized = quantizeToVoxelCenter( end, edgeLength );

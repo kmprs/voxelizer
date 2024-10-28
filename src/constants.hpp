@@ -4,7 +4,7 @@
 #include <glm/glm.hpp>
 
 // MODEL
-const std::string MODEL_PATH = "../binaries/bunny.obj";
+const std::string MODEL_PATH = "../binaries/teapot.obj";
 
 // WINDOW
 constexpr glm::vec3 BACKGROUND_COLOR = { .2f, .2f, .2f };
@@ -29,5 +29,6 @@ constexpr glm::vec3 LIGHT_COLOR = {1.f, 1.f, 1.f};
 constexpr int VOXEL_MEMORY_SIZE = 24;
 
 // VOXELIZER
-constexpr int RESOLUTION_LEVEL = 9;
+constexpr int INIT_RESOLUTION = 8;
+constexpr int MAX_RESOLUTION = 10;
 constexpr int BVH_DEPTH = 10;

@@ -40,11 +40,10 @@ void GUI::createFrame( float width, float height, int x, int y )
 
     // VOXEL RESOlUTION
     ImGui::Text( "Voxel Resolution" );
-    // int resolution = dataHandler->getVoxelResolution;
-    int resolution = dataHandler->getWorldCenter().x + 3;
+    int resolution = dataHandler->getVoxelResolution();
     ImGui::PushItemWidth(buttonWidth);
     ImGui::SliderInt( "", &resolution, 1, 10 );
-    // dataHandler->setVoxelResolution(resolution)
+    dataHandler->setVoxelResolution( resolution );
     ImGui::Spacing();
 
     glm::vec3 voxelColor = dataHandler->getVoxelColor();

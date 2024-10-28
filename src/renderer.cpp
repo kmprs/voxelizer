@@ -1,19 +1,17 @@
 #include "renderer.hpp"
-#include "meshDataHandler.hpp"
 
 extern unsigned int programID;
 
 extern std::shared_ptr<DataHandler> dataHandler;
 
-Renderer::Renderer()
+Renderer::Renderer() : m_currentResolution( dataHandler->getVoxelResolution() )
 {
-    std::unique_ptr<MeshDataHandler> meshDataHandler = std::make_unique<MeshDataHandler>(
-            MODEL_PATH, OBJ );
+    m_meshDataHandler = std::make_unique<MeshDataHandler>( MODEL_PATH, OBJ );
 
-    std::vector<std::shared_ptr<TriangleFace>> triangleFaces = meshDataHandler->getTriangleFaces();
+    std::vector<std::shared_ptr<TriangleFace>> triangleFaces = m_meshDataHandler->getTriangleFaces();
     m_meshTriangle = Mesh( { triangleFaces.begin(), triangleFaces.end() } );
 
-    std::vector<std::shared_ptr<Voxel>> voxels = meshDataHandler->getVoxels();
+    std::vector<std::shared_ptr<Voxel>> voxels = m_meshDataHandler->getVoxels();
     m_meshVoxel = Mesh( { voxels.begin(), voxels.end() } );
 
 
@@ -34,6 +32,15 @@ void Renderer::render()
 {
     glClearColor( BACKGROUND_COLOR.x, BACKGROUND_COLOR.y, BACKGROUND_COLOR.z, 1.f );
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+
+    // if resolution has changed the mesh must be updated
+    if ( m_currentResolution != dataHandler->getVoxelResolution() )
+    {
+        m_currentResolution = dataHandler->getVoxelResolution();
+        m_meshDataHandler->update();
+        std::vector<std::shared_ptr<Voxel>> voxels = m_meshDataHandler->getVoxels();
+        m_meshVoxel = Mesh( { voxels.begin(), voxels.end() } );
+    }
 
     if ( dataHandler->getModelRepresentation() == VOXEL ) m_meshVoxel.draw();
     else m_meshTriangle.draw();

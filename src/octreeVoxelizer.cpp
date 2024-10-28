@@ -5,23 +5,24 @@ extern std::shared_ptr<DataHandler> dataHandler;
 
 
 std::vector<Voxel> OctreeVoxelizer::run(
-        const std::vector<std::shared_ptr<TriangleFace>> &triangleFaces )
+        const std::vector<std::shared_ptr<TriangleFace>> &triangleFaces, int resolution
+        )
 {
-    for ( const std::shared_ptr<TriangleFace> &t: triangleFaces )
-    {
-        m_meshTriangles.push_back( t );
-    }
-
+//    m_meshTriangles.clear();
+//    for ( const std::shared_ptr<TriangleFace> &t: triangleFaces )
+//    {
+//        m_meshTriangles.push_back( t );
+//    }
     auto octree = new OctreeNode{ nullptr, 2, dataHandler->getWorldCenter() };
     auto bvh = new BVHNode{ nullptr };
 
-    bvh->triangleFaces = m_meshTriangles;
+    bvh->triangleFaces = triangleFaces;
     util::bvh::createChildren( bvh, 0, BVH_DEPTH );
     std::vector<BVHNode*> bvhLeaves;
     bvh->getLeaves( bvhLeaves );
     // DEBUG
     long counter = 0;
-    buildOctree( octree, 0, RESOLUTION_LEVEL, bvhLeaves, counter );
+    buildOctree( octree, 0, resolution, bvhLeaves, counter );
     std::cout << "Number of leaves in bvh node: " << bvhLeaves.size() << std::endl;
     std::cout << "Triangle Intersection Test Counter: " << counter << std::endl;
 
@@ -66,8 +67,8 @@ void OctreeVoxelizer::buildOctree( OctreeNode* octreeNode, int depth, int maxDep
             {
                 Triangle meshTriangle = meshTriangleFace->toTriangle();
                 counter++;
-                if ( doTrianglesIntersect( meshTriangle, voxelTriangle ))
-//                     || isInsideBox( meshTriangle, minVoxel, maxVoxel ))
+                if ( doTrianglesIntersect( meshTriangle, voxelTriangle )
+                     || isInsideBox( meshTriangle, minVoxel, maxVoxel ))
                 {
                     octreeNode->isAir = false;
                     if ( depth < maxDepth - 1 )

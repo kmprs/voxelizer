@@ -12,7 +12,8 @@ class BresenhamVoxelizer : public Voxelizer
 public:
     BresenhamVoxelizer() = default;
     std::vector<Voxel>
-    run( const std::vector<std::shared_ptr<TriangleFace>> &triangleFaces ) override;
+    run( const std::vector<std::shared_ptr<TriangleFace>> &triangleFaces,
+         int resolution ) override;
 
 private:
 

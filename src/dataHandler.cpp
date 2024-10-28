@@ -2,8 +2,11 @@
 
 
 DataHandler::DataHandler() :
-        m_voxelColor( { .5f, .7f, .4f } ), m_worldCenter({0, 0, 0}), m_windowWidth( 1280 ), m_windowHeight( 780 ),
-        m_cameraSpeed( 5.f ), m_rotationSpeed( 120.f ), m_modelRepresentation{ VOXEL }{}
+        m_voxelColor( { .5f, .7f, .4f } ), m_worldCenter( { 0, 0, 0 } ),
+        m_windowWidth( 1280 ), m_windowHeight( 780 ),
+        m_cameraSpeed( 5.f ), m_rotationSpeed( 120.f ), m_modelRepresentation{ VOXEL },
+        m_voxelResolution( INIT_RESOLUTION )
+{}
 
 
 glm::vec3 DataHandler::getVoxelColor() const
@@ -96,4 +99,14 @@ void DataHandler::toggleModelRepresentation()
     if ( m_modelRepresentation == VOXEL ) m_modelRepresentation = TRIANGLE;
     else m_modelRepresentation = VOXEL;
 
+}
+
+int DataHandler::getVoxelResolution() const
+{
+    return m_voxelResolution;
+}
+
+void DataHandler::setVoxelResolution( int resolution )
+{
+    if ( resolution >= 1 && resolution <= MAX_RESOLUTION ) m_voxelResolution = resolution;
 }

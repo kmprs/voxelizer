@@ -24,6 +24,8 @@ public:
     void setCurrentFPS(int fps);
     [[nodiscard]] int getNumberOfVoxels() const;
     void setNumberOfVoxels(int numberOfVoxels);
+    [[nodiscard]] int getVoxelResolution() const;
+    void setVoxelResolution( int resolution);
     [[nodiscard]] float getCameraSpeed() const;
     void setCameraSpeed(float speed);
     [[nodiscard]] float getRotationSpeed() const;
@@ -38,6 +40,7 @@ private:
     int m_windowHeight = -1;
     int m_currentFPS = -1;
     int m_numberOfVoxels = -1;
+    int m_voxelResolution = -1;
     float m_cameraSpeed = -1.f;
     float m_rotationSpeed = -1.f;
     Representation m_modelRepresentation = VOXEL;
