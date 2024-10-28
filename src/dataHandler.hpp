@@ -29,7 +29,6 @@ public:
     [[nodiscard]] float getRotationSpeed() const;
     void setRotationSpeed(float speed);
     [[nodiscard]] Representation getModelRepresentation() const;
-    void setModelRepresentation( Representation representation );
     void toggleModelRepresentation();
 
 private:

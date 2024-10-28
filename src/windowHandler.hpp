@@ -21,11 +21,13 @@ public:
     void makeCurrent();
     void updateWindowSize();
     void loadGUIFrame() const;
+    void toggleFullscreen();
 
 
 private:
-    int m_width;
-    int m_height;
+    int m_width = -1;
+    int m_height = -1;
+    bool m_isFullscreen = false;
     bool m_closed = false;
     SDL_Window *m_window = nullptr;
     SDL_GLContext m_context = nullptr;

@@ -91,11 +91,6 @@ Representation DataHandler::getModelRepresentation() const
     return m_modelRepresentation;
 }
 
-void DataHandler::setModelRepresentation( Representation representation )
-{
-    m_modelRepresentation = representation;
-}
-
 void DataHandler::toggleModelRepresentation()
 {
     if ( m_modelRepresentation == VOXEL ) m_modelRepresentation = TRIANGLE;

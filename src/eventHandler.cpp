@@ -10,6 +10,9 @@ void EventHandler::processInput( SDL_Event &event, WindowHandler &windowHandler,
             case SDLK_ESCAPE:
                 windowHandler.close();
                 break;
+            case SDLK_f:
+                windowHandler.toggleFullscreen();
+                break;
             case SDLK_LEFT:
                 cameraDirection = LEFT;
                 break;

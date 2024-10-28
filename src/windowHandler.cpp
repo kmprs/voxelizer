@@ -99,5 +99,12 @@ void WindowHandler::loadGUIFrame() const
                           0, 0 );
 }
 
+void WindowHandler::toggleFullscreen()
+{
+    if ( m_isFullscreen ) SDL_SetWindowFullscreen( m_window, 0 );
+    else SDL_SetWindowFullscreen( m_window, SDL_WINDOW_FULLSCREEN );
+    m_isFullscreen = !m_isFullscreen;
+}
+
 
 
