@@ -34,7 +34,10 @@ void Renderer::render()
 {
     glClearColor( BACKGROUND_COLOR.x, BACKGROUND_COLOR.y, BACKGROUND_COLOR.z, 1.f );
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
-    m_meshVoxel.draw();
+
+    if ( dataHandler->getModelRepresentation() == VOXEL ) m_meshVoxel.draw();
+    else m_meshTriangle.draw();
+
 }
 
 
