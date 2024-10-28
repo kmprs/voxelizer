@@ -116,3 +116,9 @@ enum FileFormat
 };
 
 
+enum Representation
+{
+    VOXEL,
+    TRIANGLE
+};
+

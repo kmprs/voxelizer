@@ -3,7 +3,7 @@
 
 DataHandler::DataHandler() :
         m_voxelColor( { .5f, .7f, .4f } ), m_worldCenter({0, 0, 0}), m_windowWidth( 1280 ), m_windowHeight( 780 ),
-        m_cameraSpeed( 5.f ), m_rotationSpeed( 120.f ){}
+        m_cameraSpeed( 5.f ), m_rotationSpeed( 120.f ), m_modelRepresentation{ VOXEL }{}
 
 
 glm::vec3 DataHandler::getVoxelColor() const
@@ -84,4 +84,21 @@ int DataHandler::getNumberOfVoxels() const
 void DataHandler::setNumberOfVoxels( int numberOfVoxels )
 {
     if ( numberOfVoxels >= 0 ) m_numberOfVoxels = numberOfVoxels;
+}
+
+Representation DataHandler::getModelRepresentation() const
+{
+    return m_modelRepresentation;
+}
+
+void DataHandler::setModelRepresentation( Representation representation )
+{
+    m_modelRepresentation = representation;
+}
+
+void DataHandler::toggleModelRepresentation()
+{
+    if ( m_modelRepresentation == VOXEL ) m_modelRepresentation = TRIANGLE;
+    else m_modelRepresentation = VOXEL;
+
 }

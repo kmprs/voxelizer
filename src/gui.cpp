@@ -17,13 +17,25 @@ void GUI::createFrame( float width, float height, int x, int y )
     ImGui_ImplSDL2_NewFrame();
     ImGui_ImplOpenGL3_NewFrame();
     ImGui::NewFrame();
-    ImGui::SetNextWindowPos( ImVec2( static_cast<float>(x), static_cast<float>(y)));
-    ImGui::SetNextWindowSize( ImVec2( width, height ));
-
     ImGuiWindowFlags window_flags =
             ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse |
             ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
+
+    // LEFT FRAME
+    ImGui::SetNextWindowPos( ImVec2( static_cast<float>(x), static_cast<float>(y)));
+    ImGui::SetNextWindowSize( ImVec2( width, height ));
+
     ImGui::Begin( "Left GUI", nullptr, window_flags );
+    // toggle between triangle and voxel representation
+    const char* currentRepresentation = ( dataHandler->getModelRepresentation() == VOXEL )
+                                        ? "Voxel" : "Triangle";
+    float buttonWidth = width - 20.f;
+    ImGui::Text( "Triangle/Voxel" );
+    if ( ImGui::Button( currentRepresentation, ImVec2( buttonWidth, 0 )))
+    {
+        dataHandler->toggleModelRepresentation();
+    }
+    ImGui::Spacing();
 
     glm::vec3 voxelColor = dataHandler->getVoxelColor();
     float rgb[3] = { voxelColor.x, voxelColor.y, voxelColor.z };
@@ -31,7 +43,6 @@ void GUI::createFrame( float width, float height, int x, int y )
     ImGui::ColorPicker3( "##hiddenLabel", rgb );
     ImGui::Spacing();
     dataHandler->setVoxelColor( { rgb[0], rgb[1], rgb[2] } );
-
 
     // camera and rotation speeds
     float speed = dataHandler->getCameraSpeed();
@@ -49,7 +60,7 @@ void GUI::createFrame( float width, float height, int x, int y )
     ImGui::End();
 
 
-    // left frame
+    // RIGHT FRAME
     ImGui::SetNextWindowPos(
             ImVec2( static_cast<float>(dataHandler->getWindowWidth()) - width,
                     static_cast<float>(y)));
@@ -60,13 +71,16 @@ void GUI::createFrame( float width, float height, int x, int y )
     // bottom bar for performance data
     float performanceHeight = 30.f;
     ImGui::SetNextWindowPos(
-            ImVec2( width, static_cast<float>(dataHandler->getWindowHeight()) - performanceHeight ));
+            ImVec2( width, static_cast<float>(dataHandler->getWindowHeight()) -
+                           performanceHeight ));
     ImGui::SetNextWindowSize(
-            ImVec2( static_cast<float>(dataHandler->getWindowWidth()) - 2 * width, performanceHeight ));
-    ImGui::Begin( "Performance stats", nullptr, window_flags | ImGuiWindowFlags_NoBackground );
-
+            ImVec2( static_cast<float>(dataHandler->getWindowWidth()) - 2 * width,
+                    performanceHeight ));
+    ImGui::Begin( "Performance stats", nullptr,
+                  window_flags | ImGuiWindowFlags_NoBackground );
+    ImGui::Text( "%d FPS", dataHandler->getCurrentFPS());
     ImGui::SameLine();
-    ImGui::Text("Number of voxels: %d", dataHandler->getNumberOfVoxels());
+    ImGui::Text( "%d voxels", dataHandler->getNumberOfVoxels());
     ImGui::End();
 }
 

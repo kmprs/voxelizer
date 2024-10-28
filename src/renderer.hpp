@@ -15,6 +15,6 @@ public:
     void render();
 
 private:
-    Mesh m_mesh = { std::vector<std::shared_ptr<Renderable>>() };
-    std::vector<std::shared_ptr<Renderable>> m_renderables = {};
+    Mesh m_meshVoxel = {};
+    Mesh m_meshTriangle = {};
 };

@@ -3,6 +3,7 @@
 
 #include <glm/vec3.hpp>
 #include "constants.hpp"
+#include "types.hpp"
 
 
 class DataHandler
@@ -27,6 +28,9 @@ public:
     void setCameraSpeed(float speed);
     [[nodiscard]] float getRotationSpeed() const;
     void setRotationSpeed(float speed);
+    [[nodiscard]] Representation getModelRepresentation() const;
+    void setModelRepresentation( Representation representation );
+    void toggleModelRepresentation();
 
 private:
     glm::vec3 m_voxelColor = {};
@@ -37,4 +41,5 @@ private:
     int m_numberOfVoxels = -1;
     float m_cameraSpeed = -1.f;
     float m_rotationSpeed = -1.f;
+    Representation m_modelRepresentation = VOXEL;
 };
