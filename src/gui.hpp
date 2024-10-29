@@ -12,11 +12,10 @@
 class GUI
 {
 public:
-    GUI( SDL_Window* window, SDL_GLContext glContext );
-    GUI() = default;
+    GUI();
     static void createFrame( float width, float height, int x, int y );
+    static void setStyles();
+
 
 private:
-    SDL_Window* m_window;
-    SDL_GLContext m_context;
 };

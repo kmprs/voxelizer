@@ -49,6 +49,7 @@ WindowHandler::WindowHandler( const std::string &title, int width, int height )
     ImGui_ImplOpenGL3_Init( "#version 330" );
 
     ImGui::StyleColorsDark();
+    GUI::setStyles();
 }
 
 WindowHandler::~WindowHandler()
