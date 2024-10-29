@@ -41,6 +41,7 @@ void Camera::update( Direction direction, float deltaTime )
     } else if ( dataHandler->isCameraModeToggled() )
     {
         m_direction = worldCenter - m_position;
+        dataHandler->resetCameraModeToggled();
     }
 
     float cameraRotationSpeed = dataHandler->getRotationSpeed() * deltaTime;
@@ -121,8 +122,8 @@ void Camera::mouseCallback( float currentX, float currentY, float deltaTime )
 
     m_lastX = currentX;
     m_lastY = currentY;
-    xOffset *= static_cast<float>( MOUSE_SENSITIVITY ) * ( float ) deltaTime;
-    yOffset *= static_cast<float>( MOUSE_SENSITIVITY ) * ( float ) deltaTime;
+    xOffset *= static_cast<float>( MOUSE_SENSITIVITY/ static_cast<float>(dataHandler->getVoxelResolution()) ) * ( float ) deltaTime;
+    yOffset *= static_cast<float>( MOUSE_SENSITIVITY/ static_cast<float>(dataHandler->getVoxelResolution()) ) * ( float ) deltaTime;
     m_yaw += xOffset;
     m_pitch += yOffset;
 

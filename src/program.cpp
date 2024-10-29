@@ -55,12 +55,16 @@ void Program::run()
         windowHandler.loadGUIFrame();
 
         // main methods
+
         EventHandler::processInput( event, windowHandler, cameraDirection );
-        camera.update( cameraDirection, deltaTime );
-        transformator.transform( camera.getPosition(), camera.getDirection());
-        sceneHandler.setScene();
-        renderer.render();
-        openGlHandler.use();
+        if ( !dataHandler->isWindowFreezed() )
+        {
+            camera.update( cameraDirection, deltaTime );
+            transformator.transform( camera.getPosition(), camera.getDirection());
+            sceneHandler.setScene();
+            renderer.render();
+            openGlHandler.use();
+        }
 
         // ImGui Rendering
         ImGui::Render();

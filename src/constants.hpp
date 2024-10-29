@@ -4,7 +4,7 @@
 #include <glm/glm.hpp>
 
 // MODEL
-const std::string MODEL_PATH = "../binaries/teapot.obj";
+const std::string MODEL_PATH = "../binaries/dragon.obj";
 
 // WINDOW
 constexpr glm::vec3 BACKGROUND_COLOR = { .2f, .2f, .2f };
@@ -16,7 +16,9 @@ constexpr int GUI_WIDTH = 250;
 // CAMERA
 constexpr float CAMERA_SPEED_LIMIT = 1000.f;
 constexpr float ROTATION_SPEED_LIMIT = 2000.f;
-constexpr float MOUSE_SENSITIVITY = 200.f;
+constexpr float INIT_CAMERA_SPEED = 2.f;
+constexpr float INIT_ROTATION_SPEED = 120.f;
+constexpr float MOUSE_SENSITIVITY = 2000.f;
 constexpr float CLIP_MIN = 0.1;
 constexpr float CLIP_MAX = 200;
 constexpr glm::vec3 YAW_AXIS = {0, 1, 0};

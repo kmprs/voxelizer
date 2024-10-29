@@ -1,6 +1,8 @@
 #include "eventHandler.hpp"
 
 
+extern std::shared_ptr<DataHandler> dataHandler;
+
 void EventHandler::processInput( SDL_Event &event, WindowHandler &windowHandler, Direction &cameraDirection )
 {
     if ( event.type == SDL_KEYDOWN )
@@ -40,10 +42,12 @@ void EventHandler::processInput( SDL_Event &event, WindowHandler &windowHandler,
             case SDLK_w:
                 cameraDirection = FORWARD;
                 break;
-
             case SDLK_s:
                 cameraDirection = BACKWARD;
                 break;
+            case SDLK_h:
+                dataHandler->toggleWindowFreeze();
+
             default:
                 cameraDirection = NO_MOVEMENT;
                 break;

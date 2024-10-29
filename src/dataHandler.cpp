@@ -4,8 +4,8 @@
 DataHandler::DataHandler() :
         m_voxelColor( { .5f, .7f, .4f } ), m_worldCenter( { 0, 0, 0 } ),
         m_windowWidth( 1280 ), m_windowHeight( 780 ),
-        m_cameraSpeed( 5.f ), m_rotationSpeed( 120.f ), m_modelRepresentation{ VOXEL },
-        m_voxelResolution( INIT_RESOLUTION )
+        m_cameraSpeed( INIT_CAMERA_SPEED ), m_rotationSpeed( INIT_ROTATION_SPEED ),
+        m_modelRepresentation{ VOXEL }, m_voxelResolution( INIT_RESOLUTION )
 {}
 
 
@@ -130,4 +130,14 @@ bool DataHandler::isCameraModeToggled() const
 void DataHandler::resetCameraModeToggled()
 {
     m_cameraModeToggled = false;
+}
+
+bool DataHandler::isWindowFreezed() const
+{
+    return m_isWindowFreezed;
+}
+
+void DataHandler::toggleWindowFreeze()
+{
+    m_isWindowFreezed = !m_isWindowFreezed;
 }

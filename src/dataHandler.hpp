@@ -34,8 +34,10 @@ public:
     void toggleModelRepresentation();
     [[nodiscard]] CameraMode getCameraMode() const;
     void toggleCameraMode();
-    bool isCameraModeToggled() const;
+    [[nodiscard]] bool isCameraModeToggled() const;
     void resetCameraModeToggled();
+    [[nodiscard]] bool isWindowFreezed() const;
+    void toggleWindowFreeze();
 
 private:
     glm::vec3 m_voxelColor = {};
@@ -50,4 +52,5 @@ private:
     Representation m_modelRepresentation = VOXEL;
     CameraMode m_cameraMode = CENTERED;
     bool m_cameraModeToggled = false;
+    bool m_isWindowFreezed = false;
 };

@@ -15,7 +15,7 @@ public:
     WindowHandler(const std::string& title, int width, int height);
     ~WindowHandler();
 
-    bool isClosed() const;
+    [[nodiscard]] bool isClosed() const;
     void close();
     void swapWindow();
     void makeCurrent();
