@@ -55,6 +55,7 @@ void GUI::createFrame( float width, float height, int x, int y )
     ImGui::Text( "Voxel Color" );
     ImGui::ColorEdit3( "##hiddenLabel", rgb );  // Simplified color picker
     dataHandler->setVoxelColor( { rgb[0], rgb[1], rgb[2] });
+    ImGui::Spacing();
 
     // CAMERA MODE
     const char* cameraMode = ( dataHandler->getCameraMode() == CENTERED )
@@ -110,7 +111,7 @@ void GUI::createFrame( float width, float height, int x, int y )
 void GUI::setStyles()
 {
     ImGuiIO& io = ImGui::GetIO();
-    io.Fonts->AddFontFromFileTTF("../binaries/arial_narrow.ttf", 16.0f);
+    io.Fonts->AddFontFromFileTTF("../binaries/arial.ttf", 16.0f);
     io.FontDefault = io.Fonts->Fonts.back();
 
     ImGuiStyle& style = ImGui::GetStyle();
@@ -120,7 +121,6 @@ void GUI::setStyles()
     style.ItemInnerSpacing = ImVec2(8, 6);
     style.ScrollbarSize = 12;
 
-    style.WindowRounding = 6.0f;
     style.FrameRounding = 8.0f;
     style.GrabRounding = 4.0f;
 

@@ -122,8 +122,8 @@ void Camera::mouseCallback( float currentX, float currentY, float deltaTime )
 
     m_lastX = currentX;
     m_lastY = currentY;
-    xOffset *= static_cast<float>( MOUSE_SENSITIVITY/ static_cast<float>(dataHandler->getVoxelResolution()) ) * ( float ) deltaTime;
-    yOffset *= static_cast<float>( MOUSE_SENSITIVITY/ static_cast<float>(dataHandler->getVoxelResolution()) ) * ( float ) deltaTime;
+    xOffset *= static_cast<float>( MOUSE_SENSITIVITY );
+    yOffset *= static_cast<float>( MOUSE_SENSITIVITY );
     m_yaw += xOffset;
     m_pitch += yOffset;
 
