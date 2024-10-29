@@ -3,6 +3,7 @@
 #define GLM_ENABLE_EXPERIMENTAL
 
 #include <glm/gtx/rotate_vector.hpp>
+#include <SDL.h>
 #include "glm/glm.hpp"
 #include "types.hpp"
 #include "dataHandler.hpp"
@@ -19,10 +20,10 @@ public:
     glm::vec3 getPosition();
     glm::vec3 getDirection();
 
-    // TODO: rotate around the centroid of the model!
-
-
 private:
+
+    void mouseCallback( float currentX, float currentY, float deltaTime );
+
     glm::vec3 m_position = {};
     glm::vec3 m_direction = {};
 
@@ -35,6 +36,7 @@ private:
     bool m_upMovement = false;
     bool m_leftMovement = false;
 
+    bool m_firstMouse = true;
     int m_xPosMouse = -1;
     int m_yPosMouse = -1;
     float m_lastX = -1;

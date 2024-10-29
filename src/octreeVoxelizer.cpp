@@ -8,11 +8,6 @@ std::vector<Voxel> OctreeVoxelizer::run(
         const std::vector<std::shared_ptr<TriangleFace>> &triangleFaces, int resolution
         )
 {
-//    m_meshTriangles.clear();
-//    for ( const std::shared_ptr<TriangleFace> &t: triangleFaces )
-//    {
-//        m_meshTriangles.push_back( t );
-//    }
     auto octree = new OctreeNode{ nullptr, 2, dataHandler->getWorldCenter() };
     auto bvh = new BVHNode{ nullptr };
 
@@ -23,7 +18,7 @@ std::vector<Voxel> OctreeVoxelizer::run(
     // DEBUG
     long counter = 0;
     buildOctree( octree, 0, resolution, bvhLeaves, counter );
-    std::cout << "Number of leaves in bvh node: " << bvhLeaves.size() << std::endl;
+    std::cout << "\nNumber of leaves in bvh node: " << bvhLeaves.size() << std::endl;
     std::cout << "Triangle Intersection Test Counter: " << counter << std::endl;
 
     std::vector<Voxel> voxels = util::octree::toVoxel( octree, 0 );

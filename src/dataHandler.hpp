@@ -32,6 +32,10 @@ public:
     void setRotationSpeed(float speed);
     [[nodiscard]] Representation getModelRepresentation() const;
     void toggleModelRepresentation();
+    [[nodiscard]] CameraMode getCameraMode() const;
+    void toggleCameraMode();
+    bool isCameraModeToggled() const;
+    void resetCameraModeToggled();
 
 private:
     glm::vec3 m_voxelColor = {};
@@ -44,4 +48,6 @@ private:
     float m_cameraSpeed = -1.f;
     float m_rotationSpeed = -1.f;
     Representation m_modelRepresentation = VOXEL;
+    CameraMode m_cameraMode = CENTERED;
+    bool m_cameraModeToggled = false;
 };

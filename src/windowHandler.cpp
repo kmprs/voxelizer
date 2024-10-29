@@ -34,8 +34,6 @@ WindowHandler::WindowHandler( const std::string &title, int width, int height )
         exit( EXIT_FAILURE );
     }
 
-//    SDL_SetWindowFullscreen(m_window, SDL_WINDOW_FULLSCREEN_DESKTOP);
-
     m_context = SDL_GL_CreateContext( m_window );
     if ( m_context == nullptr )
     {
@@ -51,8 +49,6 @@ WindowHandler::WindowHandler( const std::string &title, int width, int height )
     ImGui_ImplOpenGL3_Init( "#version 330" );
 
     ImGui::StyleColorsDark();
-
-    m_gui = { m_window, m_context };
 }
 
 WindowHandler::~WindowHandler()
@@ -65,7 +61,7 @@ WindowHandler::~WindowHandler()
     SDL_Quit();
 }
 
-bool WindowHandler::isClosed()
+bool WindowHandler::isClosed() const
 {
     return m_closed;
 }
@@ -105,6 +101,3 @@ void WindowHandler::toggleFullscreen()
     else SDL_SetWindowFullscreen( m_window, SDL_WINDOW_FULLSCREEN );
     m_isFullscreen = !m_isFullscreen;
 }
-
-
-

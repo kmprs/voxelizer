@@ -10,4 +10,5 @@ public:
     EventHandler() = default;
     ~EventHandler() = default;
     static void processInput( SDL_Event &event, WindowHandler &windowHandler, Direction &cameraDirection );
+
 };

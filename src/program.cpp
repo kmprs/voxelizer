@@ -15,11 +15,11 @@ void Program::run()
                                     dataHandler->getWindowHeight() };
     OpenGLHandler openGlHandler = {};
     std::shared_ptr<ShaderHandler> shaderHandler = openGlHandler.getShaderHandler();
-    Camera camera = {};
     Transformator transformator = { shaderHandler };
     SceneHandler sceneHandler = { shaderHandler };
     Renderer renderer = {};
 
+    Camera camera = {};
     Direction cameraDirection;
 
     // fps settings and display variables

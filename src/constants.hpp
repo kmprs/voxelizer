@@ -16,10 +16,12 @@ constexpr int GUI_WIDTH = 250;
 // CAMERA
 constexpr float CAMERA_SPEED_LIMIT = 1000.f;
 constexpr float ROTATION_SPEED_LIMIT = 2000.f;
+constexpr float MOUSE_SENSITIVITY = 200.f;
 constexpr float CLIP_MIN = 0.1;
 constexpr float CLIP_MAX = 200;
 constexpr glm::vec3 YAW_AXIS = {0, 1, 0};
 constexpr glm::vec3 PITCH_AXIS = {1, 0, 0};
+
 
 // WORLD
 constexpr float AMBIENT_STRENGTH = .6f;
@@ -29,6 +31,6 @@ constexpr glm::vec3 LIGHT_COLOR = {1.f, 1.f, 1.f};
 constexpr int VOXEL_MEMORY_SIZE = 24;
 
 // VOXELIZER
-constexpr int INIT_RESOLUTION = 8;
+constexpr int INIT_RESOLUTION = 7;
 constexpr int MAX_RESOLUTION = 10;
-constexpr int BVH_DEPTH = 10;
+constexpr int BVH_DEPTH = 12;

@@ -2,6 +2,7 @@
 
 
 extern std::shared_ptr<DataHandler> dataHandler;
+static int resolution = INIT_RESOLUTION;
 
 GUI::GUI( SDL_Window* window, SDL_GLContext glContext ) :
         m_window( window ), m_context( glContext )
@@ -27,7 +28,7 @@ void GUI::createFrame( float width, float height, int x, int y )
     ImGui::SetNextWindowSize( ImVec2( width, height ));
 
     ImGui::Begin( "Left GUI", nullptr, window_flags );
-    // toggle between triangle and voxel representation
+    // TRIANGLE/ VOXEL REPRESENTATION
     const char* currentRepresentation = ( dataHandler->getModelRepresentation() == VOXEL )
                                         ? "Voxel" : "Triangle";
     float buttonWidth = width - 20.f;
@@ -40,12 +41,17 @@ void GUI::createFrame( float width, float height, int x, int y )
 
     // VOXEL RESOlUTION
     ImGui::Text( "Voxel Resolution" );
-    int resolution = dataHandler->getVoxelResolution();
-    ImGui::PushItemWidth(buttonWidth);
-    ImGui::SliderInt( "", &resolution, 1, 10 );
-    dataHandler->setVoxelResolution( resolution );
+    int temp = resolution;
+    ImGui::PushItemWidth( buttonWidth );
+    if ( ImGui::SliderInt( "", &resolution, 1, 10 ))
+    {};
+    if ( ImGui::IsItemDeactivatedAfterEdit())
+    {
+        dataHandler->setVoxelResolution( resolution );
+    }
     ImGui::Spacing();
 
+    // VOXEL COLOR
     glm::vec3 voxelColor = dataHandler->getVoxelColor();
     float rgb[3] = { voxelColor.x, voxelColor.y, voxelColor.z };
     ImGui::Text( "Voxel Color" );
@@ -53,7 +59,17 @@ void GUI::createFrame( float width, float height, int x, int y )
     ImGui::Spacing();
     dataHandler->setVoxelColor( { rgb[0], rgb[1], rgb[2] } );
 
-    // camera and rotation speeds
+    // CAMERA MODE
+    const char* cameraMode = ( dataHandler->getCameraMode() == CENTERED )
+                                        ? "centered" : "free";
+    ImGui::Text( "Camera Mode" );
+    if ( ImGui::Button( cameraMode, ImVec2( buttonWidth, 0 )))
+    {
+        dataHandler->toggleCameraMode();
+    }
+    ImGui::Spacing();
+
+    // CAMERA AND ROTATION SPEED
     float speed = dataHandler->getCameraSpeed();
     ImGui::Text( "Camera Speed" );
     ImGui::InputFloat( "##camera speed", &speed, 1.f, 1.f, "%.1f" );

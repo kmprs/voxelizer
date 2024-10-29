@@ -122,3 +122,8 @@ enum Representation
     TRIANGLE
 };
 
+enum CameraMode
+{
+    CENTERED,
+    INDIVIDUAL
+};

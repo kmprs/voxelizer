@@ -18,7 +18,7 @@ void Transformator::transform( const glm::vec3 &cameraPosition,
     m_view = glm::mat4( 1.0f );
     m_projection = glm::mat4( 1.0f );
 
-    m_view = glm::lookAt( cameraPosition, dataHandler->getWorldCenter(), glm::vec3( 0, 1, 0 ));
+    m_view = glm::lookAt( cameraPosition, cameraPosition + cameraDirection, glm::vec3( 0, 1, 0 ));
     m_shaderHandler->setMat4( "view", m_view );
     m_shaderHandler->setMat4( "model", m_model );
     m_projection = glm::perspective( glm::radians( 45.0f ),

@@ -98,7 +98,6 @@ void DataHandler::toggleModelRepresentation()
 {
     if ( m_modelRepresentation == VOXEL ) m_modelRepresentation = TRIANGLE;
     else m_modelRepresentation = VOXEL;
-
 }
 
 int DataHandler::getVoxelResolution() const
@@ -109,4 +108,26 @@ int DataHandler::getVoxelResolution() const
 void DataHandler::setVoxelResolution( int resolution )
 {
     if ( resolution >= 1 && resolution <= MAX_RESOLUTION ) m_voxelResolution = resolution;
+}
+
+CameraMode DataHandler::getCameraMode() const
+{
+    return m_cameraMode;
+}
+
+void DataHandler::toggleCameraMode()
+{
+    if ( m_cameraMode == CENTERED ) m_cameraMode = INDIVIDUAL;
+    else m_cameraMode = CENTERED;
+    m_cameraModeToggled = true;
+}
+
+bool DataHandler::isCameraModeToggled() const
+{
+    return m_cameraModeToggled;
+}
+
+void DataHandler::resetCameraModeToggled()
+{
+    m_cameraModeToggled = false;
 }

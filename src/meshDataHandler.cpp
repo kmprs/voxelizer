@@ -38,6 +38,7 @@ void MeshDataHandler::voxelize( int voxelResolution )
         m_voxels.push_back( std::make_shared<Voxel>( v ));
     }
 
+    dataHandler->setNumberOfVoxels( static_cast<int>(m_voxels.size()) );
     std::cout << "Number of voxels: " << m_voxels.size() << std::endl;
 
 }

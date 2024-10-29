@@ -15,7 +15,7 @@ public:
     WindowHandler(const std::string& title, int width, int height);
     ~WindowHandler();
 
-    bool isClosed();
+    bool isClosed() const;
     void close();
     void swapWindow();
     void makeCurrent();
@@ -31,5 +31,4 @@ private:
     bool m_closed = false;
     SDL_Window *m_window = nullptr;
     SDL_GLContext m_context = nullptr;
-    GUI m_gui;
 };
