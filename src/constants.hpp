@@ -4,7 +4,7 @@
 #include <glm/glm.hpp>
 
 // MODEL
-const std::string MODEL_PATH = "../binaries/astronaut.obj";
+const std::string MODEL_PATH = "../binaries/dragon.obj";
 
 // WINDOW
 constexpr glm::vec3 BACKGROUND_COLOR = { .2f, .2f, .2f };
@@ -26,13 +26,15 @@ constexpr glm::vec3 PITCH_AXIS = {1, 0, 0};
 
 
 // WORLD
-constexpr float AMBIENT_STRENGTH = .6f;
+constexpr float AMBIENT_STRENGTH = .4f;
+constexpr float SPECULAR_STRENGTH = .5f;
+constexpr int SHININESS = 32;
 constexpr glm::vec3 LIGHT_POSITION = {-1.f, 3.f, -2.f};
 constexpr glm::vec3 LIGHT_COLOR = {1.f, 1.f, 1.f};
 
 constexpr int VOXEL_MEMORY_SIZE = 24;
 
 // VOXELIZER
-constexpr int INIT_RESOLUTION = 1;
+constexpr int INIT_RESOLUTION = 7;
 constexpr int MAX_RESOLUTION = 10;
 constexpr int BVH_DEPTH = 12;

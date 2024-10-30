@@ -16,5 +16,7 @@ void SceneHandler::setScene() const
     m_shaderHandler->setVec3( "LIGHT_POSITION", LIGHT_POSITION );
     m_shaderHandler->setVec3( "LIGHT_COLOR", LIGHT_COLOR );
     m_shaderHandler->setVec3( "VOXEL_COLOR", dataHandler->getVoxelColor() );
+    m_shaderHandler->setFloat( "SPECULAR_STRENGTH", SPECULAR_STRENGTH );
+    m_shaderHandler->setInt( "SHININESS", SHININESS );
 }
 

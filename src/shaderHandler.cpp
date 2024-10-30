@@ -71,3 +71,10 @@ void ShaderHandler::setFloat( const std::string &name, float value ) const
     GLint location = glGetUniformLocation( programID, name.c_str());
     glUniform1f(location, value);
 }
+
+void ShaderHandler::setInt( const std::string &name, int value ) const
+{
+    glUseProgram(programID);
+    GLint location = glGetUniformLocation( programID, name.c_str());
+    glUniform1i(location, value);
+}
