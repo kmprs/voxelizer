@@ -2,7 +2,7 @@
 
 
 DataHandler::DataHandler() :
-        m_voxelColor( { .5f, .7f, .4f } ), m_worldCenter( { 0, 0, 0 } ),
+        m_voxelColor( { 1.f, 1.f, 1.f } ), m_worldCenter( { 0, 0, 0 } ),
         m_windowWidth( 1280 ), m_windowHeight( 780 ),
         m_cameraSpeed( INIT_CAMERA_SPEED ), m_rotationSpeed( INIT_ROTATION_SPEED ),
         m_modelRepresentation{ VOXEL }, m_voxelResolution( INIT_RESOLUTION )

@@ -61,7 +61,7 @@ void Program::run()
         {
             camera.update( cameraDirection, deltaTime );
             transformator.transform( camera.getPosition(), camera.getDirection());
-            sceneHandler.setScene();
+            sceneHandler.setScene( camera.getPosition() );
             renderer.render();
             openGlHandler.use();
         }

@@ -1,4 +1,4 @@
-# OctreeVoxelizer 🎲
+# OctreeBVHVoxelizer 🎲
 
 ## Table of Contents
 - [Introduction](#Introduction)
@@ -8,7 +8,7 @@
 ---
 
 ## Introduction 
-OctreeVoxelizer is a C++ project designed to convert 3D models into voxel representations. 
+OctreeBVHVoxelizer is a C++ project designed to convert 3D models into voxel representations. 
 It includes features for voxel face creation, file parsing, bounding volume hierarchy (BVH)
 construction, and efficient spatial partitioning. This project aims to provide a lightweight
 platform for rendering 3D-models as voxels and to explore different optimization methods. 

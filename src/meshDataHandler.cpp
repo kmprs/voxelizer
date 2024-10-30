@@ -4,7 +4,7 @@
 extern std::shared_ptr<DataHandler> dataHandler;
 
 MeshDataHandler::MeshDataHandler( std::string path, FileFormat format ) :
-        m_path( std::move( path )), m_voxelizer( std::make_unique<OctreeVoxelizer>())
+        m_path( std::move( path )), m_voxelizer( std::make_unique<OctreeBVHVoxelizer>())
 {
     if ( format == OBJ ) m_reader = std::make_unique<OBJParser>();
     m_triangleFaces = m_reader->parse( m_path );

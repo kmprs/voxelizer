@@ -29,7 +29,4 @@ void Transformator::transform( const glm::vec3 &cameraPosition,
                                      static_cast<float>(CLIP_MAX));
 
     m_shaderHandler->setMat4( "projection", m_projection );
-
-    // set camera position for lighting
-    m_shaderHandler->setVec3("CAMERA_POSITION", cameraPosition);
 }

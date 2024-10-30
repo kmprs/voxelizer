@@ -1,9 +1,10 @@
 #pragma once
 
 #include "objParser.hpp"
-#include "octreeVoxelizer.hpp"
+#include "octreeBVHVoxelizer.hpp"
 #include "bresenhamVoxelizer.hpp"
 #include "naiveVoxelizer.hpp"
+#include "octreeVoxelizer.hpp"
 
 
 class MeshDataHandler

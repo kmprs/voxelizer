@@ -9,13 +9,14 @@ SceneHandler::SceneHandler( std::shared_ptr<ShaderHandler> shaderHandler ) :
 {
 }
 
-void SceneHandler::setScene() const
+void SceneHandler::setScene( const glm::vec3 &cameraPosition ) const
 {
     // light settings
     m_shaderHandler->setFloat( "AMBIENT_STRENGTH", AMBIENT_STRENGTH );
     m_shaderHandler->setVec3( "LIGHT_POSITION", LIGHT_POSITION );
     m_shaderHandler->setVec3( "LIGHT_COLOR", LIGHT_COLOR );
     m_shaderHandler->setVec3( "VOXEL_COLOR", dataHandler->getVoxelColor() );
+    m_shaderHandler->setVec3("CAMERA_POSITION", cameraPosition);
     m_shaderHandler->setFloat( "SPECULAR_STRENGTH", SPECULAR_STRENGTH );
     m_shaderHandler->setInt( "SHININESS", SHININESS );
 }

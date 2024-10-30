@@ -1,21 +1,24 @@
 #pragma once
 
-#include "voxelizer.hpp"
+#include <glm/vec3.hpp>
 #include "octreeNode.hpp"
-#include "dataHandler.hpp"
 #include "util.hpp"
+#include "constants.hpp"
+#include "voxelizer.hpp"
+#include "dataHandler.hpp"
 
 
-class OctreeVoxelizer : public Voxelizer
+class OctreeBVHVoxelizer : public Voxelizer
 {
 public:
-    OctreeVoxelizer() = default;
+    OctreeBVHVoxelizer() = default;
 
     std::vector<Voxel>
     run( const std::vector<std::shared_ptr<TriangleFace>> &triangleFaces,
          int resolution ) override;
-
 private:
     void buildOctree( OctreeNode* octreeNode, int depth, int maxDepth,
-                      const std::vector<std::shared_ptr<TriangleFace>> &triangleFaces );
+                      std::vector<BVHNode*> &leaves, long &counter );
 };
+
+
