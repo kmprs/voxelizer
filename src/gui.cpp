@@ -104,6 +104,7 @@ void GUI::createFrame( float width, float height, int x, int y )
         ImGui::Text( "%d FPS", dataHandler->getCurrentFPS());
         ImGui::SameLine();
         ImGui::Text( "%d voxels", dataHandler->getNumberOfVoxels());
+
         ImGui::End();
     }
 }

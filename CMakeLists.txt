@@ -68,6 +68,8 @@ add_executable(${NAME} main.cpp
         src/gui.hpp
         src/dataHandler.cpp
         src/dataHandler.hpp
+        src/naiveVoxelizer.cpp
+        src/naiveVoxelizer.hpp
 )
 
 

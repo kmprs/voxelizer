@@ -3,6 +3,7 @@
 #include "objParser.hpp"
 #include "octreeVoxelizer.hpp"
 #include "bresenhamVoxelizer.hpp"
+#include "naiveVoxelizer.hpp"
 
 
 class MeshDataHandler
