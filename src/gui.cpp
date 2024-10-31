@@ -38,21 +38,25 @@ void GUI::createFrame( float width, float height, int x, int y )
     ImGui::Spacing();
 
     // VOXELIZATION METHOD
-    ImGui::Text( "Voxelization Method" );
+    ImGui::Text("Voxelization Method");
     static bool selected[3] = { true, false, false };
-    const char* labels[3] = { "Optimized Voxelizer", "Naive Voxelizer",
-                              "Octree Voxelizer" };
+    const char* labels[3] = { "Optimized Voxelizer", "Naive Voxelizer", "Octree Voxelizer" };
     static bool isVoxelizationMenuOpen = false;
-    static int selectedIndex = -1;
-    static const char* currentLabel = labels[0];
+    static int selectedIndex = 0;
+    static const char* currentLabel = labels[selectedIndex];
 
-    ImGui::SetNextItemOpen( isVoxelizationMenuOpen );
-    if ( ImGui::CollapsingHeader( currentLabel ))
+    ImGui::SetNextItemOpen(isVoxelizationMenuOpen);
+
+// Update the title each frame based on currentLabel
+    std::string title = std::string(currentLabel) + " ";
+    const char* currentTitle = title.c_str();
+
+    if (ImGui::CollapsingHeader(currentTitle))
     {
         isVoxelizationMenuOpen = true;
-        for ( int i = 0; i < 3; ++i )
+        for (int i = 0; i < 3; ++i)
         {
-            if ( ImGui::Selectable( labels[i], selected[i] ))
+            if (ImGui::Selectable(labels[i], selected[i]))
             {
                 selectedIndex = i;
                 selected[selectedIndex] = true;
@@ -61,9 +65,10 @@ void GUI::createFrame( float width, float height, int x, int y )
                 break;
             }
         }
-        for ( int i = 0; i < 3; ++i )
+
+        for (int i = 0; i < 3; ++i)
         {
-            if ( i != selectedIndex )
+            if (i != selectedIndex)
             {
                 selected[i] = false;
             }
