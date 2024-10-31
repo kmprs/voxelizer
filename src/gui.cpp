@@ -86,7 +86,6 @@ void GUI::createFrame( float width, float height, int x, int y )
     ImGui::Begin( "Right GUI", nullptr, window_flags );
 
 
-
     ImGui::End();
 
 //     BOTTOM BAR - PERFORMANCE DATA
@@ -99,15 +98,15 @@ void GUI::createFrame( float width, float height, int x, int y )
                     performanceHeight ));
 
     // Bug in ImGui causes trembling effects if noBackgroundOption is used
-    ImGui::PushStyleColor(ImGuiCol_WindowBg,
-                          ImVec4(BACKGROUND_COLOR.x, BACKGROUND_COLOR.y,
-                                 BACKGROUND_COLOR.z, 1.0f));
-    ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
+    ImGui::PushStyleColor( ImGuiCol_WindowBg,
+                           ImVec4( BACKGROUND_COLOR.x, BACKGROUND_COLOR.y,
+                                   BACKGROUND_COLOR.z, 1.0f ));
+    ImGui::PushStyleVar( ImGuiStyleVar_WindowBorderSize, 0.0f );
 
     ImGui::Begin( "Performance stats", nullptr,
-                  window_flags | ImGuiWindowFlags_NoScrollbar);
+                  window_flags | ImGuiWindowFlags_NoScrollbar );
     if ( !dataHandler->isWindowFreezed()) showPerformanceData();
-    else ImGui::Text("-- HOLD --");
+    else ImGui::Text( "-- HOLD --" );
     ImGui::End();
     ImGui::PopStyleVar();
     ImGui::PopStyleColor();
@@ -126,8 +125,7 @@ void GUI::buttonRepresentation( float buttonWidth )
 
 void GUI::collapseAlgorithmSelection()
 {
-// ALGORITHM SELECTION
-    static bool isVoxelizationMenuOpen = false;
+    static bool isCollapsed = false;
     const char* labels[] = { "Optimized Voxelizer", "Naive Voxelizer", "Octree Voxelizer",
                              "BVH Voxelizer" };
 
@@ -135,21 +133,23 @@ void GUI::collapseAlgorithmSelection()
     std::string title = std::string( labels[selectedIndex] ) + " ";
 
     ImGui::Text( "Voxelization Method" );
-    ImGui::SetNextItemOpen( isVoxelizationMenuOpen );
+    ImGui::SetNextItemOpen( isCollapsed );
 
     if ( ImGui::CollapsingHeader( title.c_str()))
     {
-        isVoxelizationMenuOpen = true;
-
-        for ( int i = 0; i < 4; ++i )
+        isCollapsed = true;
+        for ( int i = 0; i < 4; i++ )
         {
             if ( ImGui::Selectable( labels[i], selectedIndex == i ))
             {
                 dataHandler->setAlgorithm( static_cast<VoxelizationAlgorithm>(i));
-                isVoxelizationMenuOpen = false;
+                isCollapsed = false;
                 break;
             }
         }
+    } else
+    {
+        isCollapsed = false;
     }
 }
 
