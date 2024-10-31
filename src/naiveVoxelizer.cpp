@@ -18,11 +18,9 @@ std::vector<Voxel> NaiveVoxelizer::run(const std::vector<std::shared_ptr<Triangl
         {
             for (int k = 0; k < numVoxelsPerDimension; ++k)
             {
-                // Calculate the floating-point coordinates based on the index
-                float x = -1.0f + (i + 0.5f) * voxelSize; // Center the voxel at its position
-                float y = -1.0f + (j + 0.5f) * voxelSize;
-                float z = -1.0f + (k + 0.5f) * voxelSize;
-
+                float x = -1.0f + (static_cast<float>(i) + 0.5f) * voxelSize;
+                float y = -1.0f + (static_cast<float>(j) + 0.5f) * voxelSize;
+                float z = -1.0f + (static_cast<float>(k) + 0.5f) * voxelSize;
                 std::array<Triangle, 12> voxelTriangles = util::geometry::getCubeTriangles({ x, y, z }, voxelSize);
                 bool isSolid = false;
 
@@ -33,10 +31,10 @@ std::vector<Voxel> NaiveVoxelizer::run(const std::vector<std::shared_ptr<Triangl
                         if (util::geometry::doTrianglesIntersect(voxelTriangle, triangleFace->toTriangle()))
                         {
                             isSolid = true;
-                            break; // Break out of the triangle face loop
+                            break;
                         }
                     }
-                    if (isSolid) break; // Break out of the voxel triangle loop
+                    if (isSolid) break;
                 }
                 if (isSolid)
                 {

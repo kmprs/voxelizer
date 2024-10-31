@@ -32,7 +32,7 @@ constexpr glm::vec3 LIGHT_COLOR = {1.f, 1.f, 1.f};
 constexpr int VOXEL_MEMORY_SIZE = 24;
 
 // VOXELIZER
-constexpr int INIT_RESOLUTION = 7;
+constexpr int INIT_RESOLUTION = 1;
 constexpr int MAX_RESOLUTION = 10;
 constexpr int BVH_DEPTH = 12;
 

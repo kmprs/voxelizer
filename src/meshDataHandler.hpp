@@ -5,6 +5,7 @@
 #include "bresenhamVoxelizer.hpp"
 #include "naiveVoxelizer.hpp"
 #include "octreeVoxelizer.hpp"
+#include "bvhVoxelizer.hpp"
 
 
 class MeshDataHandler

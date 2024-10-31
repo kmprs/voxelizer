@@ -52,7 +52,7 @@ void OctreeBVHVoxelizer::buildOctree( OctreeNode* octreeNode, int depth, int max
     glm::vec3 maxVoxel = util::geometry::maxVec( edgeCoordinates );
 
 
-    for ( auto bvhNode: leaves )
+    for ( const auto bvhNode: leaves )
     {
         if ( bvhNode->triangleFaces.empty()) continue;
         if ( !util::geometry::doBoundingVolumesIntersect( minVoxel, maxVoxel,

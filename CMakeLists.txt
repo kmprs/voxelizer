@@ -72,6 +72,8 @@ add_executable(${NAME} main.cpp
         src/naiveVoxelizer.hpp
         src/octreeVoxelizer.cpp
         src/octreeVoxelizer.hpp
+        src/bvhVoxelizer.cpp
+        src/bvhVoxelizer.hpp
 )
 
 
