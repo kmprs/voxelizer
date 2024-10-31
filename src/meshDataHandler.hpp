@@ -25,6 +25,7 @@ private:
     std::vector<std::shared_ptr<TriangleFace>> m_triangleFaces = {};
     std::unique_ptr<Parser> m_reader = nullptr;
     std::unique_ptr<Voxelizer> m_voxelizer = nullptr;
+    VoxelizationAlgorithm m_currentAlgorithm; 
 
     void voxelize( int voxelResolution );
 };

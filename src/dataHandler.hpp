@@ -34,6 +34,8 @@ public:
     void toggleModelRepresentation();
     [[nodiscard]] CameraMode getCameraMode() const;
     void toggleCameraMode();
+    [[nodiscard]] VoxelizationAlgorithm getVoxelizationAlgorithm() const;
+    void setAlgorithm ( VoxelizationAlgorithm algorithm );
     [[nodiscard]] bool isCameraModeToggled() const;
     void resetCameraModeToggled();
     [[nodiscard]] bool isWindowFreezed() const;
@@ -51,6 +53,7 @@ private:
     float m_rotationSpeed = -1.f;
     Representation m_modelRepresentation = VOXEL;
     CameraMode m_cameraMode = CENTERED;
+    VoxelizationAlgorithm m_voxelizationAlgorithm = OPTIMIZED;
     bool m_cameraModeToggled = false;
     bool m_isWindowFreezed = false;
 };

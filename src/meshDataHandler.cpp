@@ -45,6 +45,37 @@ void MeshDataHandler::voxelize( int voxelResolution )
 
 void MeshDataHandler::update()
 {
+    if ( dataHandler->getVoxelizationAlgorithm() != m_currentAlgorithm )
+    {
+        switch ( dataHandler->getVoxelizationAlgorithm() )
+        {
+            case OPTIMIZED:
+            {
+                m_currentAlgorithm = OPTIMIZED;
+                m_voxelizer = std::make_unique<OctreeBVHVoxelizer>();
+                break;
+            }
+            case OCTREE:
+            {
+                m_currentAlgorithm = OCTREE;
+                m_voxelizer = std::make_unique<OctreeVoxelizer>();
+                break;
+            }
+            case BVH:
+            {
+                m_currentAlgorithm = BVH;
+                m_voxelizer = std::make_unique<BVHVoxelizer>();
+                break;
+            }
+            case NAIVE:
+            {
+                m_currentAlgorithm = NAIVE;
+                m_voxelizer = std::make_unique<NaiveVoxelizer>();
+                break;
+            }
+            default: break;
+        }
+    }
     m_voxels.clear();
     voxelize( dataHandler->getVoxelResolution());
 }

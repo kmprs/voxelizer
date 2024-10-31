@@ -127,3 +127,12 @@ enum CameraMode
     CENTERED,
     INDIVIDUAL
 };
+
+
+enum VoxelizationAlgorithm
+{
+    OPTIMIZED,
+    OCTREE,
+    BVH,
+    NAIVE
+};
