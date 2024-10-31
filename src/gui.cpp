@@ -84,25 +84,33 @@ void GUI::createFrame( float width, float height, int x, int y )
                     static_cast<float>(y)));
     ImGui::SetNextWindowSize( ImVec2( width, height ));
     ImGui::Begin( "Right GUI", nullptr, window_flags );
+
+
+
     ImGui::End();
 
-    // BOTTOM BAR - PERFORMANCE DATA
-    if ( !dataHandler->isWindowFreezed())
-    {
-        float performanceHeight = 30.f;
-        ImGui::SetNextWindowPos( ImVec2( width,
-                                         static_cast<float>(dataHandler->getWindowHeight()) -
-                                         performanceHeight ));
-        ImGui::SetNextWindowSize(
-                ImVec2( static_cast<float>(dataHandler->getWindowWidth()) - 2 * width,
-                        performanceHeight ));
-        ImGui::Begin( "Performance stats", nullptr,
-                      window_flags | ImGuiWindowFlags_NoBackground );
+//     BOTTOM BAR - PERFORMANCE DATA
+    float performanceHeight = 30.f;
+    ImGui::SetNextWindowPos( ImVec2( width,
+                                     static_cast<float>(dataHandler->getWindowHeight()) -
+                                     performanceHeight ));
+    ImGui::SetNextWindowSize(
+            ImVec2( static_cast<float>(dataHandler->getWindowWidth()) - 2 * width,
+                    performanceHeight ));
 
-        showPerformanceData();
+    // Bug in ImGui causes trembling effects if noBackgroundOption is used
+    ImGui::PushStyleColor(ImGuiCol_WindowBg,
+                          ImVec4(BACKGROUND_COLOR.x, BACKGROUND_COLOR.y,
+                                 BACKGROUND_COLOR.z, 1.0f));
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
 
-        ImGui::End();
-    }
+    ImGui::Begin( "Performance stats", nullptr,
+                  window_flags | ImGuiWindowFlags_NoScrollbar);
+    if ( !dataHandler->isWindowFreezed()) showPerformanceData();
+    else ImGui::Text("-- HOLD --");
+    ImGui::End();
+    ImGui::PopStyleVar();
+    ImGui::PopStyleColor();
 }
 
 void GUI::buttonRepresentation( float buttonWidth )
@@ -201,6 +209,7 @@ void GUI::showPerformanceData()
     ImGui::Text( "%d FPS", dataHandler->getCurrentFPS());
     ImGui::SameLine();
     ImGui::Text( "%d voxels", dataHandler->getNumberOfVoxels());
+    ImGui::SameLine();
 }
 
 

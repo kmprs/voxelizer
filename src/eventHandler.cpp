@@ -3,8 +3,10 @@
 
 extern std::shared_ptr<DataHandler> dataHandler;
 
-void EventHandler::processInput( SDL_Event &event, WindowHandler &windowHandler, Direction &cameraDirection )
+void EventHandler::processInput( SDL_Event &event, WindowHandler &windowHandler,
+                                 Direction &cameraDirection )
 {
+    static bool freezeOn = false;
     if ( event.type == SDL_KEYDOWN )
     {
         switch ( event.key.keysym.sym )
@@ -16,26 +18,18 @@ void EventHandler::processInput( SDL_Event &event, WindowHandler &windowHandler,
                 windowHandler.toggleFullscreen();
                 break;
             case SDLK_LEFT:
-                cameraDirection = LEFT;
-                break;
             case SDLK_a:
                 cameraDirection = LEFT;
                 break;
             case SDLK_RIGHT:
-                cameraDirection = RIGHT;
-                break;
             case SDLK_d:
                 cameraDirection = RIGHT;
                 break;
             case SDLK_UP:
-                cameraDirection = UP;
-                break;
             case SDLK_SPACE:
                 cameraDirection = UP;
                 break;
             case SDLK_DOWN:
-                cameraDirection = DOWN;
-                break;
             case SDLK_c:
                 cameraDirection = DOWN;
                 break;
@@ -47,10 +41,15 @@ void EventHandler::processInput( SDL_Event &event, WindowHandler &windowHandler,
                 break;
             case SDLK_h:
                 dataHandler->toggleWindowFreeze();
+                break;
+
 
             default:
                 cameraDirection = NO_MOVEMENT;
                 break;
         }
-    } else if ( event.type == SDL_KEYUP ) cameraDirection = NO_MOVEMENT;
+    } else if ( event.type == SDL_KEYUP )
+    {
+        cameraDirection = NO_MOVEMENT;
+    };
 }
