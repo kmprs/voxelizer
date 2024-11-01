@@ -1,4 +1,4 @@
-# OctreeBVHVoxelizer 🎲
+# Voxelizer 🎲
 
 ## Table of Contents
 - [Introduction](#Introduction)
