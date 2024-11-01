@@ -7,7 +7,6 @@
 #include "meshDataHandler.hpp"
 
 
-
 class Renderer
 {
 public:
@@ -20,5 +19,6 @@ private:
     std::unique_ptr<MeshDataHandler> m_meshDataHandler = nullptr;
     Mesh m_meshVoxel = {};
     Mesh m_meshTriangle = {};
-    int m_currentResolution = -1;
+
+
 };

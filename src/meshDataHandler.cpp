@@ -3,11 +3,13 @@
 
 extern std::shared_ptr<DataHandler> dataHandler;
 
-MeshDataHandler::MeshDataHandler( std::string path, FileFormat format ) :
-        m_path( std::move( path )), m_voxelizer( std::make_unique<OctreeBVHVoxelizer>())
+MeshDataHandler::MeshDataHandler( FileFormat format ) :
+        m_voxelizer( std::make_unique<OctreeBVHVoxelizer>()),
+        m_currentModelPath( dataHandler->getCurrentModelPath()),
+        m_currentResolution( dataHandler->getVoxelResolution() )
 {
-    if ( format == OBJ ) m_reader = std::make_unique<OBJParser>();
-    m_triangleFaces = m_reader->parse( m_path );
+    if ( format == OBJ ) m_parser = std::make_unique<OBJParser>();
+    m_triangleFaces = m_parser->parse( dataHandler->getCurrentModelPath());
     voxelize( dataHandler->getVoxelResolution());
 }
 
@@ -23,6 +25,7 @@ std::vector<std::shared_ptr<TriangleFace>> MeshDataHandler::getTriangleFaces() c
 
 void MeshDataHandler::voxelize( int voxelResolution )
 {
+    std::cout << m_triangleFaces.size() << std::endl;
     auto start = std::chrono::high_resolution_clock::now();
 
     std::vector<Voxel> voxels = m_voxelizer->run( m_triangleFaces, voxelResolution );
@@ -38,45 +41,55 @@ void MeshDataHandler::voxelize( int voxelResolution )
         m_voxels.push_back( std::make_shared<Voxel>( v ));
     }
 
-    dataHandler->setNumberOfVoxels( static_cast<int>(m_voxels.size()) );
-    std::cout << "Number of voxels: " << m_voxels.size() << std::endl;
-
+    dataHandler->setNumberOfVoxels( static_cast<int>(m_voxels.size()));
 }
 
-void MeshDataHandler::update()
+bool MeshDataHandler::update()
 {
-    if ( dataHandler->getVoxelizationAlgorithm() != m_currentAlgorithm )
+    bool meshDataChanged = false;
+
+    if (m_currentModelPath != dataHandler->getCurrentModelPath())
     {
-        switch ( dataHandler->getVoxelizationAlgorithm() )
+        m_currentModelPath = dataHandler->getCurrentModelPath();
+        m_triangleFaces.clear();
+        m_triangleFaces = m_parser->parse(m_currentModelPath);
+        dataHandler->setWorldCenter( util::geometry::calculateCentroid( m_triangleFaces ) );
+        m_voxels.clear();
+        voxelize(dataHandler->getVoxelResolution());
+        meshDataChanged = true;
+    }
+    else if (dataHandler->getVoxelizationAlgorithm() != m_currentAlgorithm)
+    {
+        switch (dataHandler->getVoxelizationAlgorithm())
         {
             case OPTIMIZED:
-            {
-                m_currentAlgorithm = OPTIMIZED;
                 m_voxelizer = std::make_unique<OctreeBVHVoxelizer>();
                 break;
-            }
             case OCTREE:
-            {
-                m_currentAlgorithm = OCTREE;
                 m_voxelizer = std::make_unique<OctreeVoxelizer>();
                 break;
-            }
             case BVH:
-            {
-                m_currentAlgorithm = BVH;
                 m_voxelizer = std::make_unique<BVHVoxelizer>();
                 break;
-            }
             case NAIVE:
-            {
-                m_currentAlgorithm = NAIVE;
                 m_voxelizer = std::make_unique<NaiveVoxelizer>();
                 break;
-            }
-            default: break;
+            default:
+                break;
         }
+        m_currentAlgorithm = dataHandler->getVoxelizationAlgorithm();
+        m_voxels.clear();
+        voxelize(dataHandler->getVoxelResolution());
+        meshDataChanged = true;
     }
-    m_voxels.clear();
-    voxelize( dataHandler->getVoxelResolution());
+    else if (m_currentResolution != dataHandler->getVoxelResolution())
+    {
+        m_currentResolution = dataHandler->getVoxelResolution();
+        m_voxels.clear();
+        voxelize(m_currentResolution);
+        meshDataChanged = true;
+    }
+
+    return meshDataChanged;
 }
 

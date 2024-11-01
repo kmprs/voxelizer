@@ -6,7 +6,8 @@ extern std::shared_ptr<DataHandler> dataHandler;
 
 Camera::Camera() :
         m_position( glm::vec3( -2.f, 0, -2.f )),
-        m_direction( dataHandler->getWorldCenter() - m_position )
+        m_direction( dataHandler->getWorldCenter() - m_position ),
+        m_worldCenter( dataHandler->getWorldCenter() )
 {
 
 }
@@ -30,7 +31,12 @@ void Camera::update( Direction direction, float deltaTime )
 {
     // key callback
     float cameraSpeed = dataHandler->getCameraSpeed() * deltaTime;
-    glm::vec3 worldCenter = dataHandler->getWorldCenter();
+
+    if ( m_worldCenter != dataHandler->getWorldCenter() )
+    {
+        m_worldCenter = dataHandler->getWorldCenter();
+        m_direction = glm::normalize( m_worldCenter - m_position );
+    }
 
     // mouse callback
     if ( dataHandler->getCameraMode() == INDIVIDUAL )
@@ -38,9 +44,9 @@ void Camera::update( Direction direction, float deltaTime )
         SDL_GetMouseState( &m_xPosMouse, &m_yPosMouse );
         mouseCallback( static_cast<float>(m_xPosMouse), static_cast<float>(m_yPosMouse),
                        deltaTime );
-    } else if ( dataHandler->isCameraModeToggled() )
+    } else if ( dataHandler->isCameraModeToggled())
     {
-        m_direction = worldCenter - m_position;
+        m_direction = glm::normalize( m_worldCenter - m_position );
         dataHandler->resetCameraModeToggled();
     }
 
@@ -55,7 +61,7 @@ void Camera::update( Direction direction, float deltaTime )
 
         if ( dataHandler->getCameraMode() == CENTERED )
         {
-            m_position -= worldCenter;
+            m_position -= m_worldCenter;
             if ( direction == UP )
                 m_position = glm::rotate( m_position, glm::radians( cameraRotationSpeed ),
                                           PITCH_AXIS );
@@ -70,10 +76,10 @@ void Camera::update( Direction direction, float deltaTime )
                 m_position = glm::rotate( m_position,
                                           glm::radians( -cameraRotationSpeed ),
                                           YAW_AXIS );
-            m_position += worldCenter;
+            m_position += m_worldCenter;
+            m_direction = glm::normalize( m_worldCenter - m_position );
 
-            // Only update m_direction if not in free mode
-            m_direction = glm::normalize( worldCenter - m_position );
+
         } else if ( dataHandler->getCameraMode() == INDIVIDUAL )
         {
             if ( direction == UP )

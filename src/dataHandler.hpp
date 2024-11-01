@@ -13,33 +13,36 @@ public:
 
     // getters and setters
     [[nodiscard]] glm::vec3 getVoxelColor() const;
-    void setVoxelColor(const glm::vec3 &color);
+    void setVoxelColor( const glm::vec3 &color );
     [[nodiscard]] glm::vec3 getWorldCenter() const;
-    void setWorldCenter(const glm::vec3 &center);
+    void setWorldCenter( const glm::vec3 &center );
     [[nodiscard]] int getWindowWidth() const;
-    void setWindowWidth(int width);
+    void setWindowWidth( int width );
     [[nodiscard]] int getWindowHeight() const;
-    void setWindowHeight(int height);
+    void setWindowHeight( int height );
     [[nodiscard]] int getCurrentFPS() const;
-    void setCurrentFPS(int fps);
+    void setCurrentFPS( int fps );
     [[nodiscard]] int getNumberOfVoxels() const;
-    void setNumberOfVoxels(int numberOfVoxels);
+    void setNumberOfVoxels( int numberOfVoxels );
     [[nodiscard]] int getVoxelResolution() const;
-    void setVoxelResolution( int resolution);
+    void setVoxelResolution( int resolution );
     [[nodiscard]] float getCameraSpeed() const;
-    void setCameraSpeed(float speed);
+    void setCameraSpeed( float speed );
     [[nodiscard]] float getRotationSpeed() const;
-    void setRotationSpeed(float speed);
+    void setRotationSpeed( float speed );
     [[nodiscard]] Representation getModelRepresentation() const;
     void toggleModelRepresentation();
     [[nodiscard]] CameraMode getCameraMode() const;
     void toggleCameraMode();
     [[nodiscard]] VoxelizationAlgorithm getVoxelizationAlgorithm() const;
-    void setAlgorithm ( VoxelizationAlgorithm algorithm );
+    void setAlgorithm( VoxelizationAlgorithm algorithm );
     [[nodiscard]] bool isCameraModeToggled() const;
     void resetCameraModeToggled();
     [[nodiscard]] bool isWindowFreezed() const;
     void toggleWindowFreeze();
+    void setWindowFreeze( bool isFreezed );
+    [[nodiscard]] std::string getCurrentModelPath() const;
+    void setModelPath( const std::string &path );
 
 private:
     glm::vec3 m_voxelColor = {};
@@ -56,4 +59,5 @@ private:
     VoxelizationAlgorithm m_voxelizationAlgorithm = OPTIMIZED;
     bool m_cameraModeToggled = false;
     bool m_isWindowFreezed = false;
+    std::string m_currentModelPath;
 };

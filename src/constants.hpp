@@ -37,5 +37,4 @@ constexpr int MAX_RESOLUTION = 10;
 constexpr int BVH_DEPTH = 12;
 
 // MODEL
-const std::string MODEL_PATH = "../binaries/dragon.obj";
 const std::string BINARY_PATH = "../binaries";

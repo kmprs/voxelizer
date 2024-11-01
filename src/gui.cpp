@@ -127,7 +127,9 @@ void GUI::buttonRepresentation( float buttonWidth )
 void GUI::collapseAlgorithmSelection()
 {
     static bool isCollapsed = false;
-    const char* labels[] = { "Optimized Voxelizer", "Naive Voxelizer", "Octree Voxelizer",
+    const char* labels[] = { "Optimized Voxelizer",
+                             "Naive Voxelizer",
+                             "Octree Voxelizer",
                              "BVH Voxelizer" };
 
     int selectedIndex = static_cast<int>(dataHandler->getVoxelizationAlgorithm());
@@ -219,7 +221,7 @@ void GUI::buttonFileDialog( float buttonWidth )
     IGFD::FileDialogConfig config;
     config.path = BINARY_PATH;
 
-    if ( ImGui::Button( "Model upload", ImVec2( buttonWidth, 0 )))
+    if ( ImGui::Button( "Import OBJ model", ImVec2( buttonWidth, 0 )))
     {
         fileSelected = false;
         ImGuiFileDialog::Instance()->OpenDialog(
@@ -238,8 +240,12 @@ void GUI::buttonFileDialog( float buttonWidth )
     if ( ImGuiFileDialog::Instance()->IsOk() && !fileSelected )
     {
         std::string filePath = ImGuiFileDialog::Instance()->GetFilePathName();
-        std::cout << "Selected file: " << filePath << std::endl;
+        dataHandler->setModelPath( filePath );
         fileSelected = true;
+
+        // reset dataHandler members
+        dataHandler->setWindowFreeze( false );
+
         ImGuiFileDialog::Instance()->Close();
     } else if ( !ImGuiFileDialog::Instance()->IsOk() &&
                 ImGuiFileDialog::Instance()->cancelPressed )
@@ -247,6 +253,10 @@ void GUI::buttonFileDialog( float buttonWidth )
         ImGuiFileDialog::Instance()->cancelPressed = false;
         ImGuiFileDialog::Instance()->Close();
     }
+
+    std::filesystem::path filePath( dataHandler->getCurrentModelPath() );
+
+    ImGui::Text("current model: %s", filePath.filename().c_str());
 }
 
 

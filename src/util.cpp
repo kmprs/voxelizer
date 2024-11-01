@@ -260,6 +260,21 @@ namespace util
             else if ( abs( distance.y ) == maxDistance )return trianglePoint.y;
             return trianglePoint.z;
         }
+
+        glm::vec3 calculateCentroid(
+                const std::vector<std::shared_ptr<TriangleFace>> &triangleFaces )
+        {
+            // calculate centroid of mesh based on the triangle-representation of the model
+            glm::vec3 centroid = { 0, 0, 0 };
+            for ( const auto &triangleFace: triangleFaces )
+            {
+                glm::vec3 triangleCenter = triangleFace->getCenter();
+                centroid.x += triangleCenter.x / static_cast<float>(triangleFaces.size());
+                centroid.y += triangleCenter.y / static_cast<float>(triangleFaces.size());
+                centroid.z += triangleCenter.z / static_cast<float>(triangleFaces.size());
+            }
+            return centroid;
+        }
     }
 
     namespace octree

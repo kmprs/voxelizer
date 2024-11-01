@@ -26,20 +26,14 @@ private:
 
     glm::vec3 m_position = {};
     glm::vec3 m_direction = {};
+    glm::vec3 m_worldCenter = {};
 
     float m_yaw = -1;
     float m_pitch = -1;
-    float m_roll = -1;
-
-    bool m_moving = false;
-    bool m_forwardMovement = false;
-    bool m_upMovement = false;
-    bool m_leftMovement = false;
 
     bool m_firstMouse = true;
     int m_xPosMouse = -1;
     int m_yPosMouse = -1;
     float m_lastX = -1;
     float m_lastY = -1;
-    bool m_dragging = false;
 };

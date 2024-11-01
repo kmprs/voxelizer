@@ -41,6 +41,8 @@ namespace util
                                                           const std::array<float, 3> &distances );
         float
         projectOntoAxis( const glm::vec3 &distance, const glm::vec3 &trianglePoint );
+        glm::vec3 calculateCentroid(
+                const std::vector<std::shared_ptr<TriangleFace>> &triangleFaces );
     }
 
     namespace octree

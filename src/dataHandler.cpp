@@ -6,7 +6,7 @@ DataHandler::DataHandler() :
         m_windowWidth( 1280 ), m_windowHeight( 780 ),
         m_cameraSpeed( INIT_CAMERA_SPEED ), m_rotationSpeed( INIT_ROTATION_SPEED ),
         m_modelRepresentation{ VOXEL }, m_voxelResolution( INIT_RESOLUTION ),
-        m_voxelizationAlgorithm( OPTIMIZED )
+        m_voxelizationAlgorithm( OPTIMIZED ), m_currentModelPath("../binaries/bunny.obj")
 {}
 
 
@@ -143,6 +143,11 @@ void DataHandler::toggleWindowFreeze()
     m_isWindowFreezed = !m_isWindowFreezed;
 }
 
+void DataHandler::setWindowFreeze( bool isFreezed )
+{
+    m_isWindowFreezed = isFreezed;
+}
+
 VoxelizationAlgorithm DataHandler::getVoxelizationAlgorithm() const
 {
     return m_voxelizationAlgorithm;
@@ -151,4 +156,14 @@ VoxelizationAlgorithm DataHandler::getVoxelizationAlgorithm() const
 void DataHandler::setAlgorithm( VoxelizationAlgorithm algorithm )
 {
     m_voxelizationAlgorithm = algorithm;
+}
+
+std::string DataHandler::getCurrentModelPath() const
+{
+    return m_currentModelPath;
+}
+
+void DataHandler::setModelPath( const std::string &path )
+{
+    m_currentModelPath = path;
 }
