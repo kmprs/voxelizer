@@ -51,6 +51,16 @@ add_executable(${NAME} main.cpp
         src/voxelizer.hpp
         src/bresenhamVoxelizer.cpp
         src/bresenhamVoxelizer.hpp
+        src/gui.cpp
+        src/gui.hpp
+        src/dataHandler.cpp
+        src/dataHandler.hpp
+        src/naiveVoxelizer.cpp
+        src/naiveVoxelizer.hpp
+        src/octreeVoxelizer.cpp
+        src/octreeVoxelizer.hpp
+        src/bvhVoxelizer.cpp
+        src/bvhVoxelizer.hpp
 
         dependencies/imgui/imconfig.h
         dependencies/imgui/imgui.cpp
@@ -64,16 +74,9 @@ add_executable(${NAME} main.cpp
         dependencies/imgui/imgui_impl_opengl3_loader.h
         dependencies/imgui/imgui_impl_sdl2.cpp
         dependencies/imgui/imgui_impl_sdl2.h
-        src/gui.cpp
-        src/gui.hpp
-        src/dataHandler.cpp
-        src/dataHandler.hpp
-        src/naiveVoxelizer.cpp
-        src/naiveVoxelizer.hpp
-        src/octreeVoxelizer.cpp
-        src/octreeVoxelizer.hpp
-        src/bvhVoxelizer.cpp
-        src/bvhVoxelizer.hpp
+        dependencies/file_dialog/ImGuiFileDialog.cpp
+        dependencies/file_dialog/ImGuiFileDialog.h
+        dependencies/file_dialog/ImGuiFileDialogConfig.h
 )
 
 

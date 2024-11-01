@@ -215,9 +215,37 @@ void GUI::showPerformanceData()
 
 void GUI::buttonFileDialog( float buttonWidth )
 {
-    if ( ImGui::Button( "Open File Dialog", ImVec2( buttonWidth, 0 )))
-    {
+    static bool fileSelected = false;
+    IGFD::FileDialogConfig config;
+    config.path = BINARY_PATH;
 
+    if ( ImGui::Button( "Model upload", ImVec2( buttonWidth, 0 )))
+    {
+        fileSelected = false;
+        ImGuiFileDialog::Instance()->OpenDialog(
+                "OBJFileDialog",
+                "Choose an OBJ-File",
+                ".obj",
+                config );
+    }
+
+    ImVec2 minDialogSize = ImVec2(
+            static_cast<float>(dataHandler->getWindowWidth()) * .7f,
+            static_cast<float>(dataHandler->getWindowHeight()) * .7f
+            );
+    ImGuiFileDialog::Instance()->Display( "OBJFileDialog", 0, minDialogSize );
+
+    if ( ImGuiFileDialog::Instance()->IsOk() && !fileSelected )
+    {
+        std::string filePath = ImGuiFileDialog::Instance()->GetFilePathName();
+        std::cout << "Selected file: " << filePath << std::endl;
+        fileSelected = true;
+        ImGuiFileDialog::Instance()->Close();
+    } else if ( !ImGuiFileDialog::Instance()->IsOk() &&
+                ImGuiFileDialog::Instance()->cancelPressed )
+    {
+        ImGuiFileDialog::Instance()->cancelPressed = false;
+        ImGuiFileDialog::Instance()->Close();
     }
 }
 
