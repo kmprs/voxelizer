@@ -21,10 +21,5 @@ platform for rendering 3D-models as voxels and to explore different optimization
 - Install the necessary dependencies 
   - OpenGL 
   - SDL2 
-- Create a ./binaries directory and put your 3D models 
+- Create a /binaries directory and add your 3D models to it
 - Adjust the 3D model path in src/constants.hpp 
-
-## Credits
-
-This project uses [Dear ImGui](https://github.com/ocornut/imgui), which is licensed under 
-the MIT License. See the `LICENSE` file for more details.
