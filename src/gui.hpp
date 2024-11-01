@@ -25,6 +25,7 @@ private:
     static void buttonCameraMode( float buttonWidth );
     static void numberInputCameraSpeed();
     static void numberInputRotationSpeed();
+    static void buttonFileDialog( float buttonWidth );
     static void showPerformanceData();
 
 };

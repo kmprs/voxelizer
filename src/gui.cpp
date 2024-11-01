@@ -85,6 +85,7 @@ void GUI::createFrame( float width, float height, int x, int y )
     ImGui::SetNextWindowSize( ImVec2( width, height ));
     ImGui::Begin( "Right GUI", nullptr, window_flags );
 
+    buttonFileDialog( buttonWidth );
 
     ImGui::End();
 
@@ -210,6 +211,14 @@ void GUI::showPerformanceData()
     ImGui::SameLine();
     ImGui::Text( "%d voxels", dataHandler->getNumberOfVoxels());
     ImGui::SameLine();
+}
+
+void GUI::buttonFileDialog( float buttonWidth )
+{
+    if ( ImGui::Button( "Open File Dialog", ImVec2( buttonWidth, 0 )))
+    {
+
+    }
 }
 
 
