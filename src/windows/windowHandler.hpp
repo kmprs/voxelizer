@@ -3,10 +3,10 @@
 #include <iostream>
 #include <SDL.h>
 #include <GL/glew.h>
-#include "../dependencies/imgui/imgui.h"
-#include "../dependencies/imgui/imgui_impl_opengl3.h"
-#include "../dependencies/imgui/imgui_impl_sdl2.h"
-#include "gui.hpp"
+#include "../../dependencies/imgui/imgui.h"
+#include "../../dependencies/imgui/imgui_impl_opengl3.h"
+#include "../../dependencies/imgui/imgui_impl_sdl2.h"
+#include "../gui.hpp"
 
 
 class WindowHandler
@@ -16,6 +16,8 @@ public:
     ~WindowHandler();
 
     [[nodiscard]] bool isClosed() const;
+    void initGLContext();
+    void initGui();
     void close();
     void swapWindow();
     void makeCurrent();

@@ -8,8 +8,8 @@ set(CMAKE_CXX_STANDARD 17)
 add_executable(${NAME} main.cpp
         src/program.cpp
         src/program.hpp
-        src/windowHandler.cpp
-        src/windowHandler.hpp
+        src/windows/windowHandler.cpp
+        src/windows/windowHandler.hpp
         src/eventHandler.cpp
         src/eventHandler.hpp
         src/openGLHandler.cpp

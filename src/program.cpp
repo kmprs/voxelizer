@@ -13,6 +13,8 @@ void Program::run()
     SDL_Event event;
     WindowHandler windowHandler = { TITLE, dataHandler->getWindowWidth(),
                                     dataHandler->getWindowHeight() };
+    windowHandler.initGLContext();
+    windowHandler.initGui();
     OpenGLHandler openGlHandler = {};
     std::shared_ptr<ShaderHandler> shaderHandler = openGlHandler.getShaderHandler();
     Transformator transformator = { shaderHandler };
