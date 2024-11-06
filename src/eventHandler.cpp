@@ -6,7 +6,6 @@ extern std::shared_ptr<DataHandler> dataHandler;
 void EventHandler::processInput( SDL_Event &event, WindowHandler &windowHandler,
                                  Direction &cameraDirection )
 {
-    static bool freezeOn = false;
     if ( event.type == SDL_KEYDOWN )
     {
         switch ( event.key.keysym.sym )

@@ -18,10 +18,11 @@ public:
     [[nodiscard]] bool isClosed() const;
     void close();
     void swapWindow();
-    void updateWindowSize();
+    virtual void updateWindowSize();
     void loadGUIFrame() const;
     void toggleFullscreen();
 
+    [[nodiscard]] SDL_Window* getWindow() const;
 
 protected:
     int m_width = -1;

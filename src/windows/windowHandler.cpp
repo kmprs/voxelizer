@@ -33,10 +33,7 @@ WindowHandler::WindowHandler( const std::string &title, int width, int height )
 
 WindowHandler::~WindowHandler()
 {
-    ImGui_ImplSDL2_Shutdown();
-    ImGui::DestroyContext();
     SDL_DestroyWindow( m_window );
-    SDL_Quit();
 }
 
 bool WindowHandler::isClosed() const
@@ -59,9 +56,6 @@ void WindowHandler::swapWindow()
 void WindowHandler::updateWindowSize()
 {
     SDL_GetWindowSize( m_window, &m_width, &m_height );
-    glViewport(GUI_WIDTH, 0, m_width -  2 * GUI_WIDTH, m_height);
-    dataHandler->setWindowWidth( m_width );
-    dataHandler->setWindowHeight( m_height );
 }
 
 void WindowHandler::loadGUIFrame() const
@@ -75,4 +69,9 @@ void WindowHandler::toggleFullscreen()
     if ( m_isFullscreen ) SDL_SetWindowFullscreen( m_window, 0 );
     else SDL_SetWindowFullscreen( m_window, SDL_WINDOW_FULLSCREEN );
     m_isFullscreen = !m_isFullscreen;
+}
+
+SDL_Window* WindowHandler::getWindow() const
+{
+    return m_window;
 }

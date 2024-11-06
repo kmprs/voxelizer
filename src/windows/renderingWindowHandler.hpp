@@ -12,6 +12,7 @@ public:
     void initGLContext();
     void initGui();
     void makeCurrent();
+    void updateWindowSize() override;
 
 private:
     SDL_GLContext m_context = nullptr;

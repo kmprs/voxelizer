@@ -4,7 +4,7 @@
 #include <glm/glm.hpp>
 
 // WINDOW
-constexpr glm::vec3 BACKGROUND_COLOR = { .2f, .2f, .2f };
+constexpr glm::vec3 BACKGROUND_COLOR = { .12f, .12f, .12f };
 const std::string TITLE = "Voxelizer";
 constexpr int TARGET_FPS = 1000;
 constexpr int FRAME_DELAY = 1000/TARGET_FPS;
@@ -23,12 +23,12 @@ constexpr glm::vec3 PITCH_AXIS = {1, 0, 0};
 
 
 // WORLD
-constexpr float AMBIENT_STRENGTH = .7f;
+constexpr float AMBIENT_STRENGTH = .5f;
 constexpr float SPECULAR_STRENGTH = .5f;
 constexpr int SHININESS = 32;
 constexpr glm::vec3 LIGHT_POSITION = {-1.5f, 1.5f, -1.5f};
 constexpr glm::vec3 LIGHT_COLOR = {1.f, 1.f, 1.f};
-constexpr float ATTENUATION_CONSTANT = 1.f;
+constexpr float ATTENUATION_CONSTANT = 0.5f;
 constexpr float ATTENUATION_LINEAR = 0.2f;
 constexpr float ATTENUATION_QUADRATIC = 0.1f;
 

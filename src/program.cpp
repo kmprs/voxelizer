@@ -12,9 +12,10 @@ void Program::run()
 {
     SDL_Event event;
     RenderingWindowHandler windowHandler = { TITLE, dataHandler->getWindowWidth(),
-                                    dataHandler->getWindowHeight() };
-    windowHandler.initGLContext();
-    windowHandler.initGui();
+                                             dataHandler->getWindowHeight() };
+    WindowHandler benchmarkWindowHandler = { TITLE,
+                                             400,
+                                             400 };
     OpenGLHandler openGlHandler = {};
     std::shared_ptr<ShaderHandler> shaderHandler = openGlHandler.getShaderHandler();
     Transformator transformator = { shaderHandler };
@@ -33,17 +34,26 @@ void Program::run()
     Uint64 performanceFrequency = SDL_GetPerformanceFrequency();
 
 
-    while ( !windowHandler.isClosed())
+    while ( !windowHandler.isClosed() )
     {
         currentCounter = SDL_GetPerformanceCounter();
 
         if ( SDL_PollEvent( &event ) && event.type == SDL_QUIT )
         {
             windowHandler.close();
+            benchmarkWindowHandler.close();
         } else if ( event.type == SDL_WINDOWEVENT &&
                     event.window.event == SDL_WINDOWEVENT_RESIZED )
         {
-            windowHandler.updateWindowSize();
+            if ( event.window.windowID ==
+                 SDL_GetWindowID( windowHandler.getWindow()))
+            {
+                windowHandler.updateWindowSize();
+            } else if ( event.window.windowID ==
+                        SDL_GetWindowID( benchmarkWindowHandler.getWindow()))
+            {
+                benchmarkWindowHandler.updateWindowSize();
+            }
         } else
         {
             ImGui_ImplSDL2_ProcessEvent( &event );
@@ -59,11 +69,11 @@ void Program::run()
         // main methods
 
         EventHandler::processInput( event, windowHandler, cameraDirection );
-        if ( !dataHandler->isWindowFreezed() )
+        if ( !dataHandler->isWindowFreezed())
         {
             camera.update( cameraDirection, deltaTime );
             transformator.transform( camera.getPosition(), camera.getDirection());
-            sceneHandler.setScene( camera.getPosition() );
+            sceneHandler.setScene( camera.getPosition());
             renderer.render();
             openGlHandler.use();
         }
@@ -73,6 +83,8 @@ void Program::run()
         windowHandler.makeCurrent();
         ImGui_ImplOpenGL3_RenderDrawData( ImGui::GetDrawData());
         windowHandler.swapWindow();
+
+        benchmarkWindowHandler.swapWindow();
 
         // constant fps
         frameCount++;
@@ -92,4 +104,10 @@ void Program::run()
             SDL_Delay( static_cast<Uint32>(FRAME_DELAY - frameDuration));
         }
     }
+
+    // clean up SDL/GL/ImGui
+    ImGui_ImplOpenGL3_Shutdown();
+    ImGui_ImplSDL2_Shutdown();
+    ImGui::DestroyContext();
+    SDL_Quit();
 }

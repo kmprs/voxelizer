@@ -1,6 +1,9 @@
 #include "renderingWindowHandler.hpp"
 
 
+extern std::shared_ptr<DataHandler> dataHandler;
+
+
 RenderingWindowHandler::RenderingWindowHandler(const std::string& title, int width, int height)
         : WindowHandler(title, width, height)
 {
@@ -11,7 +14,6 @@ RenderingWindowHandler::RenderingWindowHandler(const std::string& title, int wid
 
 RenderingWindowHandler::~RenderingWindowHandler()
 {
-    ImGui_ImplOpenGL3_Shutdown();
     SDL_GL_DeleteContext(m_context);
 }
 
@@ -49,4 +51,13 @@ void RenderingWindowHandler::initGui()
 void RenderingWindowHandler::makeCurrent()
 {
     SDL_GL_MakeCurrent( m_window, m_context );
+}
+
+
+void RenderingWindowHandler::updateWindowSize()
+{
+    SDL_GetWindowSize( m_window, &m_width, &m_height );
+    glViewport(GUI_WIDTH, 0, m_width -  2 * GUI_WIDTH, m_height);
+    dataHandler->setWindowWidth( m_width );
+    dataHandler->setWindowHeight( m_height );
 }
