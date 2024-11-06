@@ -38,21 +38,28 @@ void Program::run()
     {
         currentCounter = SDL_GetPerformanceCounter();
 
-        if ( SDL_PollEvent( &event ) && event.type == SDL_QUIT )
+        if ( SDL_PollEvent( &event ) && event.type == SDL_WINDOWEVENT )
         {
-            windowHandler.close();
-            benchmarkWindowHandler.close();
-        } else if ( event.type == SDL_WINDOWEVENT &&
-                    event.window.event == SDL_WINDOWEVENT_RESIZED )
-        {
-            if ( event.window.windowID ==
-                 SDL_GetWindowID( windowHandler.getWindow()))
+            if ( event.window.event == SDL_WINDOWEVENT_CLOSE)
             {
-                windowHandler.updateWindowSize();
-            } else if ( event.window.windowID ==
-                        SDL_GetWindowID( benchmarkWindowHandler.getWindow()))
+                if ( SDL_GetWindowID( windowHandler.getWindow()) == event.window.windowID )
+                {
+                    windowHandler.close();
+                } else
+                {
+                    benchmarkWindowHandler.close();
+                }
+            } else if ( event.window.event == SDL_WINDOWEVENT_RESIZED)
             {
-                benchmarkWindowHandler.updateWindowSize();
+                if ( event.window.windowID ==
+                     SDL_GetWindowID( windowHandler.getWindow()))
+                {
+                    windowHandler.updateWindowSize();
+                } else if ( event.window.windowID ==
+                            SDL_GetWindowID( benchmarkWindowHandler.getWindow()))
+                {
+                    benchmarkWindowHandler.updateWindowSize();
+                }
             }
         } else
         {
