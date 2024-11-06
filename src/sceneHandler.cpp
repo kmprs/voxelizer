@@ -19,5 +19,8 @@ void SceneHandler::setScene( const glm::vec3 &cameraPosition ) const
     m_shaderHandler->setVec3("CAMERA_POSITION", cameraPosition);
     m_shaderHandler->setFloat( "SPECULAR_STRENGTH", SPECULAR_STRENGTH );
     m_shaderHandler->setInt( "SHININESS", SHININESS );
+    m_shaderHandler->setFloat( "ATTENUATION_CONSTANT", ATTENUATION_CONSTANT );
+    m_shaderHandler->setFloat( "ATTENUATION_LINEAR", ATTENUATION_LINEAR );
+    m_shaderHandler->setFloat( "ATTENUATION_QUADRATIC", ATTENUATION_QUADRATIC );
 }
 

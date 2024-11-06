@@ -23,11 +23,14 @@ constexpr glm::vec3 PITCH_AXIS = {1, 0, 0};
 
 
 // WORLD
-constexpr float AMBIENT_STRENGTH = .4f;
+constexpr float AMBIENT_STRENGTH = .7f;
 constexpr float SPECULAR_STRENGTH = .5f;
 constexpr int SHININESS = 32;
-constexpr glm::vec3 LIGHT_POSITION = {-1.f, 3.f, -2.f};
+constexpr glm::vec3 LIGHT_POSITION = {-1.5f, 1.5f, -1.5f};
 constexpr glm::vec3 LIGHT_COLOR = {1.f, 1.f, 1.f};
+constexpr float ATTENUATION_CONSTANT = 1.f;
+constexpr float ATTENUATION_LINEAR = 0.2f;
+constexpr float ATTENUATION_QUADRATIC = 0.1f;
 
 constexpr int VOXEL_MEMORY_SIZE = 24;
 
