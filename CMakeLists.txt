@@ -77,6 +77,8 @@ add_executable(${NAME} main.cpp
         dependencies/file_dialog/ImGuiFileDialog.cpp
         dependencies/file_dialog/ImGuiFileDialog.h
         dependencies/file_dialog/ImGuiFileDialogConfig.h
+        src/windows/renderingWindowHandler.cpp
+        src/windows/renderingWindowHandler.hpp
 )
 
 

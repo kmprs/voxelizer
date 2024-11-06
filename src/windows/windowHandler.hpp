@@ -16,21 +16,18 @@ public:
     ~WindowHandler();
 
     [[nodiscard]] bool isClosed() const;
-    void initGLContext();
-    void initGui();
     void close();
     void swapWindow();
-    void makeCurrent();
     void updateWindowSize();
     void loadGUIFrame() const;
     void toggleFullscreen();
 
 
-private:
+protected:
     int m_width = -1;
     int m_height = -1;
     bool m_isFullscreen = false;
     bool m_closed = false;
     SDL_Window *m_window = nullptr;
-    SDL_GLContext m_context = nullptr;
+
 };

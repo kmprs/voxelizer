@@ -11,7 +11,7 @@ std::shared_ptr<DataHandler> dataHandler = std::make_shared<DataHandler>();
 void Program::run()
 {
     SDL_Event event;
-    WindowHandler windowHandler = { TITLE, dataHandler->getWindowWidth(),
+    RenderingWindowHandler windowHandler = { TITLE, dataHandler->getWindowWidth(),
                                     dataHandler->getWindowHeight() };
     windowHandler.initGLContext();
     windowHandler.initGui();

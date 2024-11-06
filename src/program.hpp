@@ -1,6 +1,7 @@
 #pragma once
 
 #include "eventHandler.hpp"
+#include "windows/renderingWindowHandler.hpp"
 
 class Program
 {
