@@ -16,6 +16,9 @@ void Program::run()
     WindowHandler benchmarkWindowHandler = { TITLE,
                                              400,
                                              400 };
+    bool benchmarksShown = dataHandler->isBenchmarkShown();
+    SDL_HideWindow( benchmarkWindowHandler.getWindow() );
+
     OpenGLHandler openGlHandler = {};
     std::shared_ptr<ShaderHandler> shaderHandler = openGlHandler.getShaderHandler();
     Transformator transformator = { shaderHandler };
@@ -34,22 +37,23 @@ void Program::run()
     Uint64 performanceFrequency = SDL_GetPerformanceFrequency();
 
 
-    while ( !windowHandler.isClosed() )
+    while ( !windowHandler.isClosed())
     {
         currentCounter = SDL_GetPerformanceCounter();
 
         if ( SDL_PollEvent( &event ) && event.type == SDL_WINDOWEVENT )
         {
-            if ( event.window.event == SDL_WINDOWEVENT_CLOSE)
+            if ( event.window.event == SDL_WINDOWEVENT_CLOSE )
             {
-                if ( SDL_GetWindowID( windowHandler.getWindow()) == event.window.windowID )
+                if ( SDL_GetWindowID( windowHandler.getWindow()) ==
+                     event.window.windowID )
                 {
                     windowHandler.close();
                 } else
                 {
-                    benchmarkWindowHandler.close();
+                    dataHandler->showBenchmarks( false );
                 }
-            } else if ( event.window.event == SDL_WINDOWEVENT_RESIZED)
+            } else if ( event.window.event == SDL_WINDOWEVENT_RESIZED )
             {
                 if ( event.window.windowID ==
                      SDL_GetWindowID( windowHandler.getWindow()))
@@ -64,6 +68,13 @@ void Program::run()
         } else
         {
             ImGui_ImplSDL2_ProcessEvent( &event );
+        }
+
+        if ( benchmarksShown != dataHandler->isBenchmarkShown())
+        {
+            benchmarksShown = dataHandler->isBenchmarkShown();
+            SDL_Window* w = benchmarkWindowHandler.getWindow();
+            ( benchmarksShown ) ? SDL_ShowWindow( w ) : SDL_HideWindow( w );
         }
 
         deltaTime = ( static_cast<float>(currentCounter - lastCounter)) /

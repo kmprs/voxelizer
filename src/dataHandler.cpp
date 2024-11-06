@@ -148,6 +148,16 @@ void DataHandler::setWindowFreeze( bool isFreezed )
     m_isWindowFreezed = isFreezed;
 }
 
+bool DataHandler::isBenchmarkShown() const
+{
+    return m_showBenchmarks;
+}
+
+void DataHandler::showBenchmarks( bool showBenchmarks )
+{
+    m_showBenchmarks = showBenchmarks;
+}
+
 VoxelizationAlgorithm DataHandler::getVoxelizationAlgorithm() const
 {
     return m_voxelizationAlgorithm;

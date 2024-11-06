@@ -86,10 +86,13 @@ void GUI::createFrame( float width, float height, int x, int y )
     ImGui::Begin( "Right GUI", nullptr, window_flags );
 
     buttonFileDialog( buttonWidth );
+    ImGui::Spacing();
+
+    buttonBenchmarkDialog( buttonWidth );
 
     ImGui::End();
 
-//     BOTTOM BAR - PERFORMANCE DATA
+    // BOTTOM BAR - PERFORMANCE DATA
     float performanceHeight = 30.f;
     ImGui::SetNextWindowPos( ImVec2( width,
                                      static_cast<float>(dataHandler->getWindowHeight()) -
@@ -116,7 +119,7 @@ void GUI::createFrame( float width, float height, int x, int y )
 void GUI::buttonRepresentation( float buttonWidth )
 {
     const char* currentRepresentation = ( dataHandler->getModelRepresentation() == VOXEL )
-                                        ? "Voxel" : "Triangle";
+                                        ? "Voxel##REPRESENTATION" : "Triangle##REPRESENTATION";
     ImGui::Text( "Triangle/Voxel" );
     if ( ImGui::Button( currentRepresentation, ImVec2( buttonWidth, 0 )))
     {
@@ -161,7 +164,7 @@ void GUI::sliderVoxelResolution( float buttonWidth )
     // VOXEL RESOLUTION
     ImGui::Text( "Voxel Resolution" );
     ImGui::PushItemWidth( buttonWidth );
-    if ( ImGui::SliderInt( "", &resolution, 1, 10 ))
+    if ( ImGui::SliderInt( "##SLIDERRESOLUTION", &resolution, 1, 10 ))
     {};
     if ( ImGui::IsItemDeactivatedAfterEdit())
     {
@@ -181,7 +184,7 @@ void GUI::colorPickerVoxel()
 void GUI::buttonCameraMode( float buttonWidth )
 {
     const char* cameraMode = ( dataHandler->getCameraMode() == CENTERED )
-                             ? "centered" : "free";
+                             ? "centered##CAMERAMODE" : "free##CAMERAMODE";
     ImGui::Text( "Camera Mode" );
     if ( ImGui::Button( cameraMode, ImVec2( buttonWidth, 0 )))
     {
@@ -207,21 +210,13 @@ void GUI::numberInputRotationSpeed()
     dataHandler->setRotationSpeed( speed );
 }
 
-void GUI::showPerformanceData()
-{
-    ImGui::Text( "%d FPS", dataHandler->getCurrentFPS());
-    ImGui::SameLine();
-    ImGui::Text( "%d voxels", dataHandler->getNumberOfVoxels());
-    ImGui::SameLine();
-}
-
 void GUI::buttonFileDialog( float buttonWidth )
 {
     static bool fileSelected = false;
     IGFD::FileDialogConfig config;
     config.path = BINARY_PATH;
 
-    if ( ImGui::Button( "Import OBJ model", ImVec2( buttonWidth, 0 )))
+    if ( ImGui::Button( "Import OBJ model##GUI_MODEL", ImVec2( buttonWidth, 0 )))
     {
         fileSelected = false;
         ImGuiFileDialog::Instance()->OpenDialog(
@@ -234,7 +229,7 @@ void GUI::buttonFileDialog( float buttonWidth )
     ImVec2 minDialogSize = ImVec2(
             static_cast<float>(dataHandler->getWindowWidth()) * .7f,
             static_cast<float>(dataHandler->getWindowHeight()) * .7f
-            );
+    );
     ImGuiFileDialog::Instance()->Display( "OBJFileDialog", 0, minDialogSize );
 
     if ( ImGuiFileDialog::Instance()->IsOk() && !fileSelected )
@@ -259,5 +254,20 @@ void GUI::buttonFileDialog( float buttonWidth )
     ImGui::Text("current model: %s", filePath.filename().c_str());
 }
 
+void GUI::buttonBenchmarkDialog( float buttonWidth )
+{
+    ImGui::Text( "Create Benchmarks" );
+    if ( ImGui::Button( "Benchmarks##BENCHMARKS", ImVec2( buttonWidth, 0 )))
+    {
+        dataHandler->showBenchmarks( true );
+    }
+}
 
+void GUI::showPerformanceData()
+{
+    ImGui::Text( "%d FPS", dataHandler->getCurrentFPS());
+    ImGui::SameLine();
+    ImGui::Text( "%d voxels", dataHandler->getNumberOfVoxels());
+    ImGui::SameLine();
+}
 

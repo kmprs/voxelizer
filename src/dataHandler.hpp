@@ -41,6 +41,8 @@ public:
     [[nodiscard]] bool isWindowFreezed() const;
     void toggleWindowFreeze();
     void setWindowFreeze( bool isFreezed );
+    [[nodiscard]] bool isBenchmarkShown() const;
+    void showBenchmarks( bool isShown );
     [[nodiscard]] std::string getCurrentModelPath() const;
     void setModelPath( const std::string &path );
 
@@ -59,5 +61,6 @@ private:
     VoxelizationAlgorithm m_voxelizationAlgorithm = OPTIMIZED;
     bool m_cameraModeToggled = false;
     bool m_isWindowFreezed = false;
+    bool m_showBenchmarks = false;
     std::string m_currentModelPath;
 };
