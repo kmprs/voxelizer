@@ -1,44 +1,10 @@
-#include "gui.hpp"
+#include "mainGui.hpp"
 
 
 extern std::shared_ptr<DataHandler> dataHandler;
-static int resolution = INIT_RESOLUTION;
 
-void GUI::setStyles()
-{
-    ImGuiIO &io = ImGui::GetIO();
-    io.Fonts->AddFontFromFileTTF( "../binaries/arial.ttf", 16.0f );
-    io.FontDefault = io.Fonts->Fonts.back();
 
-    ImGuiStyle &style = ImGui::GetStyle();
-    style.WindowPadding = ImVec2( 10, 10 );
-    style.FramePadding = ImVec2( 5, 5 );
-    style.ItemSpacing = ImVec2( 10, 10 );
-    style.ItemInnerSpacing = ImVec2( 8, 6 );
-    style.ScrollbarSize = 12;
-
-    style.FrameRounding = 8.0f;
-    style.GrabRounding = 4.0f;
-
-    style.Colors[ImGuiCol_WindowBg] = ImVec4( 0.1f, 0.1f, 0.1f, 1.0f ); // Dark background
-    style.Colors[ImGuiCol_TitleBg] = ImVec4( 0.16f, 0.16f, 0.16f, 1.0f );
-    style.Colors[ImGuiCol_TitleBgActive] = ImVec4( 0.2f, 0.2f, 0.2f, 1.0f );
-    style.Colors[ImGuiCol_FrameBg] = ImVec4( 0.2f, 0.2f, 0.2f, 1.0f );
-    style.Colors[ImGuiCol_FrameBgHovered] = ImVec4( 0.25f, 0.25f, 0.25f, 1.0f );
-    style.Colors[ImGuiCol_FrameBgActive] = ImVec4( 0.35f, 0.35f, 0.35f, 1.0f );
-    style.Colors[ImGuiCol_Button] = ImVec4( 0.15f, 0.15f, 0.15f, 1.0f );
-    style.Colors[ImGuiCol_ButtonHovered] = ImVec4( 0.25f, 0.25f, 0.25f, 1.0f );
-    style.Colors[ImGuiCol_ButtonActive] = ImVec4( 0.35f, 0.35f, 0.35f, 1.0f );
-    style.Colors[ImGuiCol_Header] = ImVec4( 0.15f, 0.15f, 0.15f, 1.0f );
-    style.Colors[ImGuiCol_HeaderHovered] = ImVec4( 0.25f, 0.25f, 0.25f, 1.0f );
-    style.Colors[ImGuiCol_HeaderActive] = ImVec4( 0.35f, 0.35f, 0.35f, 1.0f );
-    style.Colors[ImGuiCol_SliderGrab] = ImVec4( 0.7f, 0.7f, 0.7f, 1.0f );
-    style.Colors[ImGuiCol_SliderGrabActive] = ImVec4( 0.8f, 0.8f, 0.8f, 1.0f );
-
-    ImGui::GetIO().FontGlobalScale = 1.f;
-}
-
-void GUI::createFrame( float width, float height, int x, int y )
+void MainGUI::createFrame( float width, float height, int x, int y )
 {
     ImGui_ImplSDL2_NewFrame();
     ImGui_ImplOpenGL3_NewFrame();
@@ -116,7 +82,8 @@ void GUI::createFrame( float width, float height, int x, int y )
     ImGui::PopStyleColor();
 }
 
-void GUI::buttonRepresentation( float buttonWidth )
+
+void MainGUI::buttonRepresentation( float buttonWidth )
 {
     const char* currentRepresentation = ( dataHandler->getModelRepresentation() == VOXEL )
                                         ? "Voxel##REPRESENTATION" : "Triangle##REPRESENTATION";
@@ -127,7 +94,7 @@ void GUI::buttonRepresentation( float buttonWidth )
     }
 }
 
-void GUI::collapseAlgorithmSelection()
+void MainGUI::collapseAlgorithmSelection()
 {
     static bool isCollapsed = false;
     const char* labels[] = { "Optimized Voxelizer",
@@ -148,6 +115,14 @@ void GUI::collapseAlgorithmSelection()
         {
             if ( ImGui::Selectable( labels[i], selectedIndex == i ))
             {
+                switch ( i )
+                {
+                    case 0: dataHandler->setAlgorithm(OPTIMIZED); break;
+                    case 1: dataHandler->setAlgorithm(NAIVE); break;
+                    case 2: dataHandler->setAlgorithm(OCTREE); break;
+                    case 3: dataHandler->setAlgorithm(BVH); break;
+                    default: break;
+                }
                 dataHandler->setAlgorithm( static_cast<VoxelizationAlgorithm>(i));
                 isCollapsed = false;
                 break;
@@ -159,7 +134,7 @@ void GUI::collapseAlgorithmSelection()
     }
 }
 
-void GUI::sliderVoxelResolution( float buttonWidth )
+void MainGUI::sliderVoxelResolution( float buttonWidth )
 {
     // VOXEL RESOLUTION
     ImGui::Text( "Voxel Resolution" );
@@ -172,7 +147,7 @@ void GUI::sliderVoxelResolution( float buttonWidth )
     }
 }
 
-void GUI::colorPickerVoxel()
+void MainGUI::colorPickerVoxel()
 {
     glm::vec3 voxelColor = dataHandler->getVoxelColor();
     float rgb[3] = { voxelColor.x, voxelColor.y, voxelColor.z };
@@ -181,7 +156,7 @@ void GUI::colorPickerVoxel()
     dataHandler->setVoxelColor( { rgb[0], rgb[1], rgb[2] } );
 }
 
-void GUI::buttonCameraMode( float buttonWidth )
+void MainGUI::buttonCameraMode( float buttonWidth )
 {
     const char* cameraMode = ( dataHandler->getCameraMode() == CENTERED )
                              ? "centered##CAMERAMODE" : "free##CAMERAMODE";
@@ -192,7 +167,7 @@ void GUI::buttonCameraMode( float buttonWidth )
     }
 }
 
-void GUI::numberInputCameraSpeed()
+void MainGUI::numberInputCameraSpeed()
 {
     float speed = dataHandler->getCameraSpeed();
     ImGui::Text( "Camera Speed" );
@@ -201,7 +176,7 @@ void GUI::numberInputCameraSpeed()
     dataHandler->setCameraSpeed( speed );
 }
 
-void GUI::numberInputRotationSpeed()
+void MainGUI::numberInputRotationSpeed()
 {
     static float speed = dataHandler->getRotationSpeed();
     ImGui::Text( "Rotation Speed" );
@@ -210,7 +185,7 @@ void GUI::numberInputRotationSpeed()
     dataHandler->setRotationSpeed( speed );
 }
 
-void GUI::buttonFileDialog( float buttonWidth )
+void MainGUI::buttonFileDialog( float buttonWidth )
 {
     static bool fileSelected = false;
     IGFD::FileDialogConfig config;
@@ -254,7 +229,7 @@ void GUI::buttonFileDialog( float buttonWidth )
     ImGui::Text("current model: %s", filePath.filename().c_str());
 }
 
-void GUI::buttonBenchmarkDialog( float buttonWidth )
+void MainGUI::buttonBenchmarkDialog( float buttonWidth )
 {
     ImGui::Text( "Create Benchmarks" );
     if ( ImGui::Button( "Benchmarks##BENCHMARKS", ImVec2( buttonWidth, 0 )))
@@ -263,11 +238,12 @@ void GUI::buttonBenchmarkDialog( float buttonWidth )
     }
 }
 
-void GUI::showPerformanceData()
+void MainGUI::showPerformanceData()
 {
     ImGui::Text( "%d FPS", dataHandler->getCurrentFPS());
     ImGui::SameLine();
     ImGui::Text( "%d voxels", dataHandler->getNumberOfVoxels());
     ImGui::SameLine();
 }
+
 

@@ -6,7 +6,7 @@
 #include "../../dependencies/imgui/imgui.h"
 #include "../../dependencies/imgui/imgui_impl_opengl3.h"
 #include "../../dependencies/imgui/imgui_impl_sdl2.h"
-#include "../gui.hpp"
+#include "../gui/gui.hpp"
 
 
 class WindowHandler

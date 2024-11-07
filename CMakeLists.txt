@@ -51,8 +51,8 @@ add_executable(${NAME} main.cpp
         src/voxelizer.hpp
         src/bresenhamVoxelizer.cpp
         src/bresenhamVoxelizer.hpp
-        src/gui.cpp
-        src/gui.hpp
+        src/gui/gui.cpp
+        src/gui/gui.hpp
         src/dataHandler.cpp
         src/dataHandler.hpp
         src/naiveVoxelizer.cpp
@@ -79,6 +79,8 @@ add_executable(${NAME} main.cpp
         dependencies/file_dialog/ImGuiFileDialogConfig.h
         src/windows/renderingWindowHandler.cpp
         src/windows/renderingWindowHandler.hpp
+        src/gui/mainGui.cpp
+        src/gui/mainGui.hpp
 )
 
 

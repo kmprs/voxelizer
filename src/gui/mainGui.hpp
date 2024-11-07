@@ -1,23 +1,12 @@
 #pragma once
 
 
-#include <filesystem>
-#include <SDL.h>
-#include "../dependencies/imgui/imgui.h"
-#include "../dependencies/imgui/imgui_impl_opengl3.h"
-#include "../dependencies/imgui/imgui_impl_sdl2.h"
-#include "../dependencies/file_dialog/ImGuiFileDialog.h"
-#include "constants.hpp"
-#include "dataHandler.hpp"
+#include "gui.hpp"
 
 
-class GUI
+class MainGUI : public GUI
 {
-public:
-    GUI() = default;
-    static void createFrame( float width, float height, int x, int y );
-    static void setStyles();
-
+    void createFrame( float width, float height, int x, int y ) override;
 
 private:
     static void buttonRepresentation( float buttonWidth );
@@ -30,5 +19,4 @@ private:
     static void buttonFileDialog( float buttonWidth );
     static void buttonBenchmarkDialog( float buttonWidth );
     static void showPerformanceData();
-
 };
