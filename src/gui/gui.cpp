@@ -2,7 +2,6 @@
 
 
 extern std::shared_ptr<DataHandler> dataHandler;
-static int resolution = INIT_RESOLUTION;
 
 
 void GUI::setStyles()

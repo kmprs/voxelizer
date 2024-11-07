@@ -2,6 +2,7 @@
 
 #include "eventHandler.hpp"
 #include "windows/renderingWindowHandler.hpp"
+#include "windows/benchmarkWindowHandler.hpp"
 
 class Program
 {

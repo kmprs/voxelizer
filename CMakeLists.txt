@@ -81,6 +81,10 @@ add_executable(${NAME} main.cpp
         src/windows/renderingWindowHandler.hpp
         src/gui/mainGui.cpp
         src/gui/mainGui.hpp
+        src/windows/benchmarkWindowHandler.cpp
+        src/windows/benchmarkWindowHandler.hpp
+        src/gui/benchmarkGui.cpp
+        src/gui/benchmarkGui.hpp
 )
 
 

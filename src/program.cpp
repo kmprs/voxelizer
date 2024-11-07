@@ -13,7 +13,7 @@ void Program::run()
     SDL_Event event;
     RenderingWindowHandler windowHandler = { TITLE, dataHandler->getWindowWidth(),
                                              dataHandler->getWindowHeight() };
-    WindowHandler benchmarkWindowHandler = { TITLE, 1000, 700 };
+    BenchmarkWindowHandler benchmarkWindowHandler = { TITLE, 1000, 700 };
     bool benchmarksShown = dataHandler->isBenchmarkShown();
     SDL_HideWindow( benchmarkWindowHandler.getWindow() );
 

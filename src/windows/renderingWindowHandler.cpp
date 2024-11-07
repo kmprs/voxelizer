@@ -61,3 +61,8 @@ void RenderingWindowHandler::updateWindowSize()
     dataHandler->setWindowWidth( m_width );
     dataHandler->setWindowHeight( m_height );
 }
+
+void RenderingWindowHandler::loadGUIFrame()
+{
+    m_gui.createFrame( static_cast<float>(GUI_WIDTH), static_cast<float>(m_height), 0, 0 );
+}

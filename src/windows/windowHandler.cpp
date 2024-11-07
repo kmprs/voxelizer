@@ -58,11 +58,6 @@ void WindowHandler::updateWindowSize()
     SDL_GetWindowSize( m_window, &m_width, &m_height );
 }
 
-void WindowHandler::loadGUIFrame() const
-{
-    GUI::createFrame( static_cast<float>(GUI_WIDTH), static_cast<float>(m_height),
-                          0, 0 );
-}
 
 void WindowHandler::toggleFullscreen()
 {

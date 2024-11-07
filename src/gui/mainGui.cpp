@@ -136,6 +136,7 @@ void MainGUI::collapseAlgorithmSelection()
 
 void MainGUI::sliderVoxelResolution( float buttonWidth )
 {
+    static int resolution = INIT_RESOLUTION;
     // VOXEL RESOLUTION
     ImGui::Text( "Voxel Resolution" );
     ImGui::PushItemWidth( buttonWidth );

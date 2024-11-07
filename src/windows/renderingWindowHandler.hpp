@@ -2,6 +2,7 @@
 
 
 #include "windowHandler.hpp"
+#include "../gui/mainGui.hpp"
 
 
 class RenderingWindowHandler : public WindowHandler
@@ -13,7 +14,9 @@ public:
     void initGui();
     void makeCurrent();
     void updateWindowSize() override;
+    void loadGUIFrame() override;
 
 private:
     SDL_GLContext m_context = nullptr;
+    MainGUI m_gui = {};
 };

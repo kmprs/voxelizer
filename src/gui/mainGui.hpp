@@ -6,6 +6,7 @@
 
 class MainGUI : public GUI
 {
+public:
     void createFrame( float width, float height, int x, int y ) override;
 
 private:

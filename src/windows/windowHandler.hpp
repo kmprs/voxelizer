@@ -18,9 +18,9 @@ public:
     [[nodiscard]] bool isClosed() const;
     void close();
     void swapWindow();
-    virtual void updateWindowSize();
-    void loadGUIFrame() const;
     void toggleFullscreen();
+    virtual void updateWindowSize();
+    virtual void loadGUIFrame() = 0;
 
     [[nodiscard]] SDL_Window* getWindow() const;
 
