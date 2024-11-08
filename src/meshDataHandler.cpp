@@ -25,7 +25,6 @@ std::vector<std::shared_ptr<TriangleFace>> MeshDataHandler::getTriangleFaces() c
 
 void MeshDataHandler::voxelize( int voxelResolution )
 {
-    std::cout << m_triangleFaces.size() << std::endl;
     auto start = std::chrono::high_resolution_clock::now();
 
     std::vector<Voxel> voxels = m_voxelizer->run( m_triangleFaces, voxelResolution );

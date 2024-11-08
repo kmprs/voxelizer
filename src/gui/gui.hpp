@@ -15,7 +15,10 @@ class GUI
 {
 public:
     GUI() = default;
-    virtual void createFrame( float width, float height, int x, int y ) = 0;
+    virtual void
+    createFrame( SDL_Window* window, ImGuiContext* imGuiContext, float width, float height,
+                 int x,
+                 int y ) = 0;
     static void setStyles();
 
 

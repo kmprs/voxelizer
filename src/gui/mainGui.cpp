@@ -4,10 +4,13 @@
 extern std::shared_ptr<DataHandler> dataHandler;
 
 
-void MainGUI::createFrame( float width, float height, int x, int y )
+void MainGUI::createFrame( SDL_Window* window, ImGuiContext* imGuiContext, float width,
+                           float height, int x,
+                           int y )
 {
-    ImGui_ImplSDL2_NewFrame();
+    ImGui::SetCurrentContext( imGuiContext );
     ImGui_ImplOpenGL3_NewFrame();
+    ImGui_ImplSDL2_NewFrame();
     ImGui::NewFrame();
 
     // Minimal window flags: No title bar, no resizing, no moving
@@ -86,7 +89,8 @@ void MainGUI::createFrame( float width, float height, int x, int y )
 void MainGUI::buttonRepresentation( float buttonWidth )
 {
     const char* currentRepresentation = ( dataHandler->getModelRepresentation() == VOXEL )
-                                        ? "Voxel##REPRESENTATION" : "Triangle##REPRESENTATION";
+                                        ? "Voxel##REPRESENTATION"
+                                        : "Triangle##REPRESENTATION";
     ImGui::Text( "Triangle/Voxel" );
     if ( ImGui::Button( currentRepresentation, ImVec2( buttonWidth, 0 )))
     {
@@ -117,11 +121,20 @@ void MainGUI::collapseAlgorithmSelection()
             {
                 switch ( i )
                 {
-                    case 0: dataHandler->setAlgorithm(OPTIMIZED); break;
-                    case 1: dataHandler->setAlgorithm(NAIVE); break;
-                    case 2: dataHandler->setAlgorithm(OCTREE); break;
-                    case 3: dataHandler->setAlgorithm(BVH); break;
-                    default: break;
+                    case 0:
+                        dataHandler->setAlgorithm( OPTIMIZED );
+                        break;
+                    case 1:
+                        dataHandler->setAlgorithm( NAIVE );
+                        break;
+                    case 2:
+                        dataHandler->setAlgorithm( OCTREE );
+                        break;
+                    case 3:
+                        dataHandler->setAlgorithm( BVH );
+                        break;
+                    default:
+                        break;
                 }
                 dataHandler->setAlgorithm( static_cast<VoxelizationAlgorithm>(i));
                 isCollapsed = false;
@@ -153,7 +166,7 @@ void MainGUI::colorPickerVoxel()
     glm::vec3 voxelColor = dataHandler->getVoxelColor();
     float rgb[3] = { voxelColor.x, voxelColor.y, voxelColor.z };
     ImGui::Text( "Voxel Color" );
-    ImGui::ColorEdit3( "", rgb );
+    ImGui::ColorEdit3( "##COLORPICKER", rgb );
     dataHandler->setVoxelColor( { rgb[0], rgb[1], rgb[2] } );
 }
 
@@ -225,9 +238,9 @@ void MainGUI::buttonFileDialog( float buttonWidth )
         ImGuiFileDialog::Instance()->Close();
     }
 
-    std::filesystem::path filePath( dataHandler->getCurrentModelPath() );
+    std::filesystem::path filePath( dataHandler->getCurrentModelPath());
 
-    ImGui::Text("current model: %s", filePath.filename().c_str());
+    ImGui::Text( "current model: %s", filePath.filename().c_str());
 }
 
 void MainGUI::buttonBenchmarkDialog( float buttonWidth )

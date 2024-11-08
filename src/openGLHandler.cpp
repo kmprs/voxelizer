@@ -35,7 +35,7 @@ OpenGLHandler::OpenGLHandler()
     m_shaderHandler->link();
 }
 
-void OpenGLHandler::use() const
+void OpenGLHandler::use()
 {
     glUseProgram( programID );
 }

@@ -11,4 +11,7 @@ public:
     ~Program() = default;
 
     static void run();
+
+private:
+    static void initSDL();
 };

@@ -16,13 +16,7 @@ std::vector<Voxel> OctreeBVHVoxelizer::run(
     std::vector<BVHNode*> bvhLeaves;
     bvh->getLeaves( bvhLeaves );
     // DEBUG
-    long counter = 0;
-
-    buildOctree( octree, 0, resolution, bvhLeaves, counter );
-
-    // DEBUG
-    std::cout << "\nNumber of leaves in bvh node: " << bvhLeaves.size() << std::endl;
-    std::cout << "Triangle Intersection Test Counter: " << counter << std::endl;
+    buildOctree( octree, 0, resolution, bvhLeaves );
 
     std::vector<Voxel> voxels = util::octree::toVoxel( octree, 0 );
 
@@ -34,7 +28,7 @@ std::vector<Voxel> OctreeBVHVoxelizer::run(
 
 
 void OctreeBVHVoxelizer::buildOctree( OctreeNode* octreeNode, int depth, int maxDepth,
-                                      std::vector<BVHNode*> &leaves, long &counter )
+                                      std::vector<BVHNode*> &leaves )
 {
     // fetch vertex positions from octree octreeNode
     std::array<Triangle, 12> voxelTriangles = util::geometry::getCubeTriangles(
@@ -64,7 +58,6 @@ void OctreeBVHVoxelizer::buildOctree( OctreeNode* octreeNode, int depth, int max
             for ( const std::shared_ptr<TriangleFace> &meshTriangleFace: bvhNode->triangleFaces )
             {
                 Triangle meshTriangle = meshTriangleFace->toTriangle();
-                counter++;
                 if ( util::geometry::doTrianglesIntersect( meshTriangle, voxelTriangle )
                      || util::geometry::isInsideBox( meshTriangle, minVoxel, maxVoxel ))
                 {
@@ -74,7 +67,7 @@ void OctreeBVHVoxelizer::buildOctree( OctreeNode* octreeNode, int depth, int max
                         octreeNode->createChildren();
                         for ( OctreeNode* child: octreeNode->children )
                         {
-                            buildOctree( child, depth + 1, maxDepth, leaves, counter );
+                            buildOctree( child, depth + 1, maxDepth, leaves );
                         }
                     }
                     return;

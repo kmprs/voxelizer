@@ -18,7 +18,7 @@ public:
          int resolution ) override;
 private:
     void buildOctree( OctreeNode* octreeNode, int depth, int maxDepth,
-                      std::vector<BVHNode*> &leaves, long &counter );
+                      std::vector<BVHNode*> &leaves );
 };
 
 

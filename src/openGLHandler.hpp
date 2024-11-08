@@ -8,7 +8,7 @@ class OpenGLHandler
 public:
     OpenGLHandler();
     ~OpenGLHandler() = default;
-    void use() const;
+    static void use() ;
     std::shared_ptr<ShaderHandler> getShaderHandler();
 
 private:

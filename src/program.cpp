@@ -10,10 +10,16 @@ std::shared_ptr<DataHandler> dataHandler = std::make_shared<DataHandler>();
 
 void Program::run()
 {
+    initSDL();
     SDL_Event event;
+
+    IMGUI_CHECKVERSION();
+    BenchmarkWindowHandler benchmarkWindowHandler = { TITLE, 1000, 700 };
     RenderingWindowHandler windowHandler = { TITLE, dataHandler->getWindowWidth(),
                                              dataHandler->getWindowHeight() };
-    BenchmarkWindowHandler benchmarkWindowHandler = { TITLE, 1000, 700 };
+    ImGui::StyleColorsDark();
+    GUI::setStyles();
+
     bool benchmarksShown = dataHandler->isBenchmarkShown();
     SDL_HideWindow( benchmarkWindowHandler.getWindow() );
 
@@ -57,7 +63,8 @@ void Program::run()
                      SDL_GetWindowID( windowHandler.getWindow()))
                 {
                     windowHandler.updateWindowSize();
-                } else if ( event.window.windowID ==
+                }
+                else if ( event.window.windowID ==
                             SDL_GetWindowID( benchmarkWindowHandler.getWindow()))
                 {
                     benchmarkWindowHandler.updateWindowSize();
@@ -68,6 +75,11 @@ void Program::run()
             ImGui_ImplSDL2_ProcessEvent( &event );
         }
 
+
+        deltaTime = ( static_cast<float>(currentCounter - lastCounter)) /
+                    static_cast<float>(performanceFrequency);
+        lastCounter = currentCounter;
+
         if ( benchmarksShown != dataHandler->isBenchmarkShown())
         {
             benchmarksShown = dataHandler->isBenchmarkShown();
@@ -75,11 +87,17 @@ void Program::run()
             ( benchmarksShown ) ? SDL_ShowWindow( w ) : SDL_HideWindow( w );
         }
 
-        deltaTime = ( static_cast<float>(currentCounter - lastCounter)) /
-                    static_cast<float>(performanceFrequency);
-        lastCounter = currentCounter;
+        if ( benchmarksShown )
+        {
+            benchmarkWindowHandler.makeCurrent();
+            benchmarkWindowHandler.loadGUIFrame();
+            ImGui::Render();
+            ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+            benchmarkWindowHandler.swapWindow();
+        };
 
         // imgui
+        windowHandler.makeCurrent();
         windowHandler.loadGUIFrame();
 
         // main methods
@@ -91,16 +109,13 @@ void Program::run()
             transformator.transform( camera.getPosition(), camera.getDirection());
             sceneHandler.setScene( camera.getPosition());
             renderer.render();
-            openGlHandler.use();
+            OpenGLHandler::use();
         }
 
         // ImGui Rendering
         ImGui::Render();
-        windowHandler.makeCurrent();
         ImGui_ImplOpenGL3_RenderDrawData( ImGui::GetDrawData());
         windowHandler.swapWindow();
-
-        benchmarkWindowHandler.swapWindow();
 
         // constant fps
         frameCount++;
@@ -126,4 +141,19 @@ void Program::run()
     ImGui_ImplSDL2_Shutdown();
     ImGui::DestroyContext();
     SDL_Quit();
+}
+
+
+void Program::initSDL()
+{
+    if ( SDL_Init(SDL_INIT_EVERYTHING))
+    {
+        std::cerr << "Failed to initialize SDL\n";
+        exit( EXIT_FAILURE );
+    }
+
+    SDL_GL_SetAttribute( SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE );
+    SDL_GL_SetAttribute( SDL_GL_CONTEXT_MAJOR_VERSION, 3 );
+    SDL_GL_SetAttribute( SDL_GL_CONTEXT_MINOR_VERSION, 3 );
+    SDL_GL_SetAttribute( SDL_GL_STENCIL_SIZE, 8 );
 }

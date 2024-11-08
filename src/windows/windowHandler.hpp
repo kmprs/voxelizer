@@ -19,6 +19,8 @@ public:
     void close();
     void swapWindow();
     void toggleFullscreen();
+    void makeCurrent();
+
     virtual void updateWindowSize();
     virtual void loadGUIFrame() = 0;
 
@@ -30,5 +32,10 @@ protected:
     bool m_isFullscreen = false;
     bool m_closed = false;
     SDL_Window *m_window = nullptr;
+    SDL_GLContext m_context = nullptr;
+    ImGuiContext* m_imGuiContext = nullptr;
 
+    void initWindow( const std::string& title );
+    void initGLContext();
+    void initGui();
 };
