@@ -14,14 +14,15 @@ void Program::run()
     SDL_Event event;
 
     IMGUI_CHECKVERSION();
-    BenchmarkWindowHandler benchmarkWindowHandler = { TITLE, 1000, 700 };
+    BenchmarkWindowHandler benchmarkWindowHandler = { TITLE + " Benchmarks", 1000, 700 };
+    bool benchmarksShown = dataHandler->isBenchmarkShown();
+    SDL_HideWindow( benchmarkWindowHandler.getWindow() );
+
     RenderingWindowHandler windowHandler = { TITLE, dataHandler->getWindowWidth(),
                                              dataHandler->getWindowHeight() };
     ImGui::StyleColorsDark();
     GUI::setStyles();
 
-    bool benchmarksShown = dataHandler->isBenchmarkShown();
-    SDL_HideWindow( benchmarkWindowHandler.getWindow() );
 
     OpenGLHandler openGlHandler = {};
     std::shared_ptr<ShaderHandler> shaderHandler = openGlHandler.getShaderHandler();

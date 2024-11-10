@@ -45,6 +45,23 @@ namespace util
         return !( max0 < min1 || max1 < min0 );
     }
 
+    std::string toString ( VoxelizationAlgorithm algorithm )
+    {
+        switch ( algorithm )
+        {
+            case OPTIMIZED:
+                return "Optimized";
+            case OCTREE:
+                return "Octree";
+            case BVH:
+                return "BVH";
+            case NAIVE:
+                return "Naive";
+            default:
+                return "Optimized";
+        }
+    }
+
 
     namespace geometry
     {

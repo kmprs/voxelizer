@@ -23,6 +23,8 @@ OpenGLHandler::OpenGLHandler()
     // set scene OpenGL
     glEnable( GL_DEPTH_TEST );
     glEnable( GL_CULL_FACE );
+    glEnable( GL_MULTISAMPLE );
+
 //    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
     // shaders setup

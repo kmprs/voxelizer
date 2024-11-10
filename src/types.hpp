@@ -98,6 +98,8 @@ struct OBJFaceIndices
 };
 
 
+
+
 enum Direction
 {
     NO_MOVEMENT,
@@ -135,4 +137,34 @@ enum VoxelizationAlgorithm
     OCTREE,
     BVH,
     NAIVE
+};
+
+
+struct Model
+{
+    std::string title;
+    int numberOfTriangles;
+};
+
+
+struct Duration
+{
+    int ms;
+    int s;
+};
+
+
+struct PerformanceData
+{
+    int resolution;
+    int numberOfVoxels;
+    Duration duration;
+};
+
+
+struct BenchmarkMetric
+{
+    Model model;
+    VoxelizationAlgorithm algorithm;
+    std::vector<PerformanceData> performanceData;
 };

@@ -6,7 +6,7 @@ BenchmarkGUI::createFrame( SDL_Window* window, ImGuiContext* imGuiContext, float
                            float height, int x,
                            int y )
 {
-    ImGui::SetCurrentContext(imGuiContext);
+    ImGui::SetCurrentContext( imGuiContext );
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplSDL2_NewFrame();
     ImGui::NewFrame();
@@ -22,8 +22,29 @@ BenchmarkGUI::createFrame( SDL_Window* window, ImGuiContext* imGuiContext, float
 
     ImGui::Begin( "BenchmarkGUI", nullptr, window_flags );
 
-    ImGui::Text("Hello World!");
+    static BenchmarkMetric benchmarkMetric;
+    static Model model;
+    model.title = "dragon";
+    model.numberOfTriangles = -1;
+    benchmarkMetric.model = model;
+    benchmarkMetric.algorithm = OPTIMIZED;
+    static PerformanceData d;
+    d.resolution = 1;
+    d.numberOfVoxels = 1;
+    d.duration.s = 1;
+    d.duration.ms = 23;
+    benchmarkMetric.performanceData.push_back( d );
+    d.resolution = 2;
+    d.numberOfVoxels = 8;
+    d.duration.s = 3;
+    d.duration.ms = 124;
+    benchmarkMetric.performanceData.push_back( d );
 
+
+    ImGui::Text( "Model: %s (%d triangles)", benchmarkMetric.model.title.c_str(),
+                 benchmarkMetric.model.numberOfTriangles );
+    ImGui::Spacing();
+    ImGui::Text( "Algorithm: %s", util::toString( benchmarkMetric.algorithm ).c_str());
     ImGui::End();
 }
 

@@ -18,6 +18,7 @@ namespace util
     bool differentSign( float test, float a, float b );
     bool doIntervalsIntersect( const std::array<float, 2> &interval0,
                                const std::array<float, 2> &interval1 );
+    std::string toString( VoxelizationAlgorithm algorithm );
 
 
     namespace geometry

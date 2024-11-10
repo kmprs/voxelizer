@@ -32,8 +32,8 @@ void MeshDataHandler::voxelize( int voxelResolution )
     auto durationS = std::chrono::duration_cast<std::chrono::seconds>( stop - start );
     auto durationMS = std::chrono::duration_cast<std::chrono::milliseconds>(
             stop - start );
-    std::cout << "Voxelization took: " << durationS.count() << "s:"
-              << durationMS.count() % 1000 << "ms" << std::endl;
+    std::cout << "\nVoxelization took: " << durationS.count() << "s:"
+              << durationMS.count() % 1000 << "ms" << "\n";
 
     for ( const Voxel &v: voxels )
     {

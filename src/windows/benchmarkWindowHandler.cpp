@@ -10,6 +10,6 @@ BenchmarkWindowHandler::BenchmarkWindowHandler( const std::string &title, int wi
 void BenchmarkWindowHandler::loadGUIFrame()
 {
     m_benchmarkGUI.createFrame( m_window, m_imGuiContext,
-                                200, static_cast<float>(m_height), 200, 0 );
+                                200, static_cast<float>(m_height), 0, 0 );
 }
 
