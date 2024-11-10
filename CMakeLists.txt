@@ -61,6 +61,15 @@ add_executable(${NAME} main.cpp
         src/octreeVoxelizer.hpp
         src/bvhVoxelizer.cpp
         src/bvhVoxelizer.hpp
+        src/windows/renderingWindowHandler.cpp
+        src/windows/renderingWindowHandler.hpp
+        src/gui/mainGui.cpp
+        src/gui/mainGui.hpp
+        src/windows/benchmarkWindowHandler.cpp
+        src/windows/benchmarkWindowHandler.hpp
+        src/gui/benchmarkGui.cpp
+        src/gui/benchmarkGui.hpp
+
 
         dependencies/imgui/imconfig.h
         dependencies/imgui/imgui.cpp
@@ -77,14 +86,11 @@ add_executable(${NAME} main.cpp
         dependencies/file_dialog/ImGuiFileDialog.cpp
         dependencies/file_dialog/ImGuiFileDialog.h
         dependencies/file_dialog/ImGuiFileDialogConfig.h
-        src/windows/renderingWindowHandler.cpp
-        src/windows/renderingWindowHandler.hpp
-        src/gui/mainGui.cpp
-        src/gui/mainGui.hpp
-        src/windows/benchmarkWindowHandler.cpp
-        src/windows/benchmarkWindowHandler.hpp
-        src/gui/benchmarkGui.cpp
-        src/gui/benchmarkGui.hpp
+        dependencies/implot/implot.cpp
+        dependencies/implot/implot.h
+        dependencies/implot/implot_demo.cpp
+        dependencies/implot/implot_internal.h
+        dependencies/implot/implot_items.cpp
 )
 
 
