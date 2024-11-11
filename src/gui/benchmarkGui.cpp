@@ -62,7 +62,9 @@ BenchmarkGUI::createFrame( SDL_Window* window, ImGuiContext* imGuiContext, float
 
     // plot
     ImGui::SetNextWindowPos( ImVec2( width, static_cast<float>(y)));
-    ImGui::SetNextWindowSize( ImVec2( 600, 600 ));
+    ImGui::SetNextWindowSize(
+            ImVec2( static_cast<float>(dataHandler->getBenchmarkWindowWidth()) - width,
+                    static_cast<float>(dataHandler->getBenchmarkWindowHeight())));
 
     ImGui::Begin( "Plot##Plot", nullptr, window_flags | ImGuiWindowFlags_NoScrollbar );
 
@@ -95,13 +97,13 @@ void BenchmarkGUI::plot( const float* x, const float* y, int size )
 {
     if ( ImPlot::BeginPlot( "Performance Metrics", ImVec2( -1, -1 )))
     {
-        ImPlot::SetupAxes( "Duration (s)", "Value y");
-        ImPlot::SetupAxisLimits(.1f, 0, 6.28 ); // Set Y-axis limit
-        ImPlot::SetupLegend(ImPlotLocation_NorthEast);
+        ImPlot::SetupAxes( "Duration (s)", "Value y" );
+        ImPlot::SetupAxisLimits( .1f, 0, 6.28 ); // Set Y-axis limit
+        ImPlot::SetupLegend( ImPlotLocation_NorthEast );
 
 
         ImPlot::PlotLine( "Random Sin Wave##plot2", x, x, size );
-        ImPlot::PushStyleColor(ImPlotCol_Line, ImVec4(1.0f, 0.0f, 0.0f, 1.0f));
+        ImPlot::PushStyleColor( ImPlotCol_Line, ImVec4( 1.0f, 0.0f, 0.0f, 1.0f ));
         ImPlot::PlotLine( "Time##plot1", x, y, size );
         ImPlot::PopStyleColor();
 
