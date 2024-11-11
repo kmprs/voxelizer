@@ -533,6 +533,11 @@ namespace util
             }
         }
     }//namespace bvh
-
+    namespace time{
+        int toMS( const Duration &duration )
+        {
+            return duration.s * 1000 + duration.ms;
+        }
+    }//namespace time
 
 }

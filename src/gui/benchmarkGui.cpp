@@ -34,22 +34,35 @@ BenchmarkGUI::createFrame( SDL_Window* window, ImGuiContext* imGuiContext, float
 
     ImGui::Begin( "BenchmarkGUI", nullptr, window_flags );
 
-    static BenchmarkMetric benchmarkMetric;
-    static Model model;
-    model.title = "dragon";
-    model.numberOfTriangles = -1;
-    benchmarkMetric.model = model;
+    BenchmarkMetric benchmarkMetric;
+    benchmarkMetric.model.title = "dragon";
+    benchmarkMetric.model.numberOfTriangles = -1;
     benchmarkMetric.algorithm = OPTIMIZED;
-    static PerformanceData d;
+    PerformanceData d;
     d.resolution = 1;
     d.numberOfVoxels = 1;
-    d.duration.s = 1;
+    d.duration.s = 0;
     d.duration.ms = 23;
     benchmarkMetric.performanceData.push_back( d );
     d.resolution = 2;
     d.numberOfVoxels = 8;
-    d.duration.s = 3;
-    d.duration.ms = 124;
+    d.duration.s = 0;
+    d.duration.ms = 40;
+    benchmarkMetric.performanceData.push_back( d );
+    d.resolution = 3;
+    d.numberOfVoxels = 8;
+    d.duration.s = 0;
+    d.duration.ms = 80;
+    benchmarkMetric.performanceData.push_back( d );
+    d.resolution = 4;
+    d.numberOfVoxels = 8;
+    d.duration.s = 0;
+    d.duration.ms = 233;
+    benchmarkMetric.performanceData.push_back( d );
+    d.resolution = 5;
+    d.numberOfVoxels = 8;
+    d.duration.s = 0;
+    d.duration.ms = 401;
     benchmarkMetric.performanceData.push_back( d );
 
 
@@ -60,7 +73,7 @@ BenchmarkGUI::createFrame( SDL_Window* window, ImGuiContext* imGuiContext, float
 
     ImGui::End();
 
-    // plot
+
     ImGui::SetNextWindowPos( ImVec2( width, static_cast<float>(y)));
     ImGui::SetNextWindowSize(
             ImVec2( static_cast<float>(dataHandler->getBenchmarkWindowWidth()) - width,
@@ -68,46 +81,44 @@ BenchmarkGUI::createFrame( SDL_Window* window, ImGuiContext* imGuiContext, float
 
     ImGui::Begin( "Plot##Plot", nullptr, window_flags | ImGuiWindowFlags_NoScrollbar );
 
-    // Wave simulation setup
-    static float x_data[100];  // Number of points in the wave
-    static float y_data[100];
-    static float wave_frequency = 1.0f;
-    static float wave_amplitude = 5.0f;
-
-    // Calculate elapsed time
-    static auto start_time = std::chrono::high_resolution_clock::now();
-    auto current_time = std::chrono::high_resolution_clock::now();
-    float elapsed_time = std::chrono::duration<float>(
-            current_time - start_time ).count();
-
-    // Update x_data and y_data to simulate a moving wave
-    for ( size_t i = 0; i < 100; ++i )
-    {
-        x_data[i] = i * 0.1f;  // Uniformly spaced points along x-axis
-        y_data[i] =
-                wave_amplitude * std::sin( wave_frequency * x_data[i] + elapsed_time );
-    }
-
-    plot( x_data, y_data, 100 );
+    plot( { benchmarkMetric } );
 
     ImGui::End();
 }
 
-void BenchmarkGUI::plot( const float* x, const float* y, int size )
+void BenchmarkGUI::plot( const std::vector<BenchmarkMetric> &metrics )
 {
-    if ( ImPlot::BeginPlot( "Performance Metrics", ImVec2( -1, -1 )))
+    std::string title = "Algorithm Benchmarks (" + metrics[0].model.title + ")";
+    if ( ImPlot::BeginPlot( title.c_str(), ImVec2( -1, -1 )))
     {
-        ImPlot::SetupAxes( "Duration (s)", "Value y" );
-        ImPlot::SetupAxisLimits( .1f, 0, 6.28 ); // Set Y-axis limit
+        ImPlot::SetupAxes( "Resolution Level", "Duration [ms]" );
+        ImPlot::SetupAxisLimits( ImAxis_X1, 1, MAX_RESOLUTION );
+        ImPlot::SetupAxisScale( ImAxis_Y1, ImPlotScale_Log10 );
         ImPlot::SetupLegend( ImPlotLocation_NorthEast );
 
 
-        ImPlot::PlotLine( "Random Sin Wave##plot2", x, x, size );
-        ImPlot::PushStyleColor( ImPlotCol_Line, ImVec4( 1.0f, 0.0f, 0.0f, 1.0f ));
-        ImPlot::PlotLine( "Time##plot1", x, y, size );
-        ImPlot::PopStyleColor();
+        for ( const BenchmarkMetric &m: metrics ) addLine( m );
 
         ImPlot::EndPlot();
     }
 }
+
+void BenchmarkGUI::addLine( const BenchmarkMetric &metric )
+{
+
+    std::string titleString = util::toString( metric.algorithm )
+                              + "##" +
+                              util::toString( metric.algorithm );
+    const char* title = titleString.c_str();
+
+    std::vector<float> x, y;
+    for ( const PerformanceData data: metric.performanceData )
+    {
+        x.push_back( static_cast<float>(data.resolution));
+        y.push_back( static_cast<float>( util::time::toMS( data.duration )));
+    }
+    ImPlot::PlotLine( title, x.data(), y.data(), static_cast<int>( x.size()));
+}
+
+
 

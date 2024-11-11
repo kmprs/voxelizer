@@ -130,10 +130,10 @@ enum ImAxis_ {
 // Options for plots (see BeginPlot).
 enum ImPlotFlags_ {
     ImPlotFlags_None          = 0,       // default
-    ImPlotFlags_NoTitle       = 1 << 0,  // the plot title will not be displayed (titles are also hidden if preceeded by double hashes, e.g. "##MyPlot")
+    ImPlotFlags_NoTitle       = 1 << 0,  // the addLine title will not be displayed (titles are also hidden if preceeded by double hashes, e.g. "##MyPlot")
     ImPlotFlags_NoLegend      = 1 << 1,  // the legend will not be displayed
-    ImPlotFlags_NoMouseText   = 1 << 2,  // the mouse position, in plot coordinates, will not be displayed inside of the plot
-    ImPlotFlags_NoInputs      = 1 << 3,  // the user will not be able to interact with the plot
+    ImPlotFlags_NoMouseText   = 1 << 2,  // the mouse position, in plot coordinates, will not be displayed inside of the addLine
+    ImPlotFlags_NoInputs      = 1 << 3,  // the user will not be able to interact with the addLine
     ImPlotFlags_NoMenus       = 1 << 4,  // the user will not be able to open context menus
     ImPlotFlags_NoBoxSelect   = 1 << 5,  // the user will not be able to box-select
     ImPlotFlags_NoFrame       = 1 << 6,  // the ImGui frame will not be rendered
@@ -142,7 +142,7 @@ enum ImPlotFlags_ {
     ImPlotFlags_CanvasOnly    = ImPlotFlags_NoTitle | ImPlotFlags_NoLegend | ImPlotFlags_NoMenus | ImPlotFlags_NoBoxSelect | ImPlotFlags_NoMouseText
 };
 
-// Options for plot axes (see SetupAxis).
+// Options for addLine axes (see SetupAxis).
 enum ImPlotAxisFlags_ {
     ImPlotAxisFlags_None          = 0,       // default
     ImPlotAxisFlags_NoLabel       = 1 << 0,  // the axis label will not be displayed (axis labels are also hidden if the supplied string name is nullptr)
@@ -177,8 +177,8 @@ enum ImPlotSubplotFlags_ {
     ImPlotSubplotFlags_ShareItems  = 1 << 5,  // items across all subplots will be shared and rendered into a single legend entry
     ImPlotSubplotFlags_LinkRows    = 1 << 6,  // link the y-axis limits of all plots in each row (does not apply to auxiliary axes)
     ImPlotSubplotFlags_LinkCols    = 1 << 7,  // link the x-axis limits of all plots in each column (does not apply to auxiliary axes)
-    ImPlotSubplotFlags_LinkAllX    = 1 << 8,  // link the x-axis limits in every plot in the subplot (does not apply to auxiliary axes)
-    ImPlotSubplotFlags_LinkAllY    = 1 << 9,  // link the y-axis limits in every plot in the subplot (does not apply to auxiliary axes)
+    ImPlotSubplotFlags_LinkAllX    = 1 << 8,  // link the x-axis limits in every addLine in the subplot (does not apply to auxiliary axes)
+    ImPlotSubplotFlags_LinkAllY    = 1 << 9,  // link the y-axis limits in every addLine in the subplot (does not apply to auxiliary axes)
     ImPlotSubplotFlags_ColMajor    = 1 << 10  // subplots are added in column major order instead of the default row major order
 };
 
@@ -186,10 +186,10 @@ enum ImPlotSubplotFlags_ {
 enum ImPlotLegendFlags_ {
     ImPlotLegendFlags_None            = 0,      // default
     ImPlotLegendFlags_NoButtons       = 1 << 0, // legend icons will not function as hide/show buttons
-    ImPlotLegendFlags_NoHighlightItem = 1 << 1, // plot items will not be highlighted when their legend entry is hovered
+    ImPlotLegendFlags_NoHighlightItem = 1 << 1, // addLine items will not be highlighted when their legend entry is hovered
     ImPlotLegendFlags_NoHighlightAxis = 1 << 2, // axes will not be highlighted when legend entries are hovered (only relevant if x/y-axis count > 1)
     ImPlotLegendFlags_NoMenus         = 1 << 3, // the user will not be able to open context menus with right-click
-    ImPlotLegendFlags_Outside         = 1 << 4, // legend will be rendered outside of the plot area
+    ImPlotLegendFlags_Outside         = 1 << 4, // legend will be rendered outside of the addLine area
     ImPlotLegendFlags_Horizontal      = 1 << 5, // legend entries will be displayed horizontally
     ImPlotLegendFlags_Sort            = 1 << 6, // legend entries will be displayed in alphabetical order
 };
@@ -199,14 +199,14 @@ enum ImPlotMouseTextFlags_ {
     ImPlotMouseTextFlags_None        = 0,      // default
     ImPlotMouseTextFlags_NoAuxAxes   = 1 << 0, // only show the mouse position for primary axes
     ImPlotMouseTextFlags_NoFormat    = 1 << 1, // axes label formatters won't be used to render text
-    ImPlotMouseTextFlags_ShowAlways  = 1 << 2, // always display mouse position even if plot not hovered
+    ImPlotMouseTextFlags_ShowAlways  = 1 << 2, // always display mouse position even if addLine not hovered
 };
 
 // Options for DragPoint, DragLine, DragRect
 enum ImPlotDragToolFlags_ {
     ImPlotDragToolFlags_None      = 0,      // default
     ImPlotDragToolFlags_NoCursors = 1 << 0, // drag tools won't change cursor icons when hovered or held
-    ImPlotDragToolFlags_NoFit     = 1 << 1, // the drag tool won't be considered for plot fits
+    ImPlotDragToolFlags_NoFit     = 1 << 1, // the drag tool won't be considered for addLine fits
     ImPlotDragToolFlags_NoInputs  = 1 << 2, // lock the tool from user inputs
     ImPlotDragToolFlags_Delayed   = 1 << 3, // tool rendering will be delayed one frame; useful when applying position-constraints
 };
@@ -223,7 +223,7 @@ enum ImPlotColormapScaleFlags_ {
 enum ImPlotItemFlags_ {
     ImPlotItemFlags_None     = 0,
     ImPlotItemFlags_NoLegend = 1 << 0, // the item won't have a legend entry displayed
-    ImPlotItemFlags_NoFit    = 1 << 1, // the item won't be considered for plot fits
+    ImPlotItemFlags_NoFit    = 1 << 1, // the item won't be considered for addLine fits
 };
 
 // Flags for PlotLine
@@ -232,14 +232,14 @@ enum ImPlotLineFlags_ {
     ImPlotLineFlags_Segments    = 1 << 10, // a line segment will be rendered from every two consecutive points
     ImPlotLineFlags_Loop        = 1 << 11, // the last and first point will be connected to form a closed loop
     ImPlotLineFlags_SkipNaN     = 1 << 12, // NaNs values will be skipped instead of rendered as missing data
-    ImPlotLineFlags_NoClip      = 1 << 13, // markers (if displayed) on the edge of a plot will not be clipped
+    ImPlotLineFlags_NoClip      = 1 << 13, // markers (if displayed) on the edge of a addLine will not be clipped
     ImPlotLineFlags_Shaded      = 1 << 14, // a filled region between the line and horizontal origin will be rendered; use PlotShaded for more advanced cases
 };
 
 // Flags for PlotScatter
 enum ImPlotScatterFlags_ {
     ImPlotScatterFlags_None   = 0,       // default
-    ImPlotScatterFlags_NoClip = 1 << 10, // markers on the edge of a plot will not be clipped
+    ImPlotScatterFlags_NoClip = 1 << 10, // markers on the edge of a addLine will not be clipped
 };
 
 // Flags for PlotStairs
@@ -340,19 +340,19 @@ enum ImPlotCond_
 // Plot styling colors.
 enum ImPlotCol_ {
     // item styling colors
-    ImPlotCol_Line,          // plot line/outline color (defaults to next unused color in current colormap)
-    ImPlotCol_Fill,          // plot fill color for bars (defaults to the current line color)
+    ImPlotCol_Line,          // addLine line/outline color (defaults to next unused color in current colormap)
+    ImPlotCol_Fill,          // addLine fill color for bars (defaults to the current line color)
     ImPlotCol_MarkerOutline, // marker outline color (defaults to the current line color)
     ImPlotCol_MarkerFill,    // marker fill color (defaults to the current line color)
     ImPlotCol_ErrorBar,      // error bar color (defaults to ImGuiCol_Text)
-    // plot styling colors
-    ImPlotCol_FrameBg,       // plot frame background color (defaults to ImGuiCol_FrameBg)
-    ImPlotCol_PlotBg,        // plot area background color (defaults to ImGuiCol_WindowBg)
-    ImPlotCol_PlotBorder,    // plot area border color (defaults to ImGuiCol_Border)
+    // addLine styling colors
+    ImPlotCol_FrameBg,       // addLine frame background color (defaults to ImGuiCol_FrameBg)
+    ImPlotCol_PlotBg,        // addLine area background color (defaults to ImGuiCol_WindowBg)
+    ImPlotCol_PlotBorder,    // addLine area border color (defaults to ImGuiCol_Border)
     ImPlotCol_LegendBg,      // legend background color (defaults to ImGuiCol_PopupBg)
     ImPlotCol_LegendBorder,  // legend border color (defaults to ImPlotCol_PlotBorder)
     ImPlotCol_LegendText,    // legend text color (defaults to ImPlotCol_InlayText)
-    ImPlotCol_TitleText,     // plot title text color (defaults to ImGuiCol_Text)
+    ImPlotCol_TitleText,     // addLine title text color (defaults to ImGuiCol_Text)
     ImPlotCol_InlayText,     // color of text appearing inside of plots (defaults to ImGuiCol_Text)
     ImPlotCol_AxisText,      // axis label and tick lables color (defaults to ImGuiCol_Text)
     ImPlotCol_AxisGrid,      // axis grid color (defaults to 25% ImPlotCol_AxisText)
@@ -368,17 +368,17 @@ enum ImPlotCol_ {
 // Plot styling variables.
 enum ImPlotStyleVar_ {
     // item styling variables
-    ImPlotStyleVar_LineWeight,         // float,  plot item line weight in pixels
+    ImPlotStyleVar_LineWeight,         // float,  addLine item line weight in pixels
     ImPlotStyleVar_Marker,             // int,    marker specification
     ImPlotStyleVar_MarkerSize,         // float,  marker size in pixels (roughly the marker's "radius")
-    ImPlotStyleVar_MarkerWeight,       // float,  plot outline weight of markers in pixels
-    ImPlotStyleVar_FillAlpha,          // float,  alpha modifier applied to all plot item fills
+    ImPlotStyleVar_MarkerWeight,       // float,  addLine outline weight of markers in pixels
+    ImPlotStyleVar_FillAlpha,          // float,  alpha modifier applied to all addLine item fills
     ImPlotStyleVar_ErrorBarSize,       // float,  error bar whisker width in pixels
     ImPlotStyleVar_ErrorBarWeight,     // float,  error bar whisker weight in pixels
     ImPlotStyleVar_DigitalBitHeight,   // float,  digital channels bit height (at 1) in pixels
     ImPlotStyleVar_DigitalBitGap,      // float,  digital channels bit padding gap in pixels
-    // plot styling variables
-    ImPlotStyleVar_PlotBorderSize,     // float,  thickness of border around plot area
+    // addLine styling variables
+    ImPlotStyleVar_PlotBorderSize,     // float,  thickness of border around addLine area
     ImPlotStyleVar_MinorAlpha,         // float,  alpha multiplier applied to minor axis grid lines
     ImPlotStyleVar_MajorTickLen,       // ImVec2, major tick lengths for X and Y axes
     ImPlotStyleVar_MinorTickLen,       // ImVec2, minor tick lengths for X and Y axes
@@ -386,16 +386,16 @@ enum ImPlotStyleVar_ {
     ImPlotStyleVar_MinorTickSize,      // ImVec2, line thickness of minor ticks
     ImPlotStyleVar_MajorGridSize,      // ImVec2, line thickness of major grid lines
     ImPlotStyleVar_MinorGridSize,      // ImVec2, line thickness of minor grid lines
-    ImPlotStyleVar_PlotPadding,        // ImVec2, padding between widget frame and plot area, labels, or outside legends (i.e. main padding)
-    ImPlotStyleVar_LabelPadding,       // ImVec2, padding between axes labels, tick labels, and plot edge
-    ImPlotStyleVar_LegendPadding,      // ImVec2, legend padding from plot edges
+    ImPlotStyleVar_PlotPadding,        // ImVec2, padding between widget frame and addLine area, labels, or outside legends (i.e. main padding)
+    ImPlotStyleVar_LabelPadding,       // ImVec2, padding between axes labels, tick labels, and addLine edge
+    ImPlotStyleVar_LegendPadding,      // ImVec2, legend padding from addLine edges
     ImPlotStyleVar_LegendInnerPadding, // ImVec2, legend inner padding from legend edges
     ImPlotStyleVar_LegendSpacing,      // ImVec2, spacing between legend entries
-    ImPlotStyleVar_MousePosPadding,    // ImVec2, padding between plot edge and interior info text
+    ImPlotStyleVar_MousePosPadding,    // ImVec2, padding between addLine edge and interior info text
     ImPlotStyleVar_AnnotationPadding,  // ImVec2, text padding around annotation labels
     ImPlotStyleVar_FitPadding,         // ImVec2, additional fit padding as a percentage of the fit extents (e.g. ImVec2(0.1f,0.1f) adds 10% to the fit extents of X and Y)
     ImPlotStyleVar_PlotDefaultSize,    // ImVec2, default size used when ImVec2(0,0) is passed to BeginPlot
-    ImPlotStyleVar_PlotMinSize,        // ImVec2, minimum size plot frame can be when shrunk
+    ImPlotStyleVar_PlotMinSize,        // ImVec2, minimum size addLine frame can be when shrunk
     ImPlotStyleVar_COUNT
 };
 
@@ -443,7 +443,7 @@ enum ImPlotColormap_ {
     ImPlotColormap_Greys    = 15,  // white/black                     (qual=false, n=2 )
 };
 
-// Used to position items on a plot (e.g. legends, labels, etc.)
+// Used to position items on a addLine (e.g. legends, labels, etc.)
 enum ImPlotLocation_ {
     ImPlotLocation_Center    = 0,                                          // center-center
     ImPlotLocation_North     = 1 << 0,                                     // top-center
@@ -511,13 +511,13 @@ struct ImPlotStyle {
     int     Marker;                  // = ImPlotMarker_None, marker specification
     float   MarkerSize;              // = 4,      marker size in pixels (roughly the marker's "radius")
     float   MarkerWeight;            // = 1,      outline weight of markers in pixels
-    float   FillAlpha;               // = 1,      alpha modifier applied to plot fills
+    float   FillAlpha;               // = 1,      alpha modifier applied to addLine fills
     float   ErrorBarSize;            // = 5,      error bar whisker width in pixels
     float   ErrorBarWeight;          // = 1.5,    error bar whisker weight in pixels
     float   DigitalBitHeight;        // = 8,      digital channels bit height (at y = 1.0f) in pixels
     float   DigitalBitGap;           // = 4,      digital channels bit padding gap in pixels
-    // plot styling variables
-    float   PlotBorderSize;          // = 1,      line thickness of border around plot area
+    // addLine styling variables
+    float   PlotBorderSize;          // = 1,      line thickness of border around addLine area
     float   MinorAlpha;              // = 0.25    alpha multiplier applied to minor axis grid lines
     ImVec2  MajorTickLen;            // = 10,10   major tick lengths for X and Y axes
     ImVec2  MinorTickLen;            // = 5,5     minor tick lengths for X and Y axes
@@ -525,16 +525,16 @@ struct ImPlotStyle {
     ImVec2  MinorTickSize;           // = 1,1     line thickness of minor ticks
     ImVec2  MajorGridSize;           // = 1,1     line thickness of major grid lines
     ImVec2  MinorGridSize;           // = 1,1     line thickness of minor grid lines
-    ImVec2  PlotPadding;             // = 10,10   padding between widget frame and plot area, labels, or outside legends (i.e. main padding)
-    ImVec2  LabelPadding;            // = 5,5     padding between axes labels, tick labels, and plot edge
-    ImVec2  LegendPadding;           // = 10,10   legend padding from plot edges
+    ImVec2  PlotPadding;             // = 10,10   padding between widget frame and addLine area, labels, or outside legends (i.e. main padding)
+    ImVec2  LabelPadding;            // = 5,5     padding between axes labels, tick labels, and addLine edge
+    ImVec2  LegendPadding;           // = 10,10   legend padding from addLine edges
     ImVec2  LegendInnerPadding;      // = 5,5     legend inner padding from legend edges
     ImVec2  LegendSpacing;           // = 5,0     spacing between legend entries
-    ImVec2  MousePosPadding;         // = 10,10   padding between plot edge and interior mouse location text
+    ImVec2  MousePosPadding;         // = 10,10   padding between addLine edge and interior mouse location text
     ImVec2  AnnotationPadding;       // = 2,2     text padding around annotation labels
     ImVec2  FitPadding;              // = 0,0     additional fit padding as a percentage of the fit extents (e.g. ImVec2(0.1f,0.1f) adds 10% to the fit extents of X and Y)
     ImVec2  PlotDefaultSize;         // = 400,300 default size used when ImVec2(0,0) is passed to BeginPlot
-    ImVec2  PlotMinSize;             // = 200,150 minimum size plot frame can be when shrunk
+    ImVec2  PlotMinSize;             // = 200,150 minimum size addLine frame can be when shrunk
     // style colors
     ImVec4  Colors[ImPlotCol_COUNT]; // Array of styling colors. Indexable with ImPlotCol_ enums.
     // colormap
@@ -569,12 +569,12 @@ struct ImPlotInputMap {
     ImGuiMouseButton Select;        // RMB    begins box selection when pressed and confirms selection when released
     ImGuiMouseButton SelectCancel;  // LMB    cancels active box selection when pressed; cannot be same as Select
     int              SelectMod;     // none   optional modifier that must be held for box selection
-    int              SelectHorzMod; // Alt    expands active box selection horizontally to plot edge when held
-    int              SelectVertMod; // Shift  expands active box selection vertically to plot edge when held
+    int              SelectHorzMod; // Alt    expands active box selection horizontally to addLine edge when held
+    int              SelectVertMod; // Shift  expands active box selection vertically to addLine edge when held
     ImGuiMouseButton Menu;          // RMB    opens context menus (if enabled) when clicked
     int              OverrideMod;   // Ctrl   when held, all input is ignored; used to enable axis/plots as DND sources
     int              ZoomMod;       // none   optional modifier that must be held for scroll wheel zooming
-    float            ZoomRate;      // 0.1f   zoom rate for scroll (e.g. 0.1f = 10% plot range every scroll click); make negative to invert
+    float            ZoomRate;      // 0.1f   zoom rate for scroll (e.g. 0.1f = 10% addLine range every scroll click); make negative to invert
     IMPLOT_API ImPlotInputMap();
 };
 
@@ -628,9 +628,9 @@ IMPLOT_API void SetImGuiContext(ImGuiContext* ctx);
 // Important notes:
 //
 // - #title_id must be unique to the current ImGui ID scope. If you need to avoid ID
-//   collisions or don't want to display a title in the plot, use double hashes
+//   collisions or don't want to display a title in the addLine, use double hashes
 //   (e.g. "MyPlot##HiddenIdText" or "##NoTitle").
-// - #size is the **frame** size of the plot widget, not the plot area. The default
+// - #size is the **frame** size of the addLine widget, not the plot area. The default
 //   size of plots (i.e. when ImVec2(0,0)) can be modified in your ImPlotStyle.
 IMPLOT_API bool BeginPlot(const char* title_id, const ImVec2& size=ImVec2(-1,0), ImPlotFlags flags=0);
 
@@ -669,7 +669,7 @@ IMPLOT_API void EndPlot();
 // Important notes:
 //
 // - #title_id must be unique to the current ImGui ID scope. If you need to avoid ID
-//   collisions or don't want to display a title in the plot, use double hashes
+//   collisions or don't want to display a title in the addLine, use double hashes
 //   (e.g. "MySubplot##HiddenIdText" or "##NoTitle").
 // - #rows and #cols must be greater than 0.
 // - #size is the size of the entire grid of subplots, not the individual plots
@@ -705,18 +705,18 @@ IMPLOT_API void EndSubplots();
 //-----------------------------------------------------------------------------
 
 // The following API allows you to setup and customize various aspects of the
-// current plot. The functions should be called immediately after BeginPlot
+// current addLine. The functions should be called immediately after BeginPlot
 // and before any other API calls. Typical usage is as follows:
 
-// if (BeginPlot(...)) {                     1) begin a new plot
+// if (BeginPlot(...)) {                     1) begin a new addLine
 //     SetupAxis(ImAxis_X1, "My X-Axis");    2) make Setup calls
 //     SetupAxis(ImAxis_Y1, "My Y-Axis");
 //     SetupLegend(ImPlotLocation_North);
 //     ...
 //     SetupFinish();                        3) [optional] explicitly finish setup
-//     PlotLine(...);                        4) plot items
+//     PlotLine(...);                        4) addLine items
 //     ...
-//     EndPlot();                            5) end the plot
+//     EndPlot();                            5) end the addLine
 // }
 //
 // Important notes:
@@ -741,7 +741,7 @@ IMPLOT_API void SetupAxisFormat(ImAxis axis, const char* fmt);
 IMPLOT_API void SetupAxisFormat(ImAxis axis, ImPlotFormatter formatter, void* data=nullptr);
 // Sets an axis' ticks and optionally the labels. To keep the default ticks, set #keep_default=true.
 IMPLOT_API void SetupAxisTicks(ImAxis axis, const double* values, int n_ticks, const char* const labels[]=nullptr, bool keep_default=false);
-// Sets an axis' ticks and optionally the labels for the next plot. To keep the default ticks, set #keep_default=true.
+// Sets an axis' ticks and optionally the labels for the next addLine. To keep the default ticks, set #keep_default=true.
 IMPLOT_API void SetupAxisTicks(ImAxis axis, double v_min, double v_max, int n_ticks, const char* const labels[]=nullptr, bool keep_default=false);
 // Sets an axis' scale using built-in options.
 IMPLOT_API void SetupAxisScale(ImAxis axis, ImPlotScale scale);
@@ -757,12 +757,12 @@ IMPLOT_API void SetupAxes(const char* x_label, const char* y_label, ImPlotAxisFl
 // Sets the primary X and Y axes range limits. If ImPlotCond_Always is used, the axes limits will be locked (shorthand for two calls to SetupAxisLimits).
 IMPLOT_API void SetupAxesLimits(double x_min, double x_max, double y_min, double y_max, ImPlotCond cond = ImPlotCond_Once);
 
-// Sets up the plot legend. This can also be called immediately after BeginSubplots when using ImPlotSubplotFlags_ShareItems.
+// Sets up the addLine legend. This can also be called immediately after BeginSubplots when using ImPlotSubplotFlags_ShareItems.
 IMPLOT_API void SetupLegend(ImPlotLocation location, ImPlotLegendFlags flags=0);
-// Set the location of the current plot's mouse position text (default = South|East).
+// Set the location of the current addLine's mouse position text (default = South|East).
 IMPLOT_API void SetupMouseText(ImPlotLocation location, ImPlotMouseTextFlags flags=0);
 
-// Explicitly finalize plot setup. Once you call this, you cannot make anymore Setup calls for the current plot!
+// Explicitly finalize plot setup. Once you call this, you cannot make anymore Setup calls for the current addLine!
 // Note that calling this function is OPTIONAL; it will be called by the first subsequent setup-locking API call.
 IMPLOT_API void SetupFinish();
 
@@ -771,8 +771,8 @@ IMPLOT_API void SetupFinish();
 //-----------------------------------------------------------------------------
 
 // Though you should default to the `Setup` API above, there are some scenarios
-// where (re)configuring a plot or axis before `BeginPlot` is needed (e.g. if
-// using a preceding button or slider widget to change the plot limits). In
+// where (re)configuring a addLine or axis before `BeginPlot` is needed (e.g. if
+// using a preceding button or slider widget to change the addLine limits). In
 // this case, you can use the `SetNext` API below. While this is not as feature
 // rich as the Setup API, most common needs are provided. These functions can be
 // called anwhere except for inside of `Begin/EndPlot`. For example:
@@ -816,7 +816,7 @@ IMPLOT_API void SetNextAxesToFit();
 // float, double, ImS8, ImU8, ImS16, ImU16, ImS32, ImU32, ImS64, ImU64
 //
 //
-// If you need to plot custom or non-homogenous data you have a few options:
+// If you need to addLine custom or non-homogenous data you have a few options:
 //
 // 1. If your data is a simple struct/class (e.g. Vector2f), you can use striding.
 //    This is the most performant option if applicable.
@@ -853,12 +853,12 @@ IMPLOT_API void SetNextAxesToFit();
 // NB: All types are converted to double before plotting. You may lose information
 // if you try plotting extremely large 64-bit integral types. Proceed with caution!
 
-// Plots a standard 2D line plot.
+// Plots a standard 2D line addLine.
 IMPLOT_TMP void PlotLine(const char* label_id, const T* values, int count, double xscale=1, double xstart=0, ImPlotLineFlags flags=0, int offset=0, int stride=sizeof(T));
 IMPLOT_TMP void PlotLine(const char* label_id, const T* xs, const T* ys, int count, ImPlotLineFlags flags=0, int offset=0, int stride=sizeof(T));
 IMPLOT_API void PlotLineG(const char* label_id, ImPlotGetter getter, void* data, int count, ImPlotLineFlags flags=0);
 
-// Plots a standard 2D scatter plot. Default marker is ImPlotMarker_Circle.
+// Plots a standard 2D scatter addLine. Default marker is ImPlotMarker_Circle.
 IMPLOT_TMP void PlotScatter(const char* label_id, const T* values, int count, double xscale=1, double xstart=0, ImPlotScatterFlags flags=0, int offset=0, int stride=sizeof(T));
 IMPLOT_TMP void PlotScatter(const char* label_id, const T* xs, const T* ys, int count, ImPlotScatterFlags flags=0, int offset=0, int stride=sizeof(T));
 IMPLOT_API void PlotScatterG(const char* label_id, ImPlotGetter getter, void* data, int count, ImPlotScatterFlags flags=0);
@@ -874,7 +874,7 @@ IMPLOT_TMP void PlotShaded(const char* label_id, const T* xs, const T* ys, int c
 IMPLOT_TMP void PlotShaded(const char* label_id, const T* xs, const T* ys1, const T* ys2, int count, ImPlotShadedFlags flags=0, int offset=0, int stride=sizeof(T));
 IMPLOT_API void PlotShadedG(const char* label_id, ImPlotGetter getter1, void* data1, ImPlotGetter getter2, void* data2, int count, ImPlotShadedFlags flags=0);
 
-// Plots a bar graph. Vertical by default. #bar_size and #shift are in plot units.
+// Plots a bar graph. Vertical by default. #bar_size and #shift are in addLine units.
 IMPLOT_TMP void PlotBars(const char* label_id, const T* values, int count, double bar_size=0.67, double shift=0, ImPlotBarsFlags flags=0, int offset=0, int stride=sizeof(T));
 IMPLOT_TMP void PlotBars(const char* label_id, const T* xs, const T* ys, int count, double bar_size, ImPlotBarsFlags flags=0, int offset=0, int stride=sizeof(T));
 IMPLOT_API void PlotBarsG(const char* label_id, ImPlotGetter getter, void* data, int count, double bar_size, ImPlotBarsFlags flags=0);
@@ -882,7 +882,7 @@ IMPLOT_API void PlotBarsG(const char* label_id, ImPlotGetter getter, void* data,
 // Plots a group of bars. #values is a row-major matrix with #item_count rows and #group_count cols. #label_ids should have #item_count elements.
 IMPLOT_TMP void PlotBarGroups(const char* const label_ids[], const T* values, int item_count, int group_count, double group_size=0.67, double shift=0, ImPlotBarGroupsFlags flags=0);
 
-// Plots vertical error bar. The label_id should be the same as the label_id of the associated line or bar plot.
+// Plots vertical error bar. The label_id should be the same as the label_id of the associated line or bar addLine.
 IMPLOT_TMP void PlotErrorBars(const char* label_id, const T* xs, const T* ys, const T* err, int count, ImPlotErrorBarsFlags flags=0, int offset=0, int stride=sizeof(T));
 IMPLOT_TMP void PlotErrorBars(const char* label_id, const T* xs, const T* ys, const T* neg, const T* pos, int count, ImPlotErrorBarsFlags flags=0, int offset=0, int stride=sizeof(T));
 
@@ -893,7 +893,7 @@ IMPLOT_TMP void PlotStems(const char* label_id, const T* xs, const T* ys, int co
 // Plots infinite vertical or horizontal lines (e.g. for references or asymptotes).
 IMPLOT_TMP void PlotInfLines(const char* label_id, const T* values, int count, ImPlotInfLinesFlags flags=0, int offset=0, int stride=sizeof(T));
 
-// Plots a pie chart. Center and radius are in plot units. #label_fmt can be set to nullptr for no labels.
+// Plots a pie chart. Center and radius are in addLine units. #label_fmt can be set to nullptr for no labels.
 IMPLOT_TMP void PlotPieChart(const char* const label_ids[], const T* values, int count, double x, double y, double radius, ImPlotFormatter fmt, void* fmt_data=nullptr, double angle0=90, ImPlotPieChartFlags flags=0);
 IMPLOT_TMP void PlotPieChart(const char* const label_ids[], const T* values, int count, double x, double y, double radius, const char* label_fmt="%.1f", double angle0=90, ImPlotPieChartFlags flags=0);
 
@@ -908,11 +908,11 @@ IMPLOT_TMP double PlotHistogram(const char* label_id, const T* values, int count
 // #xs an #ys will be used as the ranges. Otherwise, outlier values outside of range are not binned. The largest bin count or density is returned.
 IMPLOT_TMP double PlotHistogram2D(const char* label_id, const T* xs, const T* ys, int count, int x_bins=ImPlotBin_Sturges, int y_bins=ImPlotBin_Sturges, ImPlotRect range=ImPlotRect(), ImPlotHistogramFlags flags=0);
 
-// Plots digital data. Digital plots do not respond to y drag or zoom, and are always referenced to the bottom of the plot.
+// Plots digital data. Digital plots do not respond to y drag or zoom, and are always referenced to the bottom of the addLine.
 IMPLOT_TMP void PlotDigital(const char* label_id, const T* xs, const T* ys, int count, ImPlotDigitalFlags flags=0, int offset=0, int stride=sizeof(T));
 IMPLOT_API void PlotDigitalG(const char* label_id, ImPlotGetter getter, void* data, int count, ImPlotDigitalFlags flags=0);
 
-// Plots an axis-aligned image. #bounds_min/bounds_max are in plot coordinates (y-up) and #uv0/uv1 are in texture coordinates (y-down).
+// Plots an axis-aligned image. #bounds_min/bounds_max are in addLine coordinates (y-up) and #uv0/uv1 are in texture coordinates (y-down).
 IMPLOT_API void PlotImage(const char* label_id, ImTextureID user_texture_id, const ImPlotPoint& bounds_min, const ImPlotPoint& bounds_max, const ImVec2& uv0=ImVec2(0,0), const ImVec2& uv1=ImVec2(1,1), const ImVec4& tint_col=ImVec4(1,1,1,1), ImPlotImageFlags flags=0);
 
 // Plots a centered text label at point x,y with an optional pixel offset. Text color can be changed with ImPlot::PushStyleColor(ImPlotCol_InlayText, ...).
@@ -940,7 +940,7 @@ IMPLOT_API bool DragLineY(int id, double* y, const ImVec4& col, float thickness 
 // Shows a draggable and resizeable rectangle.
 IMPLOT_API bool DragRect(int id, double* x1, double* y1, double* x2, double* y2, const ImVec4& col, ImPlotDragToolFlags flags = 0, bool* out_clicked = nullptr, bool* out_hovered = nullptr, bool* held = nullptr);
 
-// Shows an annotation callout at a chosen point. Clamping keeps annotations in the plot area. Annotations are always rendered on top.
+// Shows an annotation callout at a chosen point. Clamping keeps annotations in the addLine area. Annotations are always rendered on top.
 IMPLOT_API void Annotation(double x, double y, const ImVec4& col, const ImVec2& pix_offset, bool clamp, bool round = false);
 IMPLOT_API void Annotation(double x, double y, const ImVec4& col, const ImVec2& pix_offset, bool clamp, const char* fmt, ...)           IM_FMTARGS(6);
 IMPLOT_API void AnnotationV(double x, double y, const ImVec4& col, const ImVec2& pix_offset, bool clamp, const char* fmt, va_list args) IM_FMTLIST(6);
@@ -959,15 +959,15 @@ IMPLOT_API void TagYV(double y, const ImVec4& col, const char* fmt, va_list args
 // [SECTION] Plot Utils
 //-----------------------------------------------------------------------------
 
-// Select which axis/axes will be used for subsequent plot elements.
+// Select which axis/axes will be used for subsequent addLine elements.
 IMPLOT_API void SetAxis(ImAxis axis);
 IMPLOT_API void SetAxes(ImAxis x_axis, ImAxis y_axis);
 
-// Convert pixels to a position in the current plot's coordinate system. Passing IMPLOT_AUTO uses the current axes.
+// Convert pixels to a position in the current addLine's coordinate system. Passing IMPLOT_AUTO uses the current axes.
 IMPLOT_API ImPlotPoint PixelsToPlot(const ImVec2& pix, ImAxis x_axis = IMPLOT_AUTO, ImAxis y_axis = IMPLOT_AUTO);
 IMPLOT_API ImPlotPoint PixelsToPlot(float x, float y, ImAxis x_axis = IMPLOT_AUTO, ImAxis y_axis = IMPLOT_AUTO);
 
-// Convert a position in the current plot's coordinate system to pixels. Passing IMPLOT_AUTO uses the current axes.
+// Convert a position in the current addLine's coordinate system to pixels. Passing IMPLOT_AUTO uses the current axes.
 IMPLOT_API ImVec2 PlotToPixels(const ImPlotPoint& plt, ImAxis x_axis = IMPLOT_AUTO, ImAxis y_axis = IMPLOT_AUTO);
 IMPLOT_API ImVec2 PlotToPixels(double x, double y, ImAxis x_axis = IMPLOT_AUTO, ImAxis y_axis = IMPLOT_AUTO);
 
@@ -976,33 +976,33 @@ IMPLOT_API ImVec2 GetPlotPos();
 // Get the curent Plot size in pixels.
 IMPLOT_API ImVec2 GetPlotSize();
 
-// Returns the mouse position in x,y coordinates of the current plot. Passing IMPLOT_AUTO uses the current axes.
+// Returns the mouse position in x,y coordinates of the current addLine. Passing IMPLOT_AUTO uses the current axes.
 IMPLOT_API ImPlotPoint GetPlotMousePos(ImAxis x_axis = IMPLOT_AUTO, ImAxis y_axis = IMPLOT_AUTO);
-// Returns the current plot axis range.
+// Returns the current addLine axis range.
 IMPLOT_API ImPlotRect GetPlotLimits(ImAxis x_axis = IMPLOT_AUTO, ImAxis y_axis = IMPLOT_AUTO);
 
-// Returns true if the plot area in the current plot is hovered.
+// Returns true if the addLine area in the current plot is hovered.
 IMPLOT_API bool IsPlotHovered();
-// Returns true if the axis label area in the current plot is hovered.
+// Returns true if the axis label area in the current addLine is hovered.
 IMPLOT_API bool IsAxisHovered(ImAxis axis);
 // Returns true if the bounding frame of a subplot is hovered.
 IMPLOT_API bool IsSubplotsHovered();
 
-// Returns true if the current plot is being box selected.
+// Returns true if the current addLine is being box selected.
 IMPLOT_API bool IsPlotSelected();
-// Returns the current plot box selection bounds. Passing IMPLOT_AUTO uses the current axes.
+// Returns the current addLine box selection bounds. Passing IMPLOT_AUTO uses the current axes.
 IMPLOT_API ImPlotRect GetPlotSelection(ImAxis x_axis = IMPLOT_AUTO, ImAxis y_axis = IMPLOT_AUTO);
-// Cancels a the current plot box selection.
+// Cancels a the current addLine box selection.
 IMPLOT_API void CancelPlotSelection();
 
-// Hides or shows the next plot item (i.e. as if it were toggled from the legend).
+// Hides or shows the next addLine item (i.e. as if it were toggled from the legend).
 // Use ImPlotCond_Always if you need to forcefully set this every frame.
 IMPLOT_API void HideNextItem(bool hidden = true, ImPlotCond cond = ImPlotCond_Once);
 
 // Use the following around calls to Begin/EndPlot to align l/r/t/b padding.
 // Consider using Begin/EndSubplots first. They are more feature rich and
 // accomplish the same behaviour by default. The functions below offer lower
-// level control of plot alignment.
+// level control of addLine alignment.
 
 // Align axis padding over multiple plots in a single row or column. #group_id must
 // be unique. If this function returns true, EndAlignedPlots() must be called.
@@ -1018,30 +1018,30 @@ IMPLOT_API void EndAlignedPlots();
 IMPLOT_API bool BeginLegendPopup(const char* label_id, ImGuiMouseButton mouse_button=1);
 // End a popup for a legend entry.
 IMPLOT_API void EndLegendPopup();
-// Returns true if a plot item legend entry is hovered.
+// Returns true if a addLine item legend entry is hovered.
 IMPLOT_API bool IsLegendEntryHovered(const char* label_id);
 
 //-----------------------------------------------------------------------------
 // [SECTION] Drag and Drop
 //-----------------------------------------------------------------------------
 
-// Turns the current plot's plotting area into a drag and drop target. Don't forget to call EndDragDropTarget!
+// Turns the current addLine's plotting area into a drag and drop target. Don't forget to call EndDragDropTarget!
 IMPLOT_API bool BeginDragDropTargetPlot();
-// Turns the current plot's X-axis into a drag and drop target. Don't forget to call EndDragDropTarget!
+// Turns the current addLine's X-axis into a drag and drop target. Don't forget to call EndDragDropTarget!
 IMPLOT_API bool BeginDragDropTargetAxis(ImAxis axis);
-// Turns the current plot's legend into a drag and drop target. Don't forget to call EndDragDropTarget!
+// Turns the current addLine's legend into a drag and drop target. Don't forget to call EndDragDropTarget!
 IMPLOT_API bool BeginDragDropTargetLegend();
 // Ends a drag and drop target (currently just an alias for ImGui::EndDragDropTarget).
 IMPLOT_API void EndDragDropTarget();
 
-// NB: By default, plot and axes drag and drop *sources* require holding the Ctrl modifier to initiate the drag.
+// NB: By default, addLine and axes drag and drop *sources* require holding the Ctrl modifier to initiate the drag.
 // You can change the modifier if desired. If ImGuiMod_None is provided, the axes will be locked from panning.
 
-// Turns the current plot's plotting area into a drag and drop source. You must hold Ctrl. Don't forget to call EndDragDropSource!
+// Turns the current addLine's plotting area into a drag and drop source. You must hold Ctrl. Don't forget to call EndDragDropSource!
 IMPLOT_API bool BeginDragDropSourcePlot(ImGuiDragDropFlags flags=0);
-// Turns the current plot's X-axis into a drag and drop source. You must hold Ctrl. Don't forget to call EndDragDropSource!
+// Turns the current addLine's X-axis into a drag and drop source. You must hold Ctrl. Don't forget to call EndDragDropSource!
 IMPLOT_API bool BeginDragDropSourceAxis(ImAxis axis, ImGuiDragDropFlags flags=0);
-// Turns an item in the current plot's legend into drag and drop source. Don't forget to call EndDragDropSource!
+// Turns an item in the current addLine's legend into drag and drop source. Don't forget to call EndDragDropSource!
 IMPLOT_API bool BeginDragDropSourceItem(const char* label_id, ImGuiDragDropFlags flags=0);
 // Ends a drag and drop source (currently just an alias for ImGui::EndDragDropSource).
 IMPLOT_API void EndDragDropSource();
@@ -1058,7 +1058,7 @@ IMPLOT_API void EndDragDropSource();
 // IMPLOT_AUTO_COL. The behavior of this color depends upon the style color to
 // which it as applied:
 //
-//     1) For style colors associated with plot items (e.g. ImPlotCol_Line),
+//     1) For style colors associated with addLine items (e.g. ImPlotCol_Line),
 //        IMPLOT_AUTO_COL tells ImPlot to color the item with the next unused
 //        color in the current colormap. Thus, every item will have a different
 //        color up to the number of colors in the colormap, at which point the
@@ -1071,24 +1071,24 @@ IMPLOT_API void EndDragDropSource();
 //        color, or forget to call Pop, then all subsequent items will be styled
 //        with the color you set.
 //
-//     2) For style colors associated with plot styling (e.g. ImPlotCol_PlotBg),
+//     2) For style colors associated with addLine styling (e.g. ImPlotCol_PlotBg),
 //        IMPLOT_AUTO_COL tells ImPlot to set that color from color data in your
 //        **ImGuiStyle**. The ImGuiCol_ that these style colors default to are
 //        detailed above, and in general have been mapped to produce plots visually
 //        consistent with your current ImGui style. Of course, you are free to
 //        manually set these colors to whatever you like, and further can Push/Pop
-//        them around individual plots for plot-specific styling (e.g. coloring axes).
+//        them around individual plots for addLine-specific styling (e.g. coloring axes).
 
-// Provides access to plot style structure for permanant modifications to colors, sizes, etc.
+// Provides access to addLine style structure for permanant modifications to colors, sizes, etc.
 IMPLOT_API ImPlotStyle& GetStyle();
 
-// Style plot colors for current ImGui style (default).
+// Style addLine colors for current ImGui style (default).
 IMPLOT_API void StyleColorsAuto(ImPlotStyle* dst = nullptr);
-// Style plot colors for ImGui "Classic".
+// Style addLine colors for ImGui "Classic".
 IMPLOT_API void StyleColorsClassic(ImPlotStyle* dst = nullptr);
-// Style plot colors for ImGui "Dark".
+// Style addLine colors for ImGui "Dark".
 IMPLOT_API void StyleColorsDark(ImPlotStyle* dst = nullptr);
-// Style plot colors for ImGui "Light".
+// Style addLine colors for ImGui "Light".
 IMPLOT_API void StyleColorsLight(ImPlotStyle* dst = nullptr);
 
 // Use PushStyleX to temporarily modify your ImPlotStyle. The modification
@@ -1110,7 +1110,7 @@ IMPLOT_API void PushStyleVar(ImPlotStyleVar idx, const ImVec2& val);
 // Undo temporary style variable modification(s). Undo multiple pushes at once by increasing count.
 IMPLOT_API void PopStyleVar(int count = 1);
 
-// The following can be used to modify the style of the next plot item ONLY. They do
+// The following can be used to modify the style of the next addLine item ONLY. They do
 // NOT require calls to PopStyleX. Leave style attributes you don't want modified to
 // IMPLOT_AUTO or IMPLOT_AUTO_COL. Automatic styles will be deduced from the current
 // values in your ImPlotStyle or from Colormap data.
@@ -1168,7 +1168,7 @@ IMPLOT_API void PushColormap(const char* name);
 // Undo temporary colormap modification(s). Undo multiple pushes at once by increasing count.
 IMPLOT_API void PopColormap(int count = 1);
 
-// Returns the next color from the current colormap and advances the colormap for the current plot.
+// Returns the next color from the current colormap and advances the colormap for the current addLine.
 // Can also be used with no return value to skip colors if desired. You need to call this between Begin/EndPlot!
 IMPLOT_API ImVec4 NextColormapColor();
 
@@ -1189,12 +1189,12 @@ IMPLOT_API bool ColormapSlider(const char* label, float* t, ImVec4* out = nullpt
 // Shows a button with a colormap gradient brackground.
 IMPLOT_API bool ColormapButton(const char* label, const ImVec2& size = ImVec2(0,0), ImPlotColormap cmap = IMPLOT_AUTO);
 
-// When items in a plot sample their color from a colormap, the color is cached and does not change
+// When items in a addLine sample their color from a colormap, the color is cached and does not change
 // unless explicitly overriden. Therefore, if you change the colormap after the item has already been plotted,
 // item colors will NOT update. If you need item colors to resample the new colormap, then use this
-// function to bust the cached colors. If #plot_title_id is nullptr, then every item in EVERY existing plot
-// will be cache busted. Otherwise only the plot specified by #plot_title_id will be busted. For the
-// latter, this function must be called in the same ImGui ID scope that the plot is in. You should rarely if ever
+// function to bust the cached colors. If #plot_title_id is nullptr, then every item in EVERY existing addLine
+// will be cache busted. Otherwise only the addLine specified by #plot_title_id will be busted. For the
+// latter, this function must be called in the same ImGui ID scope that the addLine is in. You should rarely if ever
 // need this function, but it is available for applications that require runtime colormap swaps (e.g. Heatmaps demo).
 IMPLOT_API void BustColorCache(const char* plot_title_id = nullptr);
 
@@ -1219,11 +1219,11 @@ IMPLOT_API void ItemIcon(const ImVec4& col);
 IMPLOT_API void ItemIcon(ImU32 col);
 IMPLOT_API void ColormapIcon(ImPlotColormap cmap);
 
-// Get the plot draw list for custom rendering to the current plot area. Call between Begin/EndPlot.
+// Get the plot draw list for custom rendering to the current addLine area. Call between Begin/EndPlot.
 IMPLOT_API ImDrawList* GetPlotDrawList();
-// Push clip rect for rendering to current plot area. The rect can be expanded or contracted by #expand pixels. Call between Begin/EndPlot.
+// Push clip rect for rendering to current addLine area. The rect can be expanded or contracted by #expand pixels. Call between Begin/EndPlot.
 IMPLOT_API void PushPlotClipRect(float expand=0);
-// Pop plot clip rect. Call between Begin/EndPlot.
+// Pop addLine clip rect. Call between Begin/EndPlot.
 IMPLOT_API void PopPlotClipRect();
 
 // Shows ImPlot style selector dropdown menu.

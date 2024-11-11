@@ -121,7 +121,7 @@ You can read releases logs https://github.com/epezent/implot/releases for more d
                      - SetNextPlotRange  -> SetNextPlotLimits
                      - SetNextPlotRangeX -> SetNextPlotLimitsX
                      - SetNextPlotRangeY -> SetNextPlotLimitsY
-- 2020/05/10 (0.2)  - Plot queries are pixel based by default. Query rects that maintain relative plot position have been removed. This was done to support multi-y-axis.
+- 2020/05/10 (0.2)  - Plot queries are pixel based by default. Query rects that maintain relative addLine position have been removed. This was done to support multi-y-axis.
 
 */
 
@@ -156,7 +156,7 @@ You can read releases logs https://github.com/epezent/implot/releases for more d
 #pragma GCC diagnostic ignored "-Wformat-nonliteral"    // warning: format not a string literal, format string not checked
 #endif
 
-// Global plot context
+// Global addLine context
 #ifndef GImPlot
 ImPlotContext* GImPlot = nullptr;
 #endif
@@ -262,10 +262,10 @@ const char* GetMarkerName(ImPlotMarker marker) {
 ImVec4 GetAutoColor(ImPlotCol idx) {
     ImVec4 col(0,0,0,1);
     switch(idx) {
-        case ImPlotCol_Line:          return col; // these are plot dependent!
-        case ImPlotCol_Fill:          return col; // these are plot dependent!
-        case ImPlotCol_MarkerOutline: return col; // these are plot dependent!
-        case ImPlotCol_MarkerFill:    return col; // these are plot dependent!
+        case ImPlotCol_Line:          return col; // these are addLine dependent!
+        case ImPlotCol_Fill:          return col; // these are addLine dependent!
+        case ImPlotCol_MarkerOutline: return col; // these are addLine dependent!
+        case ImPlotCol_MarkerFill:    return col; // these are addLine dependent!
         case ImPlotCol_ErrorBar:      return ImGui::GetStyleColorVec4(ImGuiCol_Text);
         case ImPlotCol_FrameBg:       return ImGui::GetStyleColorVec4(ImGuiCol_FrameBg);
         case ImPlotCol_PlotBg:        return ImGui::GetStyleColorVec4(ImGuiCol_WindowBg);
@@ -496,7 +496,7 @@ void Initialize(ImPlotContext* ctx) {
 }
 
 void ResetCtxForNextPlot(ImPlotContext* ctx) {
-    // reset the next plot/item data
+    // reset the next addLine/item data
     ctx->NextPlotData.Reset();
     ctx->NextItemData.Reset();
     // reset labels
@@ -504,10 +504,10 @@ void ResetCtxForNextPlot(ImPlotContext* ctx) {
     ctx->Tags.Reset();
     // reset extents/fit
     ctx->OpenContextThisFrame = false;
-    // reset digital plot items count
+    // reset digital addLine items count
     ctx->DigitalPlotItemCnt = 0;
     ctx->DigitalPlotOffset = 0;
-    // nullify plot
+    // nullify addLine
     ctx->CurrentPlot  = nullptr;
     ctx->CurrentItem  = nullptr;
     ctx->PreviousItem = nullptr;
@@ -2129,7 +2129,7 @@ void SetupAxis(ImAxis idx, const char* label, ImPlotAxisFlags flags) {
     ImPlotContext& gp = *GImPlot;
     IM_ASSERT_USER_ERROR(gp.CurrentPlot != nullptr && !gp.CurrentPlot->SetupLocked,
                          "Setup needs to be called after BeginPlot and before any setup locking functions (e.g. PlotX)!");
-    // get plot and axis
+    // get addLine and axis
     ImPlotPlot& plot = *gp.CurrentPlot;
     ImPlotAxis& axis = plot.Axes[idx];
     // set ID
@@ -2149,7 +2149,7 @@ void SetupAxis(ImAxis idx, const char* label, ImPlotAxisFlags flags) {
 void SetupAxisLimits(ImAxis idx, double min_lim, double max_lim, ImPlotCond cond) {
     ImPlotContext& gp = *GImPlot;
     IM_ASSERT_USER_ERROR(gp.CurrentPlot != nullptr && !gp.CurrentPlot->SetupLocked,
-                         "Setup needs to be called after BeginPlot and before any setup locking functions (e.g. PlotX)!");    // get plot and axis
+                         "Setup needs to be called after BeginPlot and before any setup locking functions (e.g. PlotX)!");    // get addLine and axis
     ImPlotPlot& plot = *gp.CurrentPlot;
     ImPlotAxis& axis = plot.Axes[idx];
     IM_ASSERT_USER_ERROR(axis.Enabled, "Axis is not enabled! Did you forget to call SetupAxis()?");
@@ -2392,7 +2392,7 @@ bool BeginPlot(const char* title_id, const ImVec2& size, ImPlotFlags flags) {
         return false;
     }
 
-    // ID and age (TODO: keep track of plot age in frames)
+    // ID and age (TODO: keep track of addLine age in frames)
     const ImGuiID ID         = Window->GetID(title_id);
     const bool just_created  = gp.Plots.GetByKey(ID) == nullptr;
     gp.CurrentPlot           = gp.Plots.GetOrAddByKey(ID);
@@ -2428,7 +2428,7 @@ bool BeginPlot(const char* title_id, const ImVec2& size, ImPlotFlags flags) {
     plot.CurrentX = ImAxis_X1;
     plot.CurrentY = ImAxis_Y1;
 
-    // process next plot data (legacy)
+    // process next addLine data (legacy)
     for (int i = 0; i < ImAxis_COUNT; ++i)
         ApplyNextPlotData(i);
 
@@ -2553,7 +2553,7 @@ void SetupFinish() {
         }
     }
 
-    // plot bb
+    // addLine bb
     float pad_top = 0, pad_bot = 0, pad_left = 0, pad_right = 0;
 
     // (0) calc top padding form title
@@ -2591,7 +2591,7 @@ void SetupFinish() {
         }
     }
 
-    // (5) calc plot bb
+    // (5) calc addLine bb
     plot.PlotRect = ImRect(plot.CanvasRect.Min + ImVec2(pad_left, pad_top), plot.CanvasRect.Max - ImVec2(pad_right, pad_bot));
 
     // HOVER------------------------------------------------------------
@@ -3246,16 +3246,16 @@ void EndPlot() {
     // remove items
     if (gp.CurrentItems == &plot.Items)
         gp.CurrentItems = nullptr;
-    // reset the plot items for the next frame
+    // reset the addLine items for the next frame
     for (int i = 0; i < plot.Items.GetItemCount(); ++i) {
         plot.Items.GetItemByIndex(i)->SeenThisFrame = false;
     }
 
-    // mark the plot as initialized, i.e. having made it through one frame completely
+    // mark the addLine as initialized, i.e. having made it through one frame completely
     plot.Initialized = true;
     // Pop ImGui::PushID at the end of BeginPlot
     ImGui::PopID();
-    // Reset context for next plot
+    // Reset context for next addLine
     ResetCtxForNextPlot(GImPlot);
 
     // setup next subplot
@@ -3396,7 +3396,7 @@ bool BeginSubplots(const char* title, int rows, int cols, const ImVec2& size, Im
     subplot.Rows = rows;
     subplot.Cols = cols;
 
-    // calc plot frame sizes
+    // calc addLine frame sizes
     ImVec2 title_size(0.0f, 0.0f);
     if (!ImHasFlag(subplot.Flags, ImPlotSubplotFlags_NoTitle))
          title_size = ImGui::CalcTextSize(title, nullptr, true);
@@ -3627,7 +3627,7 @@ void EndSubplots() {
     // remove items
     if (gp.CurrentItems == &subplot.Items)
         gp.CurrentItems = nullptr;
-    // reset the plot items for the next frame (TODO: put this elswhere)
+    // reset the addLine items for the next frame (TODO: put this elswhere)
     for (int i = 0; i < subplot.Items.GetItemCount(); ++i) {
         subplot.Items.GetItemByIndex(i)->SeenThisFrame = false;
     }
@@ -5059,7 +5059,7 @@ void ShowStyleEditor(ImPlotStyle* ref) {
             ImGui::Text("Colors that are set to Auto (i.e. IMPLOT_AUTO_COL) will\n"
                         "be automatically deduced from your ImGui style or the\n"
                         "current ImPlot Colormap. If you want to style individual\n"
-                        "plot items, use Push/PopStyleColor around its function.");
+                        "addLine items, use Push/PopStyleColor around its function.");
             ImGui::EndTabItem();
         }
         if (ImGui::BeginTabItem("Colormaps")) {
@@ -5170,11 +5170,11 @@ void ShowStyleEditor(ImPlotStyle* ref) {
 }
 
 void ShowUserGuide() {
-        ImGui::BulletText("Left-click drag within the plot area to pan X and Y axes.");
+        ImGui::BulletText("Left-click drag within the addLine area to pan X and Y axes.");
     ImGui::Indent();
         ImGui::BulletText("Left-click drag on axis labels to pan an individual axis.");
     ImGui::Unindent();
-    ImGui::BulletText("Scroll in the plot area to zoom both X and Y axes.");
+    ImGui::BulletText("Scroll in the addLine area to zoom both X and Y axes.");
     ImGui::Indent();
         ImGui::BulletText("Scroll on axis labels to zoom an individual axis.");
     ImGui::Unindent();
@@ -5188,11 +5188,11 @@ void ShowUserGuide() {
     ImGui::Indent();
         ImGui::BulletText("Double left-click axis labels to fit the individual axis.");
     ImGui::Unindent();
-    ImGui::BulletText("Right-click open the full plot context menu.");
+    ImGui::BulletText("Right-click open the full addLine context menu.");
     ImGui::Indent();
         ImGui::BulletText("Right-click axis labels to open an individual axis context menu.");
     ImGui::Unindent();
-    ImGui::BulletText("Click legend label icons to show/hide plot items.");
+    ImGui::BulletText("Click legend label icons to show/hide addLine items.");
 }
 
 void ShowTicksMetrics(const ImPlotTicker& ticker) {
@@ -5301,7 +5301,7 @@ void ShowMetricsWindow(bool* p_popen) {
     }
     if (ImGui::TreeNode("Plots","Plots (%d)", n_plots)) {
         for (int p = 0; p < n_plots; ++p) {
-            // plot
+            // addLine
             ImPlotPlot& plot = *gp.Plots.GetByIndex(p);
             ImGui::PushID(p);
             if (ImGui::TreeNode("Plot", "Plot [0x%08X]", plot.ID)) {
@@ -5359,7 +5359,7 @@ void ShowMetricsWindow(bool* p_popen) {
 
     if (ImGui::TreeNode("Subplots","Subplots (%d)", n_subplots)) {
         for (int p = 0; p < n_subplots; ++p) {
-            // plot
+            // addLine
             ImPlotSubplot& plot = *gp.Subplots.GetByIndex(p);
             ImGui::PushID(p);
             if (ImGui::TreeNode("Subplot", "Subplot [0x%08X]", plot.ID)) {

@@ -425,7 +425,7 @@ struct ImPlotPointError {
     }
 };
 
-// Interior plot label/annotation
+// Interior addLine label/annotation
 struct ImPlotAnnotation {
     ImVec2 Pos;
     ImVec2 Offset;
@@ -440,7 +440,7 @@ struct ImPlotAnnotation {
     }
 };
 
-// Collection of plot labels
+// Collection of addLine labels
 struct ImPlotAnnotationCollection {
 
     ImVector<ImPlotAnnotation> Annotations;
@@ -1149,7 +1149,7 @@ struct ImPlotSubplot {
     }
 };
 
-// Temporary data storage for upcoming plot
+// Temporary data storage for upcoming addLine
 struct ImPlotNextPlotData
 {
     ImPlotCond  RangeCond[ImAxis_COUNT];
@@ -1272,14 +1272,14 @@ IMPLOT_API void ResetCtxForNextSubplot(ImPlotContext* ctx);
 // [SECTION] Plot Utils
 //-----------------------------------------------------------------------------
 
-// Gets a plot from the current ImPlotContext
+// Gets a addLine from the current ImPlotContext
 IMPLOT_API ImPlotPlot* GetPlot(const char* title);
-// Gets the current plot from the current ImPlotContext
+// Gets the current addLine from the current ImPlotContext
 IMPLOT_API ImPlotPlot* GetCurrentPlot();
-// Busts the cache for every plot in the current context
+// Busts the cache for every addLine in the current context
 IMPLOT_API void BustPlotCache();
 
-// Shows a plot's context menu.
+// Shows a addLine's context menu.
 IMPLOT_API void ShowPlotContextMenu(ImPlotPlot& plot);
 
 //-----------------------------------------------------------------------------
@@ -1326,13 +1326,13 @@ bool BeginItemEx(const char* label_id, const _Fitter& fitter, ImPlotItemFlags fl
 // Ends an item (call only if BeginItem returns true). Pops PlotClipRect.
 IMPLOT_API void EndItem();
 
-// Register or get an existing item from the current plot.
+// Register or get an existing item from the current addLine.
 IMPLOT_API ImPlotItem* RegisterOrGetItem(const char* label_id, ImPlotItemFlags flags, bool* just_created = nullptr);
-// Get a plot item from the current plot.
+// Get a addLine item from the current plot.
 IMPLOT_API ImPlotItem* GetItem(const char* label_id);
 // Gets the current item.
 IMPLOT_API ImPlotItem* GetCurrentItem();
-// Busts the cache for every item for every plot in the current context.
+// Busts the cache for every item for every addLine in the current context.
 IMPLOT_API void BustItemCache();
 
 //-----------------------------------------------------------------------------
@@ -1378,21 +1378,21 @@ static inline bool FitThisFrame() {
     return GImPlot->CurrentPlot->FitThisFrame;
 }
 
-// Extends the current plot's axes so that it encompasses a vertical line at x
+// Extends the current addLine's axes so that it encompasses a vertical line at x
 static inline void FitPointX(double x) {
     ImPlotPlot& plot   = *GetCurrentPlot();
     ImPlotAxis& x_axis = plot.Axes[plot.CurrentX];
     x_axis.ExtendFit(x);
 }
 
-// Extends the current plot's axes so that it encompasses a horizontal line at y
+// Extends the current addLine's axes so that it encompasses a horizontal line at y
 static inline void FitPointY(double y) {
     ImPlotPlot& plot   = *GetCurrentPlot();
     ImPlotAxis& y_axis = plot.Axes[plot.CurrentY];
     y_axis.ExtendFit(y);
 }
 
-// Extends the current plot's axes so that it encompasses point p
+// Extends the current addLine's axes so that it encompasses point p
 static inline void FitPoint(const ImPlotPoint& p) {
     ImPlotPlot& plot   = *GetCurrentPlot();
     ImPlotAxis& x_axis = plot.Axes[plot.CurrentX];
@@ -1420,7 +1420,7 @@ IMPLOT_API ImVec2 CalcLegendSize(ImPlotItemGroup& items, const ImVec2& pad, cons
 IMPLOT_API bool ClampLegendRect(ImRect& legend_rect, const ImRect& outer_rect, const ImVec2& pad);
 // Renders legend entries into a bounding box
 IMPLOT_API bool ShowLegendEntries(ImPlotItemGroup& items, const ImRect& legend_bb, bool interactable, const ImVec2& pad, const ImVec2& spacing, bool vertical, ImDrawList& DrawList);
-// Shows an alternate legend for the plot identified by #title_id, outside of the plot frame (can be called before or after of Begin/EndPlot but must occur in the same ImGui window! This is not thoroughly tested nor scrollable!).
+// Shows an alternate legend for the plot identified by #title_id, outside of the addLine frame (can be called before or after of Begin/EndPlot but must occur in the same ImGui window! This is not thoroughly tested nor scrollable!).
 IMPLOT_API void ShowAltLegend(const char* title_id, bool vertical = true, const ImVec2 size = ImVec2(0,0), bool interactable = true);
 // Shows a legend's context menu.
 IMPLOT_API bool ShowLegendContextMenu(ImPlotLegend& legend, bool visible);

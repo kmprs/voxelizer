@@ -2672,7 +2672,7 @@ CALL_INSTANTIATE_FOR_NUMERIC_TYPES()
 // [SECTION] PlotDigital
 //-----------------------------------------------------------------------------
 
-// TODO: Make this behave like all the other plot types (.e. not fixed in y axis)
+// TODO: Make this behave like all the other addLine types (.e. not fixed in y axis)
 
 template <typename Getter>
 void PlotDigitalEx(const char* label_id, Getter getter, ImPlotDigitalFlags flags) {
@@ -2705,7 +2705,7 @@ void PlotDigitalEx(const char* label_id, Getter getter, ImPlotDigitalFlags flags
                 int pixY_Offset = 0; //20 pixel from bottom due to mouse cursor label
                 pMin.y = (y_axis.PixelMin) + ((-gp.DigitalPlotOffset)                   - pixY_Offset);
                 pMax.y = (y_axis.PixelMin) + ((-gp.DigitalPlotOffset) - pixY_0 - pixY_1 - pixY_Offset);
-                //plot only one rectangle for same digital state
+                //addLine only one rectangle for same digital state
                 while (((i+2) < getter.Count) && (itemData1.y == itemData2.y)) {
                     const int in = (i + 1);
                     itemData2 = getter(in);
@@ -2713,12 +2713,12 @@ void PlotDigitalEx(const char* label_id, Getter getter, ImPlotDigitalFlags flags
                     pMax.x = PlotToPixels(itemData2,IMPLOT_AUTO,IMPLOT_AUTO).x;
                     i++;
                 }
-                //do not extend plot outside plot range
+                //do not extend plot outside addLine range
                 if (pMin.x < x_axis.PixelMin) pMin.x = x_axis.PixelMin;
                 if (pMax.x < x_axis.PixelMin) pMax.x = x_axis.PixelMin;
                 if (pMin.x > x_axis.PixelMax) pMin.x = x_axis.PixelMax - 1; //fix issue related to https://github.com/ocornut/imgui/issues/3976
                 if (pMax.x > x_axis.PixelMax) pMax.x = x_axis.PixelMax - 1; //fix issue related to https://github.com/ocornut/imgui/issues/3976
-                //plot a rectangle that extends up to x2 with y1 height
+                //addLine a rectangle that extends up to x2 with y1 height
                 if ((pMax.x > pMin.x) && (gp.CurrentPlot->PlotRect.Contains(pMin) || gp.CurrentPlot->PlotRect.Contains(pMax))) {
                     // ImVec4 colAlpha = item->Color;
                     // colAlpha.w = item->Highlight ? 1.0f : 0.9f;

@@ -119,7 +119,7 @@ struct NormalDistribution {
     double Data[N];
 };
 
-// utility structure for realtime plot
+// utility structure for realtime addLine
 struct ScrollingBuffer {
     int MaxSize;
     int Offset;
@@ -145,7 +145,7 @@ struct ScrollingBuffer {
     }
 };
 
-// utility structure for realtime plot
+// utility structure for realtime addLine
 struct RollingBuffer {
     float Span;
     ImVector<ImVec2> Data;
@@ -1059,10 +1059,10 @@ void Demo_TimeScale() {
             int end = (int)(ImPlot::GetPlotLimits().X.Max - t_min) + 1000;
             end = end < 0 ? 0 : end > HugeTimeData::Size - 1 ? HugeTimeData::Size - 1 : end;
             int size = (end - start)/downsample;
-            // plot it
+            // addLine it
             ImPlot::PlotLine("Time Series", &data->Ts[start], &data->Ys[start], size, 0, 0, sizeof(double)*downsample);
         }
-        // plot time now
+        // addLine time now
         double t_now = (double)time(nullptr);
         double y_now = HugeTimeData::GetY(t_now);
         ImPlot::PlotScatter("Now",&t_now,&y_now,1);
@@ -1118,7 +1118,7 @@ void Demo_MultipleAxes() {
     ImGui::SameLine();
     ImGui::Checkbox("Y-Axis 3", &y3_axis);
 
-    ImGui::BulletText("You can drag axes to the opposite side of the plot.");
+    ImGui::BulletText("You can drag axes to the opposite side of the addLine.");
     ImGui::BulletText("Hover over legend items to see which axis they are plotted on.");
 
     if (ImPlot::BeginPlot("Multi-Axis Plot", ImVec2(-1,0))) {
@@ -1510,7 +1510,7 @@ void Demo_DragRects() {
         y_data3[i] = y_data2[i] * -0.6f + sinf(3 * arg) * 0.4f;
     }
     ImGui::BulletText("Click and drag the edges, corners, and center of the rect.");
-    ImGui::BulletText("Double click edges to expand rect to plot extents.");
+    ImGui::BulletText("Double click edges to expand rect to addLine extents.");
     static ImPlotRect rect(0.0025,0.0045,0,0.5);
     static ImPlotDragToolFlags flags = ImPlotDragToolFlags_None;
     ImGui::CheckboxFlags("NoCursors", (unsigned int*)&flags, ImPlotDragToolFlags_NoCursors); ImGui::SameLine();
@@ -1582,7 +1582,7 @@ void Demo_Querying() {
     }
 
     ImGui::BulletText("Box select and left click mouse to create a new query rect.");
-    ImGui::BulletText("Ctrl + click in the plot area to draw points.");
+    ImGui::BulletText("Ctrl + click in the addLine area to draw points.");
 
     if (ImGui::Button("Clear Queries"))
         rects.shrink(0);
@@ -1708,8 +1708,8 @@ void Demo_DragAndDrop() {
 
     const int         k_dnd = 20;
     static MyDndItem  dnd[k_dnd];
-    static MyDndItem* dndx = nullptr; // for plot 2
-    static MyDndItem* dndy = nullptr; // for plot 2
+    static MyDndItem* dndx = nullptr; // for addLine 2
+    static MyDndItem* dndy = nullptr; // for addLine 2
 
     // child window to serve as initial source for our DND items
     ImGui::BeginChild("DND_LEFT",ImVec2(100,400));
@@ -1740,7 +1740,7 @@ void Demo_DragAndDrop() {
 
     ImGui::SameLine();
     ImGui::BeginChild("DND_RIGHT",ImVec2(-1,400));
-    // plot 1 (time series)
+    // addLine 1 (time series)
     ImPlotAxisFlags flags = ImPlotAxisFlags_NoTickLabels | ImPlotAxisFlags_NoGridLines | ImPlotAxisFlags_NoHighlight;
     if (ImPlot::BeginPlot("##DND1", ImVec2(-1,195))) {
         ImPlot::SetupAxis(ImAxis_X1, nullptr, flags|ImPlotAxisFlags_Lock);
@@ -1762,7 +1762,7 @@ void Demo_DragAndDrop() {
                 }
             }
         }
-        // allow the main plot area to be a DND target
+        // allow the main addLine area to be a DND target
         if (ImPlot::BeginDragDropTargetPlot()) {
             if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("MY_DND")) {
                 int i = *(int*)payload->Data; dnd[i].Plt = 1; dnd[i].Yax = ImAxis_Y1;
@@ -1787,7 +1787,7 @@ void Demo_DragAndDrop() {
         }
         ImPlot::EndPlot();
     }
-    // plot 2 (Lissajous)
+    // addLine 2 (Lissajous)
     if (ImPlot::BeginPlot("##DND2", ImVec2(-1,195))) {
         ImPlot::PushStyleColor(ImPlotCol_AxisBg, dndx != nullptr ? dndx->Color : ImPlot::GetStyle().Colors[ImPlotCol_AxisBg]);
         ImPlot::SetupAxis(ImAxis_X1, dndx == nullptr ? "[drop here]" : dndx->Label, flags);
@@ -1827,13 +1827,13 @@ void Demo_DragAndDrop() {
             ImGui::TextUnformatted(dndy->Label);
             ImPlot::EndDragDropSource();
         }
-        // allow the plot area to be a DND target
+        // allow the addLine area to be a DND target
         if (ImPlot::BeginDragDropTargetPlot()) {
             if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("MY_DND")) {
                 int i = *(int*)payload->Data; dndx = dndy = &dnd[i];
             }
         }
-        // allow the plot area to be a DND source
+        // allow the addLine area to be a DND source
         if (ImPlot::BeginDragDropSourcePlot()) {
             ImGui::TextUnformatted("Yes, you can\ndrag this!");
             ImPlot::EndDragDropSource();
@@ -1922,7 +1922,7 @@ void Demo_OffsetAndStride() {
 //-----------------------------------------------------------------------------
 
 void Demo_CustomDataAndGetters() {
-    ImGui::BulletText("You can plot custom structs using the stride feature.");
+    ImGui::BulletText("You can addLine custom structs using the stride feature.");
     ImGui::BulletText("Most plotters can also be passed a function pointer for getting data.");
     ImGui::Indent();
         ImGui::BulletText("You can optionally pass user data to be given to your getter function.");
@@ -2436,7 +2436,7 @@ void PlotCandlestick(const char* label_id, const double* xs, const double* opens
         ImPlot::PopPlotClipRect();
         // find mouse location index
         int idx = BinarySearch(xs, 0, count - 1, mouse.x);
-        // render tool tip (won't be affected by plot clip rect)
+        // render tool tip (won't be affected by addLine clip rect)
         if (idx != -1) {
             ImGui::BeginTooltip();
             char buff[32];
@@ -2450,7 +2450,7 @@ void PlotCandlestick(const char* label_id, const double* xs, const double* opens
         }
     }
 
-    // begin plot item
+    // begin addLine item
     if (ImPlot::BeginItem(label_id)) {
         // override legend icon color
         ImPlot::GetCurrentItem()->Color = IM_COL32(64,64,64,255);
@@ -2472,7 +2472,7 @@ void PlotCandlestick(const char* label_id, const double* xs, const double* opens
             draw_list->AddRectFilled(open_pos, close_pos, color);
         }
 
-        // end plot item
+        // end addLine item
         ImPlot::EndItem();
     }
 }

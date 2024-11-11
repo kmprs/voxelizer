@@ -13,10 +13,12 @@ public:
     BenchmarkGUI();
     ~BenchmarkGUI();
     void
-    createFrame( SDL_Window* window, ImGuiContext* imGuiContext, float width, float height,
+    createFrame( SDL_Window* window, ImGuiContext* imGuiContext, float width,
+                 float height,
                  int x,
                  int y ) override;
 
 private:
-    static void plot( const float x[], const float y[], int size);
+    static void plot( const std::vector<BenchmarkMetric> &metrics );
+    static void addLine( const BenchmarkMetric& metric );
 };

@@ -65,4 +65,9 @@ namespace util
         void createChildren( BVHNode* node, int depth, int maxDepth );
         void getLeaves( BVHNode* node, std::vector<BVHNode*> &leaves );
     }
+
+    namespace time
+    {
+        int toMS( const Duration &duration );
+    }
 }
