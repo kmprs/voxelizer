@@ -14,9 +14,13 @@ void Program::run()
     SDL_Event event;
 
     IMGUI_CHECKVERSION();
-    BenchmarkWindowHandler benchmarkWindowHandler = { TITLE + " Benchmarks", 1000, 700 };
+    BenchmarkWindowHandler benchmarkWindowHandler = { TITLE + " Benchmarks",
+                                                      dataHandler->getBenchmarkWindowWidth(),
+                                                      dataHandler->getBenchmarkWindowHeight() };
     bool benchmarksShown = dataHandler->isBenchmarkShown();
     SDL_HideWindow( benchmarkWindowHandler.getWindow() );
+    ImGui::StyleColorsDark();
+    GUI::setStyles();
 
     RenderingWindowHandler windowHandler = { TITLE, dataHandler->getWindowWidth(),
                                              dataHandler->getWindowHeight() };

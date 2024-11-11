@@ -75,31 +75,35 @@ BenchmarkGUI::createFrame( SDL_Window* window, ImGuiContext* imGuiContext, float
     // Calculate elapsed time
     static auto start_time = std::chrono::high_resolution_clock::now();
     auto current_time = std::chrono::high_resolution_clock::now();
-    float elapsed_time = std::chrono::duration<float>(current_time - start_time).count();
+    float elapsed_time = std::chrono::duration<float>(
+            current_time - start_time ).count();
 
     // Update x_data and y_data to simulate a moving wave
-    for (size_t i = 0; i < 100; ++i) {
+    for ( size_t i = 0; i < 100; ++i )
+    {
         x_data[i] = i * 0.1f;  // Uniformly spaced points along x-axis
-        y_data[i] = wave_amplitude * std::sin(wave_frequency * x_data[i] + elapsed_time);
+        y_data[i] =
+                wave_amplitude * std::sin( wave_frequency * x_data[i] + elapsed_time );
     }
 
-    plot(x_data, y_data, 100);
+    plot( x_data, y_data, 100 );
 
     ImGui::End();
 }
 
-void BenchmarkGUI::plot(const float* x, const float* y, size_t size) {
-    if (ImPlot::BeginPlot("Performance Metrics", ImVec2(-1, 0), ImPlotFlags_NoLegend)) {
-        ImPlot::SetupAxes("Resolution", "Duration (ms)", ImPlotAxisFlags_AutoFit, ImPlotAxisFlags_AutoFit);
-        ImPlot::SetupAxisLimits(ImAxis_Y1, 0, 150, ImPlotCond_Once); // Set Y-axis limit
+void BenchmarkGUI::plot( const float* x, const float* y, int size )
+{
+    if ( ImPlot::BeginPlot( "Performance Metrics", ImVec2( -1, -1 )))
+    {
+        ImPlot::SetupAxes( "Duration (s)", "Value y");
+        ImPlot::SetupAxisLimits(.1f, 0, 6.28 ); // Set Y-axis limit
+        ImPlot::SetupLegend(ImPlotLocation_NorthEast);
 
-        ImPlot::PushStyleVar(ImPlotStyleVar_LineWeight, 2.0f); // Thicker line
-        ImPlot::PushStyleColor(ImPlotCol_Line, ImVec4(0.0f, 0.5f, 1.0f, 1.0f)); // Custom line color (blue)
 
-        ImPlot::PlotLine("Duration", x, y, size);
-
+        ImPlot::PlotLine( "Random Sin Wave##plot2", x, x, size );
+        ImPlot::PushStyleColor(ImPlotCol_Line, ImVec4(1.0f, 0.0f, 0.0f, 1.0f));
+        ImPlot::PlotLine( "Time##plot1", x, y, size );
         ImPlot::PopStyleColor();
-        ImPlot::PopStyleVar();
 
         ImPlot::EndPlot();
     }

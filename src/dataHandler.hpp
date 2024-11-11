@@ -20,6 +20,10 @@ public:
     void setWindowWidth( int width );
     [[nodiscard]] int getWindowHeight() const;
     void setWindowHeight( int height );
+    [[nodiscard]] int getBenchmarkWindowWidth() const;
+    void setBenchmarkWindowWidth( int width );
+    [[nodiscard]] int getBenchmarkWindowHeight() const;
+    void setBenchmarkWindowHeight( int height );
     [[nodiscard]] int getCurrentFPS() const;
     void setCurrentFPS( int fps );
     [[nodiscard]] int getNumberOfVoxels() const;
@@ -51,6 +55,8 @@ private:
     glm::vec3 m_worldCenter = {};
     int m_windowWidth = -1;
     int m_windowHeight = -1;
+    int m_benchmarkWindowWidth = -1;
+    int m_benchmarkWindowHeight = -1;
     int m_currentFPS = -1;
     int m_numberOfVoxels = -1;
     int m_voxelResolution = -1;

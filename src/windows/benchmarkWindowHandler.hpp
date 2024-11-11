@@ -9,6 +9,7 @@ class BenchmarkWindowHandler : public WindowHandler
 {
 public:
     BenchmarkWindowHandler(const std::string& title, int width, int height);
+    void updateWindowSize() override;
     void loadGUIFrame() override;
 
 private:

@@ -3,7 +3,8 @@
 
 DataHandler::DataHandler() :
         m_voxelColor( { 1.f, 1.f, 1.f } ), m_worldCenter( { 0, 0, 0 } ),
-        m_windowWidth( 1280 ), m_windowHeight( 780 ),
+        m_windowWidth( 1280 ), m_windowHeight( 780 ), m_benchmarkWindowWidth ( 1000 ),
+        m_benchmarkWindowHeight( 700 ),
         m_cameraSpeed( INIT_CAMERA_SPEED ), m_rotationSpeed( INIT_ROTATION_SPEED ),
         m_modelRepresentation{ VOXEL }, m_voxelResolution( INIT_RESOLUTION ),
         m_voxelizationAlgorithm( OPTIMIZED ), m_currentModelPath("../binaries/bunny.obj")
@@ -38,6 +39,26 @@ int DataHandler::getWindowHeight() const
 void DataHandler::setWindowHeight( int height )
 {
     m_windowHeight = height;
+}
+
+int DataHandler::getBenchmarkWindowWidth() const
+{
+    return m_benchmarkWindowWidth;
+}
+
+void DataHandler::setBenchmarkWindowWidth( int width )
+{
+    if ( width > 0 ) m_benchmarkWindowWidth = width;
+}
+
+int DataHandler::getBenchmarkWindowHeight() const
+{
+    return m_benchmarkWindowHeight;
+}
+
+void DataHandler::setBenchmarkWindowHeight( int height )
+{
+    if ( height > 0 ) m_benchmarkWindowHeight = height;
 }
 
 float DataHandler::getCameraSpeed() const

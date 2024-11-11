@@ -18,5 +18,5 @@ public:
                  int y ) override;
 
 private:
-    static void plot(const float x[], const float y[], size_t size);
+    static void plot( const float x[], const float y[], int size);
 };
