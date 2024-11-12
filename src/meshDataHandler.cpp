@@ -4,7 +4,7 @@
 extern std::shared_ptr<DataHandler> dataHandler;
 
 MeshDataHandler::MeshDataHandler( FileFormat format ) :
-        m_voxelizer( std::make_unique<OctreeBVHVoxelizer>()),
+        m_voxelizer( std::make_unique<OptimizedVoxelizer>()),
         m_currentModelPath( dataHandler->getCurrentModelPath()),
         m_currentResolution( dataHandler->getVoxelResolution() )
 {
@@ -62,7 +62,7 @@ bool MeshDataHandler::update()
         switch (dataHandler->getVoxelizationAlgorithm())
         {
             case OPTIMIZED:
-                m_voxelizer = std::make_unique<OctreeBVHVoxelizer>();
+                m_voxelizer = std::make_unique<OptimizedVoxelizer>();
                 break;
             case OCTREE:
                 m_voxelizer = std::make_unique<OctreeVoxelizer>();

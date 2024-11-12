@@ -157,7 +157,6 @@ struct Duration
 struct PerformanceData
 {
     int resolution;
-    int numberOfVoxels;
     Duration duration;
 };
 

@@ -40,27 +40,22 @@ BenchmarkGUI::createFrame( SDL_Window* window, ImGuiContext* imGuiContext, float
     benchmarkMetric.algorithm = OPTIMIZED;
     PerformanceData d;
     d.resolution = 1;
-    d.numberOfVoxels = 1;
     d.duration.s = 0;
     d.duration.ms = 23;
     benchmarkMetric.performanceData.push_back( d );
     d.resolution = 2;
-    d.numberOfVoxels = 8;
     d.duration.s = 0;
     d.duration.ms = 40;
     benchmarkMetric.performanceData.push_back( d );
     d.resolution = 3;
-    d.numberOfVoxels = 8;
     d.duration.s = 0;
     d.duration.ms = 80;
     benchmarkMetric.performanceData.push_back( d );
     d.resolution = 4;
-    d.numberOfVoxels = 8;
     d.duration.s = 0;
     d.duration.ms = 233;
     benchmarkMetric.performanceData.push_back( d );
     d.resolution = 5;
-    d.numberOfVoxels = 8;
     d.duration.s = 0;
     d.duration.ms = 401;
     benchmarkMetric.performanceData.push_back( d );
@@ -81,8 +76,14 @@ BenchmarkGUI::createFrame( SDL_Window* window, ImGuiContext* imGuiContext, float
 
     ImGui::Begin( "Plot##Plot", nullptr, window_flags | ImGuiWindowFlags_NoScrollbar );
 
+    static bool newBenchmark = true;
+    static std::vector<BenchmarkMetric> benchmarks;
+    if ( newBenchmark )
+    {
+        // TODO: how do I get the data from the model in here?
+        newBenchmark = false;
+    }
     plot( { benchmarkMetric } );
-
     ImGui::End();
 }
 
@@ -105,7 +106,6 @@ void BenchmarkGUI::plot( const std::vector<BenchmarkMetric> &metrics )
 
 void BenchmarkGUI::addLine( const BenchmarkMetric &metric )
 {
-
     std::string titleString = util::toString( metric.algorithm )
                               + "##" +
                               util::toString( metric.algorithm );

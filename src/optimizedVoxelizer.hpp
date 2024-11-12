@@ -8,10 +8,10 @@
 #include "dataHandler.hpp"
 
 
-class OctreeBVHVoxelizer : public Voxelizer
+class OptimizedVoxelizer : public Voxelizer
 {
 public:
-    OctreeBVHVoxelizer() = default;
+    OptimizedVoxelizer() = default;
 
     std::vector<Voxel>
     run( const std::vector<std::shared_ptr<TriangleFace>> &triangleFaces,

@@ -44,13 +44,11 @@ add_executable(${NAME} main.cpp
         src/util.hpp
         src/octreeNode.cpp
         src/octreeNode.hpp
-        src/octreeBVHVoxelizer.cpp
-        src/octreeBVHVoxelizer.hpp
+        src/optimizedVoxelizer.cpp
+        src/optimizedVoxelizer.hpp
         src/bvhNode.cpp
         src/bvhNode.hpp
         src/voxelizer.hpp
-        src/bresenhamVoxelizer.cpp
-        src/bresenhamVoxelizer.hpp
         src/gui/gui.cpp
         src/gui/gui.hpp
         src/dataHandler.cpp
@@ -91,6 +89,8 @@ add_executable(${NAME} main.cpp
         dependencies/implot/implot_demo.cpp
         dependencies/implot/implot_internal.h
         dependencies/implot/implot_items.cpp
+        src/benchmark.cpp
+        src/benchmark.hpp
 )
 
 

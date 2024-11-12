@@ -1,10 +1,10 @@
-#include "octreeBVHVoxelizer.hpp"
+#include "optimizedVoxelizer.hpp"
 
 
 extern std::shared_ptr<DataHandler> dataHandler;
 
 
-std::vector<Voxel> OctreeBVHVoxelizer::run(
+std::vector<Voxel> OptimizedVoxelizer::run(
         const std::vector<std::shared_ptr<TriangleFace>> &triangleFaces, int resolution
         )
 {
@@ -15,7 +15,6 @@ std::vector<Voxel> OctreeBVHVoxelizer::run(
     util::bvh::createChildren( bvh, 0, BVH_DEPTH );
     std::vector<BVHNode*> bvhLeaves;
     bvh->getLeaves( bvhLeaves );
-    // DEBUG
     buildOctree( octree, 0, resolution, bvhLeaves );
 
     std::vector<Voxel> voxels = util::octree::toVoxel( octree, 0 );
@@ -27,7 +26,7 @@ std::vector<Voxel> OctreeBVHVoxelizer::run(
 }
 
 
-void OctreeBVHVoxelizer::buildOctree( OctreeNode* octreeNode, int depth, int maxDepth,
+void OptimizedVoxelizer::buildOctree( OctreeNode* octreeNode, int depth, int maxDepth,
                                       std::vector<BVHNode*> &leaves )
 {
     // fetch vertex positions from octree octreeNode

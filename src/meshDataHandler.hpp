@@ -1,8 +1,7 @@
 #pragma once
 
 #include "objParser.hpp"
-#include "octreeBVHVoxelizer.hpp"
-#include "bresenhamVoxelizer.hpp"
+#include "optimizedVoxelizer.hpp"
 #include "naiveVoxelizer.hpp"
 #include "octreeVoxelizer.hpp"
 #include "bvhVoxelizer.hpp"

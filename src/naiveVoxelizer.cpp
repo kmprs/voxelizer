@@ -8,7 +8,7 @@ std::vector<Voxel> NaiveVoxelizer::run(const std::vector<std::shared_ptr<Triangl
                                        int resolution)
 {
     std::vector<Voxel> result;
-    float voxelSize = 1.f / std::pow(2, dataHandler->getVoxelResolution() - 2);
+    float voxelSize = 1.f / std::pow(2, resolution - 2);
 
     int numVoxelsPerDimension = static_cast<int>(std::ceil(2.f / voxelSize)); // Calculate the number of voxels per dimension
 

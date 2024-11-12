@@ -16,8 +16,8 @@ BVHVoxelizer::run( const std::vector<std::shared_ptr<TriangleFace>> &triangleFac
     bvh->getLeaves( leaves );
 
     std::vector<Voxel> result;
-    // voxel size is adjusted to the Octree/OctreeBVHVoxelizer for better comparison
-    float voxelSize = 1.f / std::pow( 2, dataHandler->getVoxelResolution() - 2 );
+    // voxel size is adjusted to the Octree/OptimizedVoxelizer for better comparison
+    float voxelSize = 1.f / std::pow( 2, resolution - 2 );
     int numVoxelsPerDimension = static_cast<int>(std::ceil(
             2.f / voxelSize ));
 
