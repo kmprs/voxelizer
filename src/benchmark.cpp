@@ -55,7 +55,7 @@ void Benchmark::create()
         metric.model.numberOfTriangles = static_cast<int>(m_triangleFaces.size());
         metric.algorithm = voxelizer.first;
         std::vector<PerformanceData> performance;
-        for ( int i = 1; i < MAX_RESOLUTION; i++ )
+        for ( int i = 1; i <= MAX_RESOLUTION; i++ )
         {
             // measure the time it takes for one voxelization run
             auto start = std::chrono::high_resolution_clock::now();
@@ -74,6 +74,7 @@ void Benchmark::create()
             data.duration.ms = static_cast<int>( durationMS.count());
             performance.push_back( data );
         }
+        metric.performanceData = performance;
         m_metrics.push_back( metric );
     }
 }

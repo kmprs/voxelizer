@@ -80,10 +80,14 @@ BenchmarkGUI::createFrame( SDL_Window* window, ImGuiContext* imGuiContext, float
     static std::vector<BenchmarkMetric> benchmarks;
     if ( newBenchmark )
     {
-        // TODO: how do I get the data from the model in here?
+        std::unique_ptr<Parser> parser = std::make_unique<OBJParser>();
+        std::vector<std::shared_ptr<TriangleFace>> triangleFaces = parser->parse( dataHandler->getCurrentModelPath());
+        Benchmark benchmark = { { OPTIMIZED, OCTREE, NAIVE, BVH }, "bunny", triangleFaces };
+        benchmark.create();
+        benchmarks = benchmark.get();
         newBenchmark = false;
     }
-    plot( { benchmarkMetric } );
+    plot( benchmarks );
     ImGui::End();
 }
 
@@ -96,7 +100,6 @@ void BenchmarkGUI::plot( const std::vector<BenchmarkMetric> &metrics )
         ImPlot::SetupAxisLimits( ImAxis_X1, 1, MAX_RESOLUTION );
         ImPlot::SetupAxisScale( ImAxis_Y1, ImPlotScale_Log10 );
         ImPlot::SetupLegend( ImPlotLocation_NorthEast );
-
 
         for ( const BenchmarkMetric &m: metrics ) addLine( m );
 
@@ -112,6 +115,7 @@ void BenchmarkGUI::addLine( const BenchmarkMetric &metric )
     const char* title = titleString.c_str();
 
     std::vector<float> x, y;
+//    std::cout << metric.performanceData.size() << std::endl;
     for ( const PerformanceData data: metric.performanceData )
     {
         x.push_back( static_cast<float>(data.resolution));

@@ -5,6 +5,8 @@
 #include "gui.hpp"
 #include "../util.hpp"
 #include "../dataHandler.hpp"
+#include "../objParser.hpp"
+#include "../benchmark.hpp"
 
 
 class BenchmarkGUI : public GUI

@@ -6,7 +6,8 @@ extern std::shared_ptr<DataHandler> dataHandler;
 MeshDataHandler::MeshDataHandler( FileFormat format ) :
         m_voxelizer( std::make_unique<OptimizedVoxelizer>()),
         m_currentModelPath( dataHandler->getCurrentModelPath()),
-        m_currentResolution( dataHandler->getVoxelResolution() )
+        m_currentResolution( dataHandler->getVoxelResolution() ),
+        m_currentAlgorithm( dataHandler->getVoxelizationAlgorithm() )
 {
     if ( format == OBJ ) m_parser = std::make_unique<OBJParser>();
     m_triangleFaces = m_parser->parse( dataHandler->getCurrentModelPath());
