@@ -23,5 +23,4 @@ public:
 private:
     static void plot( const std::vector<BenchmarkMetric> &metrics );
     static void addLine( const BenchmarkMetric& metric );
-    static void buttonTriggerBenchmark( float width, bool &flag );
 };

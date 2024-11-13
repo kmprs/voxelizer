@@ -30,12 +30,13 @@ void MainGUI::createFrame( SDL_Window* window, ImGuiContext* imGuiContext, float
     ImGui::Text( "Voxelization Method" );
     static bool algorithmSelectionCollapsed = false;
     collapseSelection(
-            {"Optimized", "Octree", "BVH", "Naive"},
+            { "Optimized", "Octree", "BVH", "Naive" },
             algorithmSelectionCollapsed,
-            [this](int index) {
-                dataHandler->setAlgorithm(static_cast<VoxelizationAlgorithm>(index));
-            }
-    );
+            static_cast<int>(dataHandler->getVoxelizationAlgorithm()),
+            "Algorithm",
+            [this]( int index ) {
+                dataHandler->setAlgorithm( static_cast<VoxelizationAlgorithm>(index));
+            } );
     ImGui::Spacing();
 
     sliderVoxelResolution( buttonWidth );
@@ -64,7 +65,19 @@ void MainGUI::createFrame( SDL_Window* window, ImGuiContext* imGuiContext, float
 
     buttonFileDialog( buttonWidth );
     ImGui::Spacing();
+    ImGui::Spacing();
 
+    static bool addAlgorithmsCollapsed = false;
+    ImGui::Text( "Add Algorithm to Benchmark" );
+    collapseSelection(
+            { "Optimized", "Octree", "BVH", "Naive" },
+            addAlgorithmsCollapsed,
+            -1,
+            "Add an algorithm",
+            [this]( int index ) {
+                dataHandler->setAlgorithm( static_cast<VoxelizationAlgorithm>(index));
+            } );
+    ImGui::Spacing();
     showSelectedAlgorithmsBenchmark();
     ImGui::Spacing();
 
@@ -110,12 +123,12 @@ void MainGUI::buttonRepresentation( float buttonWidth )
     }
 }
 
-void MainGUI::collapseSelection( const std::vector<std::string> &labels,
-                                 bool &collapseStatus,
-                                 const std::function<void(int)> &onSelect )
+void
+MainGUI::collapseSelection( const std::vector<std::string> &labels, bool &collapseStatus,
+                            int selectedIndex, std::string defaultTitle,
+                            const std::function<void( int )> &onSelect )
 {
-    int selectedIndex = static_cast<int>(dataHandler->getVoxelizationAlgorithm());
-    std::string title = labels[selectedIndex] + " ";
+    std::string title = (selectedIndex >= 0) ? labels[selectedIndex] + " " : defaultTitle;
 
     ImGui::SetNextItemOpen( collapseStatus );
 

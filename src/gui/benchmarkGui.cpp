@@ -26,7 +26,6 @@ BenchmarkGUI::createFrame( SDL_Window* window, ImGuiContext* imGuiContext, float
     ImGui_ImplSDL2_NewFrame();
     ImGui::NewFrame();
 
-    // Minimal window flags: No title bar, no resizing, no moving
     ImGuiWindowFlags window_flags =
             ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse |
             ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
@@ -50,7 +49,7 @@ BenchmarkGUI::createFrame( SDL_Window* window, ImGuiContext* imGuiContext, float
         std::unique_ptr<Parser> parser = std::make_unique<OBJParser>();
         std::vector<std::shared_ptr<TriangleFace>> triangleFaces = parser->parse(
                 dataHandler->getCurrentModelPath());
-        Benchmark benchmark = {{ OPTIMIZED, BVH }, "bunny", triangleFaces };
+        Benchmark benchmark = {{ OPTIMIZED, BVH, OCTREE, NAIVE }, "bunny", triangleFaces };
         benchmark.create();
         benchmarks = benchmark.get();
         newBenchmark = false;
@@ -85,21 +84,10 @@ void BenchmarkGUI::addLine( const BenchmarkMetric &metric )
     const char* title = titleString.c_str();
 
     std::vector<float> x, y;
-//    std::cout << metric.performanceData.size() << std::endl;
     for ( const PerformanceData data: metric.performanceData )
     {
         x.push_back( static_cast<float>(data.resolution));
         y.push_back( static_cast<float>( util::time::toMS( data.duration )));
     }
     ImPlot::PlotLine( title, x.data(), y.data(), static_cast<int>( x.size()));
-}
-
-
-void BenchmarkGUI::buttonTriggerBenchmark( float width, bool &flag )
-{
-    ImGui::Text( "Trigger Benchmarks" );
-    if ( ImGui::Button( "Trigger Benchmark##TRIGGER_BENCHMARK")     ) 
-    {
-        std::cout << "Hello\n" << std::endl;
-    }
 }

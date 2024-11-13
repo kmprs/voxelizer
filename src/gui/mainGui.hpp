@@ -15,9 +15,10 @@ public:
 
 private:
     static void buttonRepresentation( float buttonWidth );
-    static void collapseSelection( const std::vector<std::string> &labels,
-                                   bool &collapseStatus,
-                                   const std::function<void(int)> &onSelect);
+    static void
+    collapseSelection( const std::vector<std::string> &labels, bool &collapseStatus,
+                       int selectedIndex, std::string defaultTitle,
+                       const std::function<void( int )> &onSelect );
     static void sliderVoxelResolution( float buttonWidth );
     static void colorPickerVoxel();
     static void buttonCameraMode( float buttonWidth );
