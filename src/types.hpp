@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include <glm/glm.hpp>
+#include "../dependencies/implot/implot.h"
 
 
 struct Vertex
@@ -149,6 +150,7 @@ struct Model
 
 struct Duration
 {
+    int micros;
     int ms;
     int s;
 };
@@ -166,4 +168,12 @@ struct BenchmarkMetric
     Model model;
     VoxelizationAlgorithm algorithm;
     std::vector<PerformanceData> performanceData;
+};
+
+
+struct plotConfig
+{
+    ImPlotScale_ scaleType = ImPlotScale_Log10;
+    ImPlotLocation_ legendLocation = ImPlotLocation_NorthWest;
+    float lineWeight = 2.f;
 };

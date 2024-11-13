@@ -19,6 +19,8 @@ BenchmarkGUI::createFrame( SDL_Window* window, ImGuiContext* imGuiContext, float
                            float height, int x,
                            int y )
 {
+    float buttonWidth = width - 20.f;
+
     ImGui::SetCurrentContext( imGuiContext );
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplSDL2_NewFrame();
@@ -32,57 +34,23 @@ BenchmarkGUI::createFrame( SDL_Window* window, ImGuiContext* imGuiContext, float
     ImGui::SetNextWindowPos( ImVec2( static_cast<float>(x), static_cast<float>(y)));
     ImGui::SetNextWindowSize( ImVec2( width, height ));
 
-    ImGui::Begin( "BenchmarkGUI", nullptr, window_flags );
-
-    BenchmarkMetric benchmarkMetric;
-    benchmarkMetric.model.title = "dragon";
-    benchmarkMetric.model.numberOfTriangles = -1;
-    benchmarkMetric.algorithm = OPTIMIZED;
-    PerformanceData d;
-    d.resolution = 1;
-    d.duration.s = 0;
-    d.duration.ms = 23;
-    benchmarkMetric.performanceData.push_back( d );
-    d.resolution = 2;
-    d.duration.s = 0;
-    d.duration.ms = 40;
-    benchmarkMetric.performanceData.push_back( d );
-    d.resolution = 3;
-    d.duration.s = 0;
-    d.duration.ms = 80;
-    benchmarkMetric.performanceData.push_back( d );
-    d.resolution = 4;
-    d.duration.s = 0;
-    d.duration.ms = 233;
-    benchmarkMetric.performanceData.push_back( d );
-    d.resolution = 5;
-    d.duration.s = 0;
-    d.duration.ms = 401;
-    benchmarkMetric.performanceData.push_back( d );
-
-
-    ImGui::Text( "Model: %s (%d triangles)", benchmarkMetric.model.title.c_str(),
-                 benchmarkMetric.model.numberOfTriangles );
-    ImGui::Spacing();
-    ImGui::Text( "Algorithm: %s", util::toString( benchmarkMetric.algorithm ).c_str());
-
-    ImGui::End();
-
-
-    ImGui::SetNextWindowPos( ImVec2( width, static_cast<float>(y)));
+    static bool newBenchmark = true;
+    ImGui::SetNextWindowPos( ImVec2( x, static_cast<float>(y)));
     ImGui::SetNextWindowSize(
-            ImVec2( static_cast<float>(dataHandler->getBenchmarkWindowWidth()) - width,
+            ImVec2( static_cast<float>(dataHandler->getBenchmarkWindowWidth()),
                     static_cast<float>(dataHandler->getBenchmarkWindowHeight())));
 
     ImGui::Begin( "Plot##Plot", nullptr, window_flags | ImGuiWindowFlags_NoScrollbar );
 
-    static bool newBenchmark = true;
-    static std::vector<BenchmarkMetric> benchmarks;
+
+    static std::vector<BenchmarkMetric> benchmarks = { BenchmarkMetric() };
     if ( newBenchmark )
     {
+        benchmarks.clear();
         std::unique_ptr<Parser> parser = std::make_unique<OBJParser>();
-        std::vector<std::shared_ptr<TriangleFace>> triangleFaces = parser->parse( dataHandler->getCurrentModelPath());
-        Benchmark benchmark = { { OPTIMIZED, OCTREE, NAIVE, BVH }, "bunny", triangleFaces };
+        std::vector<std::shared_ptr<TriangleFace>> triangleFaces = parser->parse(
+                dataHandler->getCurrentModelPath());
+        Benchmark benchmark = {{ OPTIMIZED, BVH }, "bunny", triangleFaces };
         benchmark.create();
         benchmarks = benchmark.get();
         newBenchmark = false;
@@ -94,17 +62,19 @@ BenchmarkGUI::createFrame( SDL_Window* window, ImGuiContext* imGuiContext, float
 void BenchmarkGUI::plot( const std::vector<BenchmarkMetric> &metrics )
 {
     std::string title = "Algorithm Benchmarks (" + metrics[0].model.title + ")";
+    ImPlot::PushStyleVar( ImPlotStyleVar_LineWeight, 2.0f );
     if ( ImPlot::BeginPlot( title.c_str(), ImVec2( -1, -1 )))
     {
         ImPlot::SetupAxes( "Resolution Level", "Duration [ms]" );
         ImPlot::SetupAxisLimits( ImAxis_X1, 1, MAX_RESOLUTION );
         ImPlot::SetupAxisScale( ImAxis_Y1, ImPlotScale_Log10 );
-        ImPlot::SetupLegend( ImPlotLocation_NorthEast );
+        ImPlot::SetupLegend( ImPlotLocation_NorthWest );
 
         for ( const BenchmarkMetric &m: metrics ) addLine( m );
 
         ImPlot::EndPlot();
     }
+    ImPlot::PopStyleVar();
 }
 
 void BenchmarkGUI::addLine( const BenchmarkMetric &metric )
@@ -125,4 +95,11 @@ void BenchmarkGUI::addLine( const BenchmarkMetric &metric )
 }
 
 
-
+void BenchmarkGUI::buttonTriggerBenchmark( float width, bool &flag )
+{
+    ImGui::Text( "Trigger Benchmarks" );
+    if ( ImGui::Button( "Trigger Benchmark##TRIGGER_BENCHMARK")     ) 
+    {
+        std::cout << "Hello\n" << std::endl;
+    }
+}

@@ -19,7 +19,7 @@ void MainGUI::createFrame( SDL_Window* window, ImGuiContext* imGuiContext, float
             ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
     float buttonWidth = width - 20;
 
-    // LEFT FRAME
+    // LEFT GUI
     ImGui::SetNextWindowPos( ImVec2( static_cast<float>(x), static_cast<float>(y)));
     ImGui::SetNextWindowSize( ImVec2( width, height ));
     ImGui::Begin( "Left GUI", nullptr, window_flags );
@@ -47,7 +47,7 @@ void MainGUI::createFrame( SDL_Window* window, ImGuiContext* imGuiContext, float
 
     ImGui::End();
 
-    // RIGHT FRAME
+    // RIGHT GUI
     ImGui::SetNextWindowPos(
             ImVec2( static_cast<float>(dataHandler->getWindowWidth()) - width,
                     static_cast<float>(y)));
@@ -57,7 +57,14 @@ void MainGUI::createFrame( SDL_Window* window, ImGuiContext* imGuiContext, float
     buttonFileDialog( buttonWidth );
     ImGui::Spacing();
 
+    ImGui::Text("Selected Voxelization Algorithms");
+    for ( VoxelizationAlgorithm a : dataHandler->getBenchmarkAlgorithms() )
+    {
+        ImGui::Text( "%s", util::toString( a ).c_str() );
+    }
+    ImGui::Spacing();
     buttonBenchmarkDialog( buttonWidth );
+    ImGui::Spacing();
 
     ImGui::End();
 
@@ -153,7 +160,7 @@ void MainGUI::sliderVoxelResolution( float buttonWidth )
     // VOXEL RESOLUTION
     ImGui::Text( "Voxel Resolution" );
     ImGui::PushItemWidth( buttonWidth );
-    if ( ImGui::SliderInt( "##SLIDERRESOLUTION", &resolution, 1, 10 ))
+    if ( ImGui::SliderInt( "##SLIDERRESOLUTION", &resolution, 1, MAX_RESOLUTION ))
     {};
     if ( ImGui::IsItemDeactivatedAfterEdit())
     {
@@ -185,7 +192,7 @@ void MainGUI::numberInputCameraSpeed()
 {
     float speed = dataHandler->getCameraSpeed();
     ImGui::Text( "Camera Speed" );
-    ImGui::InputFloat( "##camera speed", &speed, 1.f, 1.f, "%.1f" );
+    ImGui::InputFloat( "##CAMERASPEED", &speed, 1.f, 1.f, "%.1f" );
     ImGui::Spacing();
     dataHandler->setCameraSpeed( speed );
 }

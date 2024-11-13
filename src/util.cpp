@@ -45,7 +45,7 @@ namespace util
         return !( max0 < min1 || max1 < min0 );
     }
 
-    std::string toString ( VoxelizationAlgorithm algorithm )
+    std::string toString( VoxelizationAlgorithm algorithm )
     {
         switch ( algorithm )
         {
@@ -533,10 +533,14 @@ namespace util
             }
         }
     }//namespace bvh
-    namespace time{
-        int toMS( const Duration &duration )
+    namespace time
+    {
+        float toMS( const Duration &duration )
         {
-            return duration.s * 1000 + duration.ms;
+            return (
+                    static_cast<float>(duration.s) * 1000.f
+                    + static_cast<float>(duration.ms)
+                    + static_cast<float>(duration.micros) / 1000.f);
         }
     }//namespace time
 

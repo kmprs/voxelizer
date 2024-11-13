@@ -14,6 +14,7 @@ void Program::run()
     SDL_Event event;
 
     IMGUI_CHECKVERSION();
+
     BenchmarkWindowHandler benchmarkWindowHandler = { TITLE + " Benchmarks",
                                                       dataHandler->getBenchmarkWindowWidth(),
                                                       dataHandler->getBenchmarkWindowHeight() };

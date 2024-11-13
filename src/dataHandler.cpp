@@ -7,7 +7,8 @@ DataHandler::DataHandler() :
         m_benchmarkWindowHeight( 700 ),
         m_cameraSpeed( INIT_CAMERA_SPEED ), m_rotationSpeed( INIT_ROTATION_SPEED ),
         m_modelRepresentation{ VOXEL }, m_voxelResolution( INIT_RESOLUTION ),
-        m_voxelizationAlgorithm( OPTIMIZED ), m_currentModelPath("../binaries/bunny.obj")
+        m_voxelizationAlgorithm( OPTIMIZED ), m_currentModelPath("../binaries/bunny.obj"),
+        m_benchmarkAlgorithms( { OPTIMIZED, BVH } )
 {}
 
 
@@ -197,4 +198,19 @@ std::string DataHandler::getCurrentModelPath() const
 void DataHandler::setModelPath( const std::string &path )
 {
     m_currentModelPath = path;
+}
+
+std::set<VoxelizationAlgorithm> DataHandler::getBenchmarkAlgorithms()
+{
+    return m_benchmarkAlgorithms;
+}
+
+void DataHandler::addToBenchmark( VoxelizationAlgorithm algorithm )
+{
+    m_benchmarkAlgorithms.insert( algorithm );
+}
+
+void DataHandler::eraseFromBenchmark( VoxelizationAlgorithm algorithm )
+{
+    m_benchmarkAlgorithms.erase( algorithm );
 }

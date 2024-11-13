@@ -5,6 +5,7 @@
 #include <set>
 #include <utility>
 #include <vector>
+#include <thread>
 #include "types.hpp"
 #include "triangleFace.hpp"
 #include "voxelizer.hpp"
@@ -31,6 +32,8 @@ private:
     std::vector<std::pair<VoxelizationAlgorithm, std::unique_ptr<Voxelizer>>> m_voxelizer = {};
     std::string m_modelName;
     std::vector<std::shared_ptr<TriangleFace>> m_triangleFaces;
+    std::mutex m_metricsMutex;
+
 };
 
 

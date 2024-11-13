@@ -12,7 +12,6 @@ BenchmarkWindowHandler::BenchmarkWindowHandler( const std::string &title, int wi
 void BenchmarkWindowHandler::updateWindowSize()
 {
     SDL_GetWindowSize( m_window, &m_width, &m_height );
-    glViewport(GUI_WIDTH, 0, m_width -  2 * GUI_WIDTH, m_height);
     dataHandler->setBenchmarkWindowWidth( m_width );
     dataHandler->setBenchmarkWindowHeight( m_height );
 }

@@ -2,6 +2,7 @@
 
 
 #include "gui.hpp"
+#include "../util.hpp"
 
 
 class MainGUI : public GUI

@@ -68,6 +68,6 @@ namespace util
 
     namespace time
     {
-        int toMS( const Duration &duration );
+        float toMS( const Duration &duration );
     }
 }

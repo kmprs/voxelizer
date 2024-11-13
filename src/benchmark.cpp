@@ -48,34 +48,54 @@ Benchmark::Benchmark( const std::set<VoxelizationAlgorithm> &algorithms,
  */
 void Benchmark::create()
 {
+    std::vector<std::thread> threads;
+    threads.reserve( m_voxelizer.size());
     for ( const auto &voxelizer: m_voxelizer )
     {
-        BenchmarkMetric metric;
-        metric.model.title = m_modelName;
-        metric.model.numberOfTriangles = static_cast<int>(m_triangleFaces.size());
-        metric.algorithm = voxelizer.first;
-        std::vector<PerformanceData> performance;
-        for ( int i = 1; i <= MAX_RESOLUTION; i++ )
+        threads.emplace_back( [this, &voxelizer]() {
+            BenchmarkMetric metric;
+            metric.model.title = m_modelName;
+            metric.model.numberOfTriangles = static_cast<int>(m_triangleFaces.size());
+            metric.algorithm = voxelizer.first;
+
+            std::vector<PerformanceData> performance;
+            for ( int i = 1; i <= MAX_RESOLUTION; i++ )
+            {
+                // measure the time it takes for one voxelization run
+                auto start = std::chrono::high_resolution_clock::now();
+
+                voxelizer.second->run( m_triangleFaces, i );
+
+                auto stop = std::chrono::high_resolution_clock::now();
+                auto durationS = std::chrono::duration_cast<std::chrono::seconds>(
+                        stop - start );
+                auto durationMS = std::chrono::duration_cast<std::chrono::milliseconds>(
+                        stop - start );
+                auto durationMicroS = std::chrono::duration_cast<std::chrono::microseconds>(
+                        stop - start );
+
+                PerformanceData data = {};
+                data.resolution = i;
+                data.duration.s = static_cast<int>(durationS.count());
+                data.duration.ms = static_cast<int>(durationMS.count());
+                data.duration.micros = static_cast<int>(durationMicroS.count());
+                performance.push_back( data );
+            }
+            metric.performanceData = performance;
+
+            // Lock access to m_metrics for thread safety
+            std::lock_guard<std::mutex> lock( m_metricsMutex );
+            m_metrics.push_back( metric );
+        } );
+    }
+
+    // Join all threads
+    for ( auto &thread: threads )
+    {
+        if ( thread.joinable())
         {
-            // measure the time it takes for one voxelization run
-            auto start = std::chrono::high_resolution_clock::now();
-
-            voxelizer.second->run( m_triangleFaces, i );
-
-            auto stop = std::chrono::high_resolution_clock::now();
-            auto durationS = std::chrono::duration_cast<std::chrono::seconds>(
-                    stop - start );
-            auto durationMS = std::chrono::duration_cast<std::chrono::milliseconds>(
-                    stop - start );
-
-            PerformanceData data = {};
-            data.resolution = i;
-            data.duration.s = static_cast<int>(durationS.count());
-            data.duration.ms = static_cast<int>( durationMS.count());
-            performance.push_back( data );
+            thread.join();
         }
-        metric.performanceData = performance;
-        m_metrics.push_back( metric );
     }
 }
 

@@ -2,6 +2,7 @@
 
 
 #include <glm/vec3.hpp>
+#include <set>
 #include "constants.hpp"
 #include "types.hpp"
 
@@ -49,6 +50,9 @@ public:
     void showBenchmarks( bool isShown );
     [[nodiscard]] std::string getCurrentModelPath() const;
     void setModelPath( const std::string &path );
+    [[nodiscard]] std::set<VoxelizationAlgorithm> getBenchmarkAlgorithms();
+    void addToBenchmark( VoxelizationAlgorithm algorithm );
+    void eraseFromBenchmark( VoxelizationAlgorithm algorithm );
 
 private:
     glm::vec3 m_voxelColor = {};
@@ -69,4 +73,5 @@ private:
     bool m_isWindowFreezed = false;
     bool m_showBenchmarks = false;
     std::string m_currentModelPath;
+    std::set<VoxelizationAlgorithm> m_benchmarkAlgorithms = {};
 };
