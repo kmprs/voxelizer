@@ -27,7 +27,15 @@ void MainGUI::createFrame( SDL_Window* window, ImGuiContext* imGuiContext, float
     buttonRepresentation( buttonWidth );
     ImGui::Spacing();
 
-    collapseAlgorithmSelection();
+    ImGui::Text( "Voxelization Method" );
+    static bool algorithmSelectionCollapsed = false;
+    collapseSelection(
+            {"Optimized", "Octree", "BVH", "Naive"},
+            algorithmSelectionCollapsed,
+            [this](int index) {
+                dataHandler->setAlgorithm(static_cast<VoxelizationAlgorithm>(index));
+            }
+    );
     ImGui::Spacing();
 
     sliderVoxelResolution( buttonWidth );
@@ -57,12 +65,9 @@ void MainGUI::createFrame( SDL_Window* window, ImGuiContext* imGuiContext, float
     buttonFileDialog( buttonWidth );
     ImGui::Spacing();
 
-    ImGui::Text("Selected Voxelization Algorithms");
-    for ( VoxelizationAlgorithm a : dataHandler->getBenchmarkAlgorithms() )
-    {
-        ImGui::Text( "%s", util::toString( a ).c_str() );
-    }
+    showSelectedAlgorithmsBenchmark();
     ImGui::Spacing();
+
     buttonBenchmarkDialog( buttonWidth );
     ImGui::Spacing();
 
@@ -105,52 +110,30 @@ void MainGUI::buttonRepresentation( float buttonWidth )
     }
 }
 
-void MainGUI::collapseAlgorithmSelection()
+void MainGUI::collapseSelection( const std::vector<std::string> &labels,
+                                 bool &collapseStatus,
+                                 const std::function<void(int)> &onSelect )
 {
-    static bool isCollapsed = false;
-    const char* labels[] = { "Optimized Voxelizer",
-                             "Naive Voxelizer",
-                             "Octree Voxelizer",
-                             "BVH Voxelizer" };
-
     int selectedIndex = static_cast<int>(dataHandler->getVoxelizationAlgorithm());
-    std::string title = std::string( labels[selectedIndex] ) + " ";
+    std::string title = labels[selectedIndex] + " ";
 
-    ImGui::Text( "Voxelization Method" );
-    ImGui::SetNextItemOpen( isCollapsed );
+    ImGui::SetNextItemOpen( collapseStatus );
 
-    if ( ImGui::CollapsingHeader( title.c_str()))
+    if ( ImGui::CollapsingHeader( title.c_str() ))
     {
-        isCollapsed = true;
-        for ( int i = 0; i < 4; i++ )
+        collapseStatus = true;
+        for ( int i = 0; i < labels.size(); i++ )
         {
-            if ( ImGui::Selectable( labels[i], selectedIndex == i ))
+            if ( ImGui::Selectable( labels[i].c_str(), selectedIndex == i ))
             {
-                switch ( i )
-                {
-                    case 0:
-                        dataHandler->setAlgorithm( OPTIMIZED );
-                        break;
-                    case 1:
-                        dataHandler->setAlgorithm( NAIVE );
-                        break;
-                    case 2:
-                        dataHandler->setAlgorithm( OCTREE );
-                        break;
-                    case 3:
-                        dataHandler->setAlgorithm( BVH );
-                        break;
-                    default:
-                        break;
-                }
-                dataHandler->setAlgorithm( static_cast<VoxelizationAlgorithm>(i));
-                isCollapsed = false;
+                onSelect(i);
+                collapseStatus = false;
                 break;
             }
         }
     } else
     {
-        isCollapsed = false;
+        collapseStatus = false;
     }
 }
 
@@ -252,10 +235,18 @@ void MainGUI::buttonFileDialog( float buttonWidth )
 
 void MainGUI::buttonBenchmarkDialog( float buttonWidth )
 {
-    ImGui::Text( "Create Benchmarks" );
-    if ( ImGui::Button( "Benchmarks##BENCHMARKS", ImVec2( buttonWidth, 0 )))
+    if ( ImGui::Button( "Create Benchmark##BENCHMARKS", ImVec2( buttonWidth, 0 )))
     {
         dataHandler->showBenchmarks( true );
+    }
+}
+
+void MainGUI::showSelectedAlgorithmsBenchmark()
+{
+    ImGui::Text("Selected Voxelization Algorithms:");
+    for ( VoxelizationAlgorithm a : dataHandler->getBenchmarkAlgorithms() )
+    {
+        ImGui::Text( "%s", util::toString( a ).c_str() );
     }
 }
 
@@ -266,5 +257,6 @@ void MainGUI::showPerformanceData()
     ImGui::Text( "%d voxels", dataHandler->getNumberOfVoxels());
     ImGui::SameLine();
 }
+
 
 

@@ -15,7 +15,9 @@ public:
 
 private:
     static void buttonRepresentation( float buttonWidth );
-    static void collapseAlgorithmSelection();
+    static void collapseSelection( const std::vector<std::string> &labels,
+                                   bool &collapseStatus,
+                                   const std::function<void(int)> &onSelect);
     static void sliderVoxelResolution( float buttonWidth );
     static void colorPickerVoxel();
     static void buttonCameraMode( float buttonWidth );
@@ -24,4 +26,5 @@ private:
     static void buttonFileDialog( float buttonWidth );
     static void buttonBenchmarkDialog( float buttonWidth );
     static void showPerformanceData();
+    static void showSelectedAlgorithmsBenchmark();
 };
