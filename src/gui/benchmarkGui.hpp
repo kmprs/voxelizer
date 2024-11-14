@@ -16,14 +16,11 @@ public:
     ~BenchmarkGUI();
     void
     createFrame( SDL_Window* window, ImGuiContext* imGuiContext, float width,
-                 float height,
-                 int x,
-                 int y ) override;
+                 float height, int x, int y ) override;
 
 private:
     static std::vector<BenchmarkMetric> createBenchmarks();
-    static void plot( const std::vector<BenchmarkMetric> &metrics, const std::string &title );
-    static void addLine( const BenchmarkMetric& metric );
-    static float findMin( const std::vector<BenchmarkMetric> &metrics );
-    static float findMax( const std::vector<BenchmarkMetric> &metrics );
+    static void
+    plot( const std::vector<BenchmarkMetric> &metrics, const std::string &title );
+    static void addLine( const BenchmarkMetric &metric );
 };

@@ -217,10 +217,15 @@ void DataHandler::eraseFromBenchmark( VoxelizationAlgorithm algorithm )
 
 bool DataHandler::benchmarkChanged() const
 {
-    return m_benchmarkChanged;
+    return m_benchmarkUpdate && m_benchmarkChanged;
 }
 
 void DataHandler::setBenchmarkChanged( bool changed )
 {
     m_benchmarkChanged = changed;
+}
+
+void DataHandler::setBenchmarkUpdate( bool updated )
+{
+    m_benchmarkUpdate = updated;
 }

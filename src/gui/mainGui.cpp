@@ -72,13 +72,10 @@ void MainGUI::createFrame( SDL_Window* window, ImGuiContext* imGuiContext, float
     static bool addAlgorithmsCollapsed = false;
     ImGui::Text( "Add Algorithm to Benchmark" );
     collapseSelection(
-            { "Optimized", "Octree", "BVH", "Naive" },
-            addAlgorithmsCollapsed,
-            -1,
-            "Add an algorithm",
+            { "Optimized", "Octree", "BVH", "Naive" }, addAlgorithmsCollapsed,
+            -1, "Add an algorithm",
             [this]( int index ) {
                 dataHandler->addToBenchmark( static_cast<VoxelizationAlgorithm>(index));
-                dataHandler->showBenchmarks( false );
                 dataHandler->setBenchmarkChanged( true );
             } );
     ImGui::Spacing();
@@ -256,6 +253,7 @@ void MainGUI::buttonBenchmarkDialog( float buttonWidth )
     if ( ImGui::Button( "Create Benchmark##BENCHMARKS", ImVec2( buttonWidth, 0 )))
     {
         dataHandler->showBenchmarks( true );
+        dataHandler->setBenchmarkUpdate( true );
     }
 }
 

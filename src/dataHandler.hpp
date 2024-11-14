@@ -55,6 +55,7 @@ public:
     void eraseFromBenchmark( VoxelizationAlgorithm algorithm );
     [[nodiscard]] bool benchmarkChanged() const;
     void setBenchmarkChanged( bool changed );
+    void setBenchmarkUpdate( bool updated );
 
 private:
     glm::vec3 m_voxelColor = {};
@@ -77,4 +78,5 @@ private:
     std::string m_currentModelPath;
     std::set<VoxelizationAlgorithm> m_benchmarkAlgorithms = {};
     bool m_benchmarkChanged = true;
+    bool m_benchmarkUpdate = false;
 };

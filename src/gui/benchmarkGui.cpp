@@ -42,6 +42,7 @@ BenchmarkGUI::createFrame( SDL_Window* window, ImGuiContext* imGuiContext, float
         title = "Algorithm Benchmarks (" + benchmarks[0].model.title + ")" + "##"
                 + util::string::generateRandomString(3);
         dataHandler->setBenchmarkChanged( false );
+        dataHandler->setBenchmarkUpdate( false );
     }
 
     plot( benchmarks, title );
@@ -76,35 +77,6 @@ void BenchmarkGUI::plot( const std::vector<BenchmarkMetric> &metrics, const std:
         ImPlot::EndPlot();
     }
     ImPlot::PopStyleVar();
-}
-
-
-float BenchmarkGUI::findMin( const std::vector<BenchmarkMetric> &metrics )
-{
-    float minDuration = std::numeric_limits<float>::max();
-    for ( const auto &metric : metrics )
-    {
-        for ( const auto &performanceDate : metric.performanceData )
-        {
-            float d = util::time::toMS( performanceDate.duration );
-            if ( d < minDuration ) minDuration = d;
-        }
-    }
-    return minDuration;
-}
-
-float BenchmarkGUI::findMax( const std::vector<BenchmarkMetric> &metrics )
-{
-    float maxDuration = std::numeric_limits<float>::min();
-    for ( const auto &metric : metrics )
-    {
-        for ( const auto &performanceDate : metric.performanceData )
-        {
-            float d = util::time::toMS( performanceDate.duration );
-            if ( d > maxDuration ) maxDuration = d;
-        }
-    }
-    return maxDuration;
 }
 
 void BenchmarkGUI::addLine( const BenchmarkMetric &metric )
