@@ -76,10 +76,11 @@ void MainGUI::createFrame( SDL_Window* window, ImGuiContext* imGuiContext, float
             -1, "Add an algorithm",
             [this]( int index ) {
                 dataHandler->addToBenchmark( static_cast<VoxelizationAlgorithm>(index));
-                dataHandler->setBenchmarkChanged( true );
             } );
     ImGui::Spacing();
-    showSelectedAlgorithmsBenchmark();
+
+    float deleteButtonWidth = width/3;
+    showSelectedAlgorithmsBenchmark( deleteButtonWidth );
     ImGui::Spacing();
 
     buttonBenchmarkDialog( buttonWidth );
@@ -257,12 +258,21 @@ void MainGUI::buttonBenchmarkDialog( float buttonWidth )
     }
 }
 
-void MainGUI::showSelectedAlgorithmsBenchmark()
+void MainGUI::showSelectedAlgorithmsBenchmark( float deleteButtonWidth )
 {
     ImGui::Text( "Selected Voxelization Algorithms:" );
     for ( VoxelizationAlgorithm a: dataHandler->getBenchmarkAlgorithms())
     {
         ImGui::Text( "%s", util::string::toString( a ).c_str());
+        ImGui::SameLine();
+        float rightAlignX =
+                ImGui::GetContentRegionAvail().x - deleteButtonWidth;
+        ImGui::SetCursorPosX( ImGui::GetCursorPosX() + rightAlignX );
+        std::string label = u8"\u0013##" + util::string::toString( a );
+        if ( ImGui::Button( label.c_str(), ImVec2( deleteButtonWidth, 0.f )))
+        {
+            dataHandler->eraseFromBenchmark( a );
+        }
     }
 }
 

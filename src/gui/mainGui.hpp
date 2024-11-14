@@ -26,6 +26,6 @@ private:
     static void numberInputRotationSpeed();
     static void buttonFileDialog( float buttonWidth );
     static void buttonBenchmarkDialog( float buttonWidth );
+    static void showSelectedAlgorithmsBenchmark( float deleteButtonWidth );
     static void showPerformanceData();
-    static void showSelectedAlgorithmsBenchmark();
 };

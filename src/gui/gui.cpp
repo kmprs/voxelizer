@@ -8,7 +8,13 @@ void GUI::setStyles()
 {
     ImGuiIO &io = ImGui::GetIO();
     io.Fonts->AddFontFromFileTTF( "../binaries/arial.ttf", 16.0f );
+    ImFontConfig config;
+    config.MergeMode = true;
     io.FontDefault = io.Fonts->Fonts.back();
+    static const ImWchar icons_ranges[] = { 0x0013, 0x0013,  0 };
+    io.Fonts->AddFontFromFileTTF("../binaries/FontAwesome.ttf", 16.0f, &config, icons_ranges);
+    io.FontDefault = io.Fonts->Fonts[0];
+
 
     ImGuiStyle &style = ImGui::GetStyle();
     style.WindowPadding = ImVec2( 10, 10 );

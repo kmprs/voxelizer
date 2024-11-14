@@ -208,11 +208,13 @@ std::set<VoxelizationAlgorithm> DataHandler::getBenchmarkAlgorithms()
 void DataHandler::addToBenchmark( VoxelizationAlgorithm algorithm )
 {
     m_benchmarkAlgorithms.insert( algorithm );
+    m_benchmarkChanged = true;
 }
 
 void DataHandler::eraseFromBenchmark( VoxelizationAlgorithm algorithm )
 {
     m_benchmarkAlgorithms.erase( algorithm );
+    m_benchmarkChanged = true;
 }
 
 bool DataHandler::benchmarkChanged() const
