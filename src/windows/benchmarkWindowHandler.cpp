@@ -6,7 +6,8 @@ extern std::shared_ptr<DataHandler> dataHandler;
 
 BenchmarkWindowHandler::BenchmarkWindowHandler( const std::string &title, int width,
                                                 int height ) :
-        WindowHandler( title, width, height ){}
+        WindowHandler( title, width, height )
+{}
 
 
 void BenchmarkWindowHandler::updateWindowSize()
@@ -19,6 +20,8 @@ void BenchmarkWindowHandler::updateWindowSize()
 void BenchmarkWindowHandler::loadGUIFrame()
 {
     m_benchmarkGUI.createFrame( m_window, m_imGuiContext,
-                                200, static_cast<float>(m_height), 0, 0 );
+                                static_cast<float>(dataHandler->getBenchmarkWindowWidth()),
+                                static_cast<float>(dataHandler->getBenchmarkWindowHeight()),
+                                0, 0 );
 }
 

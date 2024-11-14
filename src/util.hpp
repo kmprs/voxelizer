@@ -18,20 +18,25 @@ namespace util
     bool differentSign( float test, float a, float b );
     bool doIntervalsIntersect( const std::array<float, 2> &interval0,
                                const std::array<float, 2> &interval1 );
-    std::string toString( VoxelizationAlgorithm algorithm );
 
-    template<typename T>
-    std::string removeExtension( const T &filename )
+    namespace string
     {
-        typename T::size_type const p(filename.find_last_of('.'));
-        return p > 0 && p != T::npos ? filename.substr(0, p) : filename;
-    }
-    template<typename T>
-    std::string getNameFromPath( const T &path, const T &delimiters = "/" )
-    {
-        return removeExtension<T>(path.substr(path.find_last_of(delimiters) + 1));
-    }
+        std::string toString( VoxelizationAlgorithm algorithm );
 
+        template<typename T>
+        std::string removeExtension( const T &filename )
+        {
+            typename T::size_type const p(filename.find_last_of('.'));
+            return p > 0 && p != T::npos ? filename.substr(0, p) : filename;
+        }
+        template<typename T>
+        std::string getNameFromPath( const T &path, const T &delimiters = "/" )
+        {
+            return removeExtension<T>(path.substr(path.find_last_of(delimiters) + 1));
+        }
+
+        std::string generateRandomString(int length);
+    }
 
     namespace geometry
     {

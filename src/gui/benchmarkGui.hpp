@@ -22,6 +22,8 @@ public:
 
 private:
     static std::vector<BenchmarkMetric> createBenchmarks();
-    static void plot( const std::vector<BenchmarkMetric> &metrics );
+    static void plot( const std::vector<BenchmarkMetric> &metrics, const std::string &title );
     static void addLine( const BenchmarkMetric& metric );
+    static float findMin( const std::vector<BenchmarkMetric> &metrics );
+    static float findMax( const std::vector<BenchmarkMetric> &metrics );
 };

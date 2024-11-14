@@ -45,23 +45,35 @@ namespace util
         return !( max0 < min1 || max1 < min0 );
     }
 
-    std::string toString( VoxelizationAlgorithm algorithm )
+    namespace string
     {
-        switch ( algorithm )
+        std::string toString( VoxelizationAlgorithm algorithm )
         {
-            case OPTIMIZED:
-                return "Optimized";
-            case OCTREE:
-                return "Octree";
-            case BVH:
-                return "BVH";
-            case NAIVE:
-                return "Naive";
-            default:
-                return "Optimized";
+            switch ( algorithm )
+            {
+                case OPTIMIZED:
+                    return "Optimized";
+                case OCTREE:
+                    return "Octree";
+                case BVH:
+                    return "BVH";
+                case NAIVE:
+                    return "Naive";
+                default:
+                    return "Optimized";
+            }
+        }
+
+        std::string generateRandomString( int length )
+        {
+            const char charset[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            std::string randomStr;
+            for (int i = 0; i < length; ++i) {
+                randomStr += charset[std::rand() % (sizeof(charset) - 1)];
+            }
+            return randomStr;
         }
     }
-
 
     namespace geometry
     {
@@ -292,7 +304,7 @@ namespace util
             }
             return centroid;
         }
-    }
+    }//namespace geometry
 
     namespace octree
     {
@@ -341,6 +353,7 @@ namespace util
             return result;
         }
     }//namespace octree
+
     namespace voxel
     {
         Voxel
@@ -467,6 +480,7 @@ namespace util
             return { frontFace, backFace, topFace, bottomFace, leftFace, rightFace };
         }
     }//namespace voxel
+
     namespace bvh
     {
         void createChildren( BVHNode* node, int depth, int maxDepth )
@@ -533,6 +547,7 @@ namespace util
             }
         }
     }//namespace bvh
+
     namespace time
     {
         float toMS( const Duration &duration )
@@ -543,5 +558,4 @@ namespace util
                     + static_cast<float>(duration.micros) / 1000.f);
         }
     }//namespace time
-
 }

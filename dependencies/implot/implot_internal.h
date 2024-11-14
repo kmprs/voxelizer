@@ -751,7 +751,6 @@ struct ImPlotAxis
         UpdateTransformCache();
         return true;
     };
-
     inline void SetRange(double v1, double v2) {
         Range.Min = ImMin(v1,v2);
         Range.Max = ImMax(v1,v2);

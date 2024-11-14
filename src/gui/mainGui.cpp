@@ -78,6 +78,8 @@ void MainGUI::createFrame( SDL_Window* window, ImGuiContext* imGuiContext, float
             "Add an algorithm",
             [this]( int index ) {
                 dataHandler->addToBenchmark( static_cast<VoxelizationAlgorithm>(index));
+                dataHandler->showBenchmarks( false );
+                dataHandler->setBenchmarkChanged( true );
             } );
     ImGui::Spacing();
     showSelectedAlgorithmsBenchmark();
@@ -262,7 +264,7 @@ void MainGUI::showSelectedAlgorithmsBenchmark()
     ImGui::Text( "Selected Voxelization Algorithms:" );
     for ( VoxelizationAlgorithm a: dataHandler->getBenchmarkAlgorithms())
     {
-        ImGui::Text( "%s", util::toString( a ).c_str());
+        ImGui::Text( "%s", util::string::toString( a ).c_str());
     }
 }
 
