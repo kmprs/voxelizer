@@ -39,8 +39,11 @@ BenchmarkGUI::createFrame( SDL_Window* window, ImGuiContext* imGuiContext, float
     {
         benchmarks = createBenchmarks();
         // title must get a new unique id, otherwise the automatic rescaling fails
-        title = "Algorithm Benchmarks (" + benchmarks[0].model.title + ")" + "##"
-                + util::string::generateRandomString(3);
+
+        title = ( !benchmarks.empty() )
+                ? "Algorithm Benchmarks (" + benchmarks[0].model.title + ")" + "##"
+                + util::string::generateRandomString(3)
+                : "No algorithm selected";
         dataHandler->setBenchmarkChanged( false );
         dataHandler->setBenchmarkUpdate( false );
     }
@@ -51,6 +54,7 @@ BenchmarkGUI::createFrame( SDL_Window* window, ImGuiContext* imGuiContext, float
 
 std::vector<BenchmarkMetric> BenchmarkGUI::createBenchmarks()
 {
+    if ( dataHandler->getBenchmarkAlgorithms().empty() ) return {};
     std::unique_ptr<Parser> parser = std::make_unique<OBJParser>();
     std::vector<std::shared_ptr<TriangleFace>> triangleFaces = parser->parse(
             dataHandler->getCurrentModelPath());
