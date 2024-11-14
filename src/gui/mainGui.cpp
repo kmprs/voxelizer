@@ -6,6 +6,13 @@
 extern std::shared_ptr<DataHandler> dataHandler;
 
 
+static const ImVec4 BUTTON_SUBMIT_DEFAULT_COLOR = { 0.047, 0.243, 0.349, 1.f };
+static const ImVec4 BUTTON_SUBMIT_HOVER_COLOR = { 0.078, 0.376, 0.541, 1.f };
+static const ImVec4 BUTTON_SUBMIT_ACTIVE_COLOR = { 0.098, 0.463, 0.659, 1.f };
+static const ImVec4 BUTTON_DELETE_HOVER_COLOR = { 0.42, 0.071, 0.059, 1.f };
+static const ImVec4 BUTTON_DELETE_ACTIVE_COLOR = { 0.612, 0.102, 0.086, 1.f };
+
+
 void MainGUI::createFrame( SDL_Window* window, ImGuiContext* imGuiContext, float width,
                            float height, int x,
                            int y )
@@ -70,16 +77,15 @@ void MainGUI::createFrame( SDL_Window* window, ImGuiContext* imGuiContext, float
     ImGui::Spacing();
 
     static bool addAlgorithmsCollapsed = false;
-    ImGui::Text( "Add Algorithm to Benchmark" );
     collapseSelection(
             { "Optimized", "Octree", "BVH", "Naive" }, addAlgorithmsCollapsed,
-            -1, "Add an algorithm",
+            -1, "Add algorithm to benchmark",
             [this]( int index ) {
                 dataHandler->addToBenchmark( static_cast<VoxelizationAlgorithm>(index));
             } );
     ImGui::Spacing();
 
-    float deleteButtonWidth = width/3;
+    float deleteButtonWidth = width / 3;
     showSelectedAlgorithmsBenchmark( deleteButtonWidth );
     ImGui::Spacing();
 
@@ -251,11 +257,15 @@ void MainGUI::buttonFileDialog( float buttonWidth )
 
 void MainGUI::buttonBenchmarkDialog( float buttonWidth )
 {
-    if ( ImGui::Button( "Create Benchmark##BENCHMARKS", ImVec2( buttonWidth, 0 )))
+    ImGui::PushStyleColor( ImGuiCol_Button, BUTTON_SUBMIT_DEFAULT_COLOR );
+    ImGui::PushStyleColor( ImGuiCol_ButtonHovered, BUTTON_SUBMIT_HOVER_COLOR );
+    ImGui::PushStyleColor( ImGuiCol_ButtonActive, BUTTON_SUBMIT_ACTIVE_COLOR );
+    if ( ImGui::Button( "Create benchmark##BENCHMARKS", ImVec2( buttonWidth, 0 )))
     {
         dataHandler->showBenchmarks( true );
         dataHandler->setBenchmarkUpdate( true );
     }
+    ImGui::PopStyleColor( 3 );
 }
 
 void MainGUI::showSelectedAlgorithmsBenchmark( float deleteButtonWidth )
@@ -269,10 +279,14 @@ void MainGUI::showSelectedAlgorithmsBenchmark( float deleteButtonWidth )
                 ImGui::GetContentRegionAvail().x - deleteButtonWidth;
         ImGui::SetCursorPosX( ImGui::GetCursorPosX() + rightAlignX );
         std::string label = u8"\u0013##" + util::string::toString( a );
+
+        ImGui::PushStyleColor( ImGuiCol_ButtonHovered, BUTTON_DELETE_HOVER_COLOR );
+        ImGui::PushStyleColor( ImGuiCol_ButtonActive, BUTTON_DELETE_ACTIVE_COLOR );
         if ( ImGui::Button( label.c_str(), ImVec2( deleteButtonWidth, 0.f )))
         {
             dataHandler->eraseFromBenchmark( a );
         }
+        ImGui::PopStyleColor( 2 );
     }
 }
 
