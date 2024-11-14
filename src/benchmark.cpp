@@ -59,7 +59,7 @@ void Benchmark::create()
             metric.algorithm = voxelizer.first;
 
             std::vector<PerformanceData> performance;
-            for ( int i = 1; i <= MAX_RESOLUTION; i++ )
+            for ( int i = 1; i <= MAX_RESOLUTION_BENCHMARK; i++ )
             {
                 // measure the time it takes for one voxelization run
                 auto start = std::chrono::high_resolution_clock::now();

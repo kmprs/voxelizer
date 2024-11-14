@@ -159,7 +159,7 @@ void MainGUI::sliderVoxelResolution( float buttonWidth )
     // VOXEL RESOLUTION
     ImGui::Text( "Voxel Resolution" );
     ImGui::PushItemWidth( buttonWidth );
-    if ( ImGui::SliderInt( "##SLIDERRESOLUTION", &resolution, 1, MAX_RESOLUTION ))
+    if ( ImGui::SliderInt( "##SLIDERRESOLUTION", &resolution, 1, MAX_RESOLUTION_VIEWER ))
     {};
     if ( ImGui::IsItemDeactivatedAfterEdit())
     {

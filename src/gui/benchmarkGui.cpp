@@ -68,7 +68,7 @@ void BenchmarkGUI::plot( const std::vector<BenchmarkMetric> &metrics )
     if ( ImPlot::BeginPlot( title.c_str(), ImVec2( -1, -1 )))
     {
         ImPlot::SetupAxes( "Resolution Level", "Duration [ms]" );
-        ImPlot::SetupAxisLimits( ImAxis_X1, 1, MAX_RESOLUTION );
+        ImPlot::SetupAxisLimits( ImAxis_X1, 1, MAX_RESOLUTION_BENCHMARK );
         ImPlot::SetupAxisScale( ImAxis_Y1, ImPlotScale_Log10 );
         ImPlot::SetupLegend( ImPlotLocation_NorthWest );
 

@@ -130,7 +130,7 @@ int DataHandler::getVoxelResolution() const
 
 void DataHandler::setVoxelResolution( int resolution )
 {
-    if ( resolution >= 1 && resolution <= MAX_RESOLUTION ) m_voxelResolution = resolution;
+    if ( resolution >= 1 && resolution <= MAX_RESOLUTION_VIEWER ) m_voxelResolution = resolution;
 }
 
 CameraMode DataHandler::getCameraMode() const
