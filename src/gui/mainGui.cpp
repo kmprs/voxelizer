@@ -1,5 +1,7 @@
 #include "mainGui.hpp"
 
+#include <utility>
+
 
 extern std::shared_ptr<DataHandler> dataHandler;
 
@@ -75,7 +77,7 @@ void MainGUI::createFrame( SDL_Window* window, ImGuiContext* imGuiContext, float
             -1,
             "Add an algorithm",
             [this]( int index ) {
-                dataHandler->setAlgorithm( static_cast<VoxelizationAlgorithm>(index));
+                dataHandler->addToBenchmark( static_cast<VoxelizationAlgorithm>(index));
             } );
     ImGui::Spacing();
     showSelectedAlgorithmsBenchmark();
@@ -128,18 +130,19 @@ MainGUI::collapseSelection( const std::vector<std::string> &labels, bool &collap
                             int selectedIndex, std::string defaultTitle,
                             const std::function<void( int )> &onSelect )
 {
-    std::string title = (selectedIndex >= 0) ? labels[selectedIndex] + " " : defaultTitle;
+    std::string title = ( selectedIndex >= 0 ) ? labels[selectedIndex] + " " : std::move(
+            defaultTitle );
 
     ImGui::SetNextItemOpen( collapseStatus );
 
-    if ( ImGui::CollapsingHeader( title.c_str() ))
+    if ( ImGui::CollapsingHeader( title.c_str()))
     {
         collapseStatus = true;
         for ( int i = 0; i < labels.size(); i++ )
         {
             if ( ImGui::Selectable( labels[i].c_str(), selectedIndex == i ))
             {
-                onSelect(i);
+                onSelect( i );
                 collapseStatus = false;
                 break;
             }
@@ -256,10 +259,10 @@ void MainGUI::buttonBenchmarkDialog( float buttonWidth )
 
 void MainGUI::showSelectedAlgorithmsBenchmark()
 {
-    ImGui::Text("Selected Voxelization Algorithms:");
-    for ( VoxelizationAlgorithm a : dataHandler->getBenchmarkAlgorithms() )
+    ImGui::Text( "Selected Voxelization Algorithms:" );
+    for ( VoxelizationAlgorithm a: dataHandler->getBenchmarkAlgorithms())
     {
-        ImGui::Text( "%s", util::toString( a ).c_str() );
+        ImGui::Text( "%s", util::toString( a ).c_str());
     }
 }
 
