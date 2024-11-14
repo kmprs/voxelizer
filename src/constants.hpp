@@ -36,7 +36,7 @@ constexpr int VOXEL_MEMORY_SIZE = 24;
 
 // VOXELIZER
 constexpr int INIT_RESOLUTION = 6;
-constexpr int MAX_RESOLUTION = 5;
+constexpr int MAX_RESOLUTION = 7;
 constexpr int BVH_DEPTH = 12;
 
 // MODEL

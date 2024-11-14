@@ -49,8 +49,9 @@ BenchmarkGUI::createFrame( SDL_Window* window, ImGuiContext* imGuiContext, float
         std::unique_ptr<Parser> parser = std::make_unique<OBJParser>();
         std::vector<std::shared_ptr<TriangleFace>> triangleFaces = parser->parse(
                 dataHandler->getCurrentModelPath());
-        auto benchmarkAlgorithmsSet = dataHandler->getBenchmarkAlgorithms();
-        Benchmark benchmark = { dataHandler->getBenchmarkAlgorithms(), "bunny",
+        Benchmark benchmark = { dataHandler->getBenchmarkAlgorithms(),
+                                util::getNameFromPath<std::string>(
+                                        dataHandler->getCurrentModelPath()),
                                 triangleFaces };
         benchmark.create();
         benchmarks = benchmark.get();
