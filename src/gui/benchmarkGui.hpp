@@ -21,6 +21,7 @@ public:
                  int y ) override;
 
 private:
+    static std::vector<BenchmarkMetric> createBenchmarks();
     static void plot( const std::vector<BenchmarkMetric> &metrics );
     static void addLine( const BenchmarkMetric& metric );
 };

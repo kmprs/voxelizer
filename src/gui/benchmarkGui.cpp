@@ -19,8 +19,6 @@ BenchmarkGUI::createFrame( SDL_Window* window, ImGuiContext* imGuiContext, float
                            float height, int x,
                            int y )
 {
-    float buttonWidth = width - 20.f;
-
     ImGui::SetCurrentContext( imGuiContext );
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplSDL2_NewFrame();
@@ -34,7 +32,7 @@ BenchmarkGUI::createFrame( SDL_Window* window, ImGuiContext* imGuiContext, float
     ImGui::SetNextWindowSize( ImVec2( width, height ));
 
     static bool newBenchmark = true;
-    ImGui::SetNextWindowPos( ImVec2( x, static_cast<float>(y)));
+    ImGui::SetNextWindowPos( ImVec2( static_cast<float>(x), static_cast<float>(y)));
     ImGui::SetNextWindowSize(
             ImVec2( static_cast<float>(dataHandler->getBenchmarkWindowWidth()),
                     static_cast<float>(dataHandler->getBenchmarkWindowHeight())));
@@ -45,20 +43,24 @@ BenchmarkGUI::createFrame( SDL_Window* window, ImGuiContext* imGuiContext, float
     static std::vector<BenchmarkMetric> benchmarks = { BenchmarkMetric() };
     if ( newBenchmark )
     {
-        benchmarks.clear();
-        std::unique_ptr<Parser> parser = std::make_unique<OBJParser>();
-        std::vector<std::shared_ptr<TriangleFace>> triangleFaces = parser->parse(
-                dataHandler->getCurrentModelPath());
-        Benchmark benchmark = { dataHandler->getBenchmarkAlgorithms(),
-                                util::getNameFromPath<std::string>(
-                                        dataHandler->getCurrentModelPath()),
-                                triangleFaces };
-        benchmark.create();
-        benchmarks = benchmark.get();
+        benchmarks = createBenchmarks();
         newBenchmark = false;
     }
     plot( benchmarks );
     ImGui::End();
+}
+
+std::vector<BenchmarkMetric> BenchmarkGUI::createBenchmarks()
+{
+    std::unique_ptr<Parser> parser = std::make_unique<OBJParser>();
+    std::vector<std::shared_ptr<TriangleFace>> triangleFaces = parser->parse(
+            dataHandler->getCurrentModelPath());
+    Benchmark benchmark = { dataHandler->getBenchmarkAlgorithms(),
+                            util::getNameFromPath<std::string>(
+                                    dataHandler->getCurrentModelPath()),
+                            triangleFaces };
+    benchmark.create();
+    return benchmark.get();
 }
 
 void BenchmarkGUI::plot( const std::vector<BenchmarkMetric> &metrics )
@@ -94,3 +96,4 @@ void BenchmarkGUI::addLine( const BenchmarkMetric &metric )
     }
     ImPlot::PlotLine( title, x.data(), y.data(), static_cast<int>( x.size()));
 }
+
