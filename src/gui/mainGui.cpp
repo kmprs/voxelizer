@@ -6,13 +6,6 @@
 extern std::shared_ptr<DataHandler> dataHandler;
 
 
-static const ImVec4 BUTTON_SUBMIT_DEFAULT_COLOR = { .035f, .239f, .165f, 1.f };
-static const ImVec4 BUTTON_SUBMIT_HOVER_COLOR   = { .047f, .349f, .239f, 1.f };
-static const ImVec4 BUTTON_SUBMIT_ACTIVE_COLOR  = { .059f, .439f, .302f, 1.f };
-static const ImVec4 BUTTON_DELETE_HOVER_COLOR   = { .420f, .071f, .059f, 1.f };
-static const ImVec4 BUTTON_DELETE_ACTIVE_COLOR  = { .612f, .102f, .086f, 1.f };
-
-
 void MainGUI::createFrame( SDL_Window* window, ImGuiContext* imGuiContext, float width,
                            float height, int x, int y )
 {
@@ -256,9 +249,9 @@ void MainGUI::buttonFileDialog( float buttonWidth )
 
 void MainGUI::buttonBenchmarkDialog( float buttonWidth )
 {
-    ImGui::PushStyleColor( ImGuiCol_Button, BUTTON_SUBMIT_DEFAULT_COLOR );
-    ImGui::PushStyleColor( ImGuiCol_ButtonHovered, BUTTON_SUBMIT_HOVER_COLOR );
-    ImGui::PushStyleColor( ImGuiCol_ButtonActive, BUTTON_SUBMIT_ACTIVE_COLOR );
+    ImGui::PushStyleColor( ImGuiCol_Button, colors::BUTTON_SUBMIT_DEFAULT_COLOR );
+    ImGui::PushStyleColor( ImGuiCol_ButtonHovered, colors::BUTTON_SUBMIT_HOVER_COLOR );
+    ImGui::PushStyleColor( ImGuiCol_ButtonActive, colors::BUTTON_SUBMIT_ACTIVE_COLOR );
     if ( ImGui::Button( "Create benchmark##BENCHMARKS", ImVec2( buttonWidth, 0 )))
     {
         dataHandler->showBenchmarks( true );
@@ -279,8 +272,8 @@ void MainGUI::showSelectedAlgorithmsBenchmark( float deleteButtonWidth )
         ImGui::SetCursorPosX( ImGui::GetCursorPosX() + rightAlignX );
         std::string label = u8"\u0013##" + util::string::toString( a );
 
-        ImGui::PushStyleColor( ImGuiCol_ButtonHovered, BUTTON_DELETE_HOVER_COLOR );
-        ImGui::PushStyleColor( ImGuiCol_ButtonActive, BUTTON_DELETE_ACTIVE_COLOR );
+        ImGui::PushStyleColor( ImGuiCol_ButtonHovered, colors::BUTTON_DELETE_HOVER_COLOR );
+        ImGui::PushStyleColor( ImGuiCol_ButtonActive, colors::BUTTON_DELETE_ACTIVE_COLOR );
         if ( ImGui::Button( label.c_str(), ImVec2( deleteButtonWidth, 0.f )))
         {
             dataHandler->eraseFromBenchmark( a );

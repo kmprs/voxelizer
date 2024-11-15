@@ -91,6 +91,7 @@ add_executable(${NAME} main.cpp
         dependencies/implot/implot_items.cpp
         src/benchmark.cpp
         src/benchmark.hpp
+        src/gui/guiConfig.hpp
 )
 
 
