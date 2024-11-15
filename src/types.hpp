@@ -17,7 +17,6 @@ struct Model;
 struct Duration;
 struct PerformanceData;
 struct BenchmarkMetric;
-struct PlotConfig;
 
 
 // TYPEDEFS
@@ -191,11 +190,4 @@ struct BenchmarkMetric
     std::vector<PerformanceData> performanceData;
 };
 
-
-struct PlotConfig
-{
-    ImPlotScale_ scaleType = ImPlotScale_Log10;
-    ImPlotLocation_ legendLocation = ImPlotLocation_NorthWest;
-    float lineWeight = 2.f;
-};
 

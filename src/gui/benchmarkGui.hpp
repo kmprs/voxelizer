@@ -1,7 +1,6 @@
 #pragma once
 
 
-#include "../../dependencies/implot/implot.h"
 #include "gui.hpp"
 #include "../util.hpp"
 #include "../dataHandler.hpp"

@@ -4,7 +4,7 @@
 #include <glm/glm.hpp>
 
 // WINDOW
-constexpr glm::vec3 BACKGROUND_COLOR = { .12f, .12f, .12f };
+constexpr glm::vec3 BACKGROUND_COLOR = { .14f, .15f, .14f };
 const std::string TITLE = "Voxelizer";
 constexpr int TARGET_FPS = 1000;
 constexpr int FRAME_DELAY = 1000/TARGET_FPS;

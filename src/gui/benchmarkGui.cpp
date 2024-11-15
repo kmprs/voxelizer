@@ -40,9 +40,9 @@ BenchmarkGUI::createFrame( SDL_Window* window, ImGuiContext* imGuiContext, float
         benchmarks = createBenchmarks();
         // title must get a new unique id, otherwise the automatic rescaling fails
 
-        title = ( !benchmarks.empty() )
+        title = ( !benchmarks.empty())
                 ? "Algorithm Benchmarks (" + benchmarks[0].model.title + ")" + "##"
-                + util::string::generateRandomString(3)
+                  + util::string::generateRandomString( 3 )
                 : "No algorithm selected";
         dataHandler->setBenchmarkChanged( false );
         dataHandler->setBenchmarkUpdate( false );
@@ -54,27 +54,27 @@ BenchmarkGUI::createFrame( SDL_Window* window, ImGuiContext* imGuiContext, float
 
 std::vector<BenchmarkMetric> BenchmarkGUI::createBenchmarks()
 {
-    if ( dataHandler->getBenchmarkAlgorithms().empty() ) return {};
+    if ( dataHandler->getBenchmarkAlgorithms().empty()) return {};
     std::unique_ptr<Parser> parser = std::make_unique<OBJParser>();
     vecTriangleFaceSharedPtr triangleFaces = parser->parse(
             dataHandler->getCurrentModelPath());
     Benchmark benchmark = { dataHandler->getBenchmarkAlgorithms(),
                             util::string::getNameFromPath<std::string>(
-                                    dataHandler->getCurrentModelPath()),
-                            triangleFaces };
+                                    dataHandler->getCurrentModelPath()),triangleFaces };
     benchmark.create();
     return benchmark.get();
 }
 
-void BenchmarkGUI::plot( const std::vector<BenchmarkMetric> &metrics, const std::string &title )
+void BenchmarkGUI::plot( const std::vector<BenchmarkMetric> &metrics,
+                         const std::string &title )
 {
     ImPlot::PushStyleVar( ImPlotStyleVar_LineWeight, 2.0f );
     if ( ImPlot::BeginPlot( title.c_str(), ImVec2( -1, -1 )))
     {
         ImPlot::SetupAxes( "Resolution Level", "Duration [ms]" );
         ImPlot::SetupAxisLimits( ImAxis_X1, 1, MAX_RESOLUTION_BENCHMARK );
-        ImPlot::SetupAxisScale( ImAxis_Y1, ImPlotScale_Log10 );
-        ImPlot::SetupLegend( ImPlotLocation_NorthWest );
+        ImPlot::SetupAxisScale( ImAxis_Y1, plot::SCALE_TYPE );
+        ImPlot::SetupLegend( plot::LEGEND_LOCATION );
 
         for ( const BenchmarkMetric &m: metrics ) addLine( m );
 
