@@ -1,13 +1,12 @@
 #include "meshDataHandler.hpp"
 
-
 extern std::shared_ptr<DataHandler> dataHandler;
 
 MeshDataHandler::MeshDataHandler( FileFormat format ) :
         m_voxelizer( std::make_unique<OptimizedVoxelizer>()),
         m_currentModelPath( dataHandler->getCurrentModelPath()),
-        m_currentResolution( dataHandler->getVoxelResolution() ),
-        m_currentAlgorithm( dataHandler->getVoxelizationAlgorithm() )
+        m_currentResolution( dataHandler->getVoxelResolution()),
+        m_currentAlgorithm( dataHandler->getVoxelizationAlgorithm())
 {
     if ( format == OBJ ) m_parser = std::make_unique<OBJParser>();
     m_triangleFaces = m_parser->parse( dataHandler->getCurrentModelPath());
@@ -33,9 +32,10 @@ void MeshDataHandler::voxelize( int voxelResolution )
     auto durationS = std::chrono::duration_cast<std::chrono::seconds>( stop - start );
     auto durationMS = std::chrono::duration_cast<std::chrono::milliseconds>(
             stop - start );
+#ifdef DEBUG
     std::cout << "\nVoxelization took: " << durationS.count() << "s:"
               << durationMS.count() % 1000 << "ms" << "\n";
-
+#endif
     for ( const Voxel &v: voxels )
     {
         m_voxels.push_back( std::make_shared<Voxel>( v ));
@@ -48,19 +48,19 @@ bool MeshDataHandler::update()
 {
     bool meshDataChanged = false;
 
-    if (m_currentModelPath != dataHandler->getCurrentModelPath())
+    if ( m_currentModelPath != dataHandler->getCurrentModelPath())
     {
         m_currentModelPath = dataHandler->getCurrentModelPath();
         m_triangleFaces.clear();
-        m_triangleFaces = m_parser->parse(m_currentModelPath);
-        dataHandler->setWorldCenter( util::geometry::calculateCentroid( m_triangleFaces ) );
+        m_triangleFaces = m_parser->parse( m_currentModelPath );
+        dataHandler->setWorldCenter(
+                util::geometry::calculateCentroid( m_triangleFaces ));
         m_voxels.clear();
-        voxelize(dataHandler->getVoxelResolution());
+        voxelize( dataHandler->getVoxelResolution());
         meshDataChanged = true;
-    }
-    else if (dataHandler->getVoxelizationAlgorithm() != m_currentAlgorithm)
+    } else if ( dataHandler->getVoxelizationAlgorithm() != m_currentAlgorithm )
     {
-        switch (dataHandler->getVoxelizationAlgorithm())
+        switch ( dataHandler->getVoxelizationAlgorithm())
         {
             case OPTIMIZED:
                 m_voxelizer = std::make_unique<OptimizedVoxelizer>();
@@ -79,14 +79,13 @@ bool MeshDataHandler::update()
         }
         m_currentAlgorithm = dataHandler->getVoxelizationAlgorithm();
         m_voxels.clear();
-        voxelize(dataHandler->getVoxelResolution());
+        voxelize( dataHandler->getVoxelResolution());
         meshDataChanged = true;
-    }
-    else if (m_currentResolution != dataHandler->getVoxelResolution())
+    } else if ( m_currentResolution != dataHandler->getVoxelResolution())
     {
         m_currentResolution = dataHandler->getVoxelResolution();
         m_voxels.clear();
-        voxelize(m_currentResolution);
+        voxelize( m_currentResolution );
         meshDataChanged = true;
     }
 

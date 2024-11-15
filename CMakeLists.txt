@@ -3,6 +3,10 @@ set(NAME "Voxelizer")
 cmake_minimum_required(VERSION 3.26)
 project(${NAME})
 
+if (CMAKE_BUILD_TYPE MATCHES Debug)
+    add_compile_definitions(DEBUG)
+endif()
+
 set(CMAKE_CXX_STANDARD 17)
 
 add_executable(${NAME} main.cpp
