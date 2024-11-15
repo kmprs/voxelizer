@@ -26,7 +26,7 @@ struct BVHNode
     BVHNode* left = nullptr;
     BVHNode* right = nullptr;
 
-    vecTriangleFace triangleFaces = {};
+    vecTriangleFaceSharedPtr triangleFaces = {};
 
     void getLeaves( std::vector<BVHNode*> &leaves);
 };

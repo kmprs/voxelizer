@@ -1,12 +1,12 @@
 #include "objParser.hpp"
 
-vecTriangleFace OBJParser::parse( const std::string &path )
+vecTriangleFaceSharedPtr OBJParser::parse( const std::string &path )
 {
     // resetting the triangle information
     m_positions.clear();
     m_normals.clear();
     m_faceIndices.clear();
-    vecTriangleFace faces = {};
+    vecTriangleFaceSharedPtr faces = {};
 
     // reading each line and writing its content in one of three vectors based on their prefix
     std::ifstream file( path );

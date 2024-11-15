@@ -13,6 +13,6 @@ class BVHVoxelizer : public Voxelizer
 public:
     BVHVoxelizer() = default;
     std::vector<Voxel>
-    run( const vecTriangleFace &triangleFaces,
+    run( const vecTriangleFaceSharedPtr &triangleFaces,
          int resolution ) override;
 };

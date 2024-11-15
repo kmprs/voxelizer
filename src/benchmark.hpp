@@ -20,7 +20,7 @@ class Benchmark
 public:
     Benchmark( const std::set<VoxelizationAlgorithm> &algorithms,
                std::string modelName,
-               const vecTriangleFace &triangleFaces
+               const vecTriangleFaceSharedPtr &triangleFaces
     );
 
     void create();
@@ -31,7 +31,7 @@ private:
     std::set<VoxelizationAlgorithm> m_algorithms;
     std::vector<std::pair<VoxelizationAlgorithm, std::unique_ptr<Voxelizer>>> m_voxelizer = {};
     std::string m_modelName;
-    vecTriangleFace m_triangleFaces;
+    vecTriangleFaceSharedPtr m_triangleFaces;
     std::mutex m_metricsMutex;
 
 };

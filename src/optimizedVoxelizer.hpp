@@ -14,7 +14,7 @@ public:
     OptimizedVoxelizer() = default;
 
     std::vector<Voxel>
-    run( const vecTriangleFace &triangleFaces,
+    run( const vecTriangleFaceSharedPtr &triangleFaces,
          int resolution ) override;
 private:
     void buildOctree( OctreeNode* octreeNode, int depth, int maxDepth,

@@ -5,7 +5,7 @@ extern std::shared_ptr<DataHandler> dataHandler;
 
 
 std::vector<Voxel>
-BVHVoxelizer::run( const vecTriangleFace &triangleFaces,
+BVHVoxelizer::run( const vecTriangleFaceSharedPtr &triangleFaces,
                    int resolution )
 {
     // setting up the BVH

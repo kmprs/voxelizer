@@ -5,6 +5,68 @@
 #include <glm/glm.hpp>
 #include "../dependencies/implot/implot.h"
 
+// FORWARD DECLARATIONS
+class TriangleFace;
+class Voxel;
+struct Vertex;
+struct Line;
+struct Triangle;
+struct VoxelFace;
+struct OBJFaceIndices;
+struct Model;
+struct Duration;
+struct PerformanceData;
+struct BenchmarkMetric;
+struct PlotConfig;
+
+
+// TYPEDEFS
+typedef std::vector<std::shared_ptr<TriangleFace>> vecTriangleFaceSharedPtr;
+typedef std::vector<std::shared_ptr<Voxel>> vecVoxelSharedPtr;
+
+
+enum Direction
+{
+    NO_MOVEMENT,
+    FORWARD,
+    BACKWARD,
+    UP,
+    DOWN,
+    LEFT,
+    RIGHT
+};
+
+
+enum FileFormat
+{
+    OBJ,
+};
+
+
+enum Representation
+{
+    VOXEL,
+    TRIANGLE
+};
+
+
+enum CameraMode
+{
+    CENTERED,
+    INDIVIDUAL
+};
+
+
+enum VoxelizationAlgorithm
+{
+    OPTIMIZED,
+    OCTREE,
+    BVH,
+    NAIVE
+};
+
+
+
 struct Vertex
 {
     Vertex( float x, float y, float z, float nx, float ny, float nz ) :
@@ -26,6 +88,7 @@ struct Vertex
     }
 };
 
+
 struct Line
 {
     Line ( const glm::vec3& position0, const glm::vec3& position1 ) :
@@ -34,6 +97,7 @@ struct Line
     glm::vec3 position0 = {};
     glm::vec3 position1 = {};
 };
+
 
 struct Triangle
 {
@@ -98,48 +162,6 @@ struct OBJFaceIndices
 };
 
 
-
-
-enum Direction
-{
-    NO_MOVEMENT,
-    FORWARD,
-    BACKWARD,
-    UP,
-    DOWN,
-    LEFT,
-    RIGHT
-};
-
-
-enum FileFormat
-{
-    OBJ,
-};
-
-
-enum Representation
-{
-    VOXEL,
-    TRIANGLE
-};
-
-enum CameraMode
-{
-    CENTERED,
-    INDIVIDUAL
-};
-
-
-enum VoxelizationAlgorithm
-{
-    OPTIMIZED,
-    OCTREE,
-    BVH,
-    NAIVE
-};
-
-
 struct Model
 {
     std::string title;
@@ -170,9 +192,10 @@ struct BenchmarkMetric
 };
 
 
-struct plotConfig
+struct PlotConfig
 {
     ImPlotScale_ scaleType = ImPlotScale_Log10;
     ImPlotLocation_ legendLocation = ImPlotLocation_NorthWest;
     float lineWeight = 2.f;
 };
+

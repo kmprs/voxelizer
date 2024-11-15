@@ -15,13 +15,13 @@ public:
     ~MeshDataHandler() = default;
 
     [[nodiscard]] std::vector<std::shared_ptr<Voxel>> getVoxels() const;
-    [[nodiscard]] vecTriangleFace getTriangleFaces() const;
+    [[nodiscard]] vecTriangleFaceSharedPtr getTriangleFaces() const;
     bool update();
 
 private:
     std::string m_path;
-    std::vector<std::shared_ptr<Voxel>> m_voxels = {};
-    vecTriangleFace m_triangleFaces = {};
+    vecVoxelSharedPtr m_voxels = {};
+    vecTriangleFaceSharedPtr m_triangleFaces = {};
     std::unique_ptr<Parser> m_parser = nullptr;
     std::unique_ptr<Voxelizer> m_voxelizer = nullptr;
     VoxelizationAlgorithm m_currentAlgorithm;

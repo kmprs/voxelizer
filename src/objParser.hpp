@@ -9,7 +9,7 @@ class OBJParser : public Parser
 {
 public:
     OBJParser() = default;
-    [[nodiscard]] vecTriangleFace parse( const std::string &path ) override;
+    [[nodiscard]] vecTriangleFaceSharedPtr parse( const std::string &path ) override;
 
 
 private:

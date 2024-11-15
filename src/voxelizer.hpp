@@ -10,6 +10,6 @@ class Voxelizer
 {
 public:
     virtual std::vector<Voxel>
-    run( const vecTriangleFace &triangleFaces, int resolution ) = 0;
+    run( const vecTriangleFaceSharedPtr &triangleFaces, int resolution ) = 0;
     virtual ~Voxelizer() = default;
 };

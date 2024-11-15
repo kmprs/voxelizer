@@ -12,10 +12,10 @@ public:
     OctreeVoxelizer() = default;
 
     std::vector<Voxel>
-    run( const vecTriangleFace &triangleFaces,
+    run( const vecTriangleFaceSharedPtr &triangleFaces,
          int resolution ) override;
 
 private:
     void buildOctree( OctreeNode* octreeNode, int depth, int maxDepth,
-                      const vecTriangleFace &triangleFaces );
+                      const vecTriangleFaceSharedPtr &triangleFaces );
 };

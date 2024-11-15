@@ -14,12 +14,12 @@ MeshDataHandler::MeshDataHandler( FileFormat format ) :
     voxelize( dataHandler->getVoxelResolution());
 }
 
-std::vector<std::shared_ptr<Voxel>> MeshDataHandler::getVoxels() const
+vecVoxelSharedPtr MeshDataHandler::getVoxels() const
 {
     return m_voxels;
 }
 
-vecTriangleFace MeshDataHandler::getTriangleFaces() const
+vecTriangleFaceSharedPtr MeshDataHandler::getTriangleFaces() const
 {
     return m_triangleFaces;
 }

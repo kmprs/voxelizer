@@ -4,7 +4,7 @@
 extern std::shared_ptr<DataHandler> dataHandler;
 
 
-std::vector<Voxel> NaiveVoxelizer::run(const vecTriangleFace &triangleFaces,
+std::vector<Voxel> NaiveVoxelizer::run(const vecTriangleFaceSharedPtr &triangleFaces,
                                        int resolution)
 {
     std::vector<Voxel> result;
