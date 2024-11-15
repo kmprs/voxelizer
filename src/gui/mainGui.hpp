@@ -9,9 +9,8 @@ class MainGUI : public GUI
 {
 public:
     void
-    createFrame( SDL_Window* window, ImGuiContext* imGuiContext, float width, float height,
-                 int x,
-                 int y ) override;
+    createFrame( SDL_Window* window, ImGuiContext* imGuiContext,
+                 float width, float height, int x, int y ) override;
 
 private:
     static void buttonRepresentation( float buttonWidth );

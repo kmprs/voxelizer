@@ -6,16 +6,15 @@
 extern std::shared_ptr<DataHandler> dataHandler;
 
 
-static const ImVec4 BUTTON_SUBMIT_DEFAULT_COLOR = { 0.047, 0.243, 0.349, 1.f };
-static const ImVec4 BUTTON_SUBMIT_HOVER_COLOR = { 0.078, 0.376, 0.541, 1.f };
-static const ImVec4 BUTTON_SUBMIT_ACTIVE_COLOR = { 0.098, 0.463, 0.659, 1.f };
-static const ImVec4 BUTTON_DELETE_HOVER_COLOR = { 0.42, 0.071, 0.059, 1.f };
-static const ImVec4 BUTTON_DELETE_ACTIVE_COLOR = { 0.612, 0.102, 0.086, 1.f };
+static const ImVec4 BUTTON_SUBMIT_DEFAULT_COLOR = { .035f, .239f, .165f, 1.f };
+static const ImVec4 BUTTON_SUBMIT_HOVER_COLOR   = { .047f, .349f, .239f, 1.f };
+static const ImVec4 BUTTON_SUBMIT_ACTIVE_COLOR  = { .059f, .439f, .302f, 1.f };
+static const ImVec4 BUTTON_DELETE_HOVER_COLOR   = { .420f, .071f, .059f, 1.f };
+static const ImVec4 BUTTON_DELETE_ACTIVE_COLOR  = { .612f, .102f, .086f, 1.f };
 
 
 void MainGUI::createFrame( SDL_Window* window, ImGuiContext* imGuiContext, float width,
-                           float height, int x,
-                           int y )
+                           float height, int x, int y )
 {
     ImGui::SetCurrentContext( imGuiContext );
     ImGui_ImplOpenGL3_NewFrame();
@@ -85,7 +84,7 @@ void MainGUI::createFrame( SDL_Window* window, ImGuiContext* imGuiContext, float
             } );
     ImGui::Spacing();
 
-    float deleteButtonWidth = width / 3;
+    float deleteButtonWidth = width / 5;
     showSelectedAlgorithmsBenchmark( deleteButtonWidth );
     ImGui::Spacing();
 
