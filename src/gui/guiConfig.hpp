@@ -2,7 +2,6 @@
 
 #include "../../dependencies/imgui/imgui.h"
 
-
 namespace colors
 {
     constexpr ImVec4 WINDOW_BG                   = { 0.10f, 0.10f, 0.10f, 1.0f };

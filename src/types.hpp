@@ -5,7 +5,6 @@
 #include <glm/glm.hpp>
 #include "../dependencies/implot/implot.h"
 
-
 struct Vertex
 {
     Vertex( float x, float y, float z, float nx, float ny, float nz ) :

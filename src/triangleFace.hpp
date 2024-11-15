@@ -19,3 +19,5 @@ private:
     unsigned int m_indices[3] = {};
     glm::vec3 m_center = {};
 };
+
+typedef std::vector<std::shared_ptr<TriangleFace>> vecTriangleFace;

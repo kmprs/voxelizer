@@ -8,7 +8,7 @@ Renderer::Renderer()
 {
     m_meshDataHandler = std::make_unique<MeshDataHandler>( OBJ );
 
-    std::vector<std::shared_ptr<TriangleFace>> triangleFaces = m_meshDataHandler->getTriangleFaces();
+    vecTriangleFace triangleFaces = m_meshDataHandler->getTriangleFaces();
     std::vector<std::shared_ptr<Voxel>> voxels = m_meshDataHandler->getVoxels();
 
     m_meshTriangle = Mesh( { triangleFaces.begin(), triangleFaces.end() } );
@@ -26,7 +26,7 @@ void Renderer::render()
     bool meshDataUpdated = m_meshDataHandler->update();
     if ( meshDataUpdated )
     {
-        std::vector<std::shared_ptr<TriangleFace>> triangleFaces = m_meshDataHandler->getTriangleFaces();
+        vecTriangleFace triangleFaces = m_meshDataHandler->getTriangleFaces();
         std::vector<std::shared_ptr<Voxel>> voxels = m_meshDataHandler->getVoxels();
         m_meshTriangle = Mesh( { triangleFaces.begin(), triangleFaces.end() } );
         m_meshVoxel = Mesh( { voxels.begin(), voxels.end() } );

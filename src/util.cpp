@@ -118,7 +118,7 @@ namespace util
 
         std::vector<glm::vec3>
         extractPositions(
-                const std::vector<std::shared_ptr<TriangleFace>> &triangleFaces )
+                const vecTriangleFace &triangleFaces )
         {
             std::vector<glm::vec3> positions;
             for ( const std::shared_ptr<TriangleFace> &face: triangleFaces )
@@ -290,8 +290,7 @@ namespace util
             return trianglePoint.z;
         }
 
-        glm::vec3 calculateCentroid(
-                const std::vector<std::shared_ptr<TriangleFace>> &triangleFaces )
+        glm::vec3 calculateCentroid( const vecTriangleFace &triangleFaces )
         {
             // calculate centroid of mesh based on the triangle-representation of the model
             glm::vec3 centroid = { 0, 0, 0 };

@@ -5,7 +5,7 @@ extern std::shared_ptr<DataHandler> dataHandler;
 
 
 std::vector<Voxel>
-OctreeVoxelizer::run( const std::vector<std::shared_ptr<TriangleFace>> &triangleFaces,
+OctreeVoxelizer::run( const vecTriangleFace &triangleFaces,
                       int resolution )
 {
     auto octree = new OctreeNode{ nullptr, 2, dataHandler->getWorldCenter() };
@@ -20,7 +20,7 @@ OctreeVoxelizer::run( const std::vector<std::shared_ptr<TriangleFace>> &triangle
 
 void OctreeVoxelizer::buildOctree(
         OctreeNode* octreeNode, int depth, int maxDepth,
-        const std::vector<std::shared_ptr<TriangleFace>> &triangleFaces )
+        const vecTriangleFace &triangleFaces )
 {
     // fetch vertex positions from octree octreeNode
     std::array<Triangle, 12> voxelTriangles = util::geometry::getCubeTriangles(

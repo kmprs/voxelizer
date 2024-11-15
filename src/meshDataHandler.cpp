@@ -19,7 +19,7 @@ std::vector<std::shared_ptr<Voxel>> MeshDataHandler::getVoxels() const
     return m_voxels;
 }
 
-std::vector<std::shared_ptr<TriangleFace>> MeshDataHandler::getTriangleFaces() const
+vecTriangleFace MeshDataHandler::getTriangleFaces() const
 {
     return m_triangleFaces;
 }

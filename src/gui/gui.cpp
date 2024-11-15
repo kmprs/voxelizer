@@ -9,9 +9,11 @@ void GUI::setStyles()
     ImGuiIO &io = ImGui::GetIO();
     io.Fonts->AddFontFromFileTTF( "../binaries/arial.ttf", 16.0f );
     ImFontConfig config;
-    config.MergeMode = true;
 
+    // merge default font with symbol font
+    config.MergeMode = true;
     io.FontDefault = io.Fonts->Fonts.back();
+
     // trash bin icon
     static const ImWchar icons_ranges[] = { 0x0013, 0x0013,  0 };
     io.Fonts->AddFontFromFileTTF("../binaries/FontAwesome.ttf", 16.0f, &config, icons_ranges);
@@ -34,7 +36,7 @@ void GUI::setStyles()
     style.Colors[ImGuiCol_FrameBg]          = colors::FRAME_BG;
     style.Colors[ImGuiCol_FrameBgHovered]   = colors::FRAME_BG_HOVERED;
     style.Colors[ImGuiCol_FrameBgActive]    = colors::FRAME_BG_ACTIVE;
-    style.Colors[ImGuiCol_Button]           = colors::BUTTON
+    style.Colors[ImGuiCol_Button]           = colors::BUTTON;
     style.Colors[ImGuiCol_ButtonHovered]    = colors::BUTTON_HOVERED;
     style.Colors[ImGuiCol_ButtonActive]     = colors::BUTTON_ACTIVE;
     style.Colors[ImGuiCol_Header]           = colors::HEADER;

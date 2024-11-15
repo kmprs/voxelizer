@@ -5,7 +5,7 @@ extern std::shared_ptr<DataHandler> dataHandler;
 
 
 std::vector<Voxel> OptimizedVoxelizer::run(
-        const std::vector<std::shared_ptr<TriangleFace>> &triangleFaces, int resolution
+        const vecTriangleFace &triangleFaces, int resolution
         )
 {
     auto octree = new OctreeNode{ nullptr, 2, dataHandler->getWorldCenter() };

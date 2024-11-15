@@ -56,7 +56,7 @@ std::vector<BenchmarkMetric> BenchmarkGUI::createBenchmarks()
 {
     if ( dataHandler->getBenchmarkAlgorithms().empty() ) return {};
     std::unique_ptr<Parser> parser = std::make_unique<OBJParser>();
-    std::vector<std::shared_ptr<TriangleFace>> triangleFaces = parser->parse(
+    vecTriangleFace triangleFaces = parser->parse(
             dataHandler->getCurrentModelPath());
     Benchmark benchmark = { dataHandler->getBenchmarkAlgorithms(),
                             util::string::getNameFromPath<std::string>(

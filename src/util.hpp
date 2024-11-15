@@ -44,7 +44,7 @@ namespace util
         getCubeTriangles( const glm::vec3 &positions, float edgeLength );
         std::vector<glm::vec3>
         extractPositions(
-                const std::vector<std::shared_ptr<TriangleFace>> &triangleFaces );
+                const vecTriangleFace &triangleFaces );
         glm::vec3 minVec( const std::vector<glm::vec3> &vectors );
         glm::vec3 maxVec( const std::vector<glm::vec3> &vectors );
         bool doBoundingVolumesIntersect( const glm::vec3 &min1, const glm::vec3 &max1,
@@ -59,8 +59,7 @@ namespace util
                                                           const std::array<float, 3> &distances );
         float
         projectOntoAxis( const glm::vec3 &distance, const glm::vec3 &trianglePoint );
-        glm::vec3 calculateCentroid(
-                const std::vector<std::shared_ptr<TriangleFace>> &triangleFaces );
+        glm::vec3 calculateCentroid( const vecTriangleFace &triangleFaces );
     }
 
     namespace octree

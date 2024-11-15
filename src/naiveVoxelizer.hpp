@@ -10,5 +10,5 @@ class NaiveVoxelizer : public Voxelizer
 public:
     NaiveVoxelizer() = default;
     std::vector<Voxel>
-    run( const std::vector<std::shared_ptr<TriangleFace>> &triangleFaces, int resolution ) override;
+    run( const vecTriangleFace &triangleFaces, int resolution ) override;
 };

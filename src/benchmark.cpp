@@ -3,7 +3,7 @@
 
 Benchmark::Benchmark( const std::set<VoxelizationAlgorithm> &algorithms,
                       std::string modelName,
-                      const std::vector<std::shared_ptr<TriangleFace>> &triangleFaces )
+                      const vecTriangleFace &triangleFaces )
         :
         m_algorithms( algorithms ), m_modelName( std::move( modelName )),
         m_triangleFaces( triangleFaces )
