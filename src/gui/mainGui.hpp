@@ -13,6 +13,9 @@ public:
                  float width, float height, int x, int y ) override;
 
 private:
+    void createLeftFrame( float width, ImGuiWindowFlags windowFlags, float buttonWidth );
+    static void createRightFrame( float width );
+    static void createBottomFrame();
     static void buttonRepresentation( float buttonWidth );
     static void
     collapseSelection( const std::vector<std::string> &labels, bool &collapseStatus,
@@ -26,5 +29,7 @@ private:
     static void buttonFileDialog( float buttonWidth );
     static void buttonBenchmarkDialog( float buttonWidth );
     static void showSelectedAlgorithmsBenchmark( float deleteButtonWidth );
+    static void buttonCreateBenchmarkCSV( const std::vector<BenchmarkMetric> &metrics,
+                                          const std::string &title, float width );
     static void showPerformanceData();
 };

@@ -13,15 +13,79 @@ void MainGUI::createFrame( SDL_Window* window, ImGuiContext* imGuiContext, float
     ImGui::NewFrame();
 
     // Minimal window flags: No title bar, no resizing, no moving
-    ImGuiWindowFlags window_flags =
-            ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse |
-            ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
+    ImGuiWindowFlags windowFlags =
+            ImGuiWindowFlags_NoTitleBar |
+            ImGuiWindowFlags_NoCollapse |
+            ImGuiWindowFlags_NoResize   |
+            ImGuiWindowFlags_NoMove;
     float buttonWidth = width - 20;
 
     // LEFT GUI
     ImGui::SetNextWindowPos( ImVec2( static_cast<float>(x), static_cast<float>(y)));
     ImGui::SetNextWindowSize( ImVec2( width, height ));
-    ImGui::Begin( "Left GUI", nullptr, window_flags );
+    createLeftFrame( width, windowFlags, buttonWidth );
+
+
+    // RIGHT GUI
+    ImGui::SetNextWindowPos(
+            ImVec2( static_cast<float>(dataHandler->getWindowWidth()) - width,
+                    static_cast<float>(y)));
+    ImGui::SetNextWindowSize( ImVec2( width, height ));
+    ImGui::Begin( "Right GUI", nullptr, windowFlags );
+
+    buttonFileDialog( buttonWidth );
+    ImGui::Spacing();
+    ImGui::Spacing();
+
+    static bool addAlgorithmsCollapsed = false;
+    collapseSelection(
+            { "Optimized", "Octree", "BVH", "Naive" }, addAlgorithmsCollapsed,
+            -1, "Add algorithm to benchmark",
+            [this]( int index ) {
+                dataHandler->addToBenchmark( static_cast<VoxelizationAlgorithm>(index));
+            } );
+    ImGui::Spacing();
+
+    float deleteButtonWidth = width / 5;
+    showSelectedAlgorithmsBenchmark( deleteButtonWidth );
+    ImGui::Spacing();
+
+    buttonBenchmarkDialog( buttonWidth );
+    ImGui::Spacing();
+
+    buttonCreateBenchmarkCSV( {}, "Create CSV", buttonWidth );
+    ImGui::Spacing();
+
+    ImGui::End();
+
+    // BOTTOM BAR - PERFORMANCE DATA
+    float performanceHeight = 30.f;
+    ImGui::SetNextWindowPos( ImVec2( width,
+                                     static_cast<float>(dataHandler->getWindowHeight()) -
+                                     performanceHeight ));
+    ImGui::SetNextWindowSize(
+            ImVec2( static_cast<float>(dataHandler->getWindowWidth()) - 2 * width,
+                    performanceHeight ));
+
+    // Bug in ImGui causes trembling effects if noBackgroundOption is used
+    ImGui::PushStyleColor( ImGuiCol_WindowBg,
+                           ImVec4( BACKGROUND_COLOR.x, BACKGROUND_COLOR.y,
+                                   BACKGROUND_COLOR.z, 1.0f ));
+    ImGui::PushStyleVar( ImGuiStyleVar_WindowBorderSize, 0.0f );
+
+    ImGui::Begin( "Performance stats", nullptr,
+                  windowFlags | ImGuiWindowFlags_NoScrollbar );
+    if ( !dataHandler->isWindowFreezed()) showPerformanceData();
+    else ImGui::Text( "-- HOLD --" );
+    ImGui::End();
+    ImGui::PopStyleVar();
+    ImGui::PopStyleColor();
+}
+
+void
+MainGUI::createLeftFrame( float width, ImGuiWindowFlags windowFlags, float buttonWidth )
+{
+    ImGui::Begin( "Left GUI", nullptr, windowFlags );
 
     buttonRepresentation( buttonWidth );
     ImGui::Spacing();
@@ -54,60 +118,7 @@ void MainGUI::createFrame( SDL_Window* window, ImGuiContext* imGuiContext, float
     ImGui::Spacing();
 
     ImGui::End();
-
-    // RIGHT GUI
-    ImGui::SetNextWindowPos(
-            ImVec2( static_cast<float>(dataHandler->getWindowWidth()) - width,
-                    static_cast<float>(y)));
-    ImGui::SetNextWindowSize( ImVec2( width, height ));
-    ImGui::Begin( "Right GUI", nullptr, window_flags );
-
-    buttonFileDialog( buttonWidth );
-    ImGui::Spacing();
-    ImGui::Spacing();
-
-    static bool addAlgorithmsCollapsed = false;
-    collapseSelection(
-            { "Optimized", "Octree", "BVH", "Naive" }, addAlgorithmsCollapsed,
-            -1, "Add algorithm to benchmark",
-            [this]( int index ) {
-                dataHandler->addToBenchmark( static_cast<VoxelizationAlgorithm>(index));
-            } );
-    ImGui::Spacing();
-
-    float deleteButtonWidth = width / 5;
-    showSelectedAlgorithmsBenchmark( deleteButtonWidth );
-    ImGui::Spacing();
-
-    buttonBenchmarkDialog( buttonWidth );
-    ImGui::Spacing();
-
-    ImGui::End();
-
-    // BOTTOM BAR - PERFORMANCE DATA
-    float performanceHeight = 30.f;
-    ImGui::SetNextWindowPos( ImVec2( width,
-                                     static_cast<float>(dataHandler->getWindowHeight()) -
-                                     performanceHeight ));
-    ImGui::SetNextWindowSize(
-            ImVec2( static_cast<float>(dataHandler->getWindowWidth()) - 2 * width,
-                    performanceHeight ));
-
-    // Bug in ImGui causes trembling effects if noBackgroundOption is used
-    ImGui::PushStyleColor( ImGuiCol_WindowBg,
-                           ImVec4( BACKGROUND_COLOR.x, BACKGROUND_COLOR.y,
-                                   BACKGROUND_COLOR.z, 1.0f ));
-    ImGui::PushStyleVar( ImGuiStyleVar_WindowBorderSize, 0.0f );
-
-    ImGui::Begin( "Performance stats", nullptr,
-                  window_flags | ImGuiWindowFlags_NoScrollbar );
-    if ( !dataHandler->isWindowFreezed()) showPerformanceData();
-    else ImGui::Text( "-- HOLD --" );
-    ImGui::End();
-    ImGui::PopStyleVar();
-    ImGui::PopStyleColor();
 }
-
 
 void MainGUI::buttonRepresentation( float buttonWidth )
 {
@@ -288,5 +299,12 @@ void MainGUI::showPerformanceData()
     ImGui::SameLine();
 }
 
-
+void MainGUI::buttonCreateBenchmarkCSV( const std::vector<BenchmarkMetric> &metrics,
+                                        const std::string &title, float width )
+{
+    if ( ImGui::Button( title.c_str(), ImVec2( width, 0) ))
+    {
+        std::cout << "I'm here!" << std::endl;
+    }
+}
 

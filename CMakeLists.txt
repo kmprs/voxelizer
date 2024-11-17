@@ -1,11 +1,10 @@
 set(NAME "Voxelizer")
 
+set(CMAKE_CXX_COMPILER "/usr/bin/clang++")
+set(CMAKE_C_COMPILER "/usr/bin/clang")
 cmake_minimum_required(VERSION 3.26)
 project(${NAME})
 
-if (CMAKE_BUILD_TYPE MATCHES Debug)
-    add_compile_definitions(DEBUG)
-endif()
 
 set(CMAKE_CXX_STANDARD 17)
 
@@ -110,3 +109,8 @@ target_link_libraries(${NAME} PRIVATE GLEW::GLEW)
 find_package(GLM REQUIRED)
 target_include_directories(${NAME} PRIVATE ${GLM_INCLUDE_DIRS})
 target_link_libraries(${NAME} PRIVATE glm::glm)
+
+
+if (CMAKE_BUILD_TYPE MATCHES Debug)
+    add_compile_definitions(DEBUG)
+endif()
