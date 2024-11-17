@@ -8,14 +8,13 @@
 class MainGUI : public GUI
 {
 public:
-    void
-    createFrame( SDL_Window* window, ImGuiContext* imGuiContext,
-                 float width, float height, int x, int y ) override;
+    void createFrame( SDL_Window* window, ImGuiContext* imGuiContext, float width,
+                      float height, int x, int y ) override;
 
 private:
-    void createLeftFrame( float width, ImGuiWindowFlags windowFlags, float buttonWidth );
-    static void createRightFrame( float width );
-    static void createBottomFrame();
+    void createLeftFrame( ImGuiWindowFlags windowFlags, float buttonWidth );
+    void createRightFrame( float width, ImGuiWindowFlags windowFlags, float buttonWidth );
+    static void createBottomFrame( ImGuiWindowFlags windowFlags );
     static void buttonRepresentation( float buttonWidth );
     static void
     collapseSelection( const std::vector<std::string> &labels, bool &collapseStatus,
