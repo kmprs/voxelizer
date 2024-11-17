@@ -1,6 +1,7 @@
 #pragma once
 
 
+#include <fstream>
 #include "gui.hpp"
 #include "../util.hpp"
 
@@ -30,5 +31,6 @@ private:
     static void showSelectedAlgorithmsBenchmark( float deleteButtonWidth );
     static void buttonCreateBenchmarkCSV( const std::vector<BenchmarkMetric> &metrics,
                                           const std::string &title, float width );
+    static void createCSV( const std::string &path, const std::vector<BenchmarkMetric> &metrics);
     static void showPerformanceData();
 };

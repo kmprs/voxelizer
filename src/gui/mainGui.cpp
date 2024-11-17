@@ -42,8 +42,7 @@ void MainGUI::createFrame( SDL_Window* window, ImGuiContext* imGuiContext, float
     createBottomFrame( windowFlags );
 }
 
-void
-MainGUI::createLeftFrame( ImGuiWindowFlags windowFlags, float buttonWidth )
+void MainGUI::createLeftFrame( ImGuiWindowFlags windowFlags, float buttonWidth )
 {
     ImGui::Begin( "Left GUI", nullptr, windowFlags );
 
@@ -305,7 +304,28 @@ void MainGUI::buttonCreateBenchmarkCSV( const std::vector<BenchmarkMetric> &metr
 {
     if ( ImGui::Button( title.c_str(), ImVec2( width, 0 )))
     {
-        std::cout << "I'm here!" << std::endl;
+        createCSV( "../benchmarks/example.csv", metrics );
     }
 }
 
+void
+MainGUI::createCSV( const std::string &path, const std::vector<BenchmarkMetric> &metrics )
+{
+    std::ofstream file;
+    file.open( path);
+    // HEADER
+    file << "model, algorithm, resolution, time in ms\n";
+    file << "a,b,c,\n";
+    file << "c,s,v,\n";
+    file << "1,2,3.456\n";
+    file << "semi;colon";
+    file.close();
+
+#ifdef DEBUG
+    std::cout << "Ready" << std::endl;
+#endif
+    // open new csv
+    // implement logic for converting metrics to csv table
+    // close csv
+    // inform user about success
+}
