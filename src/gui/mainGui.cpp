@@ -31,6 +31,7 @@ void MainGUI::createFrame( SDL_Window* window, ImGuiContext* imGuiContext, float
     ImGui::SetNextWindowSize( ImVec2( width, height ));
     createRightFrame( width, windowFlags, buttonWidth );
 
+
     // BOTTOM BAR - PERFORMANCE DATA
     float performanceHeight = 30.f;
     ImGui::SetNextWindowPos( ImVec2( width,
@@ -100,10 +101,25 @@ MainGUI::createRightFrame( float width, ImGuiWindowFlags windowFlags, float butt
     buttonBenchmarkDialog( buttonWidth );
     ImGui::Spacing();
 
-    buttonCreateBenchmarkCSV( {}, "Create CSV", buttonWidth );
+    static std::chrono::steady_clock::time_point notificationStartTime;
+    if ( buttonCreateBenchmarkCSV( {}, "Create CSV", buttonWidth ))
+    {
+        notificationStartTime = std::chrono::steady_clock::now();
+    }
     ImGui::Spacing();
 
     ImGui::End();
+
+    auto elapsedNotificationTime =
+            std::chrono::steady_clock::now() - notificationStartTime;
+    if ( std::chrono::duration_cast<std::chrono::seconds>(
+            elapsedNotificationTime ).count() < 2 )
+    {
+        showNotification( "CSV created!",
+                          static_cast<float>(dataHandler->getWindowWidth()) - 2 * width,
+                          distances::ITEM_SPACING.y, width - distances::ITEM_SPACING.x,
+                          60.f );
+    }
 }
 
 void MainGUI::createBottomFrame( ImGuiWindowFlags windowFlags )
@@ -299,20 +315,28 @@ void MainGUI::showPerformanceData()
     ImGui::SameLine();
 }
 
-void MainGUI::buttonCreateBenchmarkCSV( const std::vector<BenchmarkMetric> &metrics,
+bool MainGUI::buttonCreateBenchmarkCSV( const std::vector<BenchmarkMetric> &metrics,
                                         const std::string &title, float width )
 {
+
+
     if ( ImGui::Button( title.c_str(), ImVec2( width, 0 )))
     {
         createCSV( "../benchmarks/example.csv", metrics );
+        return true;
     }
+    return false;
 }
 
 void
 MainGUI::createCSV( const std::string &path, const std::vector<BenchmarkMetric> &metrics )
 {
+#ifdef DEBUG
+    std::cout << "\nCREATING CSV: STARTING";
+#endif
+
     std::ofstream file;
-    file.open( path);
+    file.open( path );
     // HEADER
     file << "model, algorithm, resolution, time in ms\n";
     file << "a,b,c,\n";
@@ -322,10 +346,30 @@ MainGUI::createCSV( const std::string &path, const std::vector<BenchmarkMetric> 
     file.close();
 
 #ifdef DEBUG
-    std::cout << "Ready" << std::endl;
+    std::cout << "\nCREATING CSV: FINISHED" << std::endl;
 #endif
+
     // open new csv
     // implement logic for converting metrics to csv table
     // close csv
     // inform user about success
+}
+
+
+void MainGUI::showNotification( const std::string &message, float x, float y,
+                                float width, float height )
+{
+    ImGui::SetNextWindowPos( ImVec2( x, y ));
+    ImGui::SetNextWindowSize( ImVec2( width, height ));
+    ImGui::SetNextWindowBgAlpha( 0.5f );
+    ImGui::PushStyleColor( ImGuiCol_WindowBg, colors::BUTTON_SUBMIT_ACTIVE_COLOR);
+    if ( ImGui::Begin( "Notification", nullptr,
+                       ImGuiWindowFlags_AlwaysAutoResize |
+                       ImGuiWindowFlags_NoDecoration |
+                       ImGuiWindowFlags_NoMove))
+    {
+        ImGui::Text( "%s", message.c_str());
+        ImGui::End();
+    }
+    ImGui::PopStyleColor();
 }
