@@ -24,10 +24,10 @@ public:
     );
 
     void create();
-    [[nodiscard]] std::vector<BenchmarkMetric> get() const;
+    [[nodiscard]] vecBenchmarkMetricSharedPtr get() const;
 
 private:
-    std::vector<BenchmarkMetric> m_metrics;
+    vecBenchmarkMetricSharedPtr m_metrics;
     std::set<VoxelizationAlgorithm> m_algorithms;
     std::vector<std::pair<VoxelizationAlgorithm, std::unique_ptr<Voxelizer>>> m_voxelizer = {};
     std::string m_modelName;

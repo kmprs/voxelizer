@@ -15,36 +15,51 @@ void GUI::setStyles()
     io.FontDefault = io.Fonts->Fonts.back();
 
     // trash bin icon
-    static const ImWchar icons_ranges[] = { 0x0013, 0x0013,  0 };
-    io.Fonts->AddFontFromFileTTF("../binaries/FontAwesome.ttf", 16.0f, &config, icons_ranges);
+    static const ImWchar icons_ranges[] = { 0x0013, 0x0013, 0 };
+    io.Fonts->AddFontFromFileTTF( "../binaries/FontAwesome.ttf", 16.0f, &config,
+                                  icons_ranges );
     io.FontDefault = io.Fonts->Fonts[0];
 
 
     ImGuiStyle &style = ImGui::GetStyle();
 
-    style.WindowPadding    = distances::WINDOW_PADDING;
-    style.FramePadding     = distances::FRAME_PADDING;
-    style.ItemSpacing      = distances::ITEM_SPACING;
+    style.WindowPadding = distances::WINDOW_PADDING;
+    style.FramePadding = distances::FRAME_PADDING;
+    style.ItemSpacing = distances::ITEM_SPACING;
     style.ItemInnerSpacing = distances::ITEM_INNER_SPACING;
-    style.ScrollbarSize    = distances::SCROLLBAR_SIZE;
-    style.FrameRounding    = distances::FRAME_ROUNDING;
-    style.GrabRounding     = distances::GRAB_ROUNDING;
+    style.ScrollbarSize = distances::SCROLLBAR_SIZE;
+    style.FrameRounding = distances::FRAME_ROUNDING;
+    style.GrabRounding = distances::GRAB_ROUNDING;
 
-    style.Colors[ImGuiCol_WindowBg]         = colors::WINDOW_BG;
-    style.Colors[ImGuiCol_TitleBg]          = colors::TITLE_BG;
-    style.Colors[ImGuiCol_TitleBgActive]    = colors::TITLE_BG_ACTIVE;
-    style.Colors[ImGuiCol_FrameBg]          = colors::FRAME_BG;
-    style.Colors[ImGuiCol_FrameBgHovered]   = colors::FRAME_BG_HOVERED;
-    style.Colors[ImGuiCol_FrameBgActive]    = colors::FRAME_BG_ACTIVE;
-    style.Colors[ImGuiCol_Button]           = colors::BUTTON;
-    style.Colors[ImGuiCol_ButtonHovered]    = colors::BUTTON_HOVERED;
-    style.Colors[ImGuiCol_ButtonActive]     = colors::BUTTON_ACTIVE;
-    style.Colors[ImGuiCol_Header]           = colors::HEADER;
-    style.Colors[ImGuiCol_HeaderHovered]    = colors::HEADER_HOVERED;
-    style.Colors[ImGuiCol_HeaderActive]     = colors::HEADER_ACTIVE;
-    style.Colors[ImGuiCol_SliderGrab]       = colors::SLIDER_GRAB;
+    style.Colors[ImGuiCol_WindowBg] = colors::WINDOW_BG;
+    style.Colors[ImGuiCol_TitleBg] = colors::TITLE_BG;
+    style.Colors[ImGuiCol_TitleBgActive] = colors::TITLE_BG_ACTIVE;
+    style.Colors[ImGuiCol_FrameBg] = colors::FRAME_BG;
+    style.Colors[ImGuiCol_FrameBgHovered] = colors::FRAME_BG_HOVERED;
+    style.Colors[ImGuiCol_FrameBgActive] = colors::FRAME_BG_ACTIVE;
+    style.Colors[ImGuiCol_Button] = colors::BUTTON;
+    style.Colors[ImGuiCol_ButtonHovered] = colors::BUTTON_HOVERED;
+    style.Colors[ImGuiCol_ButtonActive] = colors::BUTTON_ACTIVE;
+    style.Colors[ImGuiCol_Header] = colors::HEADER;
+    style.Colors[ImGuiCol_HeaderHovered] = colors::HEADER_HOVERED;
+    style.Colors[ImGuiCol_HeaderActive] = colors::HEADER_ACTIVE;
+    style.Colors[ImGuiCol_SliderGrab] = colors::SLIDER_GRAB;
     style.Colors[ImGuiCol_SliderGrabActive] = colors::SLIDER_GRAB_ACTIVE;
 
     ImGui::GetIO().FontGlobalScale = 1.f;
 }
 
+
+void GUI::createBenchmarks()
+{
+    if ( dataHandler->getBenchmarkAlgorithms().empty())
+        dataHandler->setBenchmarkMetrics( {} );
+    std::unique_ptr<Parser> parser = std::make_unique<OBJParser>();
+    vecTriangleFaceSharedPtr triangleFaces = parser->parse(
+            dataHandler->getCurrentModelPath());
+    Benchmark benchmark = { dataHandler->getBenchmarkAlgorithms(),
+                            util::string::getNameFromPath<std::string>(
+                                    dataHandler->getCurrentModelPath()), triangleFaces };
+    benchmark.create();
+    dataHandler->setBenchmarkMetrics( benchmark.get());
+}

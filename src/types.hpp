@@ -22,6 +22,7 @@ struct BenchmarkMetric;
 // TYPEDEFS
 typedef std::vector<std::shared_ptr<TriangleFace>> vecTriangleFaceSharedPtr;
 typedef std::vector<std::shared_ptr<Voxel>> vecVoxelSharedPtr;
+typedef std::vector<std::shared_ptr<BenchmarkMetric>> vecBenchmarkMetricSharedPtr;
 
 
 enum Direction

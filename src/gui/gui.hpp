@@ -7,7 +7,10 @@
 #include "../../dependencies/imgui/imgui_impl_opengl3.h"
 #include "../../dependencies/imgui/imgui_impl_sdl2.h"
 #include "../../dependencies/file_dialog/ImGuiFileDialog.h"
+#include "../util.hpp"
 #include "../dataHandler.hpp"
+#include "../objParser.hpp"
+#include "../benchmark.hpp"
 
 
 class GUI
@@ -20,7 +23,7 @@ public:
                  int y ) = 0;
     static void setStyles();
 
-
-private:
+protected:
+    static void createBenchmarks();
 
 };

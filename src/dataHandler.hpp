@@ -56,6 +56,8 @@ public:
     [[nodiscard]] bool benchmarkChanged() const;
     void setBenchmarkChanged( bool changed );
     void setBenchmarkUpdate( bool updated );
+    [[nodiscard]] vecBenchmarkMetricSharedPtr getBenchmarkMetrics() const;
+    void setBenchmarkMetrics( const vecBenchmarkMetricSharedPtr &metrics );
 
 private:
     glm::vec3 m_voxelColor = {};
@@ -79,4 +81,5 @@ private:
     std::set<VoxelizationAlgorithm> m_benchmarkAlgorithms = {};
     bool m_benchmarkChanged = true;
     bool m_benchmarkUpdate = false;
+    vecBenchmarkMetricSharedPtr m_benchmarkMetrics = {};
 };

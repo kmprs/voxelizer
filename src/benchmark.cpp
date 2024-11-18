@@ -53,10 +53,10 @@ void Benchmark::create()
     for ( const auto &voxelizer: m_voxelizer )
     {
         threads.emplace_back( [this, &voxelizer]() {
-            BenchmarkMetric metric;
-            metric.model.title = m_modelName;
-            metric.model.numberOfTriangles = static_cast<int>(m_triangleFaces.size());
-            metric.algorithm = voxelizer.first;
+            std::shared_ptr<BenchmarkMetric> metric = std::make_shared<BenchmarkMetric>();
+            metric->model.title = m_modelName;
+            metric->model.numberOfTriangles = static_cast<int>(m_triangleFaces.size());
+            metric->algorithm = voxelizer.first;
 
             std::vector<PerformanceData> performance;
             for ( int i = 1; i <= MAX_RESOLUTION_BENCHMARK; i++ )
@@ -81,7 +81,7 @@ void Benchmark::create()
                 data.duration.micros = static_cast<int>(durationMicroS.count());
                 performance.push_back( data );
             }
-            metric.performanceData = performance;
+            metric->performanceData = performance;
 
             // Lock access to m_metrics for thread safety
             std::lock_guard<std::mutex> lock( m_metricsMutex );
@@ -100,7 +100,7 @@ void Benchmark::create()
 }
 
 
-std::vector<BenchmarkMetric> Benchmark::get() const
+vecBenchmarkMetricSharedPtr Benchmark::get() const
 {
     return m_metrics;
 }

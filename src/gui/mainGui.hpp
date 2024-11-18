@@ -29,9 +29,8 @@ private:
     static void buttonFileDialog( float buttonWidth );
     static void buttonBenchmarkDialog( float buttonWidth );
     static void showSelectedAlgorithmsBenchmark( float deleteButtonWidth );
-    static bool buttonCreateBenchmarkCSV( const std::vector<BenchmarkMetric> &metrics,
-                                          const std::string &title, float width );
-    static void createCSV( const std::string &path, const std::vector<BenchmarkMetric>
+    static bool buttonCreateBenchmarkCSV( const std::string &title, float width );
+    static void createCSV( const std::string &path, const vecBenchmarkMetricSharedPtr
             &metrics, const std::string& separator = ",");
     static void
     showNotification( const std::string &message, float x, float y,

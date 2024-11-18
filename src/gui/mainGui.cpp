@@ -315,22 +315,20 @@ void MainGUI::showPerformanceData()
     ImGui::SameLine();
 }
 
-bool MainGUI::buttonCreateBenchmarkCSV( const std::vector<BenchmarkMetric> &metrics,
-                                        const std::string &title, float width )
+bool MainGUI::buttonCreateBenchmarkCSV( const std::string &title, float width )
 {
-
-
     if ( ImGui::Button( title.c_str(), ImVec2( width, 0 )))
     {
-        createCSV( "../benchmarks/example.csv", metrics );
+        if ( dataHandler->getBenchmarkMetrics().empty()) createBenchmarks();
+        createCSV( "../benchmarks/example.csv", dataHandler->getBenchmarkMetrics());
         return true;
     }
     return false;
 }
 
-void
-MainGUI::createCSV( const std::string &path, const std::vector<BenchmarkMetric> &metrics,
-                    const std::string &separator )
+void MainGUI::createCSV( const std::string &path,
+                         const vecBenchmarkMetricSharedPtr &metrics,
+                         const std::string &separator )
 {
 #ifdef DEBUG
     std::cout << "\nCREATING CSV: STARTING";
@@ -341,13 +339,13 @@ MainGUI::createCSV( const std::string &path, const std::vector<BenchmarkMetric> 
     // HEADER
     file << "model, algorithm, resolution, time in ms\n";
 
-    for ( const BenchmarkMetric &metric: metrics )
+    for ( const std::shared_ptr<BenchmarkMetric> &metric: metrics )
     {
-        for ( const PerformanceData &performanceData: metric.performanceData )
+        for ( const PerformanceData &performanceData: metric->performanceData )
         {
-            file << metric.model.title;
+            file << metric->model.title;
             file << separator;
-            file << util::string::toString( metric.algorithm );
+            file << util::string::toString( metric->algorithm );
             file << separator;
             file << performanceData.resolution;
             file << separator;

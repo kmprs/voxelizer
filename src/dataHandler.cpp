@@ -3,11 +3,11 @@
 
 DataHandler::DataHandler() :
         m_voxelColor( { 1.f, 1.f, 1.f } ), m_worldCenter( { 0, 0, 0 } ),
-        m_windowWidth( 1280 ), m_windowHeight( 780 ), m_benchmarkWindowWidth ( 1000 ),
-        m_benchmarkWindowHeight( 700 ),
-        m_cameraSpeed( INIT_CAMERA_SPEED ), m_rotationSpeed( INIT_ROTATION_SPEED ),
-        m_modelRepresentation{ VOXEL }, m_voxelResolution( INIT_RESOLUTION ),
-        m_voxelizationAlgorithm( OPTIMIZED ), m_currentModelPath("../binaries/bunny.obj"),
+        m_windowWidth( 1280 ), m_windowHeight( 780 ), m_benchmarkWindowWidth( 1000 ),
+        m_benchmarkWindowHeight( 700 ), m_cameraSpeed( INIT_CAMERA_SPEED ),
+        m_rotationSpeed( INIT_ROTATION_SPEED ), m_modelRepresentation{ VOXEL },
+        m_voxelResolution( INIT_RESOLUTION ), m_voxelizationAlgorithm( OPTIMIZED ),
+        m_currentModelPath( "../binaries/bunny.obj" ),
         m_benchmarkAlgorithms( { OPTIMIZED, BVH } )
 {}
 
@@ -130,7 +130,8 @@ int DataHandler::getVoxelResolution() const
 
 void DataHandler::setVoxelResolution( int resolution )
 {
-    if ( resolution >= 1 && resolution <= MAX_RESOLUTION_VIEWER ) m_voxelResolution = resolution;
+    if ( resolution >= 1 && resolution <= MAX_RESOLUTION_VIEWER )
+        m_voxelResolution = resolution;
 }
 
 CameraMode DataHandler::getCameraMode() const
@@ -230,4 +231,15 @@ void DataHandler::setBenchmarkChanged( bool changed )
 void DataHandler::setBenchmarkUpdate( bool updated )
 {
     m_benchmarkUpdate = updated;
+}
+
+vecBenchmarkMetricSharedPtr DataHandler::getBenchmarkMetrics() const
+{
+    return m_benchmarkMetrics;
+}
+
+void DataHandler::setBenchmarkMetrics(
+        const vecBenchmarkMetricSharedPtr &metrics )
+{
+    m_benchmarkMetrics = metrics;
 }

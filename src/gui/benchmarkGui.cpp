@@ -16,8 +16,7 @@ BenchmarkGUI::~BenchmarkGUI()
 
 void
 BenchmarkGUI::createFrame( SDL_Window* window, ImGuiContext* imGuiContext, float width,
-                           float height, int x,
-                           int y )
+                           float height, int x, int y )
 {
     ImGui::SetCurrentContext( imGuiContext );
     ImGui_ImplOpenGL3_NewFrame();
@@ -34,16 +33,18 @@ BenchmarkGUI::createFrame( SDL_Window* window, ImGuiContext* imGuiContext, float
     ImGui::Begin( "Plot##Plot", nullptr, window_flags | ImGuiWindowFlags_NoScrollbar );
 
     static std::string title;
-    static std::vector<BenchmarkMetric> benchmarks = { BenchmarkMetric() };
+    static vecBenchmarkMetricSharedPtr benchmarks = {
+            std::make_shared<BenchmarkMetric>() };
     if ( dataHandler->benchmarkChanged())
     {
-        benchmarks = createBenchmarks();
+        createBenchmarks();
+        benchmarks = dataHandler->getBenchmarkMetrics();
         // title must get a new unique id, otherwise the automatic rescaling fails
 
-        title = ( !benchmarks.empty())
-                ? "Algorithm Benchmarks (" + benchmarks[0].model.title + ")" + "##"
-                  + util::string::generateRandomString( 3 )
-                : "No algorithm selected";
+        title = ( !benchmarks.empty()) ? "Algorithm Benchmarks (" +
+                                         benchmarks[0]->model.title + ")" + "##" +
+                                         util::string::generateRandomString( 3 )
+                                       : "No algorithm selected";
         dataHandler->setBenchmarkChanged( false );
         dataHandler->setBenchmarkUpdate( false );
     }
@@ -52,20 +53,8 @@ BenchmarkGUI::createFrame( SDL_Window* window, ImGuiContext* imGuiContext, float
     ImGui::End();
 }
 
-std::vector<BenchmarkMetric> BenchmarkGUI::createBenchmarks()
-{
-    if ( dataHandler->getBenchmarkAlgorithms().empty()) return {};
-    std::unique_ptr<Parser> parser = std::make_unique<OBJParser>();
-    vecTriangleFaceSharedPtr triangleFaces = parser->parse(
-            dataHandler->getCurrentModelPath());
-    Benchmark benchmark = { dataHandler->getBenchmarkAlgorithms(),
-                            util::string::getNameFromPath<std::string>(
-                                    dataHandler->getCurrentModelPath()),triangleFaces };
-    benchmark.create();
-    return benchmark.get();
-}
 
-void BenchmarkGUI::plot( const std::vector<BenchmarkMetric> &metrics,
+void BenchmarkGUI::plot( const vecBenchmarkMetricSharedPtr &metrics,
                          const std::string &title )
 {
     ImPlot::PushStyleVar( ImPlotStyleVar_LineWeight, 2.0f );
@@ -76,21 +65,21 @@ void BenchmarkGUI::plot( const std::vector<BenchmarkMetric> &metrics,
         ImPlot::SetupAxisScale( ImAxis_Y1, plot::SCALE_TYPE );
         ImPlot::SetupLegend( plot::LEGEND_LOCATION );
 
-        for ( const BenchmarkMetric &m: metrics ) addLine( m );
+        for ( const std::shared_ptr<BenchmarkMetric> &m: metrics ) addLine( m );
 
         ImPlot::EndPlot();
     }
     ImPlot::PopStyleVar();
 }
 
-void BenchmarkGUI::addLine( const BenchmarkMetric &metric )
+void BenchmarkGUI::addLine( const std::shared_ptr<BenchmarkMetric> &metric )
 {
-    std::string algorithmName = util::string::toString( metric.algorithm );
+    std::string algorithmName = util::string::toString( metric->algorithm );
     std::string titleString = algorithmName + "##" + algorithmName;
     const char* title = titleString.c_str();
 
     std::vector<float> x, y;
-    for ( const PerformanceData data: metric.performanceData )
+    for ( const PerformanceData &data: metric->performanceData )
     {
         x.push_back( static_cast<float>(data.resolution));
         y.push_back( static_cast<float>( util::time::toMS( data.duration )));

@@ -2,10 +2,7 @@
 
 
 #include "gui.hpp"
-#include "../util.hpp"
-#include "../dataHandler.hpp"
-#include "../objParser.hpp"
-#include "../benchmark.hpp"
+
 
 
 class BenchmarkGUI : public GUI
@@ -18,8 +15,7 @@ public:
                  float height, int x, int y ) override;
 
 private:
-    static std::vector<BenchmarkMetric> createBenchmarks();
     static void
-    plot( const std::vector<BenchmarkMetric> &metrics, const std::string &title );
-    static void addLine( const BenchmarkMetric &metric );
+    plot( const vecBenchmarkMetricSharedPtr &metrics, const std::string &title );
+    static void addLine( const std::shared_ptr<BenchmarkMetric> &metric );
 };
