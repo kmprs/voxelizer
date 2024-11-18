@@ -329,7 +329,8 @@ bool MainGUI::buttonCreateBenchmarkCSV( const std::vector<BenchmarkMetric> &metr
 }
 
 void
-MainGUI::createCSV( const std::string &path, const std::vector<BenchmarkMetric> &metrics )
+MainGUI::createCSV( const std::string &path, const std::vector<BenchmarkMetric>
+        &metrics, std::string separator )
 {
 #ifdef DEBUG
     std::cout << "\nCREATING CSV: STARTING";
@@ -339,10 +340,22 @@ MainGUI::createCSV( const std::string &path, const std::vector<BenchmarkMetric> 
     file.open( path );
     // HEADER
     file << "model, algorithm, resolution, time in ms\n";
-    file << "a,b,c,\n";
-    file << "c,s,v,\n";
-    file << "1,2,3.456\n";
-    file << "semi;colon";
+
+    for ( const BenchmarkMetric &metric : metrics )
+    {
+        for ( const PerformanceData &performanceData : metric.performanceData )
+        {
+            file << metric.model.title;
+            file << separator;
+            file << util::string::toString( metric.algorithm );
+            file << separator;
+            file << performanceData.resolution;
+            file << separator;
+            file << util::time::toMS( performanceData.duration );
+            file << "\n";
+        }
+
+    }
     file.close();
 
 #ifdef DEBUG
