@@ -329,8 +329,8 @@ bool MainGUI::buttonCreateBenchmarkCSV( const std::vector<BenchmarkMetric> &metr
 }
 
 void
-MainGUI::createCSV( const std::string &path, const std::vector<BenchmarkMetric>
-        &metrics, std::string separator )
+MainGUI::createCSV( const std::string &path, const std::vector<BenchmarkMetric> &metrics,
+                    const std::string &separator )
 {
 #ifdef DEBUG
     std::cout << "\nCREATING CSV: STARTING";
@@ -341,9 +341,9 @@ MainGUI::createCSV( const std::string &path, const std::vector<BenchmarkMetric>
     // HEADER
     file << "model, algorithm, resolution, time in ms\n";
 
-    for ( const BenchmarkMetric &metric : metrics )
+    for ( const BenchmarkMetric &metric: metrics )
     {
-        for ( const PerformanceData &performanceData : metric.performanceData )
+        for ( const PerformanceData &performanceData: metric.performanceData )
         {
             file << metric.model.title;
             file << separator;
@@ -354,35 +354,43 @@ MainGUI::createCSV( const std::string &path, const std::vector<BenchmarkMetric>
             file << util::time::toMS( performanceData.duration );
             file << "\n";
         }
-
     }
     file.close();
 
 #ifdef DEBUG
     std::cout << "\nCREATING CSV: FINISHED" << std::endl;
 #endif
-
-    // open new csv
-    // implement logic for converting metrics to csv table
-    // close csv
-    // inform user about success
 }
 
 
-void MainGUI::showNotification( const std::string &message, float x, float y,
-                                float width, float height )
+void MainGUI::showNotification( const std::string &message, float x, float y, float width,
+                                float height )
 {
     ImGui::SetNextWindowPos( ImVec2( x, y ));
     ImGui::SetNextWindowSize( ImVec2( width, height ));
     ImGui::SetNextWindowBgAlpha( 0.5f );
-    ImGui::PushStyleColor( ImGuiCol_WindowBg, colors::BUTTON_SUBMIT_ACTIVE_COLOR);
+    ImGui::PushStyleColor( ImGuiCol_WindowBg, colors::BUTTON_SUBMIT_ACTIVE_COLOR );
     if ( ImGui::Begin( "Notification", nullptr,
-                       ImGuiWindowFlags_AlwaysAutoResize |
-                       ImGuiWindowFlags_NoDecoration |
-                       ImGuiWindowFlags_NoMove))
+                       ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoDecoration |
+                       ImGuiWindowFlags_NoMove ))
     {
-        ImGui::Text( "%s", message.c_str());
+        centeredText( message );
         ImGui::End();
     }
     ImGui::PopStyleColor();
+}
+
+
+void MainGUI::centeredText( const std::string &input )
+{
+    ImVec2 windowSize = ImGui::GetContentRegionAvail();
+    ImVec2 textSize = ImGui::CalcTextSize( input.c_str());
+
+    ImVec2 offset = ImVec2(( windowSize.x - textSize.x ) / 2.0f,
+                           ( windowSize.y - textSize.y ) / 2.0f );
+    ImVec2 cursorPosition = ImGui::GetCursorPos();
+    ImVec2 newCursorPosition = { cursorPosition.x + offset.x,
+                                 cursorPosition.y + offset.y };
+    ImGui::SetCursorPos( newCursorPosition );
+    ImGui::Text( "%s", input.c_str());
 }

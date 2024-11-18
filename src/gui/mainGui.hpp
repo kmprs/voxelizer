@@ -32,9 +32,10 @@ private:
     static bool buttonCreateBenchmarkCSV( const std::vector<BenchmarkMetric> &metrics,
                                           const std::string &title, float width );
     static void createCSV( const std::string &path, const std::vector<BenchmarkMetric>
-            &metrics, std::string separator = ",");
+            &metrics, const std::string& separator = ",");
     static void
     showNotification( const std::string &message, float x, float y,
                       float width, float height );
     static void showPerformanceData();
+    static void centeredText( const std::string &input );
 };
