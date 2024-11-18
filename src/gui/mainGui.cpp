@@ -102,7 +102,7 @@ MainGUI::createRightFrame( float width, ImGuiWindowFlags windowFlags, float butt
     ImGui::Spacing();
 
     static std::chrono::steady_clock::time_point notificationStartTime;
-    if ( buttonCreateBenchmarkCSV( {}, "Create CSV", buttonWidth ))
+    if ( buttonCreateBenchmarkCSV( "Create CSV", buttonWidth ))
     {
         notificationStartTime = std::chrono::steady_clock::now();
     }
@@ -335,25 +335,48 @@ void MainGUI::createCSV( const std::string &path,
 #endif
 
     std::ofstream file;
-    file.open( path );
-    // HEADER
-    file << "model, algorithm, resolution, time in ms\n";
-
-    for ( const std::shared_ptr<BenchmarkMetric> &metric: metrics )
+    try
     {
-        for ( const PerformanceData &performanceData: metric->performanceData )
+        file.open(path);
+
+        // Check if the file is open
+        if (!file.is_open())
         {
-            file << metric->model.title;
-            file << separator;
-            file << util::string::toString( metric->algorithm );
-            file << separator;
-            file << performanceData.resolution;
-            file << separator;
-            file << util::time::toMS( performanceData.duration );
-            file << "\n";
+            throw std::ios_base::failure("Failed to open file at path: " + path);
+        }
+
+        // HEADER
+        file << "model, algorithm, resolution, time in ms\n";
+
+        for (const std::shared_ptr<BenchmarkMetric> &metric : metrics)
+        {
+            for (const PerformanceData &performanceData : metric->performanceData)
+            {
+                file << metric->model.title;
+                file << separator;
+                file << util::string::toString(metric->algorithm);
+                file << separator;
+                file << performanceData.resolution;
+                file << separator;
+                file << util::time::toMS(performanceData.duration);
+                file << "\n";
+            }
+        }
+        file.close();
+
+        if (file.fail())
+        {
+            throw std::ios_base::failure("Failed to close the file at path: " + path);
         }
     }
-    file.close();
+    catch (const std::ios_base::failure& e)
+    {
+        std::cerr << "File operation error: " << e.what() << std::endl;
+    }
+    catch (const std::exception& e)
+    {
+        std::cerr << "Unexpected error: " << e.what() << std::endl;
+    }
 
 #ifdef DEBUG
     std::cout << "\nCREATING CSV: FINISHED" << std::endl;

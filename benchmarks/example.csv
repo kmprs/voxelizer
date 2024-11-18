@@ -1,11 +1,11 @@
 model, algorithm, resolution, time in ms
-bunny,Optimized,1,86.005
-bunny,Optimized,2,84.367
-bunny,Optimized,3,86.566
-bunny,Optimized,4,90.814
-bunny,Optimized,5,112.297
-bunny,BVH,1,106.817
-bunny,BVH,2,84.582
-bunny,BVH,3,86.74
-bunny,BVH,4,108.815
-bunny,BVH,5,284.91
+bunny,Optimized,1,84.553
+bunny,Optimized,2,82.816
+bunny,Optimized,3,86.613
+bunny,Optimized,4,90.399
+bunny,Optimized,5,110.924
+bunny,BVH,1,104.297
+bunny,BVH,2,84.087
+bunny,BVH,3,86.673
+bunny,BVH,4,108.422
+bunny,BVH,5,284.515
