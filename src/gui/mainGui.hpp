@@ -26,15 +26,19 @@ private:
     static void buttonCameraMode( float buttonWidth );
     static void numberInputCameraSpeed();
     static void numberInputRotationSpeed();
-    static void buttonFileDialog( float buttonWidth );
+    static void buttonFileDialog( float buttonWidth, const std::string &title,
+                                  const std::string &dialogID, bool &fileSelected,
+                                  const std::function<void(
+                                          const std::string & )> &onFileSelected );
     static void buttonBenchmarkDialog( float buttonWidth );
     static void showSelectedAlgorithmsBenchmark( float deleteButtonWidth );
     static bool buttonCreateBenchmarkCSV( const std::string &title, float width );
-    static void createCSV( const std::string &path, const vecBenchmarkMetricSharedPtr
-            &metrics, const std::string& separator = ",");
     static void
-    showNotification( const std::string &message, float x, float y,
-                      float width, float height );
+    createCSV( const std::string &path, const vecBenchmarkMetricSharedPtr &metrics,
+               const std::string &separator = "," );
+    static void
+    showNotification( const std::string &message, float x, float y, float width,
+                      float height );
     static void showPerformanceData();
     static void centeredText( const std::string &input );
 };

@@ -58,6 +58,9 @@ public:
     void setBenchmarkUpdate( bool updated );
     [[nodiscard]] vecBenchmarkMetricSharedPtr getBenchmarkMetrics() const;
     void setBenchmarkMetrics( const vecBenchmarkMetricSharedPtr &metrics );
+    [[nodiscard]] std::set<std::string> getBenchmarkModelPaths();
+    void addToBenchmarkModelPaths( const std::string &path );
+    void eraseFromBenchmarkModelPath( const std::string &path );
 
 private:
     glm::vec3 m_voxelColor = {};
@@ -82,4 +85,5 @@ private:
     bool m_benchmarkChanged = true;
     bool m_benchmarkUpdate = false;
     vecBenchmarkMetricSharedPtr m_benchmarkMetrics = {};
+    std::set<std::string> m_benchmarkModelPaths = {};
 };

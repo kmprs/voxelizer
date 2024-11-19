@@ -243,3 +243,18 @@ void DataHandler::setBenchmarkMetrics(
 {
     m_benchmarkMetrics = metrics;
 }
+
+std::set<std::string> DataHandler::getBenchmarkModelPaths()
+{
+    return m_benchmarkModelPaths;
+}
+
+void DataHandler::addToBenchmarkModelPaths( const std::string &path )
+{
+    m_benchmarkModelPaths.insert( path );
+}
+
+void DataHandler::eraseFromBenchmarkModelPath( const std::string &path )
+{
+    m_benchmarkModelPaths.erase( path );
+}

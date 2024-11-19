@@ -83,7 +83,15 @@ MainGUI::createRightFrame( float width, ImGuiWindowFlags windowFlags, float butt
 {
     ImGui::Begin( "Right GUI", nullptr, windowFlags );
 
-    buttonFileDialog( buttonWidth );
+    static bool modelFileSelected = false;
+    buttonFileDialog( buttonWidth, "Import OBJ model##GUI_MODEL", "OBJFileSelector",
+                      modelFileSelected,
+                      [this]( const std::string &filePath ) {
+                          dataHandler->setModelPath( filePath );
+                          dataHandler->setWindowFreeze( false );
+                      } );
+    std::filesystem::path filePath( dataHandler->getCurrentModelPath());
+    ImGui::Text( "current model: %s", filePath.filename().c_str());
     ImGui::Spacing();
     ImGui::Spacing();
 
@@ -99,6 +107,14 @@ MainGUI::createRightFrame( float width, ImGuiWindowFlags windowFlags, float butt
     ImGui::Spacing();
 
     buttonBenchmarkDialog( buttonWidth );
+    ImGui::Spacing();
+
+    static bool benchmarkFileSelected = false;
+    buttonFileDialog( buttonWidth, "Add to model to benchmark##BENCHMARK_MODEL",
+                      "BenchmarkModelSelector", benchmarkFileSelected,
+                      [this]( const std::string &filePath ) {
+                          dataHandler->addToBenchmarkModelPaths( filePath );
+                      } );
     ImGui::Spacing();
 
     static std::chrono::steady_clock::time_point notificationStartTime;
@@ -231,44 +247,38 @@ void MainGUI::numberInputRotationSpeed()
     dataHandler->setRotationSpeed( speed );
 }
 
-void MainGUI::buttonFileDialog( float buttonWidth )
+void MainGUI::buttonFileDialog( float buttonWidth, const std::string &title,
+                                const std::string &dialogID, bool &fileSelected,
+                                const std::function<void(
+                                        const std::string & )> &onFileSelected )
 {
-    static bool fileSelected = false;
     IGFD::FileDialogConfig config;
     config.path = BINARY_PATH;
 
-    if ( ImGui::Button( "Import OBJ model##GUI_MODEL", ImVec2( buttonWidth, 0 )))
+    if ( ImGui::Button( title.c_str(), ImVec2( buttonWidth, 0 )))
     {
         fileSelected = false;
-        ImGuiFileDialog::Instance()->OpenDialog( "OBJFileDialog", "Choose an OBJ-File",
-                                                 ".obj", config );
+        ImGuiFileDialog::Instance()->OpenDialog( dialogID, "Choose an OBJ-File", ".obj",
+                                                 config );
     }
 
     ImVec2 minDialogSize = ImVec2(
             static_cast<float>(dataHandler->getWindowWidth()) * .7f,
             static_cast<float>(dataHandler->getWindowHeight()) * .7f );
-    ImGuiFileDialog::Instance()->Display( "OBJFileDialog", 0, minDialogSize );
+    ImGuiFileDialog::Instance()->Display( dialogID, 0, minDialogSize );
 
     if ( ImGuiFileDialog::Instance()->IsOk() && !fileSelected )
     {
         std::string filePath = ImGuiFileDialog::Instance()->GetFilePathName();
-        dataHandler->setModelPath( filePath );
-        fileSelected = true;
-
-        // reset dataHandler members
-        dataHandler->setWindowFreeze( false );
-
+        onFileSelected( filePath );
         ImGuiFileDialog::Instance()->Close();
+        fileSelected = true;
     } else if ( !ImGuiFileDialog::Instance()->IsOk() &&
                 ImGuiFileDialog::Instance()->cancelPressed )
     {
         ImGuiFileDialog::Instance()->cancelPressed = false;
         ImGuiFileDialog::Instance()->Close();
     }
-
-    std::filesystem::path filePath( dataHandler->getCurrentModelPath());
-
-    ImGui::Text( "current model: %s", filePath.filename().c_str());
 }
 
 void MainGUI::buttonBenchmarkDialog( float buttonWidth )
@@ -276,7 +286,8 @@ void MainGUI::buttonBenchmarkDialog( float buttonWidth )
     ImGui::PushStyleColor( ImGuiCol_Button, colors::BUTTON_SUBMIT_DEFAULT_COLOR );
     ImGui::PushStyleColor( ImGuiCol_ButtonHovered, colors::BUTTON_SUBMIT_HOVER_COLOR );
     ImGui::PushStyleColor( ImGuiCol_ButtonActive, colors::BUTTON_SUBMIT_ACTIVE_COLOR );
-    if ( ImGui::Button( "Create benchmark##BENCHMARKS", ImVec2( buttonWidth, 0 )))
+    if ( ImGui::Button( "Create benchmark (current model)##BENCHMARKS",
+                        ImVec2( buttonWidth, 0 )))
     {
         dataHandler->showBenchmarks( true );
         dataHandler->setBenchmarkUpdate( true );
@@ -317,69 +328,72 @@ void MainGUI::showPerformanceData()
 
 bool MainGUI::buttonCreateBenchmarkCSV( const std::string &title, float width )
 {
+    ImGui::PushStyleColor( ImGuiCol_Button, colors::BUTTON_SUBMIT_DEFAULT_COLOR );
+    ImGui::PushStyleColor( ImGuiCol_ButtonHovered, colors::BUTTON_SUBMIT_HOVER_COLOR );
+    ImGui::PushStyleColor( ImGuiCol_ButtonActive, colors::BUTTON_SUBMIT_ACTIVE_COLOR );
     if ( ImGui::Button( title.c_str(), ImVec2( width, 0 )))
     {
+        ImGui::PopStyleColor( 3 );
         if ( dataHandler->getBenchmarkMetrics().empty()) createBenchmarks();
         createCSV( "../benchmarks/example.csv", dataHandler->getBenchmarkMetrics());
         return true;
     }
+    ImGui::PopStyleColor( 3 );
     return false;
 }
 
-void MainGUI::createCSV( const std::string &path,
-                         const vecBenchmarkMetricSharedPtr &metrics,
-                         const std::string &separator )
+void
+MainGUI::createCSV( const std::string &path, const vecBenchmarkMetricSharedPtr &metrics,
+                    const std::string &separator )
 {
 #ifdef DEBUG
-    std::cout << "\nCREATING CSV: STARTING";
+    std::cout << "\nCREATING CSV: STARTING\n";
 #endif
 
     std::ofstream file;
     try
     {
-        file.open(path);
+        file.open( path );
 
         // Check if the file is open
-        if (!file.is_open())
+        if ( !file.is_open())
         {
-            throw std::ios_base::failure("Failed to open file at path: " + path);
+            throw std::ios_base::failure( "Failed to open file at path: " + path );
         }
 
         // HEADER
-        file << "model, algorithm, resolution, time in ms\n";
+        file << "model, algorithm, resolution, time [ms]\n";
 
-        for (const std::shared_ptr<BenchmarkMetric> &metric : metrics)
+        for ( const std::shared_ptr<BenchmarkMetric> &metric: metrics )
         {
-            for (const PerformanceData &performanceData : metric->performanceData)
+            for ( const PerformanceData &performanceData: metric->performanceData )
             {
                 file << metric->model.title;
                 file << separator;
-                file << util::string::toString(metric->algorithm);
+                file << util::string::toString( metric->algorithm );
                 file << separator;
                 file << performanceData.resolution;
                 file << separator;
-                file << util::time::toMS(performanceData.duration);
+                file << util::time::toMS( performanceData.duration );
                 file << "\n";
             }
         }
         file.close();
 
-        if (file.fail())
+        if ( file.fail())
         {
-            throw std::ios_base::failure("Failed to close the file at path: " + path);
+            throw std::ios_base::failure( "Failed to close the file at path: " + path );
         }
-    }
-    catch (const std::ios_base::failure& e)
+    } catch ( const std::ios_base::failure &e )
     {
         std::cerr << "File operation error: " << e.what() << std::endl;
-    }
-    catch (const std::exception& e)
+    } catch ( const std::exception &e )
     {
         std::cerr << "Unexpected error: " << e.what() << std::endl;
     }
 
 #ifdef DEBUG
-    std::cout << "\nCREATING CSV: FINISHED" << std::endl;
+    std::cout << "CREATING CSV: FINISHED" << std::endl;
 #endif
 }
 
