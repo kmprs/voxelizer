@@ -238,8 +238,7 @@ vecBenchmarkMetricSharedPtr DataHandler::getBenchmarkMetrics() const
     return m_benchmarkMetrics;
 }
 
-void DataHandler::setBenchmarkMetrics(
-        const vecBenchmarkMetricSharedPtr &metrics )
+void DataHandler::setBenchmarkMetrics( const vecBenchmarkMetricSharedPtr &metrics )
 {
     m_benchmarkMetrics = metrics;
 }

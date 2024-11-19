@@ -37,7 +37,8 @@ BenchmarkGUI::createFrame( SDL_Window* window, ImGuiContext* imGuiContext, float
             std::make_shared<BenchmarkMetric>() };
     if ( dataHandler->benchmarkChanged())
     {
-        createBenchmarks();
+        dataHandler->setBenchmarkMetrics(
+                createBenchmarks( dataHandler->getCurrentModelPath()));
         benchmarks = dataHandler->getBenchmarkMetrics();
         // title must get a new unique id, otherwise the automatic rescaling fails
 
@@ -54,8 +55,8 @@ BenchmarkGUI::createFrame( SDL_Window* window, ImGuiContext* imGuiContext, float
 }
 
 
-void BenchmarkGUI::plot( const vecBenchmarkMetricSharedPtr &metrics,
-                         const std::string &title )
+void
+BenchmarkGUI::plot( const vecBenchmarkMetricSharedPtr &metrics, const std::string &title )
 {
     ImPlot::PushStyleVar( ImPlotStyleVar_LineWeight, 2.0f );
     if ( ImPlot::BeginPlot( title.c_str(), ImVec2( -1, -1 )))

@@ -124,6 +124,15 @@ MainGUI::createRightFrame( float width, ImGuiWindowFlags windowFlags, float butt
                       } );
     ImGui::Spacing();
 
+    std::set < std::string > modelPaths = dataHandler->getBenchmarkModelPaths();
+    showList( deleteButtonWidth, "Selected models for benchmarks:",
+              { modelPaths.begin(), modelPaths.end() },
+              [this]( const std::string &item ) {
+                  dataHandler->eraseFromBenchmarkModelPath( item );
+              } );
+    ImGui::Spacing();
+
+
     static std::chrono::steady_clock::time_point notificationStartTime;
     if ( buttonCreateBenchmarkCSV( "Create CSV", buttonWidth ))
     {
@@ -307,9 +316,11 @@ void MainGUI::showList( float deleteButtonWidth, const std::string &caption,
                         const std::function<void( const std::string & )> &onDelete )
 {
     ImGui::Text( "%s", caption.c_str());
-    for ( const std::string &item: items )
+    std::vector<std::string> displayItems = items;
+    for ( std::string &item: displayItems )
     {
-        ImGui::Text( "%s", item.c_str());
+        std::string itemShort = util::string::getNameFromPath( item );
+        ImGui::Text( "%s", itemShort.c_str());
         ImGui::SameLine();
         float rightAlignX = ImGui::GetContentRegionAvail().x - deleteButtonWidth;
         ImGui::SetCursorPosX( ImGui::GetCursorPosX() + rightAlignX );
@@ -343,8 +354,15 @@ bool MainGUI::buttonCreateBenchmarkCSV( const std::string &title, float width )
     if ( ImGui::Button( title.c_str(), ImVec2( width, 0 )))
     {
         ImGui::PopStyleColor( 3 );
-        if ( dataHandler->getBenchmarkMetrics().empty()) createBenchmarks();
-        createCSV( "../benchmarks/example.csv", dataHandler->getBenchmarkMetrics());
+        vecBenchmarkMetricSharedPtr metrics;
+
+        for ( const std::string &path: dataHandler->getBenchmarkModelPaths())
+        {
+            auto metric = createBenchmarks( path );
+            metrics.insert( metrics.end(), metric.begin(), metric.end());
+        }
+
+        createCSV( "../benchmarks/example.csv", metrics);
         return true;
     }
     ImGui::PopStyleColor( 3 );
