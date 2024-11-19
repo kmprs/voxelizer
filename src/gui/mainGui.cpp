@@ -85,11 +85,10 @@ MainGUI::createRightFrame( float width, ImGuiWindowFlags windowFlags, float butt
 
     static bool modelFileSelected = false;
     buttonFileDialog( buttonWidth, "Import OBJ model##GUI_MODEL", "OBJFileSelector",
-                      modelFileSelected,
-                      [this]( const std::string &filePath ) {
-                          dataHandler->setModelPath( filePath );
-                          dataHandler->setWindowFreeze( false );
-                      } );
+                      modelFileSelected, [this]( const std::string &filePath ) {
+                dataHandler->setModelPath( filePath );
+                dataHandler->setWindowFreeze( false );
+            } );
     std::filesystem::path filePath( dataHandler->getCurrentModelPath());
     ImGui::Text( "current model: %s", filePath.filename().c_str());
     ImGui::Spacing();
@@ -102,8 +101,16 @@ MainGUI::createRightFrame( float width, ImGuiWindowFlags windowFlags, float butt
             } );
     ImGui::Spacing();
 
+    std::vector<std::string> selectedAlgorithms;
+    for ( VoxelizationAlgorithm a: dataHandler->getBenchmarkAlgorithms())
+    {
+        selectedAlgorithms.push_back( util::string::toString( a ));
+    }
     float deleteButtonWidth = width / 5;
-    showSelectedAlgorithmsBenchmark( deleteButtonWidth );
+    showList( deleteButtonWidth, "Selected Voxelization Algorithms:", selectedAlgorithms,
+              [this]( const std::string &item ) {
+                  dataHandler->eraseFromBenchmark( util::string::toAlgorithm( item ));
+              } );
     ImGui::Spacing();
 
     buttonBenchmarkDialog( buttonWidth );
@@ -295,16 +302,18 @@ void MainGUI::buttonBenchmarkDialog( float buttonWidth )
     ImGui::PopStyleColor( 3 );
 }
 
-void MainGUI::showSelectedAlgorithmsBenchmark( float deleteButtonWidth )
+void MainGUI::showList( float deleteButtonWidth, const std::string &caption,
+                        const std::vector<std::string> &items,
+                        const std::function<void( const std::string & )> &onDelete )
 {
-    ImGui::Text( "Selected Voxelization Algorithms:" );
-    for ( VoxelizationAlgorithm a: dataHandler->getBenchmarkAlgorithms())
+    ImGui::Text( "%s", caption.c_str());
+    for ( const std::string &item: items )
     {
-        ImGui::Text( "%s", util::string::toString( a ).c_str());
+        ImGui::Text( "%s", item.c_str());
         ImGui::SameLine();
         float rightAlignX = ImGui::GetContentRegionAvail().x - deleteButtonWidth;
         ImGui::SetCursorPosX( ImGui::GetCursorPosX() + rightAlignX );
-        std::string label = u8"\u0013##" + util::string::toString( a );
+        std::string label = u8"\u0013##" + item;
 
         ImGui::PushStyleColor( ImGuiCol_ButtonHovered,
                                colors::BUTTON_DELETE_HOVER_COLOR );
@@ -312,7 +321,7 @@ void MainGUI::showSelectedAlgorithmsBenchmark( float deleteButtonWidth )
                                colors::BUTTON_DELETE_ACTIVE_COLOR );
         if ( ImGui::Button( label.c_str(), ImVec2( deleteButtonWidth, 0.f )))
         {
-            dataHandler->eraseFromBenchmark( a );
+            onDelete( item );
         }
         ImGui::PopStyleColor( 2 );
     }

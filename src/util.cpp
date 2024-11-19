@@ -64,6 +64,22 @@ namespace util
             }
         }
 
+        VoxelizationAlgorithm toAlgorithm( const std::string &s )
+        {
+            if ( s == "Optimized") return OPTIMIZED;
+            else if ( s == "BVH") return BVH;
+            else if ( s == "Octree") return OCTREE;
+            else if ( s == "Naive") return NAIVE;
+            else
+            {
+#if DEBUG
+                std::cerr << "No matching algorithm! (util::string::toAlgorithm)\n";
+                assert(false);
+#endif
+                return OPTIMIZED;
+            }
+        }
+
         std::string generateRandomString( int length )
         {
             const char charset[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";

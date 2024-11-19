@@ -35,7 +35,10 @@ namespace util
             return removeExtension<T>(path.substr(path.find_last_of(delimiters) + 1));
         }
 
+        VoxelizationAlgorithm toAlgorithm( const std::string &s );
+
         std::string generateRandomString(int length);
+
     }
 
     namespace geometry

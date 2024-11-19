@@ -31,7 +31,9 @@ private:
                                   const std::function<void(
                                           const std::string & )> &onFileSelected );
     static void buttonBenchmarkDialog( float buttonWidth );
-    static void showSelectedAlgorithmsBenchmark( float deleteButtonWidth );
+    static void showList( float deleteButtonWidth, const std::string &caption,
+                          const std::vector<std::string> &items,
+                          const std::function<void( const std::string & )> &onDelete );
     static bool buttonCreateBenchmarkCSV( const std::string &title, float width );
     static void
     createCSV( const std::string &path, const vecBenchmarkMetricSharedPtr &metrics,
