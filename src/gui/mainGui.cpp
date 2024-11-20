@@ -94,7 +94,7 @@ MainGUI::createRightFrame( float width, ImGuiWindowFlags windowFlags, float butt
     ImGui::Spacing();
     ImGui::Spacing();
 
-    static bool addAlgorithmsCollapsed = true;
+    static bool addAlgorithmsCollapsed = false;
     collapseSelection( { "Optimized", "Octree", "BVH", "Naive" }, addAlgorithmsCollapsed,
                        -1, "Add algorithm to benchmark", [this]( int index ) {
                 dataHandler->addToBenchmark( static_cast<VoxelizationAlgorithm>(index));
