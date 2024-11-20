@@ -88,5 +88,6 @@ namespace util
     namespace time
     {
         float toMS( const Duration &duration );
+        std::string getCurrentDateTime();
     }
 }

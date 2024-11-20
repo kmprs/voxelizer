@@ -368,8 +368,8 @@ bool MainGUI::buttonCreateBenchmarkCSV( const std::string &title, float width )
             auto metric = createBenchmarks( path );
             metrics.insert( metrics.end(), metric.begin(), metric.end());
         }
-
-        createCSV( "../benchmarks/example.csv", metrics );
+        std::string csvTitle = "benchmark_" + util::time::getCurrentDateTime() + ".csv";
+        createCSV( "../benchmarks/" + csvTitle, metrics );
         return true;
     }
     ImGui::PopStyleColor( 3 );
