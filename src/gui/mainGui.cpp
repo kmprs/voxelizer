@@ -83,7 +83,7 @@ MainGUI::createRightFrame( float width, ImGuiWindowFlags windowFlags, float butt
 {
     ImGui::Begin( "Right GUI", nullptr, windowFlags );
 
-    static bool modelFileSelected = false;
+    static bool modelFileSelected = true;
     buttonFileDialog( buttonWidth, "Import OBJ model##GUI_MODEL", "OBJFileSelector",
                       modelFileSelected, [this]( const std::string &filePath ) {
                 dataHandler->setModelPath( filePath );
@@ -94,7 +94,7 @@ MainGUI::createRightFrame( float width, ImGuiWindowFlags windowFlags, float butt
     ImGui::Spacing();
     ImGui::Spacing();
 
-    static bool addAlgorithmsCollapsed = false;
+    static bool addAlgorithmsCollapsed = true;
     collapseSelection( { "Optimized", "Octree", "BVH", "Naive" }, addAlgorithmsCollapsed,
                        -1, "Add algorithm to benchmark", [this]( int index ) {
                 dataHandler->addToBenchmark( static_cast<VoxelizationAlgorithm>(index));
@@ -115,6 +115,7 @@ MainGUI::createRightFrame( float width, ImGuiWindowFlags windowFlags, float butt
 
     buttonBenchmarkDialog( buttonWidth );
     ImGui::Spacing();
+    ImGui::Separator();
 
     static bool benchmarkFileSelected = false;
     buttonFileDialog( buttonWidth, "Add to model to benchmark##BENCHMARK_MODEL",
@@ -124,7 +125,7 @@ MainGUI::createRightFrame( float width, ImGuiWindowFlags windowFlags, float butt
                       } );
     ImGui::Spacing();
 
-    std::set < std::string > modelPaths = dataHandler->getBenchmarkModelPaths();
+    std::set<std::string> modelPaths = dataHandler->getBenchmarkModelPaths();
     showList( deleteButtonWidth, "Selected models for benchmarks:",
               { modelPaths.begin(), modelPaths.end() },
               [this]( const std::string &item ) {
@@ -259,6 +260,7 @@ void MainGUI::numberInputRotationSpeed()
     static float speed = dataHandler->getRotationSpeed();
     ImGui::Text( "Rotation Speed" );
     ImGui::InputFloat( "##rotation_speed", &speed, 10.f, 10.f, "%.1f" );
+    if ( speed < 0.f ) speed = 1.0f;
     ImGui::Spacing();
     dataHandler->setRotationSpeed( speed );
 }
@@ -302,7 +304,7 @@ void MainGUI::buttonBenchmarkDialog( float buttonWidth )
     ImGui::PushStyleColor( ImGuiCol_Button, colors::BUTTON_SUBMIT_DEFAULT_COLOR );
     ImGui::PushStyleColor( ImGuiCol_ButtonHovered, colors::BUTTON_SUBMIT_HOVER_COLOR );
     ImGui::PushStyleColor( ImGuiCol_ButtonActive, colors::BUTTON_SUBMIT_ACTIVE_COLOR );
-    if ( ImGui::Button( "Create benchmark (current model)##BENCHMARKS",
+    if ( ImGui::Button( "Show benchmark (current model)##BENCHMARKS",
                         ImVec2( buttonWidth, 0 )))
     {
         dataHandler->showBenchmarks( true );
@@ -316,6 +318,11 @@ void MainGUI::showList( float deleteButtonWidth, const std::string &caption,
                         const std::function<void( const std::string & )> &onDelete )
 {
     ImGui::Text( "%s", caption.c_str());
+    if ( items.empty() )
+    {
+        ImGui::Text("None");
+        return;
+    }
     std::vector<std::string> displayItems = items;
     for ( std::string &item: displayItems )
     {
@@ -362,7 +369,7 @@ bool MainGUI::buttonCreateBenchmarkCSV( const std::string &title, float width )
             metrics.insert( metrics.end(), metric.begin(), metric.end());
         }
 
-        createCSV( "../benchmarks/example.csv", metrics);
+        createCSV( "../benchmarks/example.csv", metrics );
         return true;
     }
     ImGui::PopStyleColor( 3 );
@@ -389,22 +396,27 @@ MainGUI::createCSV( const std::string &path, const vecBenchmarkMetricSharedPtr &
         }
 
         // HEADER
-        file << "model, algorithm, resolution, time [ms]\n";
+        file << "resolution" << separator;
 
-        for ( const std::shared_ptr<BenchmarkMetric> &metric: metrics )
+        for ( int i = 0; i < metrics.size(); i++)
         {
-            for ( const PerformanceData &performanceData: metric->performanceData )
-            {
-                file << metric->model.title;
-                file << separator;
-                file << util::string::toString( metric->algorithm );
-                file << separator;
-                file << performanceData.resolution;
-                file << separator;
-                file << util::time::toMS( performanceData.duration );
-                file << "\n";
-            }
+            file << "time [ms] (" << metrics[i]->model.title + "/" +
+            util::string::toString( metrics[i]->algorithm ) << ")";
+            if ( i != metrics.size() - 1 ) file << separator;
+            else file << "\n";
         }
+
+        for ( int i = 1; i <= MAX_RESOLUTION_BENCHMARK; i++ )
+        {
+            file << i << separator;
+            for ( int j = 0; j < metrics.size(); j++ )
+            {
+                file << util::time::toMS( metrics[j]->performanceData[i - 1].duration );
+                if ( j != metrics.size() - 1 ) file << separator;
+            }
+            file << "\n";
+        }
+
         file.close();
 
         if ( file.fail())

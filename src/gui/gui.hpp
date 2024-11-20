@@ -19,8 +19,7 @@ public:
     GUI() = default;
     virtual void
     createFrame( SDL_Window* window, ImGuiContext* imGuiContext, float width, float height,
-                 int x,
-                 int y ) = 0;
+                 int x, int y ) = 0;
     static void setStyles();
 
 protected:

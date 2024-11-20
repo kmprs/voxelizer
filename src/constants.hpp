@@ -37,7 +37,11 @@ constexpr int VOXEL_MEMORY_SIZE = 24;
 // VOXELIZER
 constexpr int INIT_RESOLUTION = 6;
 constexpr int MAX_RESOLUTION_VIEWER = 10;
+#if DEBUG
 constexpr int MAX_RESOLUTION_BENCHMARK = 4;
+#else
+constexpr int MAX_RESOLUTION_BENCHMARK = 7;
+#endif
 constexpr int BVH_DEPTH = 12;
 
 // MODEL
