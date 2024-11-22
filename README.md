@@ -21,4 +21,6 @@ platform for rendering 3D-models as voxels and to explore different optimization
   - OpenGL 
   - SDL2 
 - Create a /binaries directory and add your 3D models to it
+  - In order for the voxelizer to run correctly, you need to adjust the initial model in 
+  dataHandler.cpp 
 - Adjust the 3D model path in src/constants.hpp 
