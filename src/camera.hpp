@@ -3,6 +3,9 @@
 #define GLM_ENABLE_EXPERIMENTAL
 
 #include <glm/gtx/rotate_vector.hpp>
+#include <glm/gtc/quaternion.hpp>
+#include <glm/gtx/quaternion.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 #include <SDL.h>
 #include "glm/glm.hpp"
 #include "types.hpp"

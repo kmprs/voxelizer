@@ -7,7 +7,7 @@ extern std::shared_ptr<DataHandler> dataHandler;
 Camera::Camera() :
         m_position( glm::vec3( -2.f, 0, -2.f )),
         m_direction( dataHandler->getWorldCenter() - m_position ),
-        m_worldCenter( dataHandler->getWorldCenter() )
+        m_worldCenter( dataHandler->getWorldCenter())
 {
 
 }
@@ -32,7 +32,7 @@ void Camera::update( Direction direction, float deltaTime )
     // key callback
     float cameraSpeed = dataHandler->getCameraSpeed() * deltaTime;
 
-    if ( m_worldCenter != dataHandler->getWorldCenter() )
+    if ( m_worldCenter != dataHandler->getWorldCenter())
     {
         m_worldCenter = dataHandler->getWorldCenter();
         m_direction = glm::normalize( m_worldCenter - m_position );
@@ -61,24 +61,35 @@ void Camera::update( Direction direction, float deltaTime )
 
         if ( dataHandler->getCameraMode() == CENTERED )
         {
-            m_position -= m_worldCenter;
-            if ( direction == UP )
-                m_position = glm::rotate( m_position, glm::radians( cameraRotationSpeed ),
-                                          PITCH_AXIS );
-            else if ( direction == DOWN )
-                m_position = glm::rotate( m_position,
-                                          glm::radians( -cameraRotationSpeed ),
-                                          PITCH_AXIS );
-            else if ( direction == RIGHT )
-                m_position = glm::rotate( m_position, glm::radians( cameraRotationSpeed ),
-                                          YAW_AXIS );
-            else if ( direction == LEFT )
-                m_position = glm::rotate( m_position,
-                                          glm::radians( -cameraRotationSpeed ),
-                                          YAW_AXIS );
-            m_position += m_worldCenter;
-            m_direction = glm::normalize( m_worldCenter - m_position );
+            if ( direction != FORWARD && direction != BACKWARD )
+            {
+                m_position -= m_worldCenter;
+                float rotationAngle = glm::radians( cameraRotationSpeed );
+                if ( direction == UP || direction == LEFT )
+                    rotationAngle = -rotationAngle;
 
+                glm::vec3 pitchAxis = glm::normalize(
+                        glm::cross( m_direction, YAW_AXIS ));
+                pitchAxis.y = 0;
+                glm::vec3 axis = ( direction == UP || direction == DOWN ) ? pitchAxis
+                                                                          : YAW_AXIS;
+                const float epsilon = 0.0001f;
+                float dot = glm::dot( YAW_AXIS, glm::normalize( m_direction ));
+                // the camera shall not be rotating over the top in order to avoid flipping
+                // the direction of vertical rotation
+                if ( axis == YAW_AXIS || std::abs( dot ) > 1 + epsilon ||
+                     std::abs( dot ) < 1 - epsilon || ( dot >= 0 && direction == UP ) ||
+                     ( dot <= 0 && direction == DOWN ))
+                {
+                    glm::quat rotation = glm::angleAxis( rotationAngle, axis );
+                    m_position = rotation * m_position;
+                } else if ( std::abs( dot ) == 1 )
+                {
+                    m_position.x += epsilon;
+                }
+                m_position += m_worldCenter;
+            }
+            m_direction = glm::normalize( m_worldCenter - m_position );
 
         } else if ( dataHandler->getCameraMode() == INDIVIDUAL )
         {
