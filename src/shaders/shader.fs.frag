@@ -15,8 +15,6 @@ uniform float ATTENUATION_QUADRATIC;
 
 out vec4 FragColor;
 
-
-
 void main()
 {
     vec3 norm = normalize(normal);
@@ -29,7 +27,6 @@ void main()
     float attenuation = 1.0 / (ATTENUATION_CONSTANT +
                                ATTENUATION_LINEAR * distance +
                                ATTENUATION_QUADRATIC * (distance * distance));
-
 
     vec3 viewDirection = normalize(CAMERA_POSITION - fragPosition);
     vec3 reflectDirection = reflect(-lightDirection, norm);
