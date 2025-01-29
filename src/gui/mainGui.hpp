@@ -34,7 +34,8 @@ private:
     static void showList( float deleteButtonWidth, const std::string &caption,
                           const std::vector<std::string> &items,
                           const std::function<void( const std::string & )> &onDelete );
-    static bool buttonCreateBenchmarkCSV( const std::string &title, float width );
+    static bool buttonCreateBenchmarkCSV( const std::string &title, float width,
+                                          int numberOfSamples );
     static void
     createCSV( const std::string &path, const vecBenchmarkMetricSharedPtr &metrics,
                const std::string &separator = "," );

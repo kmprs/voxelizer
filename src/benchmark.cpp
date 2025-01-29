@@ -74,7 +74,6 @@ void Benchmark::create( unsigned int numberOfRuns )
                 double mean = util::time::calculateMean( runTimes );
                 double standardDeviation = util::time::calculateStandardDeviation(
                             runTimes, mean);
-
                 PerformanceData data = {};
                 data.resolution = i;
                 data.duration.s = static_cast<int>(mean/1e6);

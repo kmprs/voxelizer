@@ -117,6 +117,7 @@ MainGUI::createRightFrame( float width, ImGuiWindowFlags windowFlags, float butt
     ImGui::Spacing();
     ImGui::Separator();
 
+    // select and display of the current models for benchmarking
     static bool benchmarkFileSelected = false;
     buttonFileDialog( buttonWidth, "Add to model to benchmark##BENCHMARK_MODEL",
                       "BenchmarkModelSelector", benchmarkFileSelected,
@@ -133,9 +134,17 @@ MainGUI::createRightFrame( float width, ImGuiWindowFlags windowFlags, float butt
               } );
     ImGui::Spacing();
 
+    // choose number of tries for benchmarking
+    int samples = dataHandler->getNumberOfBenchmarkSamples();
+    ImGui::Text( "Number of samples per model/resolution" );
+    ImGui::InputInt( "##NUMBER_OF_SAMPLES", &samples, 1, 1 );
+    ImGui::Spacing();
+    dataHandler->setNumberOfBenchmarkSamples( samples );
+    ImGui::Spacing();
 
     static std::chrono::steady_clock::time_point notificationStartTime;
-    if ( buttonCreateBenchmarkCSV( "Create CSV", buttonWidth ))
+    if ( buttonCreateBenchmarkCSV( "Create CSV", buttonWidth,
+                                   dataHandler->getNumberOfBenchmarkSamples()))
     {
         notificationStartTime = std::chrono::steady_clock::now();
     }
@@ -353,7 +362,8 @@ void MainGUI::showPerformanceData()
     ImGui::SameLine();
 }
 
-bool MainGUI::buttonCreateBenchmarkCSV( const std::string &title, float width )
+bool MainGUI::buttonCreateBenchmarkCSV( const std::string &title, float width,
+                                        int numberOfSamples )
 {
     ImGui::PushStyleColor( ImGuiCol_Button, colors::BUTTON_SUBMIT_DEFAULT_COLOR );
     ImGui::PushStyleColor( ImGuiCol_ButtonHovered, colors::BUTTON_SUBMIT_HOVER_COLOR );
@@ -365,7 +375,7 @@ bool MainGUI::buttonCreateBenchmarkCSV( const std::string &title, float width )
 
         for ( const std::string &path: dataHandler->getBenchmarkModelPaths())
         {
-            auto metric = createBenchmarks( path );
+            auto metric = createBenchmarks( path, numberOfSamples );
             metrics.insert( metrics.end(), metric.begin(), metric.end());
         }
         std::string csvTitle = "benchmark_" + util::time::getCurrentDateTime() + ".csv";
@@ -401,8 +411,8 @@ MainGUI::createCSV( const std::string &path, const vecBenchmarkMetricSharedPtr &
         for ( int i = 0; i < metrics.size(); i++ )
         {
             file << "time (average) [ms] (" << metrics[i]->model.title + "/" +
-                                     util::string::toString( metrics[i]->algorithm )
-                 << ")";
+                                               util::string::toString(
+                                                       metrics[i]->algorithm ) << ")";
             file << separator;
             file << "standard deviation [ms] (" << metrics[i]->model.title + "/" +
                                                    util::string::toString(

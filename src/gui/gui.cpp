@@ -50,7 +50,8 @@ void GUI::setStyles()
 }
 
 
-vecBenchmarkMetricSharedPtr GUI::createBenchmarks( const std::string &modelPath )
+vecBenchmarkMetricSharedPtr
+GUI::createBenchmarks( const std::string &modelPath, int numberOfSamples )
 {
     if ( dataHandler->getBenchmarkAlgorithms().empty()) return {};
 
@@ -59,6 +60,6 @@ vecBenchmarkMetricSharedPtr GUI::createBenchmarks( const std::string &modelPath 
     Benchmark benchmark = { dataHandler->getBenchmarkAlgorithms(),
                             util::string::getNameFromPath<std::string>( modelPath ),
                             triangleFaces };
-    benchmark.create( 2 );
+    benchmark.create( numberOfSamples );
     return benchmark.get();
 }

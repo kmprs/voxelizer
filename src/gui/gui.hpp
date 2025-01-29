@@ -23,6 +23,7 @@ public:
     static void setStyles();
 
 protected:
-    static vecBenchmarkMetricSharedPtr createBenchmarks( const std::string &modelPath );
+    static vecBenchmarkMetricSharedPtr
+    createBenchmarks( const std::string &modelPath, int numberOfSamples );
 
 };

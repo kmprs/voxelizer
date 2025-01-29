@@ -38,7 +38,7 @@ BenchmarkGUI::createFrame( SDL_Window* window, ImGuiContext* imGuiContext, float
     if ( dataHandler->benchmarkChanged())
     {
         dataHandler->setBenchmarkMetrics(
-                createBenchmarks( dataHandler->getCurrentModelPath()));
+                createBenchmarks( dataHandler->getCurrentModelPath(), 1 ));
         benchmarks = dataHandler->getBenchmarkMetrics();
         // title must get a new unique id, otherwise the automatic rescaling fails
 
