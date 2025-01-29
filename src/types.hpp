@@ -179,8 +179,9 @@ struct Duration
 
 struct PerformanceData
 {
-    int resolution;
-    Duration duration;
+    int resolution = 0;
+    Duration duration = {};
+    Duration standardDeviation = {};
 };
 
 

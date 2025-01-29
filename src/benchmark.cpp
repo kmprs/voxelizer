@@ -46,13 +46,13 @@ Benchmark::Benchmark( const std::set<VoxelizationAlgorithm> &algorithms,
  * @brief runs each voxelization algorithm in every resolution and stores the result in
  * a vector (accessible via .get())
  */
-void Benchmark::create()
+void Benchmark::create( unsigned int numberOfRuns )
 {
     std::vector<std::thread> threads;
     threads.reserve( m_voxelizer.size());
     for ( const auto &voxelizer: m_voxelizer )
     {
-        threads.emplace_back( [this, &voxelizer]() {
+        threads.emplace_back( [this, &voxelizer, numberOfRuns]() {
             std::shared_ptr<BenchmarkMetric> metric = std::make_shared<BenchmarkMetric>();
             metric->model.title = m_modelName;
             metric->model.numberOfTriangles = static_cast<int>(m_triangleFaces.size());
@@ -61,24 +61,28 @@ void Benchmark::create()
             std::vector<PerformanceData> performance;
             for ( int i = 1; i <= MAX_RESOLUTION_BENCHMARK; i++ )
             {
-                // measure the time it takes for one voxelization run
-                auto start = std::chrono::high_resolution_clock::now();
-
-                voxelizer.second->run( m_triangleFaces, i );
-
-                auto stop = std::chrono::high_resolution_clock::now();
-                auto durationS = std::chrono::duration_cast<std::chrono::seconds>(
-                        stop - start );
-                auto durationMS = std::chrono::duration_cast<std::chrono::milliseconds>(
-                        stop - start );
-                auto durationMicroS = std::chrono::duration_cast<std::chrono::microseconds>(
-                        stop - start );
+                std::vector<long long> runTimes = {};
+                for ( int j = 0; j < numberOfRuns; j++ )
+                {
+                    // measure the time it takes for one voxelization run
+                    auto start = std::chrono::high_resolution_clock::now();
+                    voxelizer.second->run( m_triangleFaces, i );
+                    auto stop = std::chrono::high_resolution_clock::now();
+                    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
+                    runTimes.push_back(duration.count());
+                }
+                double mean = util::time::calculateMean( runTimes );
+                double standardDeviation = util::time::calculateStandardDeviation(
+                            runTimes, mean);
 
                 PerformanceData data = {};
                 data.resolution = i;
-                data.duration.s = static_cast<int>(durationS.count());
-                data.duration.ms = static_cast<int>(durationMS.count());
-                data.duration.micros = static_cast<int>(durationMicroS.count());
+                data.duration.s = static_cast<int>(mean/1e6);
+                data.duration.ms = static_cast<int>(mean/1e3);
+                data.duration.micros = static_cast<int>(mean);
+                data.standardDeviation.s = static_cast<int>(standardDeviation/1e6);
+                data.standardDeviation.ms = static_cast<int>(standardDeviation/1e3);
+                data.standardDeviation.micros = static_cast<int>(standardDeviation);
                 performance.push_back( data );
             }
             metric->performanceData = performance;

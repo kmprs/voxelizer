@@ -125,7 +125,7 @@ MainGUI::createRightFrame( float width, ImGuiWindowFlags windowFlags, float butt
                       } );
     ImGui::Spacing();
 
-    std::set<std::string> modelPaths = dataHandler->getBenchmarkModelPaths();
+    std::set < std::string > modelPaths = dataHandler->getBenchmarkModelPaths();
     showList( deleteButtonWidth, "Selected models for benchmarks:",
               { modelPaths.begin(), modelPaths.end() },
               [this]( const std::string &item ) {
@@ -318,9 +318,9 @@ void MainGUI::showList( float deleteButtonWidth, const std::string &caption,
                         const std::function<void( const std::string & )> &onDelete )
 {
     ImGui::Text( "%s", caption.c_str());
-    if ( items.empty() )
+    if ( items.empty())
     {
-        ImGui::Text("None");
+        ImGui::Text( "None" );
         return;
     }
     std::vector<std::string> displayItems = items;
@@ -398,10 +398,15 @@ MainGUI::createCSV( const std::string &path, const vecBenchmarkMetricSharedPtr &
         // HEADER
         file << "resolution" << separator;
 
-        for ( int i = 0; i < metrics.size(); i++)
+        for ( int i = 0; i < metrics.size(); i++ )
         {
-            file << "time [ms] (" << metrics[i]->model.title + "/" +
-            util::string::toString( metrics[i]->algorithm ) << ")";
+            file << "time (average) [ms] (" << metrics[i]->model.title + "/" +
+                                     util::string::toString( metrics[i]->algorithm )
+                 << ")";
+            file << separator;
+            file << "standard deviation [ms] (" << metrics[i]->model.title + "/" +
+                                                   util::string::toString(
+                                                           metrics[i]->algorithm ) << ")";
             if ( i != metrics.size() - 1 ) file << separator;
             else file << "\n";
         }
@@ -412,6 +417,9 @@ MainGUI::createCSV( const std::string &path, const vecBenchmarkMetricSharedPtr &
             for ( int j = 0; j < metrics.size(); j++ )
             {
                 file << util::time::toMS( metrics[j]->performanceData[i - 1].duration );
+                file << separator;
+                file << util::time::toMS(
+                        metrics[j]->performanceData[i - 1].standardDeviation );
                 if ( j != metrics.size() - 1 ) file << separator;
             }
             file << "\n";

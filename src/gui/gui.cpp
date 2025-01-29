@@ -53,11 +53,12 @@ void GUI::setStyles()
 vecBenchmarkMetricSharedPtr GUI::createBenchmarks( const std::string &modelPath )
 {
     if ( dataHandler->getBenchmarkAlgorithms().empty()) return {};
+
     std::unique_ptr<Parser> parser = std::make_unique<OBJParser>();
     vecTriangleFaceSharedPtr triangleFaces = parser->parse( modelPath );
     Benchmark benchmark = { dataHandler->getBenchmarkAlgorithms(),
                             util::string::getNameFromPath<std::string>( modelPath ),
                             triangleFaces };
-    benchmark.create();
+    benchmark.create( 2 );
     return benchmark.get();
 }
