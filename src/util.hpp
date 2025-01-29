@@ -89,5 +89,8 @@ namespace util
     {
         float toMS( const Duration &duration );
         std::string getCurrentDateTime();
+        double calculateMean( const std::vector<long long> &times );
+        double calculateStandardDeviation( const std::vector<long long> &times, double
+        mean);
     }
 }

@@ -66,15 +66,15 @@ namespace util
 
         VoxelizationAlgorithm toAlgorithm( const std::string &s )
         {
-            if ( s == "Optimized") return OPTIMIZED;
-            else if ( s == "BVH") return BVH;
-            else if ( s == "Octree") return OCTREE;
-            else if ( s == "Naive") return NAIVE;
+            if ( s == "Optimized" ) return OPTIMIZED;
+            else if ( s == "BVH" ) return BVH;
+            else if ( s == "Octree" ) return OCTREE;
+            else if ( s == "Naive" ) return NAIVE;
             else
             {
 #if DEBUG
                 std::cerr << "No matching algorithm! (util::string::toAlgorithm)\n";
-                assert(false);
+                assert( false );
 #endif
                 return OPTIMIZED;
             }
@@ -84,8 +84,9 @@ namespace util
         {
             const char charset[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
             std::string randomStr;
-            for (int i = 0; i < length; ++i) {
-                randomStr += charset[std::rand() % (sizeof(charset) - 1)];
+            for ( int i = 0; i < length; ++i )
+            {
+                randomStr += charset[std::rand() % ( sizeof( charset ) - 1 )];
             }
             return randomStr;
         }
@@ -126,15 +127,13 @@ namespace util
                     Triangle( v4, v5, v7 ), Triangle( v5, v6, v7 ),
 
                     // Bottom face
-                    Triangle( v0, v1, v3 ), Triangle( v1, v2, v3 )
-            };
+                    Triangle( v0, v1, v3 ), Triangle( v1, v2, v3 ) };
 
             return triangles;
         }
 
         std::vector<glm::vec3>
-        extractPositions(
-                const vecTriangleFaceSharedPtr &triangleFaces )
+        extractPositions( const vecTriangleFaceSharedPtr &triangleFaces )
         {
             std::vector<glm::vec3> positions;
             for ( const std::shared_ptr<TriangleFace> &face: triangleFaces )
@@ -205,8 +204,7 @@ namespace util
             std::array<float, 3> distancesT0 = {
                     computePlaneDistance( normalT1, t0.position0, d1 ),
                     computePlaneDistance( normalT1, t0.position1, d1 ),
-                    computePlaneDistance( normalT1, t0.position2, d1 )
-            };
+                    computePlaneDistance( normalT1, t0.position2, d1 ) };
 
             if ( distancesT0[0] > 0 && distancesT0[1] > 0 && distancesT0[2] > 0 ||
                  distancesT0[0] < 0 && distancesT0[1] < 0 && distancesT0[2] < 0 )
@@ -218,8 +216,7 @@ namespace util
             std::array<float, 3> distancesT1 = {
                     computePlaneDistance( normalT0, t1.position0, d0 ),
                     computePlaneDistance( normalT0, t1.position1, d0 ),
-                    computePlaneDistance( normalT0, t1.position2, d0 )
-            };
+                    computePlaneDistance( normalT0, t1.position2, d0 ) };
             if ( distancesT1[0] > 0 && distancesT1[1] > 0 && distancesT1[2] > 0 ||
                  distancesT1[0] < 0 && distancesT1[1] < 0 && distancesT1[2] < 0 )
                 return false;
@@ -270,28 +267,22 @@ namespace util
             std::array<float, 2> interval = {};
             if ( util::differentSign( distances[0], distances[1], distances[2] ))
             {
-                interval[0] =
-                        p1 +
-                        ( p0 - p1 ) * ( distances[1] / ( distances[1] - distances[0] ));
-                interval[1] =
-                        p2 +
-                        ( p0 - p2 ) * ( distances[2] / ( distances[2] - distances[0] ));
+                interval[0] = p1 + ( p0 - p1 ) *
+                                   ( distances[1] / ( distances[1] - distances[0] ));
+                interval[1] = p2 + ( p0 - p2 ) *
+                                   ( distances[2] / ( distances[2] - distances[0] ));
             } else if ( util::differentSign( distances[1], distances[0], distances[2] ))
             {
-                interval[0] =
-                        p0 +
-                        ( p1 - p0 ) * ( distances[0] / ( distances[0] - distances[1] ));
-                interval[1] =
-                        p2 +
-                        ( p1 - p2 ) * ( distances[2] / ( distances[2] - distances[1] ));
+                interval[0] = p0 + ( p1 - p0 ) *
+                                   ( distances[0] / ( distances[0] - distances[1] ));
+                interval[1] = p2 + ( p1 - p2 ) *
+                                   ( distances[2] / ( distances[2] - distances[1] ));
             } else
             {
-                interval[0] =
-                        p0 +
-                        ( p2 - p0 ) * ( distances[0] / ( distances[0] - distances[2] ));
-                interval[1] =
-                        p1 +
-                        ( p2 - p1 ) * ( distances[1] / ( distances[1] - distances[2] ));
+                interval[0] = p0 + ( p2 - p0 ) *
+                                   ( distances[0] / ( distances[0] - distances[2] ));
+                interval[1] = p1 + ( p2 - p1 ) *
+                                   ( distances[1] / ( distances[1] - distances[2] ));
             }
 
             return interval;
@@ -376,112 +367,94 @@ namespace util
         {
             float halfLength = edgeLength / 2.0f;
 
-            glm::vec3 normals[6] = {
-                    { 0,  0,  1 },  // Front
-                    { 0,  0,  -1 },  // Back
-                    { 0,  1,  0 },  // Top
-                    { 0,  -1, 0 },  // Bottom
-                    { -1, 0,  0 },  // Left
-                    { 1,  0,  0 }   // Right
+            glm::vec3 normals[6] = {{ 0,  0,  1 },  // Front
+                                    { 0,  0,  -1 },  // Back
+                                    { 0,  1,  0 },  // Top
+                                    { 0,  -1, 0 },  // Bottom
+                                    { -1, 0,  0 },  // Left
+                                    { 1,  0,  0 }   // Right
             };
 
-            Vertex frontVertices[4] = {
-                    { position.x - halfLength, position.y - halfLength,
-                                                                        position.z +
-                                                                        halfLength,
-                            normals[0].x, normals[0].y, normals[0].z },
-                    { position.x + halfLength, position.y - halfLength, position.z +
-                                                                        halfLength,
-                            normals[0].x, normals[0].y, normals[0].z },
-                    { position.x - halfLength, position.y + halfLength, position.z +
-                                                                        halfLength,
-                            normals[0].x, normals[0].y, normals[0].z },
-                    { position.x + halfLength, position.y + halfLength, position.z +
-                                                                        halfLength,
-                            normals[0].x, normals[0].y, normals[0].z }
-            };
+            Vertex frontVertices[4] = {{ position.x - halfLength, position.y - halfLength,
+                                               position.z +
+                                               halfLength,              normals[0].x, normals[0].y, normals[0].z },
+                                       { position.x + halfLength, position.y - halfLength,
+                                               position.z +
+                                               halfLength,              normals[0].x, normals[0].y, normals[0].z },
+                                       { position.x - halfLength, position.y + halfLength,
+                                               position.z +
+                                               halfLength,              normals[0].x, normals[0].y, normals[0].z },
+                                       { position.x + halfLength, position.y + halfLength,
+                                               position.z +
+                                               halfLength,              normals[0].x, normals[0].y, normals[0].z }};
 
-            Vertex backVertices[4] = {
-                    { position.x + halfLength, position.y - halfLength,
-                                                                        position.z -
-                                                                        halfLength,
-                            normals[1].x, normals[1].y, normals[1].z },
-                    { position.x - halfLength, position.y - halfLength, position.z -
-                                                                        halfLength,
-                            normals[1].x, normals[1].y, normals[1].z },
-                    { position.x + halfLength, position.y + halfLength, position.z -
-                                                                        halfLength,
-                            normals[1].x, normals[1].y, normals[1].z },
-                    { position.x - halfLength, position.y + halfLength, position.z -
-                                                                        halfLength,
-                            normals[1].x, normals[1].y, normals[1].z }
-            };
+            Vertex backVertices[4] = {{ position.x + halfLength, position.y - halfLength,
+                                              position.z -
+                                              halfLength,              normals[1].x, normals[1].y, normals[1].z },
+                                      { position.x - halfLength, position.y - halfLength,
+                                              position.z -
+                                              halfLength,              normals[1].x, normals[1].y, normals[1].z },
+                                      { position.x + halfLength, position.y + halfLength,
+                                              position.z -
+                                              halfLength,              normals[1].x, normals[1].y, normals[1].z },
+                                      { position.x - halfLength, position.y + halfLength,
+                                              position.z -
+                                              halfLength,              normals[1].x, normals[1].y, normals[1].z }};
 
 
-            Vertex topVertices[4] = {
-                    { position.x - halfLength, position.y + halfLength,
-                                                                        position.z +
-                                                                        halfLength,
-                            normals[2].x, normals[2].y, normals[2].z },
-                    { position.x + halfLength, position.y + halfLength, position.z +
-                                                                        halfLength,
-                            normals[2].x, normals[2].y, normals[2].z },
-                    { position.x - halfLength, position.y + halfLength, position.z -
-                                                                        halfLength,
-                            normals[2].x, normals[2].y, normals[2].z },
-                    { position.x + halfLength, position.y + halfLength, position.z -
-                                                                        halfLength,
-                            normals[2].x, normals[2].y, normals[2].z }
-            };
+            Vertex topVertices[4] = {{ position.x - halfLength, position.y + halfLength,
+                                             position.z +
+                                             halfLength,              normals[2].x, normals[2].y, normals[2].z },
+                                     { position.x + halfLength, position.y + halfLength,
+                                             position.z +
+                                             halfLength,              normals[2].x, normals[2].y, normals[2].z },
+                                     { position.x - halfLength, position.y + halfLength,
+                                             position.z -
+                                             halfLength,              normals[2].x, normals[2].y, normals[2].z },
+                                     { position.x + halfLength, position.y + halfLength,
+                                             position.z -
+                                             halfLength,              normals[2].x, normals[2].y, normals[2].z }};
 
-            Vertex bottomVertices[4] = {
-                    { position.x - halfLength, position.y - halfLength,
-                                                                        position.z -
-                                                                        halfLength,
-                            normals[3].x, normals[3].y, normals[3].z },
-                    { position.x + halfLength, position.y - halfLength, position.z -
-                                                                        halfLength,
-                            normals[3].x, normals[3].y, normals[3].z },
-                    { position.x - halfLength, position.y - halfLength, position.z +
-                                                                        halfLength,
-                            normals[3].x, normals[3].y, normals[3].z },
-                    { position.x + halfLength, position.y - halfLength, position.z +
-                                                                        halfLength,
-                            normals[3].x, normals[3].y, normals[3].z }
-            };
+            Vertex bottomVertices[4] = {{ position.x - halfLength,
+                                                                   position.y -
+halfLength,                                                                    position.z -
+                                                                               halfLength, normals[3].x, normals[3].y, normals[3].z },
+                                        { position.x + halfLength, position.y -
+                                                                   halfLength, position.z -
+                                                                               halfLength, normals[3].x, normals[3].y, normals[3].z },
+                                        { position.x - halfLength, position.y -
+                                                                   halfLength, position.z +
+                                                                               halfLength, normals[3].x, normals[3].y, normals[3].z },
+                                        { position.x + halfLength, position.y -
+                                                                   halfLength, position.z +
+                                                                               halfLength, normals[3].x, normals[3].y, normals[3].z }};
 
-            Vertex leftVertices[4] = {
-                    { position.x - halfLength, position.y - halfLength,
-                                                                        position.z -
-                                                                        halfLength,
-                            normals[4].x, normals[4].y, normals[4].z },
-                    { position.x - halfLength, position.y - halfLength, position.z +
-                                                                        halfLength,
-                            normals[4].x, normals[4].y, normals[4].z },
-                    { position.x - halfLength, position.y + halfLength, position.z -
-                                                                        halfLength,
-                            normals[4].x, normals[4].y, normals[4].z },
-                    { position.x - halfLength, position.y + halfLength, position.z +
-                                                                        halfLength,
-                            normals[4].x, normals[4].y, normals[4].z }
-            };
+            Vertex leftVertices[4] = {{ position.x - halfLength, position.y - halfLength,
+                                              position.z -
+                                              halfLength,              normals[4].x, normals[4].y, normals[4].z },
+                                      { position.x - halfLength, position.y - halfLength,
+                                              position.z +
+                                              halfLength,              normals[4].x, normals[4].y, normals[4].z },
+                                      { position.x - halfLength, position.y + halfLength,
+                                              position.z -
+                                              halfLength,              normals[4].x, normals[4].y, normals[4].z },
+                                      { position.x - halfLength, position.y + halfLength,
+                                              position.z +
+                                              halfLength,              normals[4].x, normals[4].y, normals[4].z }};
 
 
-            Vertex rightVertices[4] = {
-                    { position.x + halfLength, position.y - halfLength,
-                                                                        position.z +
-                                                                        halfLength,
-                            normals[5].x, normals[5].y, normals[5].z },
-                    { position.x + halfLength, position.y - halfLength, position.z -
-                                                                        halfLength,
-                            normals[5].x, normals[5].y, normals[5].z },
-                    { position.x + halfLength, position.y + halfLength, position.z +
-                                                                        halfLength,
-                            normals[5].x, normals[5].y, normals[5].z },
-                    { position.x + halfLength, position.y + halfLength, position.z -
-                                                                        halfLength,
-                            normals[5].x, normals[5].y, normals[5].z }
-            };
+            Vertex rightVertices[4] = {{ position.x + halfLength, position.y - halfLength,
+                                               position.z +
+                                               halfLength,              normals[5].x, normals[5].y, normals[5].z },
+                                       { position.x + halfLength, position.y - halfLength,
+                                               position.z -
+                                               halfLength,              normals[5].x, normals[5].y, normals[5].z },
+                                       { position.x + halfLength, position.y + halfLength,
+                                               position.z +
+                                               halfLength,              normals[5].x, normals[5].y, normals[5].z },
+                                       { position.x + halfLength, position.y + halfLength,
+                                               position.z -
+                                               halfLength,              normals[5].x, normals[5].y, normals[5].z }};
 
             // Create voxel faces with calculated m_vertices and the provided offset
             VoxelFace frontFace( frontVertices, offset + 0 );
@@ -567,20 +540,41 @@ namespace util
     {
         float toMS( const Duration &duration )
         {
-            return (
-                    static_cast<float>(duration.s) * 1000.f
-                    + static_cast<float>(duration.ms)
-                    + static_cast<float>(duration.micros) / 1000.f);
+            return ( static_cast<float>(duration.s) * 1000.f +
+                     static_cast<float>(duration.ms) +
+                     static_cast<float>(duration.micros) / 1000.f );
         }
+
         std::string getCurrentDateTime()
         {
             auto now = std::chrono::system_clock::now();
-            std::time_t now_time = std::chrono::system_clock::to_time_t(now);
-            std::tm local_time = *std::localtime(&now_time);
+            std::time_t now_time = std::chrono::system_clock::to_time_t( now );
+            std::tm local_time = *std::localtime( &now_time );
 
             std::ostringstream oss;
-            oss << std::put_time(&local_time, "%Y%m%d%H%M%S");
+            oss << std::put_time( &local_time, "%Y%m%d%H%M%S" );
             return oss.str();
+        }
+
+        double calculateMean( const std::vector<long long int> &times )
+        {
+            long long sum = 0;
+            for ( auto time: times )
+            {
+                sum += time;
+            }
+            return static_cast<double>(sum) / static_cast<float>(times.size());
+        }
+
+        double
+        calculateStandardDeviation( const std::vector<long long int> &times, double mean )
+        {
+            double sumSquares = 0;
+            for ( auto time: times )
+            {
+                sumSquares += std::pow( time - static_cast<long long>( mean ), 2 );
+            }
+            return std::sqrt( sumSquares / static_cast<float>(times.size()));
         }
     }//namespace time
 }
