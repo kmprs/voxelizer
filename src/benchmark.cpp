@@ -62,18 +62,30 @@ void Benchmark::create( unsigned int numberOfRuns )
             for ( int i = 1; i <= MAX_RESOLUTION_BENCHMARK; i++ )
             {
                 std::vector<long long> runTimes = {};
-                for ( int j = 0; j < numberOfRuns; j++ )
-                {
-                    // measure the time it takes for one voxelization run
-                    auto start = std::chrono::high_resolution_clock::now();
-                    voxelizer.second->run( m_triangleFaces, i );
-                    auto stop = std::chrono::high_resolution_clock::now();
-                    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
-                    runTimes.push_back(duration.count());
+                std::vector<std::thread> runThreads;
+                runThreads.reserve(numberOfRuns);
+                std::mutex runTimesMutex;
+
+                for (int j = 0; j < numberOfRuns; j++) {
+                    runThreads.emplace_back([&, j]() {
+                        auto start = std::chrono::high_resolution_clock::now();
+                        voxelizer.second->run(m_triangleFaces, i);
+                        auto stop = std::chrono::high_resolution_clock::now();
+                        auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
+
+                        std::lock_guard<std::mutex> lock(runTimesMutex);
+                        runTimes.push_back(duration.count());
+                    });
                 }
+
+                for (auto& t : runThreads) {
+                    if (t.joinable())
+                        t.join();
+                }
+
                 double mean = util::time::calculateMean( runTimes );
                 double standardDeviation = util::time::calculateStandardDeviation(
-                            runTimes, mean);
+                        runTimes, mean);
                 PerformanceData data = {};
                 data.resolution = i;
                 data.duration.s = static_cast<int>(mean/1e6);
