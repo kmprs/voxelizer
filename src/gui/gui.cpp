@@ -7,7 +7,7 @@ extern std::shared_ptr<DataHandler> dataHandler;
 void GUI::setStyles()
 {
     ImGuiIO &io = ImGui::GetIO();
-    io.Fonts->AddFontFromFileTTF( "../binaries/arial.ttf", 16.0f );
+    io.Fonts->AddFontFromFileTTF((( "../" + FONTS_DIR + "arial.ttf" ).c_str()), 16.0f );
     ImFontConfig config;
 
     // merge default font with symbol font
@@ -16,8 +16,8 @@ void GUI::setStyles()
 
     // trash bin icon
     static const ImWchar icons_ranges[] = { 0x0013, 0x0013, 0 };
-    io.Fonts->AddFontFromFileTTF( "../binaries/FontAwesome.ttf", 16.0f, &config,
-                                  icons_ranges );
+    io.Fonts->AddFontFromFileTTF((( "../" + FONTS_DIR + "FONTAWESOME.ttf" ).c_str()),
+                                 16.0f, &config, icons_ranges );
     io.FontDefault = io.Fonts->Fonts[0];
 
 
@@ -31,19 +31,19 @@ void GUI::setStyles()
     style.FrameRounding = distances::FRAME_ROUNDING;
     style.GrabRounding = distances::GRAB_ROUNDING;
 
-    style.Colors[ImGuiCol_WindowBg]         = colors::WINDOW_BG;
-    style.Colors[ImGuiCol_TitleBg]          = colors::TITLE_BG;
-    style.Colors[ImGuiCol_TitleBgActive]    = colors::TITLE_BG_ACTIVE;
-    style.Colors[ImGuiCol_FrameBg]          = colors::FRAME_BG;
-    style.Colors[ImGuiCol_FrameBgHovered]   = colors::FRAME_BG_HOVERED;
-    style.Colors[ImGuiCol_FrameBgActive]    = colors::FRAME_BG_ACTIVE;
-    style.Colors[ImGuiCol_Button]           = colors::BUTTON;
-    style.Colors[ImGuiCol_ButtonHovered]    = colors::BUTTON_HOVERED;
-    style.Colors[ImGuiCol_ButtonActive]     = colors::BUTTON_ACTIVE;
-    style.Colors[ImGuiCol_Header]           = colors::HEADER;
-    style.Colors[ImGuiCol_HeaderHovered]    = colors::HEADER_HOVERED;
-    style.Colors[ImGuiCol_HeaderActive]     = colors::HEADER_ACTIVE;
-    style.Colors[ImGuiCol_SliderGrab]       = colors::SLIDER_GRAB;
+    style.Colors[ImGuiCol_WindowBg] = colors::WINDOW_BG;
+    style.Colors[ImGuiCol_TitleBg] = colors::TITLE_BG;
+    style.Colors[ImGuiCol_TitleBgActive] = colors::TITLE_BG_ACTIVE;
+    style.Colors[ImGuiCol_FrameBg] = colors::FRAME_BG;
+    style.Colors[ImGuiCol_FrameBgHovered] = colors::FRAME_BG_HOVERED;
+    style.Colors[ImGuiCol_FrameBgActive] = colors::FRAME_BG_ACTIVE;
+    style.Colors[ImGuiCol_Button] = colors::BUTTON;
+    style.Colors[ImGuiCol_ButtonHovered] = colors::BUTTON_HOVERED;
+    style.Colors[ImGuiCol_ButtonActive] = colors::BUTTON_ACTIVE;
+    style.Colors[ImGuiCol_Header] = colors::HEADER;
+    style.Colors[ImGuiCol_HeaderHovered] = colors::HEADER_HOVERED;
+    style.Colors[ImGuiCol_HeaderActive] = colors::HEADER_ACTIVE;
+    style.Colors[ImGuiCol_SliderGrab] = colors::SLIDER_GRAB;
     style.Colors[ImGuiCol_SliderGrabActive] = colors::SLIDER_GRAB_ACTIVE;
 
     ImGui::GetIO().FontGlobalScale = 1.f;

@@ -3,6 +3,10 @@
 #include <string>
 #include <glm/glm.hpp>
 
+
+// PATHS
+const std::string FONTS_DIR = "binaries/fonts/";
+
 // WINDOW
 constexpr glm::vec3 BACKGROUND_COLOR = { .14f, .15f, .14f };
 const std::string TITLE = "Voxelizer";
