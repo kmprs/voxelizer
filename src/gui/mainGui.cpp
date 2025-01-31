@@ -410,13 +410,11 @@ MainGUI::createCSV( const std::string &path, const vecBenchmarkMetricSharedPtr &
 
         for ( int i = 0; i < metrics.size(); i++ )
         {
-            file << "time (average) [ms] (" << metrics[i]->model.title + "/" +
-                                               util::string::toString(
-                                                       metrics[i]->algorithm ) << ")";
+            file << "time" << metrics[i]->model.title +
+                              util::string::toString( metrics[i]->algorithm );
             file << separator;
-            file << "standard deviation [ms] (" << metrics[i]->model.title + "/" +
-                                                   util::string::toString(
-                                                           metrics[i]->algorithm ) << ")";
+            file << "std" << metrics[i]->model.title +
+                             util::string::toString( metrics[i]->algorithm );
             if ( i != metrics.size() - 1 ) file << separator;
             else file << "\n";
         }

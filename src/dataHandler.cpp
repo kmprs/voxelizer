@@ -8,7 +8,7 @@ DataHandler::DataHandler() :
         m_numberOfBenchmarkSamples( 1 ), m_rotationSpeed( INIT_ROTATION_SPEED ),
         m_modelRepresentation{ VOXEL },
         m_voxelResolution( INIT_RESOLUTION ), m_voxelizationAlgorithm( OPTIMIZED ),
-        m_currentModelPath( "../binaries/bunny.obj" ),
+        m_currentModelPath( "../binaries/Bunny.obj" ),
         m_benchmarkAlgorithms( { OPTIMIZED, BVH } )
 {}
 
