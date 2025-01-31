@@ -4,8 +4,9 @@
 extern std::shared_ptr<DataHandler> dataHandler;
 
 
-WindowHandler::WindowHandler( const std::string &title, int width, int height )
-        :
+WindowHandler::WindowHandler( const std::string &title,
+                              int width,
+                              int height ) :
         m_width( width ), m_height( height )
 {
     initWindow( title );
@@ -64,17 +65,11 @@ SDL_Window* WindowHandler::getWindow() const
 }
 
 
-void WindowHandler::initWindow( const std::string& title )
+void WindowHandler::initWindow( const std::string &title )
 {
-    m_window = SDL_CreateWindow(
-            title.c_str(),
-            SDL_WINDOWPOS_CENTERED,
-            SDL_WINDOWPOS_CENTERED,
-            m_width,
-            m_height,
-            SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE
-    );
-
+    m_window = SDL_CreateWindow( title.c_str(), SDL_WINDOWPOS_CENTERED,
+                                 SDL_WINDOWPOS_CENTERED, m_width, m_height,
+                                 SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE );
 
     if ( m_window == nullptr )
     {
@@ -98,7 +93,7 @@ void WindowHandler::initGLContext()
 void WindowHandler::initGui()
 {
     m_imGuiContext = ImGui::CreateContext();
-    ImGui::SetCurrentContext(m_imGuiContext);
+    ImGui::SetCurrentContext( m_imGuiContext );
     ImGui_ImplSDL2_InitForOpenGL( m_window, m_context );
     ImGui_ImplOpenGL3_Init( "#version 330" );
 }
