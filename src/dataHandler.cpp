@@ -5,7 +5,10 @@ DataHandler::DataHandler() :
         m_voxelColor( { 1.f, 1.f, 1.f } ), m_worldCenter( { 0, 0, 0 } ),
         m_windowWidth( 1280 ), m_windowHeight( 780 ), m_benchmarkWindowWidth( 1000 ),
         m_benchmarkWindowHeight( 700 ), m_cameraSpeed( INIT_CAMERA_SPEED ),
-        m_numberOfBenchmarkSamples( 1 ), m_rotationSpeed( INIT_ROTATION_SPEED ),
+        m_numberOfBenchmarkSamples( 1 ), m_minBenchmarkResolution( 1 ),
+        m_maxBenchmarkResolution( MAX_RESOLUTION_BENCHMARK ),
+        m_rotationSpeed(
+                INIT_ROTATION_SPEED ),
         m_modelRepresentation{ VOXEL },
         m_voxelResolution( INIT_RESOLUTION ), m_voxelizationAlgorithm( OPTIMIZED ),
         m_currentModelPath( "../binaries/Bunny.obj" ),
@@ -270,4 +273,30 @@ void DataHandler::addToBenchmarkModelPaths( const std::string &path )
 void DataHandler::eraseFromBenchmarkModelPath( const std::string &path )
 {
     m_benchmarkModelPaths.erase( path );
+}
+
+int DataHandler::getMinBenchmarkResolution() const
+{
+    return m_minBenchmarkResolution;
+}
+
+void DataHandler::setMinBenchmarkResolution( int resolution )
+{
+    if ( resolution > 0 && resolution <= m_maxBenchmarkResolution )
+    {
+        m_minBenchmarkResolution = resolution;
+    }
+}
+
+int DataHandler::getMaxBenchmarkResolution() const
+{
+    return m_maxBenchmarkResolution;
+}
+
+void DataHandler::setMaxBenchmarkResolution( int resolution )
+{
+    if ( resolution > 0 && resolution >= m_minBenchmarkResolution )
+    {
+       m_maxBenchmarkResolution = resolution;
+    }
 }

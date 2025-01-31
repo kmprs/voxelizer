@@ -46,20 +46,26 @@ Benchmark::Benchmark( const std::set<VoxelizationAlgorithm> &algorithms,
  * @brief runs each voxelization algorithm in every resolution and stores the result in
  * a vector (accessible via .get())
  */
-void Benchmark::create( unsigned int numberOfRuns )
+void Benchmark::create( unsigned int numberOfRuns,
+                        unsigned int minResolution,
+                        unsigned int maxResolution )
 {
     std::vector<std::thread> threads;
     threads.reserve( m_voxelizer.size());
     for ( const auto &voxelizer: m_voxelizer )
     {
-        threads.emplace_back( [this, &voxelizer, numberOfRuns]() {
+        threads.emplace_back( [this,
+                               &voxelizer,
+                               numberOfRuns,
+                               minResolution,
+                               maxResolution]() {
             std::shared_ptr<BenchmarkMetric> metric = std::make_shared<BenchmarkMetric>();
             metric->model.title = m_modelName;
             metric->model.numberOfTriangles = static_cast<int>(m_triangleFaces.size());
             metric->algorithm = voxelizer.first;
 
             std::vector<PerformanceData> performance;
-            for ( int i = 1; i <= MAX_RESOLUTION_BENCHMARK; i++ )
+            for ( int i = static_cast<int>(minResolution); i <= maxResolution; i++ )
             {
                 std::vector<long long> runTimes = {};
                 std::vector<std::thread> runThreads;

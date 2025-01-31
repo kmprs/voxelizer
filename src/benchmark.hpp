@@ -23,7 +23,8 @@ public:
                const vecTriangleFaceSharedPtr &triangleFaces
     );
 
-    void create( unsigned int numberOfRuns );
+    void create( unsigned int numberOfRuns, unsigned int minResolution,
+                 unsigned int maxResolution );
     [[nodiscard]] vecBenchmarkMetricSharedPtr get() const;
 
 private:

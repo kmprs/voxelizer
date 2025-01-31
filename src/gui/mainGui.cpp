@@ -138,8 +138,20 @@ MainGUI::createRightFrame( float width, ImGuiWindowFlags windowFlags, float butt
     int samples = dataHandler->getNumberOfBenchmarkSamples();
     ImGui::Text( "Samples per benchmark" );
     ImGui::InputInt( "##NUMBER_OF_SAMPLES", &samples, 1, 1 );
-    ImGui::Spacing();
     dataHandler->setNumberOfBenchmarkSamples( samples );
+    ImGui::Spacing();
+
+    // choose min and max resolution for benchmarks
+    int minResolution = dataHandler->getMinBenchmarkResolution();
+    ImGui::Text( "Min resolution for benchmarks");
+    ImGui::InputInt( "##MIN_RES", &minResolution, 1, 1);
+    dataHandler->setMinBenchmarkResolution( minResolution );
+    ImGui::Spacing();
+
+    int maxResolution = dataHandler->getMaxBenchmarkResolution();
+    ImGui::Text( "Max resolution for benchmarks");
+    ImGui::InputInt( "##MAX_RES", &maxResolution, 1, 1);
+    dataHandler->setMaxBenchmarkResolution( maxResolution );
     ImGui::Spacing();
 
     static std::chrono::steady_clock::time_point notificationStartTime;
@@ -375,7 +387,9 @@ bool MainGUI::buttonCreateBenchmarkCSV( const std::string &title, float width,
 
         for ( const std::string &path: dataHandler->getBenchmarkModelPaths())
         {
-            auto metric = createBenchmarks( path, numberOfSamples );
+            auto metric = createBenchmarks( path, numberOfSamples,
+                                            dataHandler->getMinBenchmarkResolution(),
+                                            dataHandler->getMaxBenchmarkResolution());
             metrics.insert( metrics.end(), metric.begin(), metric.end());
         }
         std::string csvTitle = "benchmark_" + util::time::getCurrentDateTime() + ".csv";
@@ -419,9 +433,11 @@ MainGUI::createCSV( const std::string &path, const vecBenchmarkMetricSharedPtr &
             else file << "\n";
         }
 
-        for ( int i = 1; i <= MAX_RESOLUTION_BENCHMARK; i++ )
+        unsigned int minResolution = dataHandler->getMinBenchmarkResolution();
+        unsigned int maxResolution = dataHandler->getMaxBenchmarkResolution();
+        for ( int i = 1; i <= maxResolution - minResolution + 1; i++ )
         {
-            file << i << separator;
+            file << i + minResolution - 1 << separator;
             for ( int j = 0; j < metrics.size(); j++ )
             {
                 file << util::time::toMS( metrics[j]->performanceData[i - 1].duration );

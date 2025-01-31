@@ -14,9 +14,12 @@ BenchmarkGUI::~BenchmarkGUI()
     ImPlot::DestroyContext();
 }
 
-void
-BenchmarkGUI::createFrame( SDL_Window* window, ImGuiContext* imGuiContext, float width,
-                           float height, int x, int y )
+void BenchmarkGUI::createFrame( SDL_Window* window,
+                                ImGuiContext* imGuiContext,
+                                float width,
+                                float height,
+                                int x,
+                                int y )
 {
     ImGui::SetCurrentContext( imGuiContext );
     ImGui_ImplOpenGL3_NewFrame();
@@ -38,7 +41,8 @@ BenchmarkGUI::createFrame( SDL_Window* window, ImGuiContext* imGuiContext, float
     if ( dataHandler->benchmarkChanged())
     {
         dataHandler->setBenchmarkMetrics(
-                createBenchmarks( dataHandler->getCurrentModelPath(), 1 ));
+                createBenchmarks( dataHandler->getCurrentModelPath(), 1, 1,
+                                  MAX_RESOLUTION_BENCHMARK ));
         benchmarks = dataHandler->getBenchmarkMetrics();
         // title must get a new unique id, otherwise the automatic rescaling fails
 
@@ -55,8 +59,8 @@ BenchmarkGUI::createFrame( SDL_Window* window, ImGuiContext* imGuiContext, float
 }
 
 
-void
-BenchmarkGUI::plot( const vecBenchmarkMetricSharedPtr &metrics, const std::string &title )
+void BenchmarkGUI::plot( const vecBenchmarkMetricSharedPtr &metrics,
+                         const std::string &title )
 {
     ImPlot::PushStyleVar( ImPlotStyleVar_LineWeight, 2.0f );
     if ( ImPlot::BeginPlot( title.c_str(), ImVec2( -1, -1 )))

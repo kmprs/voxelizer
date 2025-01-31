@@ -31,6 +31,10 @@ public:
     void setNumberOfVoxels( int numberOfVoxels );
     [[nodiscard]] int getVoxelResolution() const;
     void setVoxelResolution( int resolution );
+    [[nodiscard]] int getMinBenchmarkResolution() const;
+    void setMinBenchmarkResolution( int resolution );
+    [[nodiscard]] int getMaxBenchmarkResolution() const;
+    void setMaxBenchmarkResolution( int resolution );
     [[nodiscard]] int getNumberOfBenchmarkSamples() const;
     void setNumberOfBenchmarkSamples( int samples );
     [[nodiscard]] float getCameraSpeed() const;
@@ -74,6 +78,8 @@ private:
     int m_currentFPS = -1;
     int m_numberOfVoxels = -1;
     int m_voxelResolution = -1;
+    int m_minBenchmarkResolution = -1;
+    int m_maxBenchmarkResolution = -1;
     int m_numberOfBenchmarkSamples = -1;
     float m_cameraSpeed = -1.f;
     float m_rotationSpeed = -1.f;

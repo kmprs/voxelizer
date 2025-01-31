@@ -24,6 +24,7 @@ public:
 
 protected:
     static vecBenchmarkMetricSharedPtr
-    createBenchmarks( const std::string &modelPath, int numberOfSamples );
+    createBenchmarks( const std::string &modelPath, unsigned int numberOfSamples,
+                      unsigned int minResolution, unsigned int maxResolution );
 
 };
