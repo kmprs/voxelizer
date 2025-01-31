@@ -2,15 +2,20 @@
 
 
 DataHandler::DataHandler() :
-        m_voxelColor( { 1.f, 1.f, 1.f } ), m_worldCenter( { 0, 0, 0 } ),
-        m_windowWidth( 1280 ), m_windowHeight( 780 ), m_benchmarkWindowWidth( 1000 ),
-        m_benchmarkWindowHeight( 700 ), m_cameraSpeed( INIT_CAMERA_SPEED ),
-        m_numberOfBenchmarkSamples( 1 ), m_minBenchmarkResolution( 1 ),
+        m_voxelColor( { 1.f, 1.f, 1.f } ),
+        m_worldCenter( { 0, 0, 0 } ),
+        m_windowWidth( 1280 ),
+        m_windowHeight( 780 ),
+        m_benchmarkWindowWidth( 1000 ),
+        m_benchmarkWindowHeight( 700 ),
+        m_cameraSpeed( INIT_CAMERA_SPEED ),
+        m_numberOfBenchmarkSamples( 1 ),
+        m_minBenchmarkResolution( 1 ),
         m_maxBenchmarkResolution( MAX_RESOLUTION_BENCHMARK ),
-        m_rotationSpeed(
-                INIT_ROTATION_SPEED ),
+        m_rotationSpeed( INIT_ROTATION_SPEED ),
         m_modelRepresentation{ VOXEL },
-        m_voxelResolution( INIT_RESOLUTION ), m_voxelizationAlgorithm( OPTIMIZED ),
+        m_voxelResolution( INIT_RESOLUTION ),
+        m_voxelizationAlgorithm( OPTIMIZED ),
         m_currentModelPath( "../binaries/Bunny.obj" ),
         m_benchmarkAlgorithms( { OPTIMIZED, BVH } )
 {}
