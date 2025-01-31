@@ -136,7 +136,7 @@ MainGUI::createRightFrame( float width, ImGuiWindowFlags windowFlags, float butt
 
     // choose number of tries for benchmarking
     int samples = dataHandler->getNumberOfBenchmarkSamples();
-    ImGui::Text( "Number of samples per model/resolution" );
+    ImGui::Text( "Samples per benchmark" );
     ImGui::InputInt( "##NUMBER_OF_SAMPLES", &samples, 1, 1 );
     ImGui::Spacing();
     dataHandler->setNumberOfBenchmarkSamples( samples );
