@@ -1,4 +1,5 @@
 # Voxelizer 🎲
+![header image](./assets/readme_header.png)
 
 ## Table of Contents
 - [Introduction](#Introduction)
