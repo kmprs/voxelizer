@@ -38,14 +38,15 @@ vecTriangleFaceSharedPtr OBJParser::parse( const std::string &path )
             std::string token;
             while ( iss >> token ) vertices.push_back( token );
             std::vector<OBJFaceIndices> facesInfo = toFaceIndices( vertices );
-            for ( OBJFaceIndices faceIndices : facesInfo ) m_faceIndices.push_back(faceIndices);
+            for ( OBJFaceIndices faceIndices: facesInfo )
+                m_faceIndices.push_back( faceIndices );
         }
     }
     file.close();
 
     // normalize vertex coordinates
     float maximum = util::findMax( m_positions );
-    for (glm::vec3 &vec : m_positions)
+    for ( glm::vec3 &vec: m_positions )
     {
         vec.x = vec.x / maximum;
         vec.y = vec.y / maximum;
@@ -80,7 +81,8 @@ vecTriangleFaceSharedPtr OBJParser::parse( const std::string &path )
  * @param fInput extracted .../.../... of the f-line
  * @return vector of OBJFaceIndices
  */
-std::vector<OBJFaceIndices> OBJParser::toFaceIndices( const std::vector<std::string> &fInput )
+std::vector<OBJFaceIndices>
+OBJParser::toFaceIndices( const std::vector<std::string> &fInput )
 {
     std::vector<OBJFaceIndices> faceIndices = {};
     std::vector<std::string> baseElement = util::split( fInput[0], '/' );
@@ -89,10 +91,13 @@ std::vector<OBJFaceIndices> OBJParser::toFaceIndices( const std::vector<std::str
         std::vector<std::string> element1 = util::split( fInput[i], '/' );
         std::vector<std::string> element2 = util::split( fInput[i + 1], '/' );
         // the index in the f line in obj starts at 1, not 0
-        OBJFaceIndices face = { std::stoi( baseElement[0]) - 1, std::stoi( baseElement[2] ) - 1,
-                                std::stoi( element1[0] ) - 1, std::stoi( element1[2] ) - 1,
-                                std::stoi( element2[0] ) - 1, std::stoi( element2[2] ) - 1};
-        faceIndices.push_back(face);
+        OBJFaceIndices face = { std::stoi( baseElement[0] ) - 1,
+                                std::stoi( baseElement[2] ) - 1,
+                                std::stoi( element1[0] ) - 1,
+                                std::stoi( element1[2] ) - 1,
+                                std::stoi( element2[0] ) - 1,
+                                std::stoi( element2[2] ) - 1 };
+        faceIndices.push_back( face );
     }
 
     return faceIndices;

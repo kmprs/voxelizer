@@ -9,7 +9,7 @@
 class Mesh
 {
 public:
-    Mesh( const std::vector<std::shared_ptr<Renderable>>& renderables);
+    Mesh( const std::vector<std::shared_ptr<Renderable>> &renderables );
     Mesh() = default;
     ~Mesh() = default;
 

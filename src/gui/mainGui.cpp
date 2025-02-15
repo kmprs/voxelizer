@@ -4,8 +4,12 @@
 extern std::shared_ptr<DataHandler> dataHandler;
 
 
-void MainGUI::createFrame( SDL_Window* window, ImGuiContext* imGuiContext, float width,
-                           float height, int x, int y )
+void MainGUI::createFrame( SDL_Window* window,
+                           ImGuiContext* imGuiContext,
+                           float width,
+                           float height,
+                           int x,
+                           int y )
 {
     ImGui::SetCurrentContext( imGuiContext );
     ImGui_ImplOpenGL3_NewFrame();
@@ -43,7 +47,8 @@ void MainGUI::createFrame( SDL_Window* window, ImGuiContext* imGuiContext, float
     createBottomFrame( windowFlags );
 }
 
-void MainGUI::createLeftFrame( ImGuiWindowFlags windowFlags, float buttonWidth )
+void MainGUI::createLeftFrame( ImGuiWindowFlags windowFlags,
+                               float buttonWidth )
 {
     ImGui::Begin( "Left GUI", nullptr, windowFlags );
 
@@ -78,8 +83,9 @@ void MainGUI::createLeftFrame( ImGuiWindowFlags windowFlags, float buttonWidth )
     ImGui::End();
 }
 
-void
-MainGUI::createRightFrame( float width, ImGuiWindowFlags windowFlags, float buttonWidth )
+void MainGUI::createRightFrame( float width,
+                                ImGuiWindowFlags windowFlags,
+                                float buttonWidth )
 {
     ImGui::Begin( "Right GUI", nullptr, windowFlags );
 
@@ -143,14 +149,14 @@ MainGUI::createRightFrame( float width, ImGuiWindowFlags windowFlags, float butt
 
     // choose min and max resolution for benchmarks
     int minResolution = dataHandler->getMinBenchmarkResolution();
-    ImGui::Text( "Min resolution for benchmarks");
-    ImGui::InputInt( "##MIN_RES", &minResolution, 1, 1);
+    ImGui::Text( "Min resolution for benchmarks" );
+    ImGui::InputInt( "##MIN_RES", &minResolution, 1, 1 );
     dataHandler->setMinBenchmarkResolution( minResolution );
     ImGui::Spacing();
 
     int maxResolution = dataHandler->getMaxBenchmarkResolution();
-    ImGui::Text( "Max resolution for benchmarks");
-    ImGui::InputInt( "##MAX_RES", &maxResolution, 1, 1);
+    ImGui::Text( "Max resolution for benchmarks" );
+    ImGui::InputInt( "##MAX_RES", &maxResolution, 1, 1 );
     dataHandler->setMaxBenchmarkResolution( maxResolution );
     ImGui::Spacing();
 
@@ -205,10 +211,11 @@ void MainGUI::buttonRepresentation( float buttonWidth )
     }
 }
 
-void
-MainGUI::collapseSelection( const std::vector<std::string> &labels, bool &collapseStatus,
-                            int selectedIndex, std::string defaultTitle,
-                            const std::function<void( int )> &onSelect )
+void MainGUI::collapseSelection( const std::vector<std::string> &labels,
+                                 bool &collapseStatus,
+                                 int selectedIndex,
+                                 std::string defaultTitle,
+                                 const std::function<void( int )> &onSelect )
 {
     std::string title = ( selectedIndex >= 0 ) ? labels[selectedIndex] + " " : std::move(
             defaultTitle );
@@ -286,10 +293,11 @@ void MainGUI::numberInputRotationSpeed()
     dataHandler->setRotationSpeed( speed );
 }
 
-void MainGUI::buttonFileDialog( float buttonWidth, const std::string &title,
-                                const std::string &dialogID, bool &fileSelected,
-                                const std::function<void(
-                                        const std::string & )> &onFileSelected )
+void MainGUI::buttonFileDialog( float buttonWidth,
+                                const std::string &title,
+                                const std::string &dialogID,
+                                bool &fileSelected,
+                                const std::function<void( const std::string & )> &onFileSelected )
 {
     IGFD::FileDialogConfig config;
     config.path = BINARY_PATH;
@@ -334,7 +342,8 @@ void MainGUI::buttonBenchmarkDialog( float buttonWidth )
     ImGui::PopStyleColor( 3 );
 }
 
-void MainGUI::showList( float deleteButtonWidth, const std::string &caption,
+void MainGUI::showList( float deleteButtonWidth,
+                        const std::string &caption,
                         const std::vector<std::string> &items,
                         const std::function<void( const std::string & )> &onDelete )
 {
@@ -374,7 +383,8 @@ void MainGUI::showPerformanceData()
     ImGui::SameLine();
 }
 
-bool MainGUI::buttonCreateBenchmarkCSV( const std::string &title, float width,
+bool MainGUI::buttonCreateBenchmarkCSV( const std::string &title,
+                                        float width,
                                         int numberOfSamples )
 {
     ImGui::PushStyleColor( ImGuiCol_Button, colors::BUTTON_SUBMIT_DEFAULT_COLOR );
@@ -400,9 +410,9 @@ bool MainGUI::buttonCreateBenchmarkCSV( const std::string &title, float width,
     return false;
 }
 
-void
-MainGUI::createCSV( const std::string &path, const vecBenchmarkMetricSharedPtr &metrics,
-                    const std::string &separator )
+void MainGUI::createCSV( const std::string &path,
+                         const vecBenchmarkMetricSharedPtr &metrics,
+                         const std::string &separator )
 {
 #ifdef DEBUG
     std::cout << "\nCREATING CSV: STARTING\n";
@@ -469,7 +479,10 @@ MainGUI::createCSV( const std::string &path, const vecBenchmarkMetricSharedPtr &
 }
 
 
-void MainGUI::showNotification( const std::string &message, float x, float y, float width,
+void MainGUI::showNotification( const std::string &message,
+                                float x,
+                                float y,
+                                float width,
                                 float height )
 {
     ImGui::SetNextWindowPos( ImVec2( x, y ));

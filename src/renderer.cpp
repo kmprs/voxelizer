@@ -14,7 +14,7 @@ Renderer::Renderer()
     m_meshTriangle = Mesh( { triangleFaces.begin(), triangleFaces.end() } );
     m_meshVoxel = Mesh( { voxels.begin(), voxels.end() } );
 
-    dataHandler->setWorldCenter( util::geometry::calculateCentroid( triangleFaces ) );
+    dataHandler->setWorldCenter( util::geometry::calculateCentroid( triangleFaces ));
     dataHandler->setNumberOfVoxels( static_cast<int>(voxels.size()));
 }
 
